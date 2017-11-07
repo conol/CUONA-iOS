@@ -128,7 +128,7 @@
 		1446E6031FAF9E4100F06724 /* CUONA */ = {
 			isa = PBXGroup;
 			children = (
-				145750D71FB1995F000C0C96 /* CUONA */,
+				145750D71FB1995F000C0C96 /* Core */,
 				1446E64D1FAFA43800F06724 /* Extensions.swift */,
 				1446E64A1FAFA3EC00F06724 /* WifiHelper */,
 				1446E6051FAF9E4100F06724 /* Info.plist */,
@@ -171,7 +171,7 @@
 			path = WifiHelper;
 			sourceTree = "<group>";
 		};
-		145750D71FB1995F000C0C96 /* CUONA */ = {
+		145750D71FB1995F000C0C96 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				1446E6041FAF9E4100F06724 /* CUONA.h */,
@@ -182,7 +182,7 @@
 				1446E6201FAF9E9200F06724 /* CUONAManager.swift */,
 				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
 			);
-			path = CUONA;
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
