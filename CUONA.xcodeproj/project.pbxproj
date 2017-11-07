@@ -25,6 +25,8 @@
 		1446E6491FAFA36C00F06724 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
 		1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64B1FAFA41700F06724 /* WifiHelper.swift */; };
 		1446E64E1FAFA43900F06724 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
+		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
+		145750D61FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,7 @@
 		1446E63D1FAFA35200F06724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1446E64B1FAFA41700F06724 /* WifiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiHelper.swift; sourceTree = "<group>"; };
 		1446E64D1FAFA43800F06724 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,14 +128,9 @@
 		1446E6031FAF9E4100F06724 /* CUONA */ = {
 			isa = PBXGroup;
 			children = (
+				145750D71FB1995F000C0C96 /* CUONA */,
 				1446E64D1FAFA43800F06724 /* Extensions.swift */,
 				1446E64A1FAFA3EC00F06724 /* WifiHelper */,
-				1446E6041FAF9E4100F06724 /* CUONA.h */,
-				1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */,
-				1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */,
-				1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */,
-				1446E6201FAF9E9200F06724 /* CUONAManager.swift */,
-				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
 				1446E6051FAF9E4100F06724 /* Info.plist */,
 			);
 			path = CUONA;
@@ -171,6 +169,20 @@
 				1446E64B1FAFA41700F06724 /* WifiHelper.swift */,
 			);
 			path = WifiHelper;
+			sourceTree = "<group>";
+		};
+		145750D71FB1995F000C0C96 /* CUONA */ = {
+			isa = PBXGroup;
+			children = (
+				1446E6041FAF9E4100F06724 /* CUONA.h */,
+				1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */,
+				1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */,
+				1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */,
+				145750D41FB19947000C0C96 /* CUONAEncryptor.swift */,
+				1446E6201FAF9E9200F06724 /* CUONAManager.swift */,
+				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
+			);
+			path = CUONA;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +367,7 @@
 				1446E6261FAF9E9200F06724 /* CUONAManager.swift in Sources */,
 				1446E6211FAF9E9200F06724 /* CUONABTManager.swift in Sources */,
 				1446E6231FAF9E9200F06724 /* CUONAKeys.swift in Sources */,
+				145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */,
 				1446E6221FAF9E9200F06724 /* CUONADecryptor.swift in Sources */,
 				1446E6251FAF9E9200F06724 /* NFCReader.swift in Sources */,
 			);
@@ -375,6 +388,7 @@
 				1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */,
 				1446E6451FAFA36C00F06724 /* CUONABTManager.swift in Sources */,
 				1446E6461FAFA36C00F06724 /* CUONADecryptor.swift in Sources */,
+				145750D61FB19947000C0C96 /* CUONAEncryptor.swift in Sources */,
 				1446E6471FAFA36C00F06724 /* CUONAKeys.swift in Sources */,
 				1446E6481FAFA36C00F06724 /* CUONAManager.swift in Sources */,
 				1446E6491FAFA36C00F06724 /* NFCReader.swift in Sources */,

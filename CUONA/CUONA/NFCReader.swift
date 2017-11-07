@@ -4,9 +4,10 @@ import CoreNFC
 private let CUONA_NFC_TYPENAME_Secure = "conol.jp:cuona"
 private let CUONA_NFC_TYPENAME_Legacy = "conol.co.jp:cnfc_bt_manu_data"
 
-private let CUONA_MAGIC_1 = 0x63
-private let CUONA_MAGIC_2 = 0x6f
-private let CUONA_MAGIC_3_Legacy = 0x01
+let CUONA_MAGIC_1 = 0x63
+let CUONA_MAGIC_2 = 0x6f
+let CUONA_MAGIC_3 = 0x04
+let CUONA_MAGIC_3_Legacy = 0x01
 
 private let CUONA_Legacy_SCAN_SIGNATURE_LENGTH = 10
 private let CUONA_Legacy_SCAN_SIGNATURE_PREFIX_LENGTH = 3

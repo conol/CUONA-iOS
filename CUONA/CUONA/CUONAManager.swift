@@ -212,8 +212,25 @@ public class CUONAManager: NFCReaderDelegate {
     
     public func writeJSON(_ json: String) -> Bool {
         if let data = json.data(using: .utf8) {
-            return CUONABTManager.shared.writePlainJSON(data)
-        } else {
+            if CUONABTManager.shared.isSecureNFCSupported {
+                if let deviceId = deviceId {
+                    let enc = CUONAEncryptor(deviceId: deviceId)
+                    if let nfcData = enc.encrypt(jsonData: data) {
+                        return CUONABTManager.shared.writeSecureNFCData(nfcData)
+                    } else {
+                        CUONADebugPrint("CUONAEncryptor.encrypt failed")
+                        return false
+                    }
+                } else {
+                    CUONADebugPrint("deviceId is not available")
+                    return false
+                }
+            } else {
+                CUONADebugPrint("WARNING: writing insecure JSON")
+                return CUONABTManager.shared.writePlainJSON(data)
+            }
+       } else {
+            CUONADebugPrint("Cannot convert JSON string to UTF-8")
             return false
         }
     }

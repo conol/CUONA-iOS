@@ -2,11 +2,16 @@ import Foundation
 import Security
 import CommonCrypto
 
-private let CUONA_MAGIC_1 = 0x63
-private let CUONA_MAGIC_2 = 0x6f
-private let CUONA_MAGIC_3 = 0x04
+let SYMMETRY_KEY_LENGTH = 32
 
-private let SYMMETRY_KEY_LENGTH = 32
+func getSymmetryKey(deviceId: [UInt8]) -> [UInt8] {
+    var key = [UInt8](repeating: 0, count: SYMMETRY_KEY_LENGTH)
+    CC_SHA256(deviceId, CC_LONG(deviceId.count), &key)
+    for i in 0 ..< SYMMETRY_KEY_LENGTH {
+        key[i] ^= CUONAKeys.cuonaKey32B[i]
+    }
+    return key
+}
 
 class CUONADecryptor {
     
@@ -40,17 +45,8 @@ class CUONADecryptor {
         encryptedContent = Array(payload[p ..< p + encryptedcontentLen])
     }
     
-    func getSymmetryKey() -> [UInt8] {
-        var key = [UInt8](repeating: 0, count: SYMMETRY_KEY_LENGTH)
-        CC_SHA256(deviceId, CC_LONG(deviceId.count), &key)
-        for i in 0 ..< SYMMETRY_KEY_LENGTH {
-            key[i] ^= CUONAKeys.cuonaKey32B[i]
-        }
-        return key
-    }
-    
     func decrypt() -> Data? {
-        let key = getSymmetryKey()
+        let key = getSymmetryKey(deviceId: deviceId)
         
         var cryptor: CCCryptorRef? = nil
         var st: CCCryptorStatus

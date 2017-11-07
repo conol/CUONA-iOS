@@ -4,13 +4,16 @@ import CoreBluetooth
 let CUONA_SERVICE_UUID: UInt16            = 0xff00
 
 let CUONA_CHAR_UUID_SYSTEM_STATUS: UInt16 = 0xff01
-let CUONA_CHAR_UUID_WIFI_SSID_PW: UInt16  = 0xff02
-let CUONA_CHAR_UUID_SERVER_HOST: UInt16   = 0xff03
-let CUONA_CHAR_UUID_SERVER_PATH: UInt16   = 0xff04
+let CUONA_CHAR_UUID_WIFI_SSID_PW: UInt16  = 0xff02 // protected
+let CUONA_CHAR_UUID_SERVER_HOST: UInt16   = 0xff03 // protected
+let CUONA_CHAR_UUID_SERVER_PATH: UInt16   = 0xff04 // protected
 let CUONA_CHAR_UUID_NET_REQUEST: UInt16   = 0xff05
 let CUONA_CHAR_UUID_NET_RESPONSE: UInt16  = 0xff06
-let CUONA_CHAR_UUID_OTA_CTRL: UInt16      = 0xff07
-let CUONA_CHAR_UUID_PLAIN_JSON: UInt16    = 0xff08
+let CUONA_CHAR_UUID_OTA_CTRL: UInt16      = 0xff07 // protected
+let CUONA_CHAR_UUID_PLAIN_JSON: UInt16    = 0xff08 // protected, legacy
+let CUONA_CHAR_UUID_NFC_DATA: UInt16      = 0xff09 // protected, secure
+let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
+
 
 let CUONA_OTA_REQ_NORMAL: [UInt8]         = [ 0x00, 0x01 ]
 let CUONA_OTA_REQ_FORCE: [UInt8]          = [ 0x00, 0x03 ]
@@ -53,6 +56,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var CUONANetResponseChar: CBCharacteristic?
     var CUONAOTACtrlChar: CBCharacteristic?
     var CUONAPlainJSONChar: CBCharacteristic?
+    var CUONANFCDataChar: CBCharacteristic?
+    var CUONAPWProtectChar: CBCharacteristic?
     
     var writeWiFiValue: CUONAWiFiSSIDPw?
     var writeHostValue: String?
@@ -158,6 +163,19 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
         peripheral.writeValue(data, for: char, type: .withResponse)
         return true
+    }
+    
+    func writeSecureNFCData(_ data: Data) -> Bool {
+        guard let peripheral = currentPeripheral,
+            let char = CUONANFCDataChar else {
+                return false
+        }
+        peripheral.writeValue(data, for: char, type: .withResponse)
+        return true
+    }
+    
+    var isSecureNFCSupported: Bool {
+        return CUONANFCDataChar != nil
     }
     
     // CBCentralManagerDelegate
@@ -271,6 +289,10 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     peripheral.readValue(for: char)
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PLAIN_JSON) {
                     CUONAPlainJSONChar = char
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_NFC_DATA) {
+                    CUONANFCDataChar = char
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PWPROTECT) {
+                    CUONAPWProtectChar = char
                 }
             }
         }
@@ -372,6 +394,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_OTA_CTRL) {
             delegate?.cuonaUpdateOTAStatus?(.updating)
         } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_PLAIN_JSON) {
+            delegate?.cuonaUpdatedJSON?()
+        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_NFC_DATA) {
             delegate?.cuonaUpdatedJSON?()
         }
     }
