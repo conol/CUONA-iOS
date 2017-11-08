@@ -24,26 +24,9 @@
 		1446E6481FAFA36C00F06724 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
 		1446E6491FAFA36C00F06724 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
 		1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64B1FAFA41700F06724 /* WifiHelper.swift */; };
-		1446E64E1FAFA43900F06724 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
 		145750D61FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		145750E91FB1A362000C0C96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750E81FB1A362000C0C96 /* AppDelegate.swift */; };
-		145750EB1FB1A362000C0C96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750EA1FB1A362000C0C96 /* ViewController.swift */; };
-		145750EE1FB1A362000C0C96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145750EC1FB1A362000C0C96 /* Main.storyboard */; };
-		145750F01FB1A362000C0C96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 145750EF1FB1A362000C0C96 /* Assets.xcassets */; };
-		145750F31FB1A362000C0C96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145750F11FB1A362000C0C96 /* LaunchScreen.storyboard */; };
-		145750FE1FB1A362000C0C96 /* sample_wifihelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750FD1FB1A362000C0C96 /* sample_wifihelperTests.swift */; };
-		145751091FB1A362000C0C96 /* sample_wifihelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145751081FB1A362000C0C96 /* sample_wifihelperUITests.swift */; };
-		1457511A1FB1AA0F000C0C96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750EA1FB1A362000C0C96 /* ViewController.swift */; };
-		1457511B1FB1ABB3000C0C96 /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
-		1457511C1FB1ABB3000C0C96 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
-		1457511D1FB1ABB3000C0C96 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
-		1457511E1FB1ABB3000C0C96 /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
-		1457511F1FB1ABB3000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		145751201FB1ABB3000C0C96 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
-		145751211FB1ABB3000C0C96 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
-		145751221FB1ABBC000C0C96 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
-		145751241FB1ABBC000C0C96 /* WifiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64B1FAFA41700F06724 /* WifiHelper.swift */; };
+		145751301FB2D7D3000C0C96 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,41 +44,7 @@
 			remoteGlobalIDString = 1446E62D1FAFA35100F06724;
 			remoteInfo = WifiHelper;
 		};
-		145750FA1FB1A362000C0C96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 145750E51FB1A362000C0C96;
-			remoteInfo = "sample-wifihelper";
-		};
-		145751051FB1A362000C0C96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 145750E51FB1A362000C0C96;
-			remoteInfo = "sample-wifihelper";
-		};
-		145751171FB1A3F7000C0C96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1446E62D1FAFA35100F06724;
-			remoteInfo = WifiHelper;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		145751191FB1A3F7000C0C96 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1446E6011FAF9E4100F06724 /* CUONA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CUONA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,20 +67,6 @@
 		1446E64B1FAFA41700F06724 /* WifiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiHelper.swift; sourceTree = "<group>"; };
 		1446E64D1FAFA43800F06724 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
-		145750E61FB1A362000C0C96 /* sample-wifihelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sample-wifihelper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		145750E81FB1A362000C0C96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		145750EA1FB1A362000C0C96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		145750ED1FB1A362000C0C96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		145750EF1FB1A362000C0C96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		145750F21FB1A362000C0C96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		145750F41FB1A362000C0C96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		145750F91FB1A362000C0C96 /* sample-wifihelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sample-wifihelperTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		145750FD1FB1A362000C0C96 /* sample_wifihelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sample_wifihelperTests.swift; sourceTree = "<group>"; };
-		145750FF1FB1A362000C0C96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		145751041FB1A362000C0C96 /* sample-wifihelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sample-wifihelperUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		145751081FB1A362000C0C96 /* sample_wifihelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sample_wifihelperUITests.swift; sourceTree = "<group>"; };
-		1457510A1FB1A362000C0C96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		145751141FB1A38B000C0C96 /* sample-wifihelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "sample-wifihelper.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,27 +100,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		145750E31FB1A362000C0C96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145750F61FB1A362000C0C96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751011FB1A362000C0C96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -196,10 +110,8 @@
 				1446E60E1FAF9E4100F06724 /* CUONATests */,
 				1446E62F1FAFA35100F06724 /* WifiHelper */,
 				1446E63A1FAFA35200F06724 /* WifiHelperTests */,
-				145750E71FB1A362000C0C96 /* sample-wifihelper */,
-				145750FC1FB1A362000C0C96 /* sample-wifihelperTests */,
-				145751071FB1A362000C0C96 /* sample-wifihelperUITests */,
 				1446E6021FAF9E4100F06724 /* Products */,
+				145751271FB2C960000C0C96 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,9 +122,6 @@
 				1446E60A1FAF9E4100F06724 /* CUONATests.xctest */,
 				1446E62E1FAFA35100F06724 /* WifiHelper.framework */,
 				1446E6361FAFA35200F06724 /* WifiHelperTests.xctest */,
-				145750E61FB1A362000C0C96 /* sample-wifihelper.app */,
-				145750F91FB1A362000C0C96 /* sample-wifihelperTests.xctest */,
-				145751041FB1A362000C0C96 /* sample-wifihelperUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -221,9 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				145750D71FB1995F000C0C96 /* Core */,
+				1446E6051FAF9E4100F06724 /* Info.plist */,
 				1446E64D1FAFA43800F06724 /* Extensions.swift */,
 				1446E64A1FAFA3EC00F06724 /* WifiHelper */,
-				1446E6051FAF9E4100F06724 /* Info.plist */,
 			);
 			path = CUONA;
 			sourceTree = "<group>";
@@ -277,36 +186,11 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		145750E71FB1A362000C0C96 /* sample-wifihelper */ = {
+		145751271FB2C960000C0C96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				145751141FB1A38B000C0C96 /* sample-wifihelper.entitlements */,
-				145750E81FB1A362000C0C96 /* AppDelegate.swift */,
-				145750EA1FB1A362000C0C96 /* ViewController.swift */,
-				145750EC1FB1A362000C0C96 /* Main.storyboard */,
-				145750EF1FB1A362000C0C96 /* Assets.xcassets */,
-				145750F11FB1A362000C0C96 /* LaunchScreen.storyboard */,
-				145750F41FB1A362000C0C96 /* Info.plist */,
 			);
-			path = "sample-wifihelper";
-			sourceTree = "<group>";
-		};
-		145750FC1FB1A362000C0C96 /* sample-wifihelperTests */ = {
-			isa = PBXGroup;
-			children = (
-				145750FD1FB1A362000C0C96 /* sample_wifihelperTests.swift */,
-				145750FF1FB1A362000C0C96 /* Info.plist */,
-			);
-			path = "sample-wifihelperTests";
-			sourceTree = "<group>";
-		};
-		145751071FB1A362000C0C96 /* sample-wifihelperUITests */ = {
-			isa = PBXGroup;
-			children = (
-				145751081FB1A362000C0C96 /* sample_wifihelperUITests.swift */,
-				1457510A1FB1A362000C0C96 /* Info.plist */,
-			);
-			path = "sample-wifihelperUITests";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,61 +287,6 @@
 			productReference = 1446E6361FAFA35200F06724 /* WifiHelperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		145750E51FB1A362000C0C96 /* sample-wifihelper */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1457510B1FB1A362000C0C96 /* Build configuration list for PBXNativeTarget "sample-wifihelper" */;
-			buildPhases = (
-				145750E21FB1A362000C0C96 /* Sources */,
-				145750E31FB1A362000C0C96 /* Frameworks */,
-				145750E41FB1A362000C0C96 /* Resources */,
-				145751191FB1A3F7000C0C96 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				145751181FB1A3F7000C0C96 /* PBXTargetDependency */,
-			);
-			name = "sample-wifihelper";
-			productName = "sample-wifihelper";
-			productReference = 145750E61FB1A362000C0C96 /* sample-wifihelper.app */;
-			productType = "com.apple.product-type.application";
-		};
-		145750F81FB1A362000C0C96 /* sample-wifihelperTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1457510E1FB1A362000C0C96 /* Build configuration list for PBXNativeTarget "sample-wifihelperTests" */;
-			buildPhases = (
-				145750F51FB1A362000C0C96 /* Sources */,
-				145750F61FB1A362000C0C96 /* Frameworks */,
-				145750F71FB1A362000C0C96 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				145750FB1FB1A362000C0C96 /* PBXTargetDependency */,
-			);
-			name = "sample-wifihelperTests";
-			productName = "sample-wifihelperTests";
-			productReference = 145750F91FB1A362000C0C96 /* sample-wifihelperTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		145751031FB1A362000C0C96 /* sample-wifihelperUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 145751111FB1A362000C0C96 /* Build configuration list for PBXNativeTarget "sample-wifihelperUITests" */;
-			buildPhases = (
-				145751001FB1A362000C0C96 /* Sources */,
-				145751011FB1A362000C0C96 /* Frameworks */,
-				145751021FB1A362000C0C96 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				145751061FB1A362000C0C96 /* PBXTargetDependency */,
-			);
-			name = "sample-wifihelperUITests";
-			productName = "sample-wifihelperUITests";
-			productReference = 145751041FB1A362000C0C96 /* sample-wifihelperUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -485,25 +314,6 @@
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
-					145750E51FB1A362000C0C96 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.NearFieldCommunicationTagReading = {
-								enabled = 1;
-							};
-						};
-					};
-					145750F81FB1A362000C0C96 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 145750E51FB1A362000C0C96;
-					};
-					145751031FB1A362000C0C96 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 145750E51FB1A362000C0C96;
-					};
 				};
 			};
 			buildConfigurationList = 1446E5FB1FAF9E4100F06724 /* Build configuration list for PBXProject "CUONA" */;
@@ -523,9 +333,6 @@
 				1446E6091FAF9E4100F06724 /* CUONATests */,
 				1446E62D1FAFA35100F06724 /* WifiHelper */,
 				1446E6351FAFA35200F06724 /* WifiHelperTests */,
-				145750E51FB1A362000C0C96 /* sample-wifihelper */,
-				145750F81FB1A362000C0C96 /* sample-wifihelperTests */,
-				145751031FB1A362000C0C96 /* sample-wifihelperUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -559,30 +366,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		145750E41FB1A362000C0C96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145750F31FB1A362000C0C96 /* LaunchScreen.storyboard in Resources */,
-				145750F01FB1A362000C0C96 /* Assets.xcassets in Resources */,
-				145750EE1FB1A362000C0C96 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145750F71FB1A362000C0C96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751021FB1A362000C0C96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -594,7 +377,6 @@
 				1446E6211FAF9E9200F06724 /* CUONABTManager.swift in Sources */,
 				1446E6231FAF9E9200F06724 /* CUONAKeys.swift in Sources */,
 				145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */,
-				1457511A1FB1AA0F000C0C96 /* ViewController.swift in Sources */,
 				1446E6221FAF9E9200F06724 /* CUONADecryptor.swift in Sources */,
 				1446E6251FAF9E9200F06724 /* NFCReader.swift in Sources */,
 			);
@@ -612,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145751301FB2D7D3000C0C96 /* Extensions.swift in Sources */,
 				1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */,
 				1446E6451FAFA36C00F06724 /* CUONABTManager.swift in Sources */,
 				1446E6461FAFA36C00F06724 /* CUONADecryptor.swift in Sources */,
@@ -619,7 +402,6 @@
 				1446E6471FAFA36C00F06724 /* CUONAKeys.swift in Sources */,
 				1446E6481FAFA36C00F06724 /* CUONAManager.swift in Sources */,
 				1446E6491FAFA36C00F06724 /* NFCReader.swift in Sources */,
-				1446E64E1FAFA43900F06724 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,40 +410,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1446E63C1FAFA35200F06724 /* WifiHelperTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145750E21FB1A362000C0C96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145751221FB1ABBC000C0C96 /* Extensions.swift in Sources */,
-				145751241FB1ABBC000C0C96 /* WifiHelper.swift in Sources */,
-				1457511B1FB1ABB3000C0C96 /* CUONA.h in Sources */,
-				1457511C1FB1ABB3000C0C96 /* CUONABTManager.swift in Sources */,
-				1457511D1FB1ABB3000C0C96 /* CUONADecryptor.swift in Sources */,
-				1457511E1FB1ABB3000C0C96 /* CUONAKeys.swift in Sources */,
-				1457511F1FB1ABB3000C0C96 /* CUONAEncryptor.swift in Sources */,
-				145751201FB1ABB3000C0C96 /* CUONAManager.swift in Sources */,
-				145751211FB1ABB3000C0C96 /* NFCReader.swift in Sources */,
-				145750EB1FB1A362000C0C96 /* ViewController.swift in Sources */,
-				145750E91FB1A362000C0C96 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145750F51FB1A362000C0C96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145750FE1FB1A362000C0C96 /* sample_wifihelperTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751001FB1A362000C0C96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145751091FB1A362000C0C96 /* sample_wifihelperUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,41 +426,7 @@
 			target = 1446E62D1FAFA35100F06724 /* WifiHelper */;
 			targetProxy = 1446E6381FAFA35200F06724 /* PBXContainerItemProxy */;
 		};
-		145750FB1FB1A362000C0C96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 145750E51FB1A362000C0C96 /* sample-wifihelper */;
-			targetProxy = 145750FA1FB1A362000C0C96 /* PBXContainerItemProxy */;
-		};
-		145751061FB1A362000C0C96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 145750E51FB1A362000C0C96 /* sample-wifihelper */;
-			targetProxy = 145751051FB1A362000C0C96 /* PBXContainerItemProxy */;
-		};
-		145751181FB1A3F7000C0C96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1446E62D1FAFA35100F06724 /* WifiHelper */;
-			targetProxy = 145751171FB1A3F7000C0C96 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		145750EC1FB1A362000C0C96 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				145750ED1FB1A362000C0C96 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		145750F11FB1A362000C0C96 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				145750F21FB1A362000C0C96 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1446E6131FAF9E4100F06724 /* Debug */ = {
@@ -981,112 +695,6 @@
 			};
 			name = Release;
 		};
-		1457510C1FB1A362000C0C96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "sample-wifihelper/sample-wifihelper.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = "sample-wifihelper/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.conol.apps.sample-wifihelper";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1457510D1FB1A362000C0C96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "sample-wifihelper/sample-wifihelper.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = "sample-wifihelper/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.conol.apps.sample-wifihelper";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		1457510F1FB1A362000C0C96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = "sample-wifihelperTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.conol.apps.sample-wifihelperTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sample-wifihelper.app/sample-wifihelper";
-			};
-			name = Debug;
-		};
-		145751101FB1A362000C0C96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = "sample-wifihelperTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.conol.apps.sample-wifihelperTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sample-wifihelper.app/sample-wifihelper";
-			};
-			name = Release;
-		};
-		145751121FB1A362000C0C96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = "sample-wifihelperUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.conol.apps.sample-wifihelperUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "sample-wifihelper";
-			};
-			name = Debug;
-		};
-		145751131FB1A362000C0C96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = "sample-wifihelperUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.conol.apps.sample-wifihelperUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "sample-wifihelper";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1131,33 +739,6 @@
 			buildConfigurations = (
 				1446E6431FAFA35200F06724 /* Debug */,
 				1446E6441FAFA35200F06724 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1457510B1FB1A362000C0C96 /* Build configuration list for PBXNativeTarget "sample-wifihelper" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1457510C1FB1A362000C0C96 /* Debug */,
-				1457510D1FB1A362000C0C96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1457510E1FB1A362000C0C96 /* Build configuration list for PBXNativeTarget "sample-wifihelperTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1457510F1FB1A362000C0C96 /* Debug */,
-				145751101FB1A362000C0C96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		145751111FB1A362000C0C96 /* Build configuration list for PBXNativeTarget "sample-wifihelperUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				145751121FB1A362000C0C96 /* Debug */,
-				145751131FB1A362000C0C96 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

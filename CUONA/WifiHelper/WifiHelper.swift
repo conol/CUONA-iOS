@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import CUONA
 
 public enum CORONAMode:Int
 {
@@ -22,31 +23,16 @@ public enum CORONAMode:Int
 }
 
 @available(iOS 11.0, *)
-public class WifiHelperController: UIViewController, CUONAManagerDelegate
+public class WifiHelper: NSObject, CUONAManagerDelegate
 {
     var cuonaManager: CUONAManager?
     weak var delegate: WifiHelperDelegate?
     public var mode: CORONAMode?
     
-    required public init(coder aDecoder: NSCoder)
+    required public init(delegate: WifiHelperDelegate)
     {
-        super.init(coder: aDecoder)!
-        setup()
-    }
-    
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!)
-    {
-        super.init(nibName: nil, bundle: nil)
-        setup()
-    }
-    
-    convenience init()
-    {
-        self.init(nibName: nil, bundle: nil)
-    }
-    
-    func setup()
-    {
+        super.init()
+        self.delegate = delegate
         cuonaManager = CUONAManager(delegate: self)
     }
     
@@ -59,6 +45,12 @@ public class WifiHelperController: UIViewController, CUONAManagerDelegate
     {
         let success = connectedAndRead(json)
         return success
+    }
+    
+    public func cuonaNFCCanceled() {
+    }
+    
+    public func cuonaIllegalNFCDetected() {
     }
     
     func connectedAndWrite(_ json: String) -> Bool
@@ -103,16 +95,6 @@ public class WifiHelperController: UIViewController, CUONAManagerDelegate
             }
         }
         return nil
-    }
-    
-    public func cuonaNFCCanceled()
-    {
-        
-    }
-    
-    public func cuonaIllegalNFCDetected()
-    {
-        
     }
     
     //MARK: - 便利メソッド
