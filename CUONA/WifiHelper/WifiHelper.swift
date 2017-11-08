@@ -22,22 +22,36 @@ public enum CORONAMode:Int
 }
 
 @available(iOS 11.0, *)
-public class WifiHelper: NSObject, CUONAManagerDelegate
+public class WifiHelperController: UIViewController, CUONAManagerDelegate
 {
     var cuonaManager: CUONAManager?
     weak var delegate: WifiHelperDelegate?
     public var mode: CORONAMode?
     
-    public init(delegate: WifiHelperDelegate)
+    required public init(coder aDecoder: NSCoder)
     {
-        print("aaaa")
-        self.delegate = delegate
-        print("bbbb")
+        super.init(coder: aDecoder)!
+        setup()
+    }
+    
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!)
+    {
+        super.init(nibName: nil, bundle: nil)
+        setup()
+    }
+    
+    convenience init()
+    {
+        self.init(nibName: nil, bundle: nil)
+    }
+    
+    func setup()
+    {
+        cuonaManager = CUONAManager(delegate: self)
     }
     
     public func start()
     {
-        cuonaManager = CUONAManager(delegate: self)
         cuonaManager?.startReadingNFC("CUONAにタッチしてください")
     }
     
