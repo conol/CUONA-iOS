@@ -13,21 +13,57 @@ import CUONA
 public enum CORONAMode:Int
 {
     case Admin = 1
-    case User  = 2
-    case Other = 3
+    case Write = 2
+    case User  = 3
+    case Other = 4
 }
+
+let serviceKey:String = "H7Pa7pQaVxxG"
 
 @objc public protocol WifiHelperDelegate: class
 {
     
 }
 
+public class Wifi: NSObject
+{
+    var id:String = serviceKey
+    var ssid:String?
+    var pass:String?
+    var kind:Int = 0
+    var days:Int = 0
+    
+    func convertWifiObj(_ data: [String:Any])
+    {
+        ssid = data["ssid"] as? String
+        pass = data["pass"] as? String
+        days = data["days"] as! Int
+        kind = data["kind"] as! Int
+    }
+    
+    func getDict() -> [String:Any]
+    {
+        return [
+            "id"   : serviceKey,
+            "ssid" : ssid ?? "",
+            "pass" : pass ?? "",
+            "days" : days,
+            "kind" : kind
+        ]
+    }
+}
+
 @available(iOS 11.0, *)
 public class WifiHelper: NSObject, CUONAManagerDelegate
 {
     var cuonaManager: CUONAManager?
+    
+    var deviceId: String?
+    var jsonDic: [String: Any]?
+    
     weak var delegate: WifiHelperDelegate?
-    public var mode: CORONAMode?
+    public var mode: CORONAMode = .Other
+    public var wifi = Wifi()
     
     required public init(delegate: WifiHelperDelegate)
     {
@@ -36,15 +72,30 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
         cuonaManager = CUONAManager(delegate: self)
     }
     
-    public func start()
+    public func start(mode: CORONAMode)
     {
+        self.mode = mode
         cuonaManager?.startReadingNFC("CUONAにタッチしてください")
     }
     
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        let success = connectedAndRead(json)
-        return success
+        if mode == .Write {
+            if self.deviceId != deviceId {
+                Alert.show(title: "不正エラー", message: "書込するためにタッチしたCUONAが最初にタッチしたCUONAと異なります")
+                return false
+            }
+        }
+        self.deviceId = deviceId
+        
+        switch mode {
+        case .Admin: return connectedAndGetInfo(json)
+        case .Write: return true
+        case .User:  return connectedAndReadWifi(json)
+        case .Other:
+            Alert.show(title: "不正エラー", message: "認識出来ない形式です")
+            return false
+        }
     }
     
     public func cuonaNFCCanceled() {
@@ -53,22 +104,45 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     public func cuonaIllegalNFCDetected() {
     }
     
-    func connectedAndWrite(_ json: String) -> Bool
+    public func cuonaConnected()
     {
-        let jsonDic = convertToDictionary(json)
-        let wifi    = jsonDic?["wifi"] as? [String: Any]
+        jsonDic?["wifi"] = wifi.getDict()
+        let jsonstr = convertToString(jsonDic)
         
-        if (wifi != nil && 1 < (wifi?.count)!) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            if let cm = self.cuonaManager {
+                if !cm.writeJSON(jsonstr!) {
+                    print("書込に対応していないデータ形式または、対応していないバージョンです")
+                }
+            }
+        }
+    }
+    
+    public func cuonaUpdatedJSON()
+    {
+        print("データ書込完了!")
+    }
+    
+    func connectedAndGetInfo(_ json: String) -> Bool
+    {
+        jsonDic  = convertToDictionary(json)
+        let wifi = jsonDic?["wifi"] as? [String:Any]
+        
+        if (wifi != nil && 1 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
+            self.wifi.convertWifiObj(wifi!)
+            return false
+        } else {
+            showSettingNoneError()
         }
         return false
     }
     
-    func connectedAndRead(_ json: String) -> Bool
+    func connectedAndReadWifi(_ json: String) -> Bool
     {
-        let jsonDic = convertToDictionary(json)
-        let wifi    = jsonDic?["wifi"] as? [String: Any]
+        jsonDic  = convertToDictionary(json)
+        let wifi = jsonDic?["wifi"] as? [String: Any]
         
-        if (wifi != nil && 1 < (wifi?.count)!) {
+        if (wifi != nil && 1 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
             let ssid = wifi!["ssid"] as! String
             let pass = wifi!["pass"] as! String
             let type = wifi!["kind"] as! Int
@@ -80,7 +154,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
                 self.checkConnectedWifi(ssid: ssid, password: pass, isWEP: isWep, day: NSNumber(value: days))
             }
         } else {
-            Alert.show(title: "Wi-Fi HELPER未設定", message: "タッチしたNFCにはWi-Fi HELPERの\n設定がありません")
+            showSettingNoneError()
         }
         return false
     }
@@ -93,6 +167,18 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
             } catch {
                 print(error.localizedDescription)
             }
+        }
+        return nil
+    }
+    
+    func convertToString(_ dictionay:[String:Any]?) -> String?
+    {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionay ?? [], options: [])
+            let jsonStr = String(bytes: jsonData, encoding: .utf8)!
+            return jsonStr
+        } catch let error {
+            print(error)
         }
         return nil
     }
@@ -118,5 +204,10 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
                 Alert.show(title: "接続完了", message: "Wi-Fiへ接続しました。インターネットが利用できます")
             }
         }
+    }
+    
+    func showSettingNoneError()
+    {
+        Alert.show(title: "Wi-Fi HELPER未設定", message: "タッチしたCUONAにはWi-Fi HELPERの\nサービス設定がありません")
     }
 }
