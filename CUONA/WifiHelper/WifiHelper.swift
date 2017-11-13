@@ -64,6 +64,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     weak var delegate: WifiHelperDelegate?
     public var mode: CORONAMode = .Other
     public var wifi = Wifi()
+    var request = HttpRequest()
     
     required public init(delegate: WifiHelperDelegate)
     {
@@ -80,7 +81,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        cuonaManager?.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
+        request.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
         if mode == .Write {
             if self.deviceId != deviceId {
                 Alert.show(title: "不正エラー", message: "書込するためにタッチしたCUONAが最初にタッチしたCUONAと異なります")
@@ -121,6 +122,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     
     public func cuonaUpdatedJSON()
     {
+        request.sendLog(deviceId!, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "NFCデータを書き込みました")
         print("データ書込完了!")
     }
     
