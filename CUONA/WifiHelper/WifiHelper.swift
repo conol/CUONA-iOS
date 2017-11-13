@@ -80,6 +80,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
+        cuonaManager?.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
         if mode == .Write {
             if self.deviceId != deviceId {
                 Alert.show(title: "不正エラー", message: "書込するためにタッチしたCUONAが最初にタッチしたCUONAと異なります")
