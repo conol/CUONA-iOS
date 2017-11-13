@@ -12,15 +12,61 @@ import SystemConfiguration
 private let API_URL = "http://manage-dev.cuona.io/"
 private let SAVE_LOGS = "saveLogs"
 
-class DeviceManager: NSObject
+@objc public protocol DeviceManagerDelegate: class
 {
+    func successSendLog(json:[String : Any])
+    func failedSendLog(status:NSInteger, json:[String : Any])
+    @objc optional func successSignIn(json:[String : Any])
+    @objc optional func failedSignIn(status:NSInteger, json:[String : Any])
+}
+
+class DeviceManager: NSObject, HttpRequestDelegate
+{
+    weak var delegate: DeviceManagerDelegate?
+    public var request: HttpRequest?
     
+    required public init(delegate: DeviceManagerDelegate)
+    {
+        super.init()
+        self.delegate = delegate
+        request = HttpRequest(delegate: self)
+    }
+    
+    func successSendLog(json: [String : Any]) {
+        delegate?.successSendLog(json: json)
+    }
+    
+    func failedSendLog(status: NSInteger, json: [String : Any]) {
+        delegate?.failedSendLog(status: status, json: json)
+    }
+    
+    func successSignIn(json: [String : Any]) {
+        delegate?.successSignIn!(json: json)
+    }
+    
+    func failedSignIn(status: NSInteger, json: [String : Any]) {
+        delegate?.failedSignIn!(status: status, json: json)
+    }
+}
+
+@objc public protocol HttpRequestDelegate: class
+{
+    func successSendLog(json:[String : Any])
+    func failedSendLog(status:NSInteger, json:[String : Any])
+    func successSignIn(json:[String : Any])
+    func failedSignIn(status:NSInteger, json:[String : Any])
 }
 
 class HttpRequest
 {
     let condition = NSCondition()
     var token:String?
+    weak var delegate: HttpRequestDelegate?
+    
+    required public init(delegate: HttpRequestDelegate)
+    {
+        self.delegate = delegate
+    }
     
     //MARK: - ログ送信
     public func sendLog(_ device_id:String, latlng:String, serviceKey:String, addUniquId:String, note:String)
@@ -39,13 +85,17 @@ class HttpRequest
         ]
         
         if Reachability.isConnectedToNetwork() {
-            sendPostRequestAsynchronous(url, method:"POST", token:nil, params:params, funcs:{(returnData: [String : Any]) in
-                print(returnData)
+            sendPostRequestAsynchronous(url, method:"POST", token:nil, params:params, funcs:{(returnData: [String : Any], response: URLResponse) in
+                let httpResponse = response as! HTTPURLResponse
+                if httpResponse.statusCode == 200 {
+                    self.delegate?.successSendLog(json: returnData)
+                } else {
+                    self.delegate?.failedSendLog(status: httpResponse.statusCode, json: returnData)
+                }
             })
         } else {
             UserDefaults.standard.set(logs, forKey: SAVE_LOGS)
         }
-        
     }
     
     private func makeLogData(_ log:Dictionary<String,Any>) -> Array<Dictionary<String, Any>>
@@ -66,13 +116,18 @@ class HttpRequest
             "password": password
         ]
         sendPostRequestAsynchronous(url, method: "POST", token: nil, params: params) {
-            (returnData: [String : Any]) in
-            
+            (returnData: [String : Any], response: URLResponse) in
+            let httpResponse = response as! HTTPURLResponse
+            if httpResponse.statusCode == 200 {
+                self.delegate?.successSignIn(json: returnData)
+            } else {
+                self.delegate?.failedSignIn(status: httpResponse.statusCode, json: returnData)
+            }
         }
     }
     
     //MARK: - 共通通信部分
-    public func sendPostRequestAsynchronous(_ url:String, method:String, token:String?, params:[String:Any], funcs:@escaping ([String : Any]) -> Void)
+    public func sendPostRequestAsynchronous(_ url:String, method:String, token:String?, params:[String:Any], funcs:@escaping ([String : Any], URLResponse) -> Void)
     {
         var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)
@@ -95,7 +150,7 @@ class HttpRequest
                     print(error)
                 }
             }
-            funcs(returnData)
+            funcs(returnData, response!)
         }
         task.resume()
     }

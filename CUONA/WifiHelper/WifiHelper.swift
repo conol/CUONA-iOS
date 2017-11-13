@@ -54,9 +54,10 @@ public class Wifi: NSObject
 }
 
 @available(iOS 11.0, *)
-public class WifiHelper: NSObject, CUONAManagerDelegate
+public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
     var cuonaManager: CUONAManager?
+    var deviceManager: DeviceManager?
     
     var deviceId: String?
     var jsonDic: [String: Any]?
@@ -64,13 +65,13 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     weak var delegate: WifiHelperDelegate?
     public var mode: CORONAMode = .Other
     public var wifi = Wifi()
-    var request = HttpRequest()
     
     required public init(delegate: WifiHelperDelegate)
     {
         super.init()
         self.delegate = delegate
         cuonaManager = CUONAManager(delegate: self)
+        deviceManager = DeviceManager(delegate: self)
     }
     
     public func start(mode: CORONAMode)
@@ -81,7 +82,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        request.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
+        deviceManager?.request?.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
         if mode == .Write {
             if self.deviceId != deviceId {
                 Alert.show(title: "不正エラー", message: "書込するためにタッチしたCUONAが最初にタッチしたCUONAと異なります")
@@ -122,7 +123,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     
     public func cuonaUpdatedJSON()
     {
-        request.sendLog(deviceId!, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "NFCデータを書き込みました")
+        deviceManager?.request?.sendLog(deviceId!, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "NFCデータを書き込みました")
         print("データ書込完了!")
     }
     
@@ -212,5 +213,14 @@ public class WifiHelper: NSObject, CUONAManagerDelegate
     func showSettingNoneError()
     {
         Alert.show(title: "Wi-Fi HELPER未設定", message: "タッチしたCUONAにはWi-Fi HELPERの\nサービス設定がありません")
+    }
+    
+    //MARK: - 通信用デリゲート
+    public func successSendLog(json: [String : Any]) {
+        print("ログ送信成功！")
+    }
+    
+    public func failedSendLog(status: NSInteger, json: [String : Any]) {
+        print("ログ送信失敗！")
     }
 }
