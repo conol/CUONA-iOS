@@ -22,7 +22,8 @@ let serviceKey:String = "H7Pa7pQaVxxG"
 
 @objc public protocol WifiHelperDelegate: class
 {
-    
+    func successScan()
+    func failedScan()
 }
 
 public class Wifi: NSObject
@@ -134,10 +135,12 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         
         if (wifi != nil && 1 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
             self.wifi.convertWifiObj(wifi!)
+            self.delegate?.successScan()
             return false
         } else {
             showSettingNoneError()
         }
+        self.delegate?.failedScan()
         return false
     }
     

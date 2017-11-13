@@ -85,12 +85,12 @@ class HttpRequest
         ]
         
         if Reachability.isConnectedToNetwork() {
-            sendPostRequestAsynchronous(url, method:"POST", token:nil, params:params, funcs:{(returnData: [String : Any], response: URLResponse) in
-                let httpResponse = response as! HTTPURLResponse
-                if httpResponse.statusCode == 200 {
+            sendPostRequestAsynchronous(url, method:"POST", token:nil, params:params, funcs:{(returnData: [String : Any], response: URLResponse?) in
+                let httpResponse = response as? HTTPURLResponse
+                if httpResponse?.statusCode == 200 {
                     self.delegate?.successSendLog(json: returnData)
                 } else {
-                    self.delegate?.failedSendLog(status: httpResponse.statusCode, json: returnData)
+                    self.delegate?.failedSendLog(status: httpResponse?.statusCode ?? 0, json: returnData)
                 }
             })
         } else {
@@ -101,8 +101,11 @@ class HttpRequest
     private func makeLogData(_ log:Dictionary<String,Any>) -> Array<Dictionary<String, Any>>
     {
         var logs = Array<Dictionary<String, Any>>()
-        let save_logs = UserDefaults.standard.array(forKey: SAVE_LOGS) as! Array<Dictionary<String, Any>>
-        logs = save_logs
+        let save_logs = UserDefaults.standard.array(forKey: SAVE_LOGS) as? Array<Dictionary<String, Any>>
+        
+        if save_logs != nil {
+            logs = save_logs!
+        }
         logs.append(log)
         return logs
     }
@@ -116,18 +119,18 @@ class HttpRequest
             "password": password
         ]
         sendPostRequestAsynchronous(url, method: "POST", token: nil, params: params) {
-            (returnData: [String : Any], response: URLResponse) in
-            let httpResponse = response as! HTTPURLResponse
-            if httpResponse.statusCode == 200 {
+            (returnData: [String : Any], response: URLResponse?) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
                 self.delegate?.successSignIn(json: returnData)
             } else {
-                self.delegate?.failedSignIn(status: httpResponse.statusCode, json: returnData)
+                self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         }
     }
     
     //MARK: - 共通通信部分
-    public func sendPostRequestAsynchronous(_ url:String, method:String, token:String?, params:[String:Any], funcs:@escaping ([String : Any], URLResponse) -> Void)
+    public func sendPostRequestAsynchronous(_ url:String, method:String, token:String?, params:[String:Any], funcs:@escaping ([String : Any], URLResponse?) -> Void)
     {
         var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)
@@ -150,7 +153,7 @@ class HttpRequest
                     print(error)
                 }
             }
-            funcs(returnData, response!)
+            funcs(returnData, response)
         }
         task.resume()
     }
