@@ -235,6 +235,19 @@ public class CUONAManager: NFCReaderDelegate {
         }
     }
     
+    public func enterAdminMode(_ password: String) -> Bool {
+        return CUONABTManager.shared.sendPWProtect(cmd: 0, password: password)
+    }
+    
+    public func setAdminPassword(_ password: String) -> Bool {
+        return CUONABTManager.shared.sendPWProtect(cmd: 1, password: password)
+    }
+    
+    public func unsetAdminPassword() -> Bool {
+        return CUONABTManager.shared.sendPWProtect(cmd: 1,
+                    password: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+    }
+    
     // NFCReaderDelegate
     
     func nfcReaderGotRecord(_ record: String) {

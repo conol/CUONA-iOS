@@ -113,7 +113,13 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
             return
         }
         let deviceId = Data(decryptor.deviceId)
-        delegate?.nfcReaderFoundCUONARecord(scanSignature: nil,
+        let signatureMagic: [UInt8] = [
+            UInt8(CUONA_MAGIC_1),
+            UInt8(CUONA_MAGIC_2),
+            UInt8(CUONA_MAGIC_3_Legacy)]
+        var scanSignature = Data(signatureMagic)
+        scanSignature.append(deviceId)
+        delegate?.nfcReaderFoundCUONARecord(scanSignature: scanSignature,
                                             deviceId: deviceId,
                                             jsonData: jsonData)
     }

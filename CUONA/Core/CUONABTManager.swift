@@ -25,6 +25,8 @@ let CUONA_OTA_STATUS_DONE: UInt8          = 0x20
 
 let CUONA_BT_SCAN_TIMEOUT_SECONDS: Double = 3.0
 
+let CUONA_PASSWORD_LENGTH = 16
+
 private func uuid16equal(_ uuid: CBUUID, _ value: UInt16) -> Bool {
     let data = uuid.data
     return data.count == 2 &&
@@ -173,11 +175,39 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         peripheral.writeValue(data, for: char, type: .withResponse)
         return true
     }
-    
+
     var isSecureNFCSupported: Bool {
         return CUONANFCDataChar != nil
     }
     
+    func sendPWProtect(cmd: Int, password: String) -> Bool {
+        var reqdata = [UInt8](repeating: 0, count: CUONA_PASSWORD_LENGTH + 1)
+        reqdata[0] = UInt8(cmd)
+        let pwnums = password.components(separatedBy:CharacterSet.whitespaces)
+        var i = 1
+        for s in pwnums {
+            if (i >= reqdata.count) {
+                CUONADebugPrint("long password, rest will be ignored")
+                break
+            }
+            if let n = UInt8(s) {
+                reqdata[i] = n
+            } else {
+                CUONADebugPrint("password string format error")
+                return false
+            }
+            i += 1
+        }
+        
+        guard let peripheral = currentPeripheral,
+            let char = CUONAPWProtectChar else {
+                return false
+        }
+        peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
+        return true
+    }
+    
+
     // CBCentralManagerDelegate
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -227,7 +257,6 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
         peripheral.delegate = self
         peripheral.discoverServices(nil)
-        delegate?.cuonaConnected?()
     }
 
     func centralManager(_ central: CBCentralManager,
@@ -296,6 +325,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 }
             }
         }
+        delegate?.cuonaConnected?()
     }
     
     func peripheral(_ peripheral: CBPeripheral,

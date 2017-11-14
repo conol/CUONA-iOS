@@ -114,6 +114,16 @@ UITextFieldDelegate {
                 }
             }
         }
+        let changePW = UIAlertAction(title: "パスワード書き込み", style: .default){ Void in
+            if let cuonaManager = self.cuonaManager {
+                _ = cuonaManager.setAdminPassword("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")
+            }
+        }
+        let unsetPW = UIAlertAction(title: "パスワード解除", style: .default){ Void in
+            if let cuonaManager = self.cuonaManager {
+                _ = cuonaManager.unsetAdminPassword()
+            }
+        }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         
         sheet.addAction(startNFC)
@@ -122,6 +132,8 @@ UITextFieldDelegate {
         sheet.addAction(updateFirmware)
         sheet.addAction(forceUpdateFirmware)
         sheet.addAction(writeJSON)
+        sheet.addAction(changePW)
+        sheet.addAction(unsetPW)
         sheet.addAction(cancel)
         
         present(sheet, animated: true, completion: nil)
@@ -199,6 +211,10 @@ UITextFieldDelegate {
     func cuonaConnected() {
         if let tv = logTextView {
             tv.text! += "Connected\n"
+        }
+        // 管理者モード（要パスワード）に入る
+        if let cm = cuonaManager {
+            _ = cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
         }
     }
     
