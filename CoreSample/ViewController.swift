@@ -51,9 +51,6 @@ UITextFieldDelegate {
             let pw = pwTextField?.text else {
                 return
         }
-        if ssid == "" {
-            return
-        }
         _ = cuonaManager?.writeWifiSSIDPw(ssid: ssid, password: pw)
     }
     
