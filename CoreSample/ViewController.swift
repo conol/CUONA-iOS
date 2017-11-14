@@ -87,38 +87,38 @@ UITextFieldDelegate {
             self.cuonaManager?.requestDisconnect()
         }
         let updateFirmware = UIAlertAction(title: "ファームウェアアップデート", style: .default) { Void in
-            if let cuonaManager = self.cuonaManager {
-                if !cuonaManager.requestOTAUpdate() {
+            if let manager = self.cuonaManager {
+                if !manager.requestOTAUpdate() {
                     self.logTextView.text!
                         += "OTAに対応していないファームウェアのようです\n"
                 }
             }
         }
         let forceUpdateFirmware = UIAlertAction(title: "ファームウェアアップデート（強制）", style: .default) { Void in
-            if let cuonaManager = self.cuonaManager {
-                if !cuonaManager.requestOTAUpdate(force: true) {
+            if let manager = self.cuonaManager {
+                if !manager.requestOTAUpdate(force: true) {
                     self.logTextView.text!
                         += "OTAに対応していないファームウェアのようです\n"
                 }
             }
         }
         let writeJSON = UIAlertAction(title: "JSON書き込み", style: .default) { Void in
-            if let cuonaManager = self.cuonaManager {
-                let json = "{\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"conolAir\",\"pass\":\"RaePh2oh\",\"kind\":1,\"days\":1}}"
-                if !cuonaManager.writeJSON(json) {
+            if let manager = self.cuonaManager {
+                let json = "{\"wifi\":{\"id\":\"H7Pa7pQaVxxG\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
+                if !manager.writeJSON(json) {
                     self.logTextView.text!
                         += "JSON書き込みに対応していないファームウェアのようです\n"
                 }
             }
         }
         let changePW = UIAlertAction(title: "パスワード書き込み", style: .default){ Void in
-            if let cuonaManager = self.cuonaManager {
-                _ = cuonaManager.setAdminPassword("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")
+            if let manager = self.cuonaManager {
+                _ = manager.setAdminPassword("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")
             }
         }
         let unsetPW = UIAlertAction(title: "パスワード解除", style: .default){ Void in
-            if let cuonaManager = self.cuonaManager {
-                _ = cuonaManager.unsetAdminPassword()
+            if let manager = self.cuonaManager {
+                _ = manager.unsetAdminPassword()
             }
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)

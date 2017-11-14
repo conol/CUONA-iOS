@@ -119,6 +119,9 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func cuonaConnected()
     {
+        //書込用管理者モード設定
+        _ = cuonaManager?.enterAdminMode((deviceManager?.device_password)!)
+        
         jsonDic?["wifi"] = wifi.getDict()
         let jsonstr = convertToString(jsonDic)
         
@@ -244,6 +247,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     public func successSignIn(json: [String : Any]) {
+        _ = cuonaManager?.setAdminPassword(json["device_password"] as! String)
         delegate?.successSignIn!(response: json)
     }
     

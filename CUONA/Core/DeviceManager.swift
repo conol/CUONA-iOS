@@ -27,7 +27,7 @@ class DeviceManager: NSObject, HttpRequestDelegate
     weak var delegate: DeviceManagerDelegate?
     public var request: HttpRequest?
     
-    private var device_password:String?
+    public var device_password:String?
     
     required public init(delegate: DeviceManagerDelegate)
     {
