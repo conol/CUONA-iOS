@@ -11,6 +11,8 @@ import SystemConfiguration
 
 private let API_URL = "http://manage-dev.cuona.io/"
 private let SAVE_LOGS = "saveLogs"
+private let APP_TOKEN = "appToken"
+private let DEVICE_PASS = "deviceMasterPassword"
 
 @objc public protocol DeviceManagerDelegate: class
 {
@@ -25,10 +27,17 @@ class DeviceManager: NSObject, HttpRequestDelegate
     weak var delegate: DeviceManagerDelegate?
     public var request: HttpRequest?
     
+    private var device_password:String?
+    
     required public init(delegate: DeviceManagerDelegate)
     {
         super.init()
         self.delegate = delegate
+        
+        let pass = UserDefaults.standard.object(forKey: DEVICE_PASS) as! String?
+        if pass != nil {
+            self.device_password = pass
+        }
         request = HttpRequest(delegate: self)
     }
     
@@ -41,6 +50,9 @@ class DeviceManager: NSObject, HttpRequestDelegate
     }
     
     func successSignIn(json: [String : Any]) {
+        let device_pass = json["device_password"] as? String
+        device_password = device_pass
+        UserDefaults.standard.set(device_pass, forKey: DEVICE_PASS)
         delegate?.successSignIn!(json: json)
     }
     
@@ -60,12 +72,17 @@ class DeviceManager: NSObject, HttpRequestDelegate
 class HttpRequest
 {
     let condition = NSCondition()
-    var token:String?
     weak var delegate: HttpRequestDelegate?
+    public var app_token:String?
     
     required public init(delegate: HttpRequestDelegate)
     {
         self.delegate = delegate
+        
+        let token = UserDefaults.standard.object(forKey: APP_TOKEN) as! String?
+        if token != nil {
+            self.app_token = token
+        }
     }
     
     //MARK: - ログ送信
@@ -122,6 +139,9 @@ class HttpRequest
             (returnData: [String : Any], response: URLResponse?) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
+                let token = returnData["app_token"] as? String
+                self.app_token = token
+                UserDefaults.standard.set(token, forKey: APP_TOKEN)
                 self.delegate?.successSignIn(json: returnData)
             } else {
                 self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: returnData)
@@ -135,8 +155,8 @@ class HttpRequest
         var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)
         req.httpMethod = method
-        if token != nil {
-            req.addValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
+        if app_token != nil {
+            req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {

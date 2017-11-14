@@ -24,15 +24,19 @@ let serviceKey:String = "H7Pa7pQaVxxG"
 {
     func successScan()
     func failedScan()
+    @objc optional func successSignIn(response: [String : Any])
+    @objc optional func failedSignIn(status: NSInteger, response: [String : Any])
+    @objc optional func successWrite()
+    @objc optional func failedWrite()
 }
 
 public class Wifi: NSObject
 {
     var id:String = serviceKey
-    var ssid:String?
-    var pass:String?
-    var kind:Int = 0
-    var days:Int = 0
+    public var ssid:String?
+    public var pass:String?
+    public var kind:Int = 0
+    public var days:Int = 0
     
     func convertWifiObj(_ data: [String:Any])
     {
@@ -42,7 +46,7 @@ public class Wifi: NSObject
         kind = data["kind"] as! Int
     }
     
-    func getDict() -> [String:Any]
+    public func getDict() -> [String:Any]
     {
         return [
             "id"   : serviceKey,
@@ -60,7 +64,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     var cuonaManager: CUONAManager?
     var deviceManager: DeviceManager?
     
-    var deviceId: String?
+    public var deviceId: String?
     var jsonDic: [String: Any]?
     
     weak var delegate: WifiHelperDelegate?
@@ -79,6 +83,11 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     {
         self.mode = mode
         cuonaManager?.startReadingNFC("CUONAにタッチしてください")
+    }
+    
+    public func hasToken() -> Bool
+    {
+        return deviceManager?.request?.app_token != nil ? true : false
     }
     
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
@@ -117,6 +126,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             if let cm = self.cuonaManager {
                 if !cm.writeJSON(jsonstr!) {
                     print("書込に対応していないデータ形式または、対応していないバージョンです")
+                    self.delegate?.failedWrite!()
                 }
             }
         }
@@ -125,6 +135,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func cuonaUpdatedJSON()
     {
         deviceManager?.request?.sendLog(deviceId!, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "NFCデータを書き込みました")
+        delegate?.successWrite!()
         print("データ書込完了!")
     }
     
@@ -213,6 +224,11 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         }
     }
     
+    public func login(email:String, password:String)
+    {
+        deviceManager?.request?.signIn(email: email, password: password)
+    }
+    
     func showSettingNoneError()
     {
         Alert.show(title: "Wi-Fi HELPER未設定", message: "タッチしたCUONAにはWi-Fi HELPERの\nサービス設定がありません")
@@ -225,5 +241,13 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func failedSendLog(status: NSInteger, json: [String : Any]) {
         print("ログ送信失敗！")
+    }
+    
+    public func successSignIn(json: [String : Any]) {
+        delegate?.successSignIn!(response: json)
+    }
+    
+    public func failedSignIn(status: NSInteger, json: [String : Any]) {
+        delegate?.failedSignIn!(status: status, response: json)
     }
 }

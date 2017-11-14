@@ -28,6 +28,14 @@ class ViewController: UIViewController, WifiHelperDelegate {
         wifihelper?.wifi.days = 2
         wifihelper?.start(mode: .Write)
     }
+    
+    func successScan(){
+        
+    }
+    
+    func failedScan(){
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

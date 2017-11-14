@@ -45,6 +45,7 @@
 		14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824A41FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824A51FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
+		14B824AC1FBA85B60097050B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,7 +98,7 @@
 		1446E63B1FAFA35200F06724 /* WifiHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiHelperTests.swift; sourceTree = "<group>"; };
 		1446E63D1FAFA35200F06724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1446E64B1FAFA41700F06724 /* WifiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiHelper.swift; sourceTree = "<group>"; };
-		1446E64D1FAFA43800F06724 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1446E64D1FAFA43800F06724 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../Extensions.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
 		145751351FB2F3D5000C0C96 /* testtt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testtt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		145751371FB2F3D5000C0C96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,7 +206,6 @@
 			children = (
 				145750D71FB1995F000C0C96 /* Core */,
 				1446E6051FAF9E4100F06724 /* Info.plist */,
-				1446E64D1FAFA43800F06724 /* Extensions.swift */,
 				1446E64A1FAFA3EC00F06724 /* WifiHelper */,
 			);
 			path = CUONA;
@@ -257,6 +257,7 @@
 				1446E6201FAF9E9200F06724 /* CUONAManager.swift */,
 				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
 				14B824A21FB9D09E0097050B /* DeviceManager.swift */,
+				1446E64D1FAFA43800F06724 /* Extensions.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -579,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14B824AC1FBA85B60097050B /* Extensions.swift in Sources */,
 				14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */,
 				1446E6261FAF9E9200F06724 /* CUONAManager.swift in Sources */,
 				1446E6211FAF9E9200F06724 /* CUONABTManager.swift in Sources */,
