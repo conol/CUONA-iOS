@@ -100,6 +100,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             }
         }
         self.deviceId = deviceId
+        jsonDic  = convertToDictionary(json)
         
         switch mode {
         case .Admin: return connectedAndGetInfo(json)
@@ -145,13 +146,13 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func cuonaUpdatedJSON()
     {
         deviceManager?.request?.sendLog(deviceId!, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "NFCデータを書き込みました")
+        cuonaManager?.requestDisconnect()
         delegate?.successWrite!()
         print("データ書込完了!")
     }
     
     func connectedAndGetInfo(_ json: String) -> Bool
     {
-        jsonDic  = convertToDictionary(json)
         let wifi = jsonDic?["wifi"] as? [String:Any]
         
         if (wifi != nil && 0 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
@@ -167,7 +168,6 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func connectedAndReadWifi(_ json: String) -> Bool
     {
-        jsonDic  = convertToDictionary(json)
         let wifi = jsonDic?["wifi"] as? [String: Any]
         
         if (wifi != nil && 1 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
