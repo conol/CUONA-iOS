@@ -10,7 +10,7 @@ import UIKit
 import NetworkExtension
 import CUONA
 
-public enum CORONAMode:Int
+public enum CUONAMode:Int
 {
     case Admin = 1
     case Write = 2
@@ -22,8 +22,8 @@ let serviceKey:String = "H7Pa7pQaVxxG"
 
 @objc public protocol WifiHelperDelegate: class
 {
-    func successScan()
-    func failedScan()
+    @objc optional func successScan()
+    @objc optional func failedScan()
     @objc optional func successSignIn(response: [String : Any])
     @objc optional func failedSignIn(status: NSInteger, response: [String : Any])
     @objc optional func successWrite()
@@ -42,8 +42,8 @@ public class Wifi: NSObject
     {
         ssid = data["ssid"] as? String
         pass = data["pass"] as? String
-        days = data["days"] as! Int
-        kind = data["kind"] as! Int
+        days = data["days"] as? Int ?? 0
+        kind = data["kind"] as? Int ?? 0
     }
     
     public func getDict() -> [String:Any]
@@ -68,7 +68,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     var jsonDic: [String: Any]?
     
     weak var delegate: WifiHelperDelegate?
-    public var mode: CORONAMode = .Other
+    public var mode: CUONAMode = .Other
     public var wifi = Wifi()
     
     required public init(delegate: WifiHelperDelegate)
@@ -79,7 +79,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager = DeviceManager(delegate: self)
     }
     
-    public func start(mode: CORONAMode)
+    public func start(mode: CUONAMode)
     {
         self.mode = mode
         cuonaManager?.startReadingNFC("CUONAにタッチしてください")
@@ -119,6 +119,13 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func cuonaConnected()
     {
+        if mode == .Admin {
+            _ = cuonaManager?.setAdminPassword((deviceManager?.device_password)!)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.cuonaManager?.requestDisconnect()
+            }
+            return
+        }
         //書込用管理者モード設定
         _ = cuonaManager?.enterAdminMode((deviceManager?.device_password)!)
         
@@ -128,8 +135,10 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             if let cm = self.cuonaManager {
                 if !cm.writeJSON(jsonstr!) {
-                    print("書込に対応していないデータ形式または、対応していないバージョンです")
+                    Alert.show(title: "エラー", message: "書込に対応していないデータ形式または、対応していないバージョンです：\(jsonstr!)")
                     self.delegate?.failedWrite!()
+                } else {
+                    self.delegate?.successWrite!()
                 }
             }
         }
@@ -147,14 +156,14 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         jsonDic  = convertToDictionary(json)
         let wifi = jsonDic?["wifi"] as? [String:Any]
         
-        if (wifi != nil && 1 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
+        if (wifi != nil && 0 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
             self.wifi.convertWifiObj(wifi!)
-            self.delegate?.successScan()
-            return false
+            self.delegate?.successScan?()
+            return true
         } else {
             showSettingNoneError()
         }
-        self.delegate?.failedScan()
+        self.delegate?.failedScan?()
         return false
     }
     
@@ -227,7 +236,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         }
     }
     
-    public func login(email:String, password:String)
+    public func signIn(email:String, password:String)
     {
         deviceManager?.request?.signIn(email: email, password: password)
     }
@@ -247,7 +256,6 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     public func successSignIn(json: [String : Any]) {
-        _ = cuonaManager?.setAdminPassword(json["device_password"] as! String)
         delegate?.successSignIn!(response: json)
     }
     
