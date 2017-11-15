@@ -137,8 +137,6 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 if !cm.writeJSON(jsonstr!) {
                     Alert.show(title: "エラー", message: "書込に対応していないデータ形式または、対応していないバージョンです：\(jsonstr!)")
                     self.delegate?.failedWrite!()
-                } else {
-                    self.delegate?.successWrite!()
                 }
             }
         }
