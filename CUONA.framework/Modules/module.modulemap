@@ -1,0 +1,11 @@
+framework module CUONA {
+  umbrella header "CUONA.h"
+
+  export *
+  module * { export * }
+}
+
+module CUONA.Swift {
+    header "CUONA-Swift.h"
+    requires objc
+}
