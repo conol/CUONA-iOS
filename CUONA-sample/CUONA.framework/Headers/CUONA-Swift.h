@@ -203,6 +203,7 @@ SWIFT_PROTOCOL("_TtP5CUONA20CUONAManagerDelegate_")
 - (void)cuonaUpdatedServerPath:(NSString * _Nonnull)path;
 - (void)cuonaUpdatedNetResponseWithCode:(NSInteger)code message:(NSString * _Nonnull)message;
 - (void)cuonaUpdatedJSON;
+- (void)cuonaUpdatedFailedJSONWithCode:(NSInteger)code errortxt:(NSString * _Nonnull)errortxt;
 - (void)cuonaUpdateOTAStatus:(enum CUONAOTAStatus)status;
 @end
 
@@ -243,6 +244,7 @@ SWIFT_CLASS("_TtC5CUONA5Cuona") SWIFT_AVAILABILITY(ios,introduced=11.0)
 - (void)cuonaNFCCanceled;
 - (void)cuonaIllegalNFCDetected;
 - (void)cuonaUpdatedJSON;
+- (void)cuonaUpdatedFailedJSONWithCode:(NSInteger)code errortxt:(NSString * _Nonnull)errortxt;
 - (void)cuonaConnected;
 - (void)cuonaConnectFailed;
 - (void)cuonaDisconnected;
@@ -260,9 +262,10 @@ SWIFT_PROTOCOL("_TtP5CUONA13CuonaDelegate_")
 - (void)catchNFCWithDevice_id:(NSString * _Nonnull)device_id type:(enum CUONAType)type data:(NSDictionary<NSString *, id> * _Nullable)data;
 - (void)cancelNFC;
 - (void)failedNFC;
-- (void)successNFCData;
-- (void)disconnect;
 @optional
+- (void)successNFCData;
+- (void)failedNFCDataWithCode:(NSInteger)code errortxt:(NSString * _Nonnull)errortxt;
+- (void)disconnect;
 - (void)successConnect;
 - (void)failedConnect;
 - (void)successWiFiWithSsid:(NSString * _Nullable)ssid password:(NSString * _Nullable)password;
@@ -285,6 +288,7 @@ SWIFT_PROTOCOL("_TtP5CUONA19HttpRequestDelegate_")
 typedef SWIFT_ENUM(NSInteger, Service) {
   ServiceWifihelper = 1,
   ServiceFavor = 2,
+  ServiceDevelop = 100,
   ServiceAll = 10,
 };
 
