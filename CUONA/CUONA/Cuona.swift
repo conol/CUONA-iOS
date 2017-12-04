@@ -41,6 +41,7 @@ public enum Logging:Int
 {
     case wifihelper = 1
     case favor      = 2
+    case rounds     = 3
     case develop    = 100
     case all        = 10
     
@@ -49,7 +50,8 @@ public enum Logging:Int
         case .wifihelper: return "H7Pa7pQaVxxG"
         case .favor:      return "UXbfYJ6SXm8G"
         case .develop:    return "NkNbRxEiHZrk"
-        case .all:        return "H7Pa7pQaVxxG,UXbfYJ6SXm8G,NkNbRxEiHZrk"
+        case .rounds:     return "yhNuCERUMM58"
+        case .all:        return "H7Pa7pQaVxxG,UXbfYJ6SXm8G,yhNuCERUMM58,NkNbRxEiHZrk"
         }
     }
 }
