@@ -150,6 +150,7 @@ public struct CUONAWiFiSSIDPw {
     @objc optional func cuonaUpdatedServerPath(_ path: String)
     @objc optional func cuonaUpdatedNetResponse(code: Int, message: String)
     @objc optional func cuonaUpdatedJSON()
+    @objc optional func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
 
     // OTA status update
     @objc optional func cuonaUpdateOTAStatus(_ status: CUONAOTAStatus)
@@ -218,10 +219,12 @@ public class CUONAManager: NFCReaderDelegate {
                     if let nfcData = enc.encrypt(jsonData: data) {
                         return CUONABTManager.shared.writeSecureNFCData(nfcData)
                     } else {
+                        delegate?.cuonaUpdatedFailedJSON!(code: 10001, errortxt: "CUONAEncryptor.encrypt failed")
                         CUONADebugPrint("CUONAEncryptor.encrypt failed")
                         return false
                     }
                 } else {
+                    delegate?.cuonaUpdatedFailedJSON!(code: 10002, errortxt: "deviceId is not available")
                     CUONADebugPrint("deviceId is not available")
                     return false
                 }
@@ -230,6 +233,7 @@ public class CUONAManager: NFCReaderDelegate {
                 return CUONABTManager.shared.writePlainJSON(data)
             }
        } else {
+            delegate?.cuonaUpdatedFailedJSON!(code: 10004, errortxt: "Cannot convert JSON string to UTF-8")
             CUONADebugPrint("Cannot convert JSON string to UTF-8")
             return false
         }

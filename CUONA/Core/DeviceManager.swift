@@ -9,7 +9,7 @@
 import UIKit
 import SystemConfiguration
 
-private let API_URL = "http://manage-dev.cuona.io/"
+private let API_URL = "https://manage.cuona.io"
 private let SAVE_LOGS = "saveLogs"
 private let APP_TOKEN = "appToken"
 private let DEVICE_PASS = "deviceMasterPassword"

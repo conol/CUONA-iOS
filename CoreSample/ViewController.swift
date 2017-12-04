@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CUONA
+import CUONACore
 
 extension Data {
     func hexEncodedString() -> String {
