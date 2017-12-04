@@ -26,7 +26,12 @@ private func CUONAGetDebugMode() -> Bool {
 }
 
 func CUONADebugPrint(_ message: String) {
-    if CUONAManager.isDebugMode {
+    if #available(iOS 11.0, *) {
+        if CUONAManager.isDebugMode {
+            print("CUONA:", message)
+        }
+    } else {
+        print("CUONA: This iOS is under 11.0. Can't Use CUONA.")
         print("CUONA:", message)
     }
 }

@@ -67,6 +67,7 @@ func expandNDEFURI(_ src: Data) -> String {
     return abbrev + (String(data: src.dropFirst(), encoding: .utf8) ?? "")
 }
 
+@available(iOS 11.0, *)
 class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
     
     var session: NFCNDEFReaderSession?
