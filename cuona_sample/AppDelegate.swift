@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  testtt
+//  cuona_sample
 //
-//  Created by 溝田隆明 on 2017/11/08.
+//  Created by mizota takaaki on 2017/12/06.
 //  Copyright © 2017年 conol, Inc. All rights reserved.
 //
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14322FB51FD62D63007A78A1 /* CUONACore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; };
+		14322FB61FD62D63007A78A1 /* CUONACore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1446E60B1FAF9E4100F06724 /* CUONA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; };
 		1446E6101FAF9E4100F06724 /* CUONATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E60F1FAF9E4100F06724 /* CUONATests.swift */; };
 		1446E6121FAF9E4100F06724 /* CUONA.h in Headers */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,24 +39,8 @@
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
 		145750D61FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
 		145751301FB2D7D3000C0C96 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
-		145751381FB2F3D5000C0C96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145751371FB2F3D5000C0C96 /* AppDelegate.swift */; };
-		1457513A1FB2F3D5000C0C96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145751391FB2F3D5000C0C96 /* ViewController.swift */; };
-		1457513D1FB2F3D5000C0C96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1457513B1FB2F3D5000C0C96 /* Main.storyboard */; };
-		1457513F1FB2F3D5000C0C96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1457513E1FB2F3D5000C0C96 /* Assets.xcassets */; };
-		145751421FB2F3D5000C0C96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145751401FB2F3D5000C0C96 /* LaunchScreen.storyboard */; };
-		1457514D1FB2F3D6000C0C96 /* testttTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1457514C1FB2F3D6000C0C96 /* testttTests.swift */; };
-		145751581FB2F3D6000C0C96 /* testttUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145751571FB2F3D6000C0C96 /* testttUITests.swift */; };
-		145751631FB2F41C000C0C96 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
-		145751641FB2F41C000C0C96 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
-		145751651FB2F41C000C0C96 /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
-		145751661FB2F41C000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		145751671FB2F41C000C0C96 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
-		145751681FB2F41C000C0C96 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
-		145751691FB2F41C000C0C96 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
-		1457516A1FB2F41C000C0C96 /* WifiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64B1FAFA41700F06724 /* WifiHelper.swift */; };
 		14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824A41FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
-		14B824A51FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824AC1FBA85B60097050B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14B824B61FBADE160097050B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B51FBADE160097050B /* AppDelegate.swift */; };
 		14B824B81FBADE160097050B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B71FBADE160097050B /* ViewController.swift */; };
@@ -63,11 +49,32 @@
 		14B824C01FBADE160097050B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B824BE1FBADE160097050B /* LaunchScreen.storyboard */; };
 		14B824CB1FBADE160097050B /* CoreSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824CA1FBADE160097050B /* CoreSampleTests.swift */; };
 		14B824D61FBADE160097050B /* CoreSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824D51FBADE160097050B /* CoreSampleUITests.swift */; };
-		14B824E11FBADECF0097050B /* CUONA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; };
-		14B824E21FBADECF0097050B /* CUONA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14E3A8EF1FD8104700428950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E3A8EE1FD8104700428950 /* AppDelegate.swift */; };
+		14E3A8F11FD8104700428950 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E3A8F01FD8104700428950 /* ViewController.swift */; };
+		14E3A8F41FD8104700428950 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E3A8F21FD8104700428950 /* Main.storyboard */; };
+		14E3A8F61FD8104700428950 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14E3A8F51FD8104700428950 /* Assets.xcassets */; };
+		14E3A8F91FD8104700428950 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E3A8F71FD8104700428950 /* LaunchScreen.storyboard */; };
+		14E3A8FE1FD8105600428950 /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
+		14E3A8FF1FD8105600428950 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
+		14E3A9001FD8105600428950 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
+		14E3A9011FD8105600428950 /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
+		14E3A9021FD8105600428950 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
+		14E3A9031FD8105600428950 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
+		14E3A9041FD8105600428950 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
+		14E3A9051FD8105600428950 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
+		14E3A9061FD8105600428950 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
+		14E3A9071FD8105600428950 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6051FAF9E4100F06724 /* Info.plist */; };
+		14E3A9081FD8105600428950 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		14322FB71FD62D63007A78A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1454EA041FBDB01800DA77E0;
+			remoteInfo = CUONACore;
+		};
 		1446E60C1FAF9E4100F06724 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
@@ -81,20 +88,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1446E62D1FAFA35100F06724;
 			remoteInfo = WifiHelper;
-		};
-		145751491FB2F3D6000C0C96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 145751341FB2F3D5000C0C96;
-			remoteInfo = testtt;
-		};
-		145751541FB2F3D6000C0C96 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 145751341FB2F3D5000C0C96;
-			remoteInfo = testtt;
 		};
 		14B824C71FBADE160097050B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -110,23 +103,16 @@
 			remoteGlobalIDString = 14B824B21FBADE160097050B;
 			remoteInfo = CoreSample;
 		};
-		14B824E31FBADECF0097050B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1446E6001FAF9E4100F06724;
-			remoteInfo = CUONA;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		14B824E51FBADECF0097050B /* Embed Frameworks */ = {
+		14322FB91FD62D63007A78A1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				14B824E21FBADECF0097050B /* CUONA.framework in Embed Frameworks */,
+				14322FB61FD62D63007A78A1 /* CUONACore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,20 +143,6 @@
 		1454EA161FBDB01800DA77E0 /* CUONACore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CUONACore.plist; path = "/Users/mizotatakaaki/repositories/CUONA-iOS/CUONACore.plist"; sourceTree = "<absolute>"; };
 		1454EA181FBDB4FB00DA77E0 /* Cuona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuona.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
-		145751351FB2F3D5000C0C96 /* testtt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testtt.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		145751371FB2F3D5000C0C96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		145751391FB2F3D5000C0C96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1457513C1FB2F3D5000C0C96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1457513E1FB2F3D5000C0C96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		145751411FB2F3D5000C0C96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		145751431FB2F3D5000C0C96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		145751481FB2F3D5000C0C96 /* testttTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testttTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1457514C1FB2F3D6000C0C96 /* testttTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testttTests.swift; sourceTree = "<group>"; };
-		1457514E1FB2F3D6000C0C96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		145751531FB2F3D6000C0C96 /* testttUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testttUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		145751571FB2F3D6000C0C96 /* testttUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testttUITests.swift; sourceTree = "<group>"; };
-		145751591FB2F3D6000C0C96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14B824A11FB8A6A20097050B /* testtt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = testtt.entitlements; sourceTree = "<group>"; };
 		14B824A21FB9D09E0097050B /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		14B824B31FBADE160097050B /* CoreSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B824B51FBADE160097050B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +158,14 @@
 		14B824D51FBADE160097050B /* CoreSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSampleUITests.swift; sourceTree = "<group>"; };
 		14B824D71FBADE160097050B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14B824E61FBADEF00097050B /* CoreSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoreSample.entitlements; sourceTree = "<group>"; };
+		14E3A8EC1FD8104700428950 /* cuona_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cuona_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14E3A8EE1FD8104700428950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		14E3A8F01FD8104700428950 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		14E3A8F31FD8104700428950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		14E3A8F51FD8104700428950 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		14E3A8F81FD8104700428950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		14E3A8FA1FD8104700428950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14E3A9091FD8110F00428950 /* cuona_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cuona_sample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,32 +206,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		145751321FB2F3D5000C0C96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751451FB2F3D5000C0C96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751501FB2F3D6000C0C96 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14B824B01FBADE160097050B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14B824E11FBADECF0097050B /* CUONA.framework in Frameworks */,
+				14322FB51FD62D63007A78A1 /* CUONACore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +228,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14E3A8E91FD8104700428950 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -279,12 +245,10 @@
 				1446E60E1FAF9E4100F06724 /* CUONATests */,
 				1446E62F1FAFA35100F06724 /* WifiHelper */,
 				1446E63A1FAFA35200F06724 /* WifiHelperTests */,
-				145751361FB2F3D5000C0C96 /* testtt */,
-				1457514B1FB2F3D6000C0C96 /* testttTests */,
-				145751561FB2F3D6000C0C96 /* testttUITests */,
 				14B824B41FBADE160097050B /* CoreSample */,
 				14B824C91FBADE160097050B /* CoreSampleTests */,
 				14B824D41FBADE160097050B /* CoreSampleUITests */,
+				14E3A8ED1FD8104700428950 /* cuona_sample */,
 				1446E6021FAF9E4100F06724 /* Products */,
 				145751271FB2C960000C0C96 /* Frameworks */,
 				1454EA161FBDB01800DA77E0 /* CUONACore.plist */,
@@ -298,13 +262,11 @@
 				1446E60A1FAF9E4100F06724 /* CUONATests.xctest */,
 				1446E62E1FAFA35100F06724 /* WifiHelper.framework */,
 				1446E6361FAFA35200F06724 /* WifiHelperTests.xctest */,
-				145751351FB2F3D5000C0C96 /* testtt.app */,
-				145751481FB2F3D5000C0C96 /* testttTests.xctest */,
-				145751531FB2F3D6000C0C96 /* testttUITests.xctest */,
 				14B824B31FBADE160097050B /* CoreSample.app */,
 				14B824C61FBADE160097050B /* CoreSampleTests.xctest */,
 				14B824D11FBADE160097050B /* CoreSampleUITests.xctest */,
 				1454EA151FBDB01800DA77E0 /* CUONACore.framework */,
+				14E3A8EC1FD8104700428950 /* cuona_sample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -386,38 +348,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		145751361FB2F3D5000C0C96 /* testtt */ = {
-			isa = PBXGroup;
-			children = (
-				14B824A11FB8A6A20097050B /* testtt.entitlements */,
-				145751371FB2F3D5000C0C96 /* AppDelegate.swift */,
-				145751391FB2F3D5000C0C96 /* ViewController.swift */,
-				1457513B1FB2F3D5000C0C96 /* Main.storyboard */,
-				1457513E1FB2F3D5000C0C96 /* Assets.xcassets */,
-				145751401FB2F3D5000C0C96 /* LaunchScreen.storyboard */,
-				145751431FB2F3D5000C0C96 /* Info.plist */,
-			);
-			path = testtt;
-			sourceTree = "<group>";
-		};
-		1457514B1FB2F3D6000C0C96 /* testttTests */ = {
-			isa = PBXGroup;
-			children = (
-				1457514C1FB2F3D6000C0C96 /* testttTests.swift */,
-				1457514E1FB2F3D6000C0C96 /* Info.plist */,
-			);
-			path = testttTests;
-			sourceTree = "<group>";
-		};
-		145751561FB2F3D6000C0C96 /* testttUITests */ = {
-			isa = PBXGroup;
-			children = (
-				145751571FB2F3D6000C0C96 /* testttUITests.swift */,
-				145751591FB2F3D6000C0C96 /* Info.plist */,
-			);
-			path = testttUITests;
-			sourceTree = "<group>";
-		};
 		14B824B41FBADE160097050B /* CoreSample */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +378,20 @@
 				14B824D71FBADE160097050B /* Info.plist */,
 			);
 			path = CoreSampleUITests;
+			sourceTree = "<group>";
+		};
+		14E3A8ED1FD8104700428950 /* cuona_sample */ = {
+			isa = PBXGroup;
+			children = (
+				14E3A9091FD8110F00428950 /* cuona_sample.entitlements */,
+				14E3A8EE1FD8104700428950 /* AppDelegate.swift */,
+				14E3A8F01FD8104700428950 /* ViewController.swift */,
+				14E3A8F21FD8104700428950 /* Main.storyboard */,
+				14E3A8F51FD8104700428950 /* Assets.xcassets */,
+				14E3A8F71FD8104700428950 /* LaunchScreen.storyboard */,
+				14E3A8FA1FD8104700428950 /* Info.plist */,
+			);
+			path = cuona_sample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -570,59 +514,6 @@
 			productReference = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		145751341FB2F3D5000C0C96 /* testtt */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1457515A1FB2F3D6000C0C96 /* Build configuration list for PBXNativeTarget "testtt" */;
-			buildPhases = (
-				145751311FB2F3D5000C0C96 /* Sources */,
-				145751321FB2F3D5000C0C96 /* Frameworks */,
-				145751331FB2F3D5000C0C96 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = testtt;
-			productName = testtt;
-			productReference = 145751351FB2F3D5000C0C96 /* testtt.app */;
-			productType = "com.apple.product-type.application";
-		};
-		145751471FB2F3D5000C0C96 /* testttTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1457515D1FB2F3D6000C0C96 /* Build configuration list for PBXNativeTarget "testttTests" */;
-			buildPhases = (
-				145751441FB2F3D5000C0C96 /* Sources */,
-				145751451FB2F3D5000C0C96 /* Frameworks */,
-				145751461FB2F3D5000C0C96 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1457514A1FB2F3D6000C0C96 /* PBXTargetDependency */,
-			);
-			name = testttTests;
-			productName = testttTests;
-			productReference = 145751481FB2F3D5000C0C96 /* testttTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		145751521FB2F3D6000C0C96 /* testttUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 145751601FB2F3D6000C0C96 /* Build configuration list for PBXNativeTarget "testttUITests" */;
-			buildPhases = (
-				1457514F1FB2F3D6000C0C96 /* Sources */,
-				145751501FB2F3D6000C0C96 /* Frameworks */,
-				145751511FB2F3D6000C0C96 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				145751551FB2F3D6000C0C96 /* PBXTargetDependency */,
-			);
-			name = testttUITests;
-			productName = testttUITests;
-			productReference = 145751531FB2F3D6000C0C96 /* testttUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		14B824B21FBADE160097050B /* CoreSample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14B824D81FBADE160097050B /* Build configuration list for PBXNativeTarget "CoreSample" */;
@@ -630,12 +521,12 @@
 				14B824AF1FBADE160097050B /* Sources */,
 				14B824B01FBADE160097050B /* Frameworks */,
 				14B824B11FBADE160097050B /* Resources */,
-				14B824E51FBADECF0097050B /* Embed Frameworks */,
+				14322FB91FD62D63007A78A1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				14B824E41FBADECF0097050B /* PBXTargetDependency */,
+				14322FB81FD62D63007A78A1 /* PBXTargetDependency */,
 			);
 			name = CoreSample;
 			productName = CoreSample;
@@ -678,6 +569,23 @@
 			productReference = 14B824D11FBADE160097050B /* CoreSampleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		14E3A8EB1FD8104700428950 /* cuona_sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14E3A8FB1FD8104700428950 /* Build configuration list for PBXNativeTarget "cuona_sample" */;
+			buildPhases = (
+				14E3A8E81FD8104700428950 /* Sources */,
+				14E3A8E91FD8104700428950 /* Frameworks */,
+				14E3A8EA1FD8104700428950 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cuona_sample;
+			productName = cuona_sample;
+			productReference = 14E3A8EC1FD8104700428950 /* cuona_sample.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -708,25 +616,6 @@
 					1454EA041FBDB01800DA77E0 = {
 						ProvisioningStyle = Automatic;
 					};
-					145751341FB2F3D5000C0C96 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.NearFieldCommunicationTagReading = {
-								enabled = 1;
-							};
-						};
-					};
-					145751471FB2F3D5000C0C96 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 145751341FB2F3D5000C0C96;
-					};
-					145751521FB2F3D6000C0C96 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 145751341FB2F3D5000C0C96;
-					};
 					14B824B21FBADE160097050B = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
@@ -745,6 +634,15 @@
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 14B824B21FBADE160097050B;
+					};
+					14E3A8EB1FD8104700428950 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.NearFieldCommunicationTagReading = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -765,13 +663,11 @@
 				1446E6091FAF9E4100F06724 /* CUONATests */,
 				1446E62D1FAFA35100F06724 /* WifiHelper */,
 				1446E6351FAFA35200F06724 /* WifiHelperTests */,
-				145751341FB2F3D5000C0C96 /* testtt */,
-				145751471FB2F3D5000C0C96 /* testttTests */,
-				145751521FB2F3D6000C0C96 /* testttUITests */,
 				14B824B21FBADE160097050B /* CoreSample */,
 				14B824C51FBADE160097050B /* CoreSampleTests */,
 				14B824D01FBADE160097050B /* CoreSampleUITests */,
 				1454EA041FBDB01800DA77E0 /* CUONACore */,
+				14E3A8EB1FD8104700428950 /* cuona_sample */,
 			);
 		};
 /* End PBXProject section */
@@ -812,30 +708,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		145751331FB2F3D5000C0C96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145751421FB2F3D5000C0C96 /* LaunchScreen.storyboard in Resources */,
-				1457513F1FB2F3D5000C0C96 /* Assets.xcassets in Resources */,
-				1457513D1FB2F3D5000C0C96 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751461FB2F3D5000C0C96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751511FB2F3D6000C0C96 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14B824B11FBADE160097050B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -857,6 +729,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14E3A8EA1FD8104700428950 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14E3A8F91FD8104700428950 /* LaunchScreen.storyboard in Resources */,
+				14E3A8F61FD8104700428950 /* Assets.xcassets in Resources */,
+				14E3A8F41FD8104700428950 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,40 +808,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		145751311FB2F3D5000C0C96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145751631FB2F41C000C0C96 /* CUONABTManager.swift in Sources */,
-				145751641FB2F41C000C0C96 /* CUONADecryptor.swift in Sources */,
-				145751651FB2F41C000C0C96 /* CUONAKeys.swift in Sources */,
-				14B824A51FB9D09E0097050B /* DeviceManager.swift in Sources */,
-				145751661FB2F41C000C0C96 /* CUONAEncryptor.swift in Sources */,
-				145751671FB2F41C000C0C96 /* CUONAManager.swift in Sources */,
-				145751681FB2F41C000C0C96 /* NFCReader.swift in Sources */,
-				145751691FB2F41C000C0C96 /* Extensions.swift in Sources */,
-				1457516A1FB2F41C000C0C96 /* WifiHelper.swift in Sources */,
-				1457513A1FB2F3D5000C0C96 /* ViewController.swift in Sources */,
-				145751381FB2F3D5000C0C96 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		145751441FB2F3D5000C0C96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1457514D1FB2F3D6000C0C96 /* testttTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1457514F1FB2F3D6000C0C96 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				145751581FB2F3D6000C0C96 /* testttUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14B824AF1FBADE160097050B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -985,9 +833,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14E3A8E81FD8104700428950 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14E3A8FE1FD8105600428950 /* CUONA.h in Sources */,
+				14E3A8FF1FD8105600428950 /* CUONABTManager.swift in Sources */,
+				14E3A9001FD8105600428950 /* CUONADecryptor.swift in Sources */,
+				14E3A9011FD8105600428950 /* CUONAKeys.swift in Sources */,
+				14E3A9021FD8105600428950 /* CUONAEncryptor.swift in Sources */,
+				14E3A9031FD8105600428950 /* CUONAManager.swift in Sources */,
+				14E3A9041FD8105600428950 /* NFCReader.swift in Sources */,
+				14E3A9051FD8105600428950 /* DeviceManager.swift in Sources */,
+				14E3A9061FD8105600428950 /* Extensions.swift in Sources */,
+				14E3A9071FD8105600428950 /* Info.plist in Sources */,
+				14E3A9081FD8105600428950 /* Cuona.swift in Sources */,
+				14E3A8F11FD8104700428950 /* ViewController.swift in Sources */,
+				14E3A8EF1FD8104700428950 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		14322FB81FD62D63007A78A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1454EA041FBDB01800DA77E0 /* CUONACore */;
+			targetProxy = 14322FB71FD62D63007A78A1 /* PBXContainerItemProxy */;
+		};
 		1446E60D1FAF9E4100F06724 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1446E6001FAF9E4100F06724 /* CUONA */;
@@ -997,16 +870,6 @@
 			isa = PBXTargetDependency;
 			target = 1446E62D1FAFA35100F06724 /* WifiHelper */;
 			targetProxy = 1446E6381FAFA35200F06724 /* PBXContainerItemProxy */;
-		};
-		1457514A1FB2F3D6000C0C96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 145751341FB2F3D5000C0C96 /* testtt */;
-			targetProxy = 145751491FB2F3D6000C0C96 /* PBXContainerItemProxy */;
-		};
-		145751551FB2F3D6000C0C96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 145751341FB2F3D5000C0C96 /* testtt */;
-			targetProxy = 145751541FB2F3D6000C0C96 /* PBXContainerItemProxy */;
 		};
 		14B824C81FBADE160097050B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1018,30 +881,9 @@
 			target = 14B824B21FBADE160097050B /* CoreSample */;
 			targetProxy = 14B824D21FBADE160097050B /* PBXContainerItemProxy */;
 		};
-		14B824E41FBADECF0097050B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1446E6001FAF9E4100F06724 /* CUONA */;
-			targetProxy = 14B824E31FBADECF0097050B /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1457513B1FB2F3D5000C0C96 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1457513C1FB2F3D5000C0C96 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		145751401FB2F3D5000C0C96 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				145751411FB2F3D5000C0C96 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		14B824B91FBADE160097050B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1054,6 +896,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				14B824BF1FBADE160097050B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		14E3A8F21FD8104700428950 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14E3A8F31FD8104700428950 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		14E3A8F71FD8104700428950 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14E3A8F81FD8104700428950 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1110,7 +968,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1165,7 +1023,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CUONA/CommonCrypto";
@@ -1191,13 +1049,14 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "-fembed-bitcode";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CUONA;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CUONA/CommonCrypto";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1216,12 +1075,13 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "-fembed-bitcode";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CUONA;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CUONA/CommonCrypto";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1378,110 +1238,6 @@
 			};
 			name = Release;
 		};
-		1457515B1FB2F3D6000C0C96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = testtt/testtt.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = testtt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.testtt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1457515C1FB2F3D6000C0C96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = testtt/testtt.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = testtt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.testtt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		1457515E1FB2F3D6000C0C96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = testttTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.testttTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testtt.app/testtt";
-			};
-			name = Debug;
-		};
-		1457515F1FB2F3D6000C0C96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = testttTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.testttTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testtt.app/testtt";
-			};
-			name = Release;
-		};
-		145751611FB2F3D6000C0C96 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = testttUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.testttUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = testtt;
-			};
-			name = Debug;
-		};
-		145751621FB2F3D6000C0C96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = testttUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.testttUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = testtt;
-			};
-			name = Release;
-		};
 		14B824D91FBADE160097050B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1491,7 +1247,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68WVY52GZ2;
 				INFOPLIST_FILE = CoreSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CoreSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1509,7 +1265,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68WVY52GZ2;
 				INFOPLIST_FILE = CoreSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CoreSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1588,6 +1344,40 @@
 			};
 			name = Release;
 		};
+		14E3A8FC1FD8104700428950 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = cuona_sample/cuona_sample.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = cuona_sample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.cuona-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14E3A8FD1FD8104700428950 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = cuona_sample/cuona_sample.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = cuona_sample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.cuona-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1645,33 +1435,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1457515A1FB2F3D6000C0C96 /* Build configuration list for PBXNativeTarget "testtt" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1457515B1FB2F3D6000C0C96 /* Debug */,
-				1457515C1FB2F3D6000C0C96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1457515D1FB2F3D6000C0C96 /* Build configuration list for PBXNativeTarget "testttTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1457515E1FB2F3D6000C0C96 /* Debug */,
-				1457515F1FB2F3D6000C0C96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		145751601FB2F3D6000C0C96 /* Build configuration list for PBXNativeTarget "testttUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				145751611FB2F3D6000C0C96 /* Debug */,
-				145751621FB2F3D6000C0C96 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		14B824D81FBADE160097050B /* Build configuration list for PBXNativeTarget "CoreSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1695,6 +1458,15 @@
 			buildConfigurations = (
 				14B824DF1FBADE160097050B /* Debug */,
 				14B824E01FBADE160097050B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14E3A8FB1FD8104700428950 /* Build configuration list for PBXNativeTarget "cuona_sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14E3A8FC1FD8104700428950 /* Debug */,
+				14E3A8FD1FD8104700428950 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

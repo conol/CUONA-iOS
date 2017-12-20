@@ -35,7 +35,7 @@ extension Formatter
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+        formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'"
         return formatter
     }()
 }
@@ -51,5 +51,18 @@ extension String
 {
     var dateFromISO8601: Date? {
         return Formatter.iso8601.date(from: self)
+    }
+    
+    public func split(_ length: Int) -> String {
+        guard length > 0 else {
+            return ""
+        }
+        let array = self.map { "\($0)" }
+        let limit = array.count
+        
+        let results = stride(from: 0, to: limit, by: length).map {
+            array[$0..<min($0.advanced(by: length), limit)].joined(separator: "")
+        }
+        return results.joined(separator: " ")
     }
 }

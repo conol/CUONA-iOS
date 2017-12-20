@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CUONACore
 
 public enum Bluetooth:Int
 {
@@ -70,6 +69,8 @@ public enum Logging:Int
     @objc optional func successWiFi(ssid: String?, password: String?)
     @objc optional func successSignIn(response: [String : Any])
     @objc optional func failedSignIn(status: NSInteger, response: [String : Any])
+    @objc optional func successSendLog(response: [String : Any]?)
+    @objc optional func failedSendLog(status: NSInteger, response: [String : Any]?)
 }
 
 @available(iOS 11.0, *)
@@ -87,6 +88,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         super.init()
         self.delegate = delegate
         cuonaManager = CUONAManager(delegate: self)
+        deviceManager = DeviceManager(delegate: self)
     }
     
     public func start(message:String)
@@ -97,7 +99,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         if sendLog == .on {
-            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: Service.develop.serviceKey(), addUniquId: "", note: "Touch CUONA")
+            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: Service.rounds.serviceKey(), addUniquId: "", note: "Read DeviceId by iOS")
         }
         let data = convertToDictionary(json)
         delegate?.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
@@ -131,6 +133,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         } else {
             cuonaManager?.requestDisconnect()
             cuonaConnectFailed()
+            return
         }
         delegate?.successConnect!()
     }
@@ -146,9 +149,9 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.disconnect!()
     }
     
-    public func updateFirmware(force: Bool)
+    public func updateFirmware(force: Bool) -> Bool
     {
-        _ = cuonaManager?.requestOTAUpdate(force: force)
+        return cuonaManager!.requestOTAUpdate(force: force)
     }
     
     public func writeNFC(_ data:[String:Any]?)
@@ -225,8 +228,10 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     // MARK:- DeviceManagerDelegate methods
     public func successSendLog(json: [String : Any]) {
+        delegate?.successSendLog?(response: json)
     }
     
     public func failedSendLog(status: NSInteger, json: [String : Any]) {
+        delegate?.failedSendLog?(status: status, response: json)
     }
 }

@@ -92,7 +92,7 @@ class HttpRequest
         
         let log = [
             "lat_lng": latlng,
-            "device_id": device_id,
+            "device_id": device_id.split(2),
             "used_at": Date().iso8601,
             "notes": note
         ]

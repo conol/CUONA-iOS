@@ -104,7 +104,7 @@ UITextFieldDelegate {
         }
         let writeJSON = UIAlertAction(title: "JSON書き込み", style: .default) { Void in
             if let manager = self.cuonaManager {
-                let json = "{\"wifi\":{\"id\":\"H7Pa7pQaVxxG\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
+                let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"conol\",\"asasdasdsa\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
                 if !manager.writeJSON(json) {
                     self.logTextView.text!
                         += "JSON書き込みに対応していないファームウェアのようです\n"
@@ -210,9 +210,9 @@ UITextFieldDelegate {
             tv.text! += "Connected\n"
         }
         // 管理者モード（要パスワード）に入る
-        if let cm = cuonaManager {
-            _ = cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
-        }
+//        if let cm = cuonaManager {
+//            _ = cm.enterAdminMode("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")
+//        }
     }
     
     func cuonaDisconnected() {
