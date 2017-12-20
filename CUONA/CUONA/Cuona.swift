@@ -48,9 +48,7 @@ public enum Logging:Int
         switch self {
         case .wifihelper: return "H7Pa7pQaVxxG"
         case .favor:      return "UXbfYJ6SXm8G"
-        case .develop:    return "NkNbRxEiHZrk"
         case .rounds:     return "yhNuCERUMM58"
-        case .all:        return "H7Pa7pQaVxxG,UXbfYJ6SXm8G,yhNuCERUMM58,NkNbRxEiHZrk"
         }
     }
 }
@@ -87,7 +85,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     {
         super.init()
         self.delegate = delegate
-        cuonaManager = CUONAManager(delegate: self)
+        cuonaManager  = CUONAManager(delegate: self)
         deviceManager = DeviceManager(delegate: self)
     }
     

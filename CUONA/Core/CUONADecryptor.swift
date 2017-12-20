@@ -8,7 +8,7 @@ func getSymmetryKey(deviceId: [UInt8]) -> [UInt8] {
     var key = [UInt8](repeating: 0, count: SYMMETRY_KEY_LENGTH)
     CC_SHA256(deviceId, CC_LONG(deviceId.count), &key)
     for i in 0 ..< SYMMETRY_KEY_LENGTH {
-        key[i] ^= CUONAKeys.cuonaKey32B[i]
+        key[i] ^= CUONAKeys.type == .develop ? CUONAKeys.cuonaKey32B[i] : CUONAKeys.production_cuonaKey32B[i]
     }
     return key
 }

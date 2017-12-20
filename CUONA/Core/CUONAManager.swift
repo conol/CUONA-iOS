@@ -187,6 +187,11 @@ public class CUONAManager: NFCReaderDelegate {
         nfc?.scan(message)
     }
     
+    public func setEnviroment(type:Int)
+    {
+        CUONAKeys.type = KeyType(rawValue: type)!
+    }
+    
     public func requestDisconnect() {
         CUONABTManager.shared.requestDisconnect()
     }

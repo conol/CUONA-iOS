@@ -136,6 +136,12 @@ UITextFieldDelegate {
         present(sheet, animated: true, completion: nil)
     }
     
+    @IBAction func changeEnv(_ sender: UISegmentedControl)
+    {
+        let select = sender.selectedSegmentIndex
+        cuonaManager?.setEnviroment(type: select)
+    }
+    
     @IBAction func clearLog(_ sender: Any)
     {
         logTextView.text = ""
