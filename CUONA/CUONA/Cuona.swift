@@ -20,18 +20,27 @@ public enum Logging:Int
     case off = 2
 }
 
-struct NFCJsonData: Codable {
-    let wifi: Dictionay?
-    let favor: Dictionay?
-    let rounds: Dictionay?
-    
-    struct wifi: Codable {
+struct NFCJsonData: Codable
+{
+    struct wifiDict: Codable {
         let id: String
-        let ssid: String?
-        let pass: String?
-        let kind: Int?
-        let days: Int?
+        var ssid: String?
+        var pass: String?
+        var kind: Int?
+        var days: Int?
     }
+    
+    struct favorDict: Codable {
+        let id: String
+    }
+    
+    struct roundsDict: Codable {
+        let id: String
+    }
+    
+    var wifi: wifiDict
+    let favor: favorDict
+    let rounds: roundsDict
 }
 
 @objc public enum CUONAType:Int
