@@ -146,7 +146,7 @@ public struct CUONAWiFiSSIDPw {
     // connection
     @objc optional func cuonaConnected()
     @objc optional func cuonaDisconnected()
-    @objc optional func cuonaConnectFailed()
+    @objc optional func cuonaConnectFailed(_ error:String)
 
     // value update
     @objc optional func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus)

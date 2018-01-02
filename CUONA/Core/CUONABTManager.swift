@@ -82,7 +82,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     private func scanTimeout() {
         if let centralManager = centralManager {
             centralManager.stopScan()
-            delegate?.cuonaConnectFailed?()
+            delegate?.cuonaConnectFailed?("Bluetooth接続にタイムアウトで失敗しました。")
         }
     }
     

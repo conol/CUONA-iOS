@@ -20,6 +20,20 @@ public enum Logging:Int
     case off = 2
 }
 
+struct NFCJsonData: Codable {
+    let wifi: Dictionay?
+    let favor: Dictionay?
+    let rounds: Dictionay?
+    
+    struct wifi: Codable {
+        let id: String
+        let ssid: String?
+        let pass: String?
+        let kind: Int?
+        let days: Int?
+    }
+}
+
 @objc public enum CUONAType:Int
 {
     case unknown = 0
@@ -63,7 +77,7 @@ public enum Logging:Int
     @objc optional func failedNFCData(code: Int, errortxt: String)
     @objc optional func disconnect()
     @objc optional func successConnect()
-    @objc optional func failedConnect()
+    @objc optional func failedConnect(_ errortxt: String)
     @objc optional func successWiFi(ssid: String?, password: String?)
     @objc optional func successSignIn(response: [String : Any])
     @objc optional func failedSignIn(status: NSInteger, response: [String : Any])
@@ -117,12 +131,12 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func cuonaUpdatedJSON()
     {
-        delegate?.successNFCData!()
+        delegate?.successNFCData?()
     }
     
     public func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
     {
-        delegate?.failedNFCData!(code: code, errortxt: errortxt)
+        delegate?.failedNFCData?(code: code, errortxt: errortxt)
     }
     
     public func cuonaConnected()
@@ -131,21 +145,21 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             _ = cuonaManager?.enterAdminMode((deviceManager?.device_password!)!)
         } else {
             cuonaManager?.requestDisconnect()
-            cuonaConnectFailed()
+            cuonaConnectFailed("ログインしていないため機能が有効になりません")
             return
         }
-        delegate?.successConnect!()
+        delegate?.successConnect?()
     }
     
-    public func cuonaConnectFailed()
+    public func cuonaConnectFailed(_ error:String)
     {
-        delegate?.failedConnect!()
+        delegate?.failedConnect?(error)
     }
     
     public func cuonaDisconnected()
     {
         cuonaManager?.requestDisconnect()
-        delegate?.disconnect!()
+        delegate?.disconnect?()
     }
     
     public func updateFirmware(force: Bool) -> Bool
