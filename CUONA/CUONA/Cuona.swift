@@ -41,14 +41,14 @@ public enum Logging:Int
     case wifihelper = 1
     case favor      = 2
     case rounds     = 3
-    case develop    = 100
-    case all        = 10
+    case developer  = 1000
     
-    func serviceKey() -> String {
+    func string() -> String {
         switch self {
         case .wifihelper: return "H7Pa7pQaVxxG"
         case .favor:      return "UXbfYJ6SXm8G"
         case .rounds:     return "yhNuCERUMM58"
+        case .developer:  return ""
         }
     }
 }
@@ -76,6 +76,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
     public var bluetooth:Bluetooth = .off
     public var sendLog:Logging = .on
+    public var serviceKey:Service = .developer
     
     var cuonaManager: CUONAManager?
     var deviceManager: DeviceManager?
@@ -96,8 +97,8 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        if sendLog == .on {
-            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: Service.rounds.serviceKey(), addUniquId: "", note: "Read DeviceId by iOS")
+        if sendLog == .on && serviceKey != .developer {
+            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: serviceKey.string(), addUniquId: "", note: "Read DeviceId by iOS")
         }
         let data = convertToDictionary(json)
         delegate?.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
@@ -161,14 +162,20 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func makeServiceData(service:Service)
     {
         var json = "{"
-        if service == .wifihelper || service == .all {
-            json = "\"wifi\":{\"id\":\"H7Pa7pQaVxxG\"}"
+        if service == .wifihelper || service == .developer {
+            json += "\"wifi\":{\"id\":\"\(Service.wifihelper.string())\"}"
         }
-        if service == .all {
+        if service == .developer {
             json += ","
         }
-        if service == .favor || service == .all {
-            json += "\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}"
+        if service == .favor || service == .developer {
+            json += "\"favor\":{\"id\":\"\(Service.favor.string())\"}"
+        }
+        if service == .developer {
+            json += ","
+        }
+        if service == .rounds || service == .developer {
+            json += "\"favor\":{\"id\":\"\(Service.rounds.string())\"}"
         }
         json += "}"
         
