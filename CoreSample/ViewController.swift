@@ -114,11 +114,13 @@ UITextFieldDelegate {
         let changePW = UIAlertAction(title: "パスワード書き込み", style: .default){ Void in
             if let manager = self.cuonaManager {
                 _ = manager.setAdminPassword("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")
+                self.logTextView.text! += "success: Password registered\n"
             }
         }
         let unsetPW = UIAlertAction(title: "パスワード解除", style: .default){ Void in
             if let manager = self.cuonaManager {
                 _ = manager.unsetAdminPassword()
+                self.logTextView.text! += "success: Password initialized\n"
             }
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -216,9 +218,10 @@ UITextFieldDelegate {
         if let tv = logTextView {
             tv.text! += "Connected\n"
         }
-        // 管理者モード（要パスワード）に入る
+        // 管理モード（要パスワード）に入る
         if let cm = cuonaManager {
             _ = cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+            self.logTextView.text! += "Logged in admin mode\n"
         }
     }
     
@@ -254,6 +257,7 @@ UITextFieldDelegate {
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String) {
         ssidTextField?.text = ssid
         pwTextField?.text = password
+        self.logTextView.text! += "Loaded SSID and Password\n"
     }
     
     func cuonaUpdatedServerHost(_ hostName: String) {
