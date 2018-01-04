@@ -240,7 +240,17 @@ UITextFieldDelegate {
     func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus) {
         if let tv = logTextView {
             let stringArray = status.nfcDeviceUID.flatMap({ String($0) }).joined(separator: ",")
-            tv.text! += "status: CNFCSystemStatus(version: \(status.version), wifiStarted: \(status.wifiStarted), wifiConnected: \(status.wifiConnected), ip4addr: \(status.ip4addr), nfcChipUID: [\(stringArray)], voltage: \(status.voltage))\n"
+            let ps = status.isPowerFromUSB ? "USB" : "battery"
+            tv.text! += "status: version: \(status.version),"
+                + " hardware: \(status.hardwareVersion)\n"
+                + "  wifi: started: \(status.wifiStarted),"
+                + " connected: \(status.wifiConnected)\n"
+                + "  ip4addr: \(status.ip4addr)\n"
+                + "  nfcChipUID: [\(stringArray)]\n"
+                + "  adminMode: \(status.inAdminMode),"
+                + " power from \(ps)\n"
+                + "  voltage: \(status.voltage),"
+                + " battery: \(status.batteryPercentage) %\n"
         }
         if status.wifiStarted {
             if status.wifiConnected {
@@ -251,7 +261,8 @@ UITextFieldDelegate {
         } else {
             statusLabel1?.text = "Wifi not started"
         }
-        statusLabel2?.text = String(format: "Voltage = %.3f", status.voltage)
+        statusLabel2?.text = String(format: "Voltage: %.3f, Battery: %.0f %%",
+                                    status.voltage, status.batteryPercentage)
     }
     
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String) {

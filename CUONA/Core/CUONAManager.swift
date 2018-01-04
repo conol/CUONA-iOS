@@ -44,6 +44,17 @@ func CUONADebugPrint(_ message: String) {
     public let ip4addr: String
     public let nfcDeviceUID: [UInt8]
     public let voltage: Double
+    public let batteryPercentage: Double
+    public let inAdminMode: Bool
+    public let hardwareVersion: Int
+    public let isPowerFromUSB: Bool
+    
+    private let MISC_STATUS_ADMIN_MODE = UInt8(1 << 0)
+    private let MISC_STATUS_CORONA3    = UInt8(1 << 1)
+    private let MISC_STATUS_USB_POWER  = UInt8(1 << 2)
+
+    private let BATTERY_VOLTAGE_HIGH   = 4.2
+    private let BATTERY_VOLTAGE_LOW    = 3.2
     
     init?(data: Data) {
         if data.count < 18 {
@@ -52,6 +63,11 @@ func CUONADebugPrint(_ message: String) {
         version  = data[0]
         wifiStarted = data[1] != 0
         wifiConnected = data[2] != 0
+        let miscStatus = data[3]
+        inAdminMode = (miscStatus & MISC_STATUS_ADMIN_MODE) != 0
+        hardwareVersion = (miscStatus & MISC_STATUS_CORONA3) != 0 ? 3 : 1
+        isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
+        
         ip4addr = String(format: "%d.%d.%d.%d",
                          data[4], data[5], data[6], data[7])
         nfcDeviceUID = [data[8], data[9], data[10], data[11],
@@ -60,6 +76,15 @@ func CUONADebugPrint(_ message: String) {
         adcValue += (Int32(data[16]) << 22)
         adcValue += (Int32(data[17]) << 14)
         voltage = 2.048 * (Double(adcValue) / 2_147_483_648.0) * 3.0
+        
+        var p = (voltage - BATTERY_VOLTAGE_LOW) /
+            (BATTERY_VOLTAGE_HIGH - BATTERY_VOLTAGE_LOW)
+        if p < 0 {
+            p = 0
+        } else if p > 1 {
+            p = 1
+        }
+        batteryPercentage = 100 * p
     }
 }
 
