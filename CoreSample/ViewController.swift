@@ -220,7 +220,7 @@ UITextFieldDelegate {
         }
         // 管理モード（要パスワード）に入る
         if let cm = cuonaManager {
-            _ = cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+            _ = cm.enterAdminMode("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")
             self.logTextView.text! += "Logged in admin mode\n"
         }
     }
@@ -248,8 +248,9 @@ UITextFieldDelegate {
                 + "  ip4addr: \(status.ip4addr)\n"
                 + "  nfcChipUID: [\(stringArray)]\n"
                 + "  adminMode: \(status.inAdminMode),"
-                + " power from \(ps)\n"
-                + "  voltage: \(status.voltage),"
+                + " allzero pw: \(status.isPasswordAllZeros)\n"
+                + "  power from \(ps),"
+                + " voltage: \(status.voltage),"
                 + " battery: \(status.batteryPercentage) %\n"
         }
         if status.wifiStarted {

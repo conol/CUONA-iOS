@@ -48,10 +48,12 @@ func CUONADebugPrint(_ message: String) {
     public let inAdminMode: Bool
     public let hardwareVersion: Int
     public let isPowerFromUSB: Bool
+    public let isPasswordAllZeros: Bool
     
     private let MISC_STATUS_ADMIN_MODE = UInt8(1 << 0)
     private let MISC_STATUS_CORONA3    = UInt8(1 << 1)
     private let MISC_STATUS_USB_POWER  = UInt8(1 << 2)
+    private let MISC_STATUS_PW_ALLZERO = UInt8(1 << 3)
 
     private let BATTERY_VOLTAGE_HIGH   = 4.2
     private let BATTERY_VOLTAGE_LOW    = 3.2
@@ -67,6 +69,7 @@ func CUONADebugPrint(_ message: String) {
         inAdminMode = (miscStatus & MISC_STATUS_ADMIN_MODE) != 0
         hardwareVersion = (miscStatus & MISC_STATUS_CORONA3) != 0 ? 3 : 1
         isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
+        isPasswordAllZeros = (miscStatus & MISC_STATUS_PW_ALLZERO) != 0
         
         ip4addr = String(format: "%d.%d.%d.%d",
                          data[4], data[5], data[6], data[7])
