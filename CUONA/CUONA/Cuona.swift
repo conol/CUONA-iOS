@@ -89,9 +89,11 @@ struct NFCJsonData: Codable
     @objc optional func failedConnect(_ errortxt: String)
     @objc optional func successWiFi(ssid: String?, password: String?)
     @objc optional func successSignIn(response: [String : Any])
-    @objc optional func failedSignIn(status: NSInteger, response: [String : Any])
+    @objc optional func failedSignIn(status: NSInteger, response: [String : Any]?)
     @objc optional func successSendLog(response: [String : Any]?)
     @objc optional func failedSendLog(status: NSInteger, response: [String : Any]?)
+    @objc optional func successGetDeviceList(response: Array<Dictionary<String, Any>>)
+    @objc optional func failedGetDeviceList(status: NSInteger, response: [String : Any]?)
 }
 
 @available(iOS 11.0, *)
@@ -220,9 +222,24 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.successSignIn!(response: json)
     }
     
-    public func failedSignIn(status: NSInteger, json: [String : Any])
+    public func failedSignIn(status: NSInteger, json: [String : Any]?)
     {
         delegate?.failedSignIn!(status: status, response: json)
+    }
+    
+    public func getDeviceList(_ develop: Bool = false)
+    {
+        deviceManager?.request?.getDeviceList(develop)
+    }
+    
+    public func successGetDeviceList(json: Array<Dictionary<String, Any>>)
+    {
+        delegate?.successGetDeviceList?(response: json)
+    }
+    
+    public func failedGetDeviceList(status: NSInteger, json: [String : Any]?)
+    {
+        delegate?.failedGetDeviceList?(status: status, response: json)
     }
     
     public func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
@@ -259,7 +276,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.successSendLog?(response: json)
     }
     
-    public func failedSendLog(status: NSInteger, json: [String : Any]) {
+    public func failedSendLog(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSendLog?(status: status, response: json)
     }
 }

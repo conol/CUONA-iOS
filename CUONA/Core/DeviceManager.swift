@@ -17,9 +17,11 @@ private let DEVICE_PASS = "deviceMasterPassword"
 @objc public protocol DeviceManagerDelegate: class
 {
     func successSendLog(json:[String : Any])
-    func failedSendLog(status:NSInteger, json:[String : Any])
+    func failedSendLog(status:NSInteger, json:[String : Any]?)
     @objc optional func successSignIn(json:[String : Any])
-    @objc optional func failedSignIn(status:NSInteger, json:[String : Any])
+    @objc optional func failedSignIn(status:NSInteger, json:[String : Any]?)
+    @objc optional func successGetDeviceList(json:Array<Dictionary<String, Any>>)
+    @objc optional func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
 }
 
 class DeviceManager: NSObject, HttpRequestDelegate
@@ -45,7 +47,7 @@ class DeviceManager: NSObject, HttpRequestDelegate
         delegate?.successSendLog(json: json)
     }
     
-    func failedSendLog(status: NSInteger, json: [String : Any]) {
+    func failedSendLog(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSendLog(status: status, json: json)
     }
     
@@ -53,20 +55,30 @@ class DeviceManager: NSObject, HttpRequestDelegate
         let device_pass = json["device_password"] as? String
         device_password = device_pass
         UserDefaults.standard.set(device_pass, forKey: DEVICE_PASS)
-        delegate?.successSignIn!(json: json)
+        delegate?.successSignIn?(json: json)
     }
     
-    func failedSignIn(status: NSInteger, json: [String : Any]) {
-        delegate?.failedSignIn!(status: status, json: json)
+    func failedSignIn(status: NSInteger, json: [String : Any]?) {
+        delegate?.failedSignIn?(status: status, json: json)
+    }
+    
+    func successGetDeviceList(json: Array<Dictionary<String, Any>>) {
+        delegate?.successGetDeviceList?(json: json)
+    }
+    
+    func failedGetDeviceList(status: NSInteger, json: [String : Any]?) {
+        delegate?.failedGetDeviceList?(status: status, json: json)
     }
 }
 
 @objc public protocol HttpRequestDelegate: class
 {
     func successSendLog(json:[String : Any])
-    func failedSendLog(status:NSInteger, json:[String : Any])
+    func failedSendLog(status:NSInteger, json:[String : Any]?)
     func successSignIn(json:[String : Any])
-    func failedSignIn(status:NSInteger, json:[String : Any])
+    func failedSignIn(status:NSInteger, json:[String : Any]?)
+    func successGetDeviceList(json:Array<Dictionary<String, Any>>)
+    func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
 }
 
 class HttpRequest
@@ -102,12 +114,12 @@ class HttpRequest
         ]
         
         if Reachability.isConnectedToNetwork() {
-            sendPostRequestAsynchronous(url, method:"POST", token:nil, params:params, funcs:{(returnData: [String : Any], response: URLResponse?) in
+            sendRequestAsynchronous(url, method:"POST", params:params, funcs:{(returnData, response) in
                 let httpResponse = response as? HTTPURLResponse
                 if httpResponse?.statusCode == 200 {
-                    self.delegate?.successSendLog(json: returnData)
+                    self.delegate?.successSendLog(json: returnData as! [String:Any])
                 } else {
-                    self.delegate?.failedSendLog(status: httpResponse?.statusCode ?? 0, json: returnData)
+                    self.delegate?.failedSendLog(status: httpResponse?.statusCode ?? 0, json: returnData as? [String : Any])
                 }
             })
         } else {
@@ -135,24 +147,46 @@ class HttpRequest
             "email": email,
             "password": password
         ]
-        sendPostRequestAsynchronous(url, method: "POST", token: nil, params: params) {
-            (returnData: [String : Any], response: URLResponse?) in
+        sendRequestAsynchronous(url, method: "POST", params: params) {
+            (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
+            let data = returnData as! [String : Any]
+            
             if httpResponse?.statusCode == 200 {
-                let token = returnData["app_token"] as? String
+                let token = data["app_token"] as? String
                 self.app_token = token
                 UserDefaults.standard.set(token, forKey: APP_TOKEN)
-                self.delegate?.successSignIn(json: returnData)
+                self.delegate?.successSignIn(json: data)
             } else {
-                self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: data)
+            }
+        }
+    }
+    
+    //MARK: - デバイス一覧を取得
+    public func getDeviceList(_ develop:Bool = false)
+    {
+        var url = API_URL + "/api/owners/devices.json"
+        if develop {
+            url += "?development=1"
+        }
+        sendRequestAsynchronous(url, method: "GET", params: nil) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                let data = returnData as! Array<Dictionary<String, Any>>
+                self.delegate?.successGetDeviceList(json: data)
+            } else {
+                let data = returnData as? [String:Any]
+                self.delegate?.failedGetDeviceList(status: httpResponse?.statusCode ?? 0, json: data)
             }
         }
     }
     
     //MARK: - 共通通信部分
-    public func sendPostRequestAsynchronous(_ url:String, method:String, token:String?, params:[String:Any], funcs:@escaping ([String : Any], URLResponse?) -> Void)
+    public func sendRequestAsynchronous(_ url:String, method:String, params:[String:Any]?, funcs:@escaping (Any?, URLResponse?) -> Void)
     {
-        var returnData:[String:Any] = [:]
+        var returnData:Any?
         var req = URLRequest(url: URL(string:url)!)
         req.httpMethod = method
         if app_token != nil {
@@ -160,7 +194,7 @@ class HttpRequest
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-            req.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+            req.httpBody = try JSONSerialization.data(withJSONObject: params ?? [:], options: [])
         } catch {
             print(error.localizedDescription)
         }
@@ -168,7 +202,7 @@ class HttpRequest
             
             if error == nil {
                 do {
-                    returnData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : Any]
+                    returnData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
                 } catch let error as NSError {
                     print(error)
                 }
