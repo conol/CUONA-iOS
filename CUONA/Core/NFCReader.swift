@@ -73,12 +73,12 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
     var session: NFCNDEFReaderSession?
     var delegate: NFCReaderDelegate?
     
-    required init(delegate: NFCReaderDelegate) {
+    required init(delegate: NFCReaderDelegate, isMulti:Bool = false) {
         self.delegate = delegate
         super.init()
         session = NFCNDEFReaderSession(delegate: self,
                                        queue: DispatchQueue.main,
-                                       invalidateAfterFirstRead: true)
+                                       invalidateAfterFirstRead: (isMulti ? false : true))
         CUONADebugPrint("NFC: started")
     }
     

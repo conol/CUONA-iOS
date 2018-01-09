@@ -204,7 +204,7 @@ public class CUONAManager: NFCReaderDelegate {
     
     public init(delegate: CUONAManagerDelegate) {
         self.delegate = delegate
-        nfc = NFCReader(delegate: self)
+        nfc = NFCReader(delegate: self, isMulti: false)
     }
     
     public func startReadingNFC(_ message: String?) {
