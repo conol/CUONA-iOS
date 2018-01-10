@@ -193,10 +193,12 @@ class HttpRequest
             req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        do {
-            req.httpBody = try JSONSerialization.data(withJSONObject: params ?? [:], options: [])
-        } catch {
-            print(error.localizedDescription)
+        if method == "POST" {
+            do {
+                req.httpBody = try JSONSerialization.data(withJSONObject: params ?? [:], options: [])
+            } catch {
+                print(error.localizedDescription)
+            }
         }
         let task = URLSession.shared.dataTask(with: req) { (data, response, error) in
             
@@ -207,7 +209,9 @@ class HttpRequest
                     print(error)
                 }
             }
-            funcs(returnData, response)
+            DispatchQueue.main.async {
+                funcs(returnData, response)
+            }
         }
         task.resume()
     }
