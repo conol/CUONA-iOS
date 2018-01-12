@@ -20,7 +20,7 @@ private let DEVICE_PASS = "deviceMasterPassword"
     func failedSendLog(status:NSInteger, json:[String : Any]?)
     @objc optional func successSignIn(json:[String : Any])
     @objc optional func failedSignIn(status:NSInteger, json:[String : Any]?)
-    @objc optional func successGetDeviceList(json:Array<Dictionary<String, Any>>)
+    @objc optional func successGetDeviceList(json:[String : Any])
     @objc optional func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
 }
 
@@ -62,7 +62,7 @@ class DeviceManager: NSObject, HttpRequestDelegate
         delegate?.failedSignIn?(status: status, json: json)
     }
     
-    func successGetDeviceList(json: Array<Dictionary<String, Any>>) {
+    func successGetDeviceList(json: [String : Any]) {
         delegate?.successGetDeviceList?(json: json)
     }
     
@@ -77,7 +77,7 @@ class DeviceManager: NSObject, HttpRequestDelegate
     func failedSendLog(status:NSInteger, json:[String : Any]?)
     func successSignIn(json:[String : Any])
     func failedSignIn(status:NSInteger, json:[String : Any]?)
-    func successGetDeviceList(json:Array<Dictionary<String, Any>>)
+    func successGetDeviceList(json:[String : Any])
     func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
 }
 
@@ -117,9 +117,9 @@ class HttpRequest
             sendRequestAsynchronous(url, method:"POST", params:params, funcs:{(returnData, response) in
                 let httpResponse = response as? HTTPURLResponse
                 if httpResponse?.statusCode == 200 {
-                    self.delegate?.successSendLog(json: returnData as! [String:Any])
+                    self.delegate?.successSendLog(json: returnData)
                 } else {
-                    self.delegate?.failedSendLog(status: httpResponse?.statusCode ?? 0, json: returnData as? [String : Any])
+                    self.delegate?.failedSendLog(status: httpResponse?.statusCode ?? 0, json: returnData)
                 }
             })
         } else {
@@ -150,15 +150,15 @@ class HttpRequest
         sendRequestAsynchronous(url, method: "POST", params: params) {
             (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
-            let data = returnData as! [String : Any]
             
             if httpResponse?.statusCode == 200 {
+                let data = returnData["data"] as! [String : Any]
                 let token = data["app_token"] as? String
                 self.app_token = token
                 UserDefaults.standard.set(token, forKey: APP_TOKEN)
-                self.delegate?.successSignIn(json: data)
+                self.delegate?.successSignIn(json: returnData)
             } else {
-                self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: data)
+                self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         }
     }
@@ -174,19 +174,17 @@ class HttpRequest
             let httpResponse = response as? HTTPURLResponse
             
             if httpResponse?.statusCode == 200 {
-                let data = returnData as! Array<Dictionary<String, Any>>
-                self.delegate?.successGetDeviceList(json: data)
+                self.delegate?.successGetDeviceList(json: returnData)
             } else {
-                let data = returnData as? [String:Any]
-                self.delegate?.failedGetDeviceList(status: httpResponse?.statusCode ?? 0, json: data)
+                self.delegate?.failedGetDeviceList(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         }
     }
     
     //MARK: - 共通通信部分
-    public func sendRequestAsynchronous(_ url:String, method:String, params:[String:Any]?, funcs:@escaping (Any?, URLResponse?) -> Void)
+    public func sendRequestAsynchronous(_ url:String, method:String, params:[String:Any]?, funcs:@escaping ([String : Any], URLResponse?) -> Void)
     {
-        var returnData:Any?
+        var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)
         req.httpMethod = method
         if app_token != nil {
@@ -204,7 +202,8 @@ class HttpRequest
             
             if error == nil {
                 do {
-                    returnData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                    returnData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : Any]
+                    print("return=\(returnData)")
                 } catch let error as NSError {
                     print(error)
                 }
