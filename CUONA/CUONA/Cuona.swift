@@ -61,16 +61,28 @@ struct NFCJsonData: Codable
 
 @objc public enum Service:Int
 {
-    case wifihelper = 1
-    case favor      = 2
+    case favor      = 1
+    case wifihelper = 2
     case rounds     = 3
+    case members    = 4
     case developer  = 1000
     
-    func string() -> String {
+    public func id() -> String {
         switch self {
-        case .wifihelper: return "H7Pa7pQaVxxG"
         case .favor:      return "UXbfYJ6SXm8G"
+        case .wifihelper: return "H7Pa7pQaVxxG"
         case .rounds:     return "yhNuCERUMM58"
+        case .members:    return "ReoDexKWs9a7"
+        case .developer:  return ""
+        }
+    }
+    
+    public func name() -> String {
+        switch self {
+        case .favor:      return "Favor"
+        case .wifihelper: return "WiFi HELPER"
+        case .rounds:     return "Rounds"
+        case .members:    return "MEMBERS"
         case .developer:  return ""
         }
     }
@@ -92,7 +104,7 @@ struct NFCJsonData: Codable
     @objc optional func failedSignIn(status: NSInteger, response: [String : Any]?)
     @objc optional func successSendLog(response: [String : Any]?)
     @objc optional func failedSendLog(status: NSInteger, response: [String : Any]?)
-    @objc optional func successGetDeviceList(response: Array<Dictionary<String, Any>>)
+    @objc optional func successGetDeviceList(response: [String : Any]?)
     @objc optional func failedGetDeviceList(status: NSInteger, response: [String : Any]?)
 }
 
@@ -123,7 +135,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         if sendLog == .on && serviceKey != .developer {
-            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: serviceKey.string(), addUniquId: "", note: "Read DeviceId by iOS")
+            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: serviceKey.id(), addUniquId: "", note: "Read DeviceId by iOS")
         }
         let data = convertToDictionary(json)
         delegate?.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
@@ -188,19 +200,19 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     {
         var json = "{"
         if service == .wifihelper || service == .developer {
-            json += "\"wifi\":{\"id\":\"\(Service.wifihelper.string())\"}"
+            json += "\"wifi\":{\"id\":\"\(Service.wifihelper.id())\"}"
         }
         if service == .developer {
             json += ","
         }
         if service == .favor || service == .developer {
-            json += "\"favor\":{\"id\":\"\(Service.favor.string())\"}"
+            json += "\"favor\":{\"id\":\"\(Service.favor.id())\"}"
         }
         if service == .developer {
             json += ","
         }
         if service == .rounds || service == .developer {
-            json += "\"favor\":{\"id\":\"\(Service.rounds.string())\"}"
+            json += "\"favor\":{\"id\":\"\(Service.rounds.id())\"}"
         }
         json += "}"
         
@@ -232,7 +244,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.getDeviceList(develop)
     }
     
-    public func successGetDeviceList(json: Array<Dictionary<String, Any>>)
+    public func successGetDeviceList(json: [String : Any])
     {
         delegate?.successGetDeviceList?(response: json)
     }
