@@ -24,8 +24,8 @@ let serviceKey:String = "H7Pa7pQaVxxG"
 {
     @objc optional func successScan()
     @objc optional func failedScan()
-    @objc optional func successSignIn(response: [String : Any])
-    @objc optional func failedSignIn(status: NSInteger, response: [String : Any])
+    @objc optional func successSignIn(response: [String : Any]?)
+    @objc optional func failedSignIn(status: NSInteger, response: [String : Any]?)
     @objc optional func successWrite()
     @objc optional func failedWrite()
 }
@@ -90,6 +90,12 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         return deviceManager?.request?.app_token != nil ? true : false
     }
     
+    public func deleteToken()-> Bool
+    {
+        deviceManager?.request?.app_token = nil
+        return true
+    }
+    
     public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         deviceManager?.request?.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
@@ -101,6 +107,8 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         }
         self.deviceId = deviceId
         jsonDic  = convertToDictionary(json)
+        
+        print(jsonDic)
         
         switch mode {
         case .Admin: return connectedAndGetInfo(json)
@@ -174,7 +182,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             let ssid = wifi!["ssid"] as! String
             let pass = wifi!["pass"] as! String
             let type = wifi!["kind"] as! Int
-            let days = wifi!["days"] as! Int
+            let days = wifi!["days"] as? Int ?? 0
             
             let isWep = type == 2 ? true : false
             
@@ -217,7 +225,10 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         let manager = NEHotspotConfigurationManager.shared
         let hotspotConfiguration = NEHotspotConfiguration(ssid: ssid, passphrase: password, isWEP: isWEP)
         hotspotConfiguration.joinOnce = false
-        hotspotConfiguration.lifeTimeInDays = day
+        
+        if 0 < day as! Decimal {
+            hotspotConfiguration.lifeTimeInDays = day
+        }
         
         manager.apply(hotspotConfiguration) { (error) in
             if let error = error {
@@ -249,7 +260,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         print("ログ送信成功！")
     }
     
-    public func failedSendLog(status: NSInteger, json: [String : Any]) {
+    public func failedSendLog(status: NSInteger, json: [String : Any]?) {
         print("ログ送信失敗！")
     }
     
@@ -257,7 +268,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.successSignIn!(response: json)
     }
     
-    public func failedSignIn(status: NSInteger, json: [String : Any]) {
+    public func failedSignIn(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSignIn!(status: status, response: json)
     }
 }

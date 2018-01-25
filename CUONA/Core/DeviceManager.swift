@@ -38,6 +38,7 @@ class DeviceManager: NSObject, HttpRequestDelegate
         
         let pass = UserDefaults.standard.object(forKey: DEVICE_PASS) as! String?
         if pass != nil {
+            print("device_password=\(pass!)")
             self.device_password = pass
         }
         request = HttpRequest(delegate: self)
@@ -163,13 +164,12 @@ class HttpRequest
         }
     }
     
-    //MARK: - デバイス一覧を取得
+    //MARK: - オーナーのデバイス一覧を取得
     public func getDeviceList(_ develop:Bool = false)
     {
-        var url = API_URL + "/api/owners/devices.json"
-        if develop {
-            url += "?development=1"
-        }
+        var url = API_URL + "/api/owners/devices.json?unused=true&environment="
+        url += develop ? "development" : "production"
+        
         sendRequestAsynchronous(url, method: "GET", params: nil) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             
@@ -203,7 +203,6 @@ class HttpRequest
             if error == nil {
                 do {
                     returnData = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : Any]
-                    print("return=\(returnData)")
                 } catch let error as NSError {
                     print(error)
                 }
