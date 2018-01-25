@@ -10,7 +10,7 @@ enum KeyType:Int
 
 class CUONAKeys
 {
-    static var type:KeyType = .develop
+    static var type:KeyType = .production
 
     static let production_cuonaKey32B: [UInt8] = [
         0x8C, 0xD9, 0xD6, 0xF9, 0x0E, 0x62, 0xD3, 0xCE, 0xA8, 0xF8,
