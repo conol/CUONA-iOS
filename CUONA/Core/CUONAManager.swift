@@ -308,7 +308,7 @@ public class CUONAManager: NFCReaderDelegate {
         nfc = nil
         if let deviceId = deviceId {
             let devIdString = deviceId.map {
-                String(format: "%02hhx", $0) }.joined()
+                String(format: "%02hhx", $0) }.joined().split(2)
             let json = String(data: jsonData!, encoding: .utf8) ?? ""
             if  delegate?.cuonaNFCDetected(deviceId: devIdString,
                                            type: tagTypeFromDeviceId(deviceId),
