@@ -46,7 +46,7 @@ class CUONADecryptor {
             deviceIdLen = Int(payload[3])
             ivLen = Int(payload[4])
             p = 5
-        } else if magic3 == CUONA_MAGIC_3_new {
+        } else if magic3 == CUONA_MAGIC_3 {
             customerId = (UInt16(payload[4]) << 8) + UInt16(payload[3])
             deviceIdLen = Int(payload[5])
             ivLen = Int(payload[6])

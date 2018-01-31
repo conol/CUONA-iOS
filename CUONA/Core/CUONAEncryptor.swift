@@ -30,7 +30,7 @@ class CUONAEncryptor {
         
         var out: [UInt8] = [ UInt8(CUONA_MAGIC_1),
                              UInt8(CUONA_MAGIC_2),
-                             UInt8(CUONA_MAGIC_3_new),
+                             UInt8(CUONA_MAGIC_3),
                              customerId[0],
                              customerId[1],
                              UInt8(deviceId.count),
