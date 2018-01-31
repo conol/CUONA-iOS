@@ -150,8 +150,6 @@ UITextFieldDelegate {
     
     @IBAction func changeEnv(_ sender: UISegmentedControl)
     {
-        let select = sender.selectedSegmentIndex
-        cuonaManager?.setEnviroment(type: select)
     }
     
     @IBAction func clearLog(_ sender: Any)
@@ -182,7 +180,6 @@ UITextFieldDelegate {
         statusView.clipsToBounds = true
         
         cuonaManager = CUONAManager(delegate: self)
-        cuonaManager?.setEnviroment(type: 0)
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(willEnterForeground),

@@ -6,8 +6,9 @@ private let CUONA_NFC_TYPENAME_Legacy = "conol.co.jp:cnfc_bt_manu_data"
 
 let CUONA_MAGIC_1 = 0x63
 let CUONA_MAGIC_2 = 0x6f
-let CUONA_MAGIC_3 = 0x04
-let CUONA_MAGIC_3_Legacy = 0x01
+let CUONA_MAGIC_3_Legacy = 0x01 // Used for initial state
+let CUONA_MAGIC_3_NoCID = 0x04  // Old secure, no customer ID in NFC
+let CUONA_MAGIC_3_new = 0x05 // New secure, with customer ID
 
 private let CUONA_Legacy_SCAN_SIGNATURE_LENGTH = 10
 private let CUONA_Legacy_SCAN_SIGNATURE_PREFIX_LENGTH = 3
@@ -110,9 +111,6 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
         guard let decryptor = CUONADecryptor(payload: payload) else {
             return
         }
-        guard let jsonData = decryptor.decrypt() else {
-            return
-        }
         let deviceId = Data(decryptor.deviceId)
         let signatureMagic: [UInt8] = [
             UInt8(CUONA_MAGIC_1),
@@ -120,9 +118,19 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
             UInt8(CUONA_MAGIC_3_Legacy)]
         var scanSignature = Data(signatureMagic)
         scanSignature.append(deviceId)
-        delegate?.nfcReaderFoundCUONARecord(scanSignature: scanSignature,
-                                            deviceId: deviceId,
-                                            jsonData: jsonData)
+        if decryptor.customerId == nil {
+            delegate?.nfcReaderFoundCUONARecord(scanSignature: scanSignature,
+                                                deviceId: deviceId,
+                                                jsonData: Data())
+
+        } else {
+            guard let jsonData = decryptor.decrypt() else {
+                return
+            }
+            delegate?.nfcReaderFoundCUONARecord(scanSignature: scanSignature,
+                                                deviceId: deviceId,
+                                                jsonData: jsonData)
+        }
     }
     
     // NFCNDEFReaderSessionDelegate

@@ -65,6 +65,8 @@
 		14E3A9061FD8105600428950 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14E3A9071FD8105600428950 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6051FAF9E4100F06724 /* Info.plist */; };
 		14E3A9081FD8105600428950 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
+		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +168,7 @@
 		14E3A8F81FD8104700428950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14E3A8FA1FD8104700428950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14E3A9091FD8110F00428950 /* cuona_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cuona_sample.entitlements; sourceTree = "<group>"; };
+		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,12 +334,13 @@
 				1446E6041FAF9E4100F06724 /* CUONA.h */,
 				1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */,
 				1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */,
-				1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */,
 				145750D41FB19947000C0C96 /* CUONAEncryptor.swift */,
+				1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */,
 				1446E6201FAF9E9200F06724 /* CUONAManager.swift */,
-				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
+				59566682202203D300B8213A /* CUONAMasterKey.swift */,
 				14B824A21FB9D09E0097050B /* DeviceManager.swift */,
 				1446E64D1FAFA43800F06724 /* Extensions.swift */,
+				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -753,6 +757,7 @@
 				14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */,
 				1446E6261FAF9E9200F06724 /* CUONAManager.swift in Sources */,
 				1446E6211FAF9E9200F06724 /* CUONABTManager.swift in Sources */,
+				59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */,
 				1446E6231FAF9E9200F06724 /* CUONAKeys.swift in Sources */,
 				145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */,
 				1446E6221FAF9E9200F06724 /* CUONADecryptor.swift in Sources */,
@@ -797,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				595666842022136000B8213A /* CUONAMasterKey.swift in Sources */,
 				1454EA061FBDB01800DA77E0 /* Extensions.swift in Sources */,
 				1454EA071FBDB01800DA77E0 /* DeviceManager.swift in Sources */,
 				1454EA081FBDB01800DA77E0 /* CUONAManager.swift in Sources */,
@@ -1204,6 +1210,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CUONACore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1229,6 +1236,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CUONACore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
