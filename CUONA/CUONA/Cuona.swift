@@ -106,6 +106,8 @@ struct NFCJsonData: Codable
     @objc optional func failedSendLog(status: NSInteger, response: [String : Any]?)
     @objc optional func successGetDeviceList(response: [String : Any]?)
     @objc optional func failedGetDeviceList(status: NSInteger, response: [String : Any]?)
+    @objc optional func successPearing(response: [String : Any]?)
+    @objc optional func failedPearing(status: NSInteger, response: [String : Any]?)
 }
 
 @available(iOS 11.0, *)
@@ -196,27 +198,38 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         _ = cuonaManager?.writeJSON(data!)
     }
     
-    public func makeServiceData(service:Service)
+    public func makeServiceData(enabled_services:[String:Bool]) -> Bool//[wifi,favor,rounds,members]
     {
+        var flg = false
         var json = "{"
-        if service == .wifihelper || service == .developer {
+        if enabled_services[Service.wifihelper.name()] == true {
+            flg = true
             json += "\"wifi\":{\"id\":\"\(Service.wifihelper.id())\"}"
         }
-        if service == .developer {
-            json += ","
-        }
-        if service == .favor || service == .developer {
+        if enabled_services[Service.favor.name()] == true {
+            if flg {
+                json += ","
+            }
+            flg = true
             json += "\"favor\":{\"id\":\"\(Service.favor.id())\"}"
         }
-        if service == .developer {
-            json += ","
+        if enabled_services[Service.rounds.name()] == true {
+            if flg {
+                json += ","
+            }
+            flg = true
+            json += "\"rounds\":{\"id\":\"\(Service.rounds.id())\"}"
         }
-        if service == .rounds || service == .developer {
-            json += "\"favor\":{\"id\":\"\(Service.rounds.id())\"}"
+        if enabled_services[Service.members.name()] == true {
+            if flg {
+                json += ","
+            }
+            flg = true
+            json += "\"members\":{\"id\":\"\(Service.members.id())\"}"
         }
         json += "}"
         
-        _ = cuonaManager?.writeJSON(json)
+        return cuonaManager!.writeJSON(json)
     }
     
     public func signIn(email:String, password:String)
@@ -252,6 +265,21 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func failedGetDeviceList(status: NSInteger, json: [String : Any]?)
     {
         delegate?.failedGetDeviceList?(status: status, response: json)
+    }
+    
+    public func pearing(device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
+    {
+        deviceManager?.request?.pearingDevice(device_id, name: name, service_ids: service_ids, enabled: enabled)
+    }
+    
+    public func successPearing(json: [String : Any])
+    {
+        delegate?.successPearing?(response: json)
+    }
+    
+    public func failedPearing(status: NSInteger, json: [String : Any]?)
+    {
+        delegate?.failedPearing?(status: status, response: json)
     }
     
     public func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)

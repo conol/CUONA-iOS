@@ -22,6 +22,8 @@ private let DEVICE_PASS = "deviceMasterPassword"
     @objc optional func failedSignIn(status:NSInteger, json:[String : Any]?)
     @objc optional func successGetDeviceList(json:[String : Any])
     @objc optional func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
+    @objc optional func successPearing(json:[String : Any])
+    @objc optional func failedPearing(status:NSInteger, json:[String : Any]?)
 }
 
 class DeviceManager: NSObject, HttpRequestDelegate
@@ -70,6 +72,14 @@ class DeviceManager: NSObject, HttpRequestDelegate
     func failedGetDeviceList(status: NSInteger, json: [String : Any]?) {
         delegate?.failedGetDeviceList?(status: status, json: json)
     }
+    
+    func successPearing(json: [String : Any]) {
+        delegate?.successPearing?(json: json)
+    }
+    
+    func failedPearing(status: NSInteger, json: [String : Any]?) {
+        delegate?.failedPearing?(status: status, json: json)
+    }
 }
 
 @objc public protocol HttpRequestDelegate: class
@@ -80,6 +90,8 @@ class DeviceManager: NSObject, HttpRequestDelegate
     func failedSignIn(status:NSInteger, json:[String : Any]?)
     func successGetDeviceList(json:[String : Any])
     func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
+    func successPearing(json:[String : Any])
+    func failedPearing(status:NSInteger, json:[String : Any]?)
 }
 
 class HttpRequest
@@ -177,6 +189,28 @@ class HttpRequest
                 self.delegate?.successGetDeviceList(json: returnData)
             } else {
                 self.delegate?.failedGetDeviceList(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
+    //MARK: - オーナーにデバイスをペアリング
+    public func pearingDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
+    {
+        let url = API_URL + "/api/owners/devices/pairing.json"
+        let params = [
+            "device_id": device_id,
+            "name": name,
+            "status": enabled ? "enable" : "disable",
+            "service_ids": service_ids
+            ] as [String : Any]
+        
+        sendRequestAsynchronous(url, method: "PATCH", params: params) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successPearing(json: returnData)
+            } else {
+                self.delegate?.failedPearing(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         }
     }
