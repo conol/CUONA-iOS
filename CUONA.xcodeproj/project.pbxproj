@@ -67,6 +67,8 @@
 		14E3A9081FD8105600428950 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		A6F4FD62202301CA00523677 /* Favor.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F4FD60202301CA00523677 /* Favor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6F4FD68202302D000523677 /* Favor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4FD67202302D000523677 /* Favor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,10 @@
 		14E3A8FA1FD8104700428950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14E3A9091FD8110F00428950 /* cuona_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cuona_sample.entitlements; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
+		A6F4FD5E202301CA00523677 /* Favor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Favor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6F4FD60202301CA00523677 /* Favor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favor.h; sourceTree = "<group>"; };
+		A6F4FD61202301CA00523677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6F4FD67202302D000523677 /* Favor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +244,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6F4FD5A202301CA00523677 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -252,6 +265,7 @@
 				14B824C91FBADE160097050B /* CoreSampleTests */,
 				14B824D41FBADE160097050B /* CoreSampleUITests */,
 				14E3A8ED1FD8104700428950 /* cuona_sample */,
+				A6F4FD5F202301CA00523677 /* Favor */,
 				1446E6021FAF9E4100F06724 /* Products */,
 				145751271FB2C960000C0C96 /* Frameworks */,
 				1454EA161FBDB01800DA77E0 /* CUONACore.plist */,
@@ -270,6 +284,7 @@
 				14B824D11FBADE160097050B /* CoreSampleUITests.xctest */,
 				1454EA151FBDB01800DA77E0 /* CUONACore.framework */,
 				14E3A8EC1FD8104700428950 /* cuona_sample.app */,
+				A6F4FD5E202301CA00523677 /* Favor.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,6 +295,7 @@
 				145750D71FB1995F000C0C96 /* Core */,
 				1446E6051FAF9E4100F06724 /* Info.plist */,
 				1454EA171FBDB15900DA77E0 /* CUONA */,
+				A6F4FD662023023700523677 /* Favor */,
 				1446E64A1FAFA3EC00F06724 /* WifiHelper */,
 			);
 			path = CUONA;
@@ -398,6 +414,23 @@
 			path = cuona_sample;
 			sourceTree = "<group>";
 		};
+		A6F4FD5F202301CA00523677 /* Favor */ = {
+			isa = PBXGroup;
+			children = (
+				A6F4FD60202301CA00523677 /* Favor.h */,
+				A6F4FD61202301CA00523677 /* Info.plist */,
+			);
+			path = Favor;
+			sourceTree = "<group>";
+		};
+		A6F4FD662023023700523677 /* Favor */ = {
+			isa = PBXGroup;
+			children = (
+				A6F4FD67202302D000523677 /* Favor.swift */,
+			);
+			path = Favor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -422,6 +455,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1454EA101FBDB01800DA77E0 /* CUONA.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6F4FD5B202301CA00523677 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6F4FD62202301CA00523677 /* Favor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +631,24 @@
 			productReference = 14E3A8EC1FD8104700428950 /* cuona_sample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A6F4FD5D202301CA00523677 /* Favor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6F4FD65202301CA00523677 /* Build configuration list for PBXNativeTarget "Favor" */;
+			buildPhases = (
+				A6F4FD59202301CA00523677 /* Sources */,
+				A6F4FD5A202301CA00523677 /* Frameworks */,
+				A6F4FD5B202301CA00523677 /* Headers */,
+				A6F4FD5C202301CA00523677 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Favor;
+			productName = Favor;
+			productReference = A6F4FD5E202301CA00523677 /* Favor.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -648,6 +707,11 @@
 							};
 						};
 					};
+					A6F4FD5D202301CA00523677 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 1446E5FB1FAF9E4100F06724 /* Build configuration list for PBXProject "CUONA" */;
@@ -672,6 +736,7 @@
 				14B824D01FBADE160097050B /* CoreSampleUITests */,
 				1454EA041FBDB01800DA77E0 /* CUONACore */,
 				14E3A8EB1FD8104700428950 /* cuona_sample */,
+				A6F4FD5D202301CA00523677 /* Favor */,
 			);
 		};
 /* End PBXProject section */
@@ -743,6 +808,13 @@
 				14E3A8F91FD8104700428950 /* LaunchScreen.storyboard in Resources */,
 				14E3A8F61FD8104700428950 /* Assets.xcassets in Resources */,
 				14E3A8F41FD8104700428950 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6F4FD5C202301CA00523677 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +928,14 @@
 				14E3A9081FD8105600428950 /* Cuona.swift in Sources */,
 				14E3A8F11FD8104700428950 /* ViewController.swift in Sources */,
 				14E3A8EF1FD8104700428950 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6F4FD59202301CA00523677 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6F4FD68202302D000523677 /* Favor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1386,6 +1466,53 @@
 			};
 			name = Release;
 		};
+		A6F4FD63202301CA00523677 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Favor/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.co.conol.Favor;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A6F4FD64202301CA00523677 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Favor/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.co.conol.Favor;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1475,6 +1602,15 @@
 			buildConfigurations = (
 				14E3A8FC1FD8104700428950 /* Debug */,
 				14E3A8FD1FD8104700428950 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6F4FD65202301CA00523677 /* Build configuration list for PBXNativeTarget "Favor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6F4FD63202301CA00523677 /* Debug */,
+				A6F4FD64202301CA00523677 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
