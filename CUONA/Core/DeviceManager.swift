@@ -225,7 +225,7 @@ public class HttpRequest
             req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if method == "POST" {
+        if method == "POST" || method == "PATCH" || method == "PUT" {
             do {
                 req.httpBody = try JSONSerialization.data(withJSONObject: params ?? [:], options: [])
             } catch {
