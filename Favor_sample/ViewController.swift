@@ -12,12 +12,20 @@ import Favor
 class ViewController: UIViewController, FavorDelegate {
 
     var favor:Favor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
+        favor!.register()
+    }
+    
+    func successRegister(json: [String : Any]?) {
         
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func failedRegister(status: Int, json: [String : Any]?) {
+        
     }
 
     override func didReceiveMemoryWarning() {
