@@ -20,11 +20,6 @@
 		1446E6371FAFA35200F06724 /* WifiHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E62E1FAFA35100F06724 /* WifiHelper.framework */; };
 		1446E63C1FAFA35200F06724 /* WifiHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E63B1FAFA35200F06724 /* WifiHelperTests.swift */; };
 		1446E63E1FAFA35200F06724 /* WifiHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1446E6301FAFA35100F06724 /* WifiHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1446E6451FAFA36C00F06724 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
-		1446E6461FAFA36C00F06724 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
-		1446E6471FAFA36C00F06724 /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
-		1446E6481FAFA36C00F06724 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
-		1446E6491FAFA36C00F06724 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
 		1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64B1FAFA41700F06724 /* WifiHelper.swift */; };
 		1454EA061FBDB01800DA77E0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		1454EA071FBDB01800DA77E0 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
@@ -37,10 +32,7 @@
 		1454EA101FBDB01800DA77E0 /* CUONA.h in Headers */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1454EA191FBDB4FB00DA77E0 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		145750D61FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		145751301FB2D7D3000C0C96 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
-		14B824A41FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824AC1FBA85B60097050B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14B824B61FBADE160097050B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B51FBADE160097050B /* AppDelegate.swift */; };
 		14B824B81FBADE160097050B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B71FBADE160097050B /* ViewController.swift */; };
@@ -65,6 +57,11 @@
 		14E3A9061FD8105600428950 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14E3A9071FD8105600428950 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6051FAF9E4100F06724 /* Info.plist */; };
 		14E3A9081FD8105600428950 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
+		14F87674202309C100BB24F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F87673202309C100BB24F9 /* AppDelegate.swift */; };
+		14F87676202309C100BB24F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F87675202309C100BB24F9 /* ViewController.swift */; };
+		14F87679202309C100BB24F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F87677202309C100BB24F9 /* Main.storyboard */; };
+		14F8767B202309C100BB24F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14F8767A202309C100BB24F9 /* Assets.xcassets */; };
+		14F8767E202309C100BB24F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F8767C202309C100BB24F9 /* LaunchScreen.storyboard */; };
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		A6F4FD62202301CA00523677 /* Favor.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F4FD60202301CA00523677 /* Favor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -170,6 +167,13 @@
 		14E3A8F81FD8104700428950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14E3A8FA1FD8104700428950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14E3A9091FD8110F00428950 /* cuona_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cuona_sample.entitlements; sourceTree = "<group>"; };
+		14F87671202309C100BB24F9 /* Favor_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Favor_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14F87673202309C100BB24F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		14F87675202309C100BB24F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		14F87678202309C100BB24F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		14F8767A202309C100BB24F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		14F8767D202309C100BB24F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		14F8767F202309C100BB24F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
 		A6F4FD5E202301CA00523677 /* Favor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Favor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6F4FD60202301CA00523677 /* Favor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favor.h; sourceTree = "<group>"; };
@@ -244,6 +248,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14F8766E202309C100BB24F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6F4FD5A202301CA00523677 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +277,7 @@
 				14B824D41FBADE160097050B /* CoreSampleUITests */,
 				14E3A8ED1FD8104700428950 /* cuona_sample */,
 				A6F4FD5F202301CA00523677 /* Favor */,
+				14F87672202309C100BB24F9 /* Favor_sample */,
 				1446E6021FAF9E4100F06724 /* Products */,
 				145751271FB2C960000C0C96 /* Frameworks */,
 				1454EA161FBDB01800DA77E0 /* CUONACore.plist */,
@@ -285,6 +297,7 @@
 				1454EA151FBDB01800DA77E0 /* CUONACore.framework */,
 				14E3A8EC1FD8104700428950 /* cuona_sample.app */,
 				A6F4FD5E202301CA00523677 /* Favor.framework */,
+				14F87671202309C100BB24F9 /* Favor_sample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -412,6 +425,19 @@
 				14E3A8FA1FD8104700428950 /* Info.plist */,
 			);
 			path = cuona_sample;
+			sourceTree = "<group>";
+		};
+		14F87672202309C100BB24F9 /* Favor_sample */ = {
+			isa = PBXGroup;
+			children = (
+				14F87673202309C100BB24F9 /* AppDelegate.swift */,
+				14F87675202309C100BB24F9 /* ViewController.swift */,
+				14F87677202309C100BB24F9 /* Main.storyboard */,
+				14F8767A202309C100BB24F9 /* Assets.xcassets */,
+				14F8767C202309C100BB24F9 /* LaunchScreen.storyboard */,
+				14F8767F202309C100BB24F9 /* Info.plist */,
+			);
+			path = Favor_sample;
 			sourceTree = "<group>";
 		};
 		A6F4FD5F202301CA00523677 /* Favor */ = {
@@ -631,6 +657,23 @@
 			productReference = 14E3A8EC1FD8104700428950 /* cuona_sample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		14F87670202309C100BB24F9 /* Favor_sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14F87680202309C100BB24F9 /* Build configuration list for PBXNativeTarget "Favor_sample" */;
+			buildPhases = (
+				14F8766D202309C100BB24F9 /* Sources */,
+				14F8766E202309C100BB24F9 /* Frameworks */,
+				14F8766F202309C100BB24F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Favor_sample;
+			productName = Favor_sample;
+			productReference = 14F87671202309C100BB24F9 /* Favor_sample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A6F4FD5D202301CA00523677 /* Favor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6F4FD65202301CA00523677 /* Build configuration list for PBXNativeTarget "Favor" */;
@@ -655,7 +698,7 @@
 		1446E5F81FAF9E4100F06724 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "conol, Inc";
 				TargetAttributes = {
@@ -707,6 +750,10 @@
 							};
 						};
 					};
+					14F87670202309C100BB24F9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					A6F4FD5D202301CA00523677 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
@@ -737,6 +784,7 @@
 				1454EA041FBDB01800DA77E0 /* CUONACore */,
 				14E3A8EB1FD8104700428950 /* cuona_sample */,
 				A6F4FD5D202301CA00523677 /* Favor */,
+				14F87670202309C100BB24F9 /* Favor_sample */,
 			);
 		};
 /* End PBXProject section */
@@ -811,6 +859,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14F8766F202309C100BB24F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F8767E202309C100BB24F9 /* LaunchScreen.storyboard in Resources */,
+				14F8767B202309C100BB24F9 /* Assets.xcassets in Resources */,
+				14F87679202309C100BB24F9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6F4FD5C202301CA00523677 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -850,15 +908,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145751301FB2D7D3000C0C96 /* Extensions.swift in Sources */,
 				1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */,
-				1446E6451FAFA36C00F06724 /* CUONABTManager.swift in Sources */,
-				1446E6461FAFA36C00F06724 /* CUONADecryptor.swift in Sources */,
-				145750D61FB19947000C0C96 /* CUONAEncryptor.swift in Sources */,
-				1446E6471FAFA36C00F06724 /* CUONAKeys.swift in Sources */,
-				1446E6481FAFA36C00F06724 /* CUONAManager.swift in Sources */,
-				14B824A41FB9D09E0097050B /* DeviceManager.swift in Sources */,
-				1446E6491FAFA36C00F06724 /* NFCReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -931,6 +981,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14F8766D202309C100BB24F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14F87676202309C100BB24F9 /* ViewController.swift in Sources */,
+				14F87674202309C100BB24F9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6F4FD59202301CA00523677 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -998,6 +1057,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				14E3A8F81FD8104700428950 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		14F87677202309C100BB24F9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14F87678202309C100BB24F9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		14F8767C202309C100BB24F9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14F8767D202309C100BB24F9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1466,6 +1541,38 @@
 			};
 			name = Release;
 		};
+		14F87681202309C100BB24F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = Favor_sample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.Favor-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14F87682202309C100BB24F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = Favor_sample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.Favor-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A6F4FD63202301CA00523677 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1602,6 +1709,15 @@
 			buildConfigurations = (
 				14E3A8FC1FD8104700428950 /* Debug */,
 				14E3A8FD1FD8104700428950 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14F87680202309C100BB24F9 /* Build configuration list for PBXNativeTarget "Favor_sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F87681202309C100BB24F9 /* Debug */,
+				14F87682202309C100BB24F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

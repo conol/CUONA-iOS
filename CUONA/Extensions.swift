@@ -10,11 +10,11 @@ import UIKit
 import Foundation
 
 //MARK: - アラート画面をどこからでも出す機能
-class Alert
+public class Alert
 {
-    internal static var alert:UIAlertController!
+    public static var alert:UIAlertController!
     
-    internal static func show(title:String, message:String)
+    public static func show(title:String, message:String)
     {
         alert = UIAlertController(title: title, message:message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
