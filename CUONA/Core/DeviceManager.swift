@@ -26,7 +26,7 @@ private let DEVICE_PASS = "deviceMasterPassword"
     @objc optional func failedPearing(status:NSInteger, json:[String : Any]?)
 }
 
-class DeviceManager: NSObject, HttpRequestDelegate
+public class DeviceManager: NSObject, HttpRequestDelegate
 {
     weak var delegate: DeviceManagerDelegate?
     public var request: HttpRequest?
@@ -46,38 +46,38 @@ class DeviceManager: NSObject, HttpRequestDelegate
         request = HttpRequest(delegate: self)
     }
     
-    func successSendLog(json: [String : Any]) {
+    public func successSendLog(json: [String : Any]) {
         delegate?.successSendLog(json: json)
     }
     
-    func failedSendLog(status: NSInteger, json: [String : Any]?) {
+    public func failedSendLog(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSendLog(status: status, json: json)
     }
     
-    func successSignIn(json: [String : Any]) {
+    public func successSignIn(json: [String : Any]) {
         let device_pass = json["device_password"] as? String
         device_password = device_pass
         UserDefaults.standard.set(device_pass, forKey: DEVICE_PASS)
         delegate?.successSignIn?(json: json)
     }
     
-    func failedSignIn(status: NSInteger, json: [String : Any]?) {
+    public func failedSignIn(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSignIn?(status: status, json: json)
     }
     
-    func successGetDeviceList(json: [String : Any]) {
+    public func successGetDeviceList(json: [String : Any]) {
         delegate?.successGetDeviceList?(json: json)
     }
     
-    func failedGetDeviceList(status: NSInteger, json: [String : Any]?) {
+    public func failedGetDeviceList(status: NSInteger, json: [String : Any]?) {
         delegate?.failedGetDeviceList?(status: status, json: json)
     }
     
-    func successPearing(json: [String : Any]) {
+    public func successPearing(json: [String : Any]) {
         delegate?.successPearing?(json: json)
     }
     
-    func failedPearing(status: NSInteger, json: [String : Any]?) {
+    public func failedPearing(status: NSInteger, json: [String : Any]?) {
         delegate?.failedPearing?(status: status, json: json)
     }
 }
@@ -94,7 +94,7 @@ class DeviceManager: NSObject, HttpRequestDelegate
     func failedPearing(status:NSInteger, json:[String : Any]?)
 }
 
-class HttpRequest
+public class HttpRequest
 {
     let condition = NSCondition()
     weak var delegate: HttpRequestDelegate?
@@ -225,7 +225,7 @@ class HttpRequest
             req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if method == "POST" {
+        if method == "POST" || method == "PATCH" || method == "PUT" {
             do {
                 req.httpBody = try JSONSerialization.data(withJSONObject: params ?? [:], options: [])
             } catch {
