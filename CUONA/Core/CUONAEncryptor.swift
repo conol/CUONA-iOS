@@ -19,7 +19,7 @@ class CUONAEncryptor {
         payload.append(contentsOf: jsonData)
         
         let key = getSymmetryKey(deviceId: deviceId)
-        let customerId = getCustomerId()
+        let keyCode = getKeyCode()
 
         var iv = [UInt8](repeating: 0, count: AES_IV_LENGTH)
         let r = SecRandomCopyBytes(kSecRandomDefault, AES_IV_LENGTH, &iv)
@@ -31,8 +31,8 @@ class CUONAEncryptor {
         var out: [UInt8] = [ UInt8(CUONA_MAGIC_1),
                              UInt8(CUONA_MAGIC_2),
                              UInt8(CUONA_MAGIC_3),
-                             customerId[0],
-                             customerId[1],
+                             keyCode[0],
+                             keyCode[1],
                              UInt8(deviceId.count),
                              UInt8(AES_IV_LENGTH) ]
         out.append(contentsOf: deviceId)

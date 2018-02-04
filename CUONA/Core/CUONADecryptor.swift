@@ -13,9 +13,9 @@ func getSymmetryKey(deviceId: [UInt8]) -> [UInt8] {
     return key
 }
 
-func getCustomerId() -> [UInt8] {
-    let cid = CUONAKeys.customerId
-    return [ UInt8(cid), UInt8(cid >> 8) ]
+func getKeyCode() -> [UInt8] {
+    let kc = CUONAKeys.keyCode
+    return [ UInt8(kc), UInt8(kc >> 8) ]
 }
 
 class CUONADecryptor {
@@ -23,7 +23,7 @@ class CUONADecryptor {
     let deviceId: [UInt8]
     let iv: [UInt8]
     let encryptedContent: [UInt8]
-    let customerId: UInt16?
+    let keyCode: UInt16?
     
     init?(payload: Data) {
         if payload.count <= 5 {
@@ -42,12 +42,12 @@ class CUONADecryptor {
         var p: Int
         if magic3 == CUONA_MAGIC_3_NoCID {
             // Old style, extract device ID only
-            customerId = nil
+            keyCode = nil
             deviceIdLen = Int(payload[3])
             ivLen = Int(payload[4])
             p = 5
         } else if magic3 == CUONA_MAGIC_3 {
-            customerId = (UInt16(payload[4]) << 8) + UInt16(payload[3])
+            keyCode = (UInt16(payload[4]) << 8) + UInt16(payload[3])
             deviceIdLen = Int(payload[5])
             ivLen = Int(payload[6])
             p = 7
@@ -66,16 +66,16 @@ class CUONADecryptor {
     }
     
     func decrypt() -> Data? {
-        guard let customerId = customerId else {
+        guard let keyCode = keyCode else {
             return nil
         }
 
         let key: [UInt8]
-        if customerId == CUONAKeys.customerId {
+        if keyCode == CUONAKeys.keyCode {
             key = getSymmetryKey(deviceId: deviceId)
         } else {
             #if ENABLE_MASTER_KEY
-                key = CUONAMasterKey.getKey(customerId: customerId,
+                key = CUONAMasterKey.getKey(keyCode: keyCode,
                                             deviceId: deviceId)
             #else
                 return nil
