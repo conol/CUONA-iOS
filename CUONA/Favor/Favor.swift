@@ -33,15 +33,14 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func register()
     {
-        let url = ""
+        let url = "http://favor-dev.cuona.io/api/users/register.json"
         let params = [
-            "": ""
+            "nickname": "test"
         ]
         deviceManager?.request?.sendRequestAsynchronous(url, method: "POST", params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 let data = returnData["data"] as! [String : Any]
-                let user = data["user"] as! [String: Any]
                 self.delegate?.successRegister?(json: data)
             } else {
                 self.delegate?.failedRegister?(status: httpResponse?.statusCode ?? 0, json: returnData)
@@ -49,7 +48,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
-    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool {
+    public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool {
         return false
     }
     

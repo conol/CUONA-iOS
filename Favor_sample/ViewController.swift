@@ -21,11 +21,12 @@ class ViewController: UIViewController, FavorDelegate {
     }
     
     func successRegister(json: [String : Any]?) {
-        
+        print("successRegister")
+        print(json!["nickname"] as Any)
     }
     
     func failedRegister(status: Int, json: [String : Any]?) {
-        
+        print("failedRegister")
     }
 
     override func didReceiveMemoryWarning() {

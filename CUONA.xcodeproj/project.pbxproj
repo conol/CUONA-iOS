@@ -64,6 +64,7 @@
 		14F8767E202309C100BB24F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14F8767C202309C100BB24F9 /* LaunchScreen.storyboard */; };
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		A66FF821202848AB008E262E /* Favor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; };
 		A6F4FD62202301CA00523677 /* Favor.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F4FD60202301CA00523677 /* Favor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F4FD68202302D000523677 /* Favor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4FD67202302D000523677 /* Favor.swift */; };
 /* End PBXBuildFile section */
@@ -252,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A66FF821202848AB008E262E /* Favor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
