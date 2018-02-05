@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CUONACore
 
 @objc public protocol FavorDelegate: class
 {
@@ -48,15 +47,16 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
-    public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool {
+    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
+    {
         return false
     }
     
-    public func cuonaNFCCanceled() {
+    func cuonaNFCCanceled() {
         
     }
     
-    public func cuonaIllegalNFCDetected() {
+    func cuonaIllegalNFCDetected() {
         
     }
     

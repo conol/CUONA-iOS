@@ -164,7 +164,7 @@ public struct CUONAWiFiSSIDPw {
     }
 }
 
-@objc public protocol CUONAManagerDelegate: class {
+@objc protocol CUONAManagerDelegate: class {
 
     // card detection
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
@@ -190,7 +190,7 @@ public struct CUONAWiFiSSIDPw {
 }
 
 @available(iOS 11.0, *)
-public class CUONAManager: NFCReaderDelegate {
+class CUONAManager: NFCReaderDelegate {
     
     public static var isDebugMode: Bool = CUONAGetDebugMode()
     
@@ -202,12 +202,12 @@ public class CUONAManager: NFCReaderDelegate {
     var jsonData: Data?
     var anyNfcRead: Bool = false
     
-    public init(delegate: CUONAManagerDelegate) {
+    init(delegate: CUONAManagerDelegate) {
         self.delegate = delegate
         nfc = NFCReader(delegate: self, isMulti: false)
     }
     
-    public func startReadingNFC(_ message: String?) {
+    func startReadingNFC(_ message: String?) {
         scanSignature = nil
         deviceId = nil
         anyNfcRead = false
@@ -215,36 +215,36 @@ public class CUONAManager: NFCReaderDelegate {
         nfc?.scan(message)
     }
     
-    public func requestDisconnect() {
+    func requestDisconnect() {
         CUONABTManager.shared.requestDisconnect()
     }
     
-    public func requestSystemStatus() -> Bool {
+    func requestSystemStatus() -> Bool {
         return CUONABTManager.shared.requestSystemStatus()
     }
     
-    public func writeWifiSSIDPw(ssid: String, password: String) -> Bool {
+    func writeWifiSSIDPw(ssid: String, password: String) -> Bool {
         return CUONABTManager.shared.writeWiFiSSIDPw(ssid: ssid,
                                                     password: password)
     }
     
-    public func writeServerHost(_ host: String) -> Bool {
+    func writeServerHost(_ host: String) -> Bool {
         return CUONABTManager.shared.writeServerHost(host)
     }
     
-    public func writeServerPath(_ path: String) -> Bool {
+    func writeServerPath(_ path: String) -> Bool {
         return CUONABTManager.shared.writeServerPath(path)
     }
     
-    public func writeNetRequest(_ req: String) -> Bool {
+    func writeNetRequest(_ req: String) -> Bool {
         return CUONABTManager.shared.writeNetRequest(req)
     }
     
-    public func requestOTAUpdate(force: Bool = false) -> Bool {
+    func requestOTAUpdate(force: Bool = false) -> Bool {
         return CUONABTManager.shared.requestOTAUpdate(force: force)
     }
     
-    public func writeJSON(_ json: String) -> Bool {
+    func writeJSON(_ json: String) -> Bool {
         if let data = json.data(using: .utf8) {
             if CUONABTManager.shared.isSecureNFCSupported {
                 if let deviceId = deviceId {
@@ -272,15 +272,15 @@ public class CUONAManager: NFCReaderDelegate {
         }
     }
     
-    public func enterAdminMode(_ password: String) -> Bool {
+    func enterAdminMode(_ password: String) -> Bool {
         return CUONABTManager.shared.sendPWProtect(cmd: 0, password: password)
     }
     
-    public func setAdminPassword(_ password: String) -> Bool {
+    func setAdminPassword(_ password: String) -> Bool {
         return CUONABTManager.shared.sendPWProtect(cmd: 1, password: password)
     }
     
-    public func unsetAdminPassword() -> Bool {
+    func unsetAdminPassword() -> Bool {
         return CUONABTManager.shared.sendPWProtect(cmd: 1,
                     password: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
     }
