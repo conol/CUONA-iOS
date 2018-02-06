@@ -19,7 +19,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
     var cuonaManager: CUONAManager?
     public var deviceManager: DeviceManager?
-    
+
     weak var delegate: FavorDelegate?
     
     required public init(delegate: FavorDelegate)
