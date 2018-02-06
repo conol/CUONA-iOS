@@ -14,6 +14,15 @@ private let SAVE_LOGS = "saveLogs"
 private let APP_TOKEN = "appToken"
 private let DEVICE_PASS = "deviceMasterPassword"
 
+public enum Method:String
+{
+    case post   = "POST"
+    case get    = "GET"
+    case put    = "PUT"
+    case patch  = "PATCH"
+    case delete = "DELETE"
+}
+
 @objc protocol DeviceManagerDelegate: class
 {
     func successSendLog(json:[String : Any])
@@ -127,7 +136,7 @@ public class HttpRequest
         ]
         
         if Reachability.isConnectedToNetwork() {
-            sendRequestAsynchronous(url, method:"POST", params:params, funcs:{(returnData, response) in
+            sendRequestAsynchronous(url, method: .post, params:params, funcs:{(returnData, response) in
                 let httpResponse = response as? HTTPURLResponse
                 if httpResponse?.statusCode == 200 {
                     self.delegate?.successSendLog(json: returnData)
@@ -160,7 +169,7 @@ public class HttpRequest
             "email": email,
             "password": password
         ]
-        sendRequestAsynchronous(url, method: "POST", params: params) {
+        sendRequestAsynchronous(url, method: .post, params: params) {
             (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             
@@ -182,7 +191,7 @@ public class HttpRequest
         var url = API_URL + "/api/owners/devices.json?unused=true&environment="
         url += develop ? "development" : "production"
         
-        sendRequestAsynchronous(url, method: "GET", params: nil) { (returnData, response) in
+        sendRequestAsynchronous(url, method: .get, params: nil) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             
             if httpResponse?.statusCode == 200 {
@@ -204,7 +213,7 @@ public class HttpRequest
             "service_ids": service_ids
             ] as [String : Any]
         
-        sendRequestAsynchronous(url, method: "PATCH", params: params) { (returnData, response) in
+        sendRequestAsynchronous(url, method: .patch, params: params) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             
             if httpResponse?.statusCode == 200 {
@@ -216,16 +225,16 @@ public class HttpRequest
     }
     
     //MARK: - 共通通信部分
-    public func sendRequestAsynchronous(_ url:String, method:String, params:[String:Any]?, funcs:@escaping ([String : Any], URLResponse?) -> Void)
+    public func sendRequestAsynchronous(_ url:String, method:Method, params:[String:Any]?, funcs:@escaping ([String : Any], URLResponse?) -> Void)
     {
         var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)
-        req.httpMethod = method
+        req.httpMethod = method.rawValue
         if app_token != nil {
             req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if method == "POST" || method == "PATCH" || method == "PUT" {
+        if method == .post || method == .patch || method == .put {
             do {
                 req.httpBody = try JSONSerialization.data(withJSONObject: params ?? [:], options: [])
             } catch {
