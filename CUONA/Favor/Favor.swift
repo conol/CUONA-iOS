@@ -26,7 +26,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     {
         super.init()
         self.delegate = delegate
-        cuonaManager = CUONAManager(delegate: self)
+        cuonaManager  = CUONAManager(delegate: self)
         deviceManager = DeviceManager(delegate: self)
     }
     
@@ -41,6 +41,21 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 self.delegate?.failedRegister?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
+    }
+    
+    public func getShopInfo()
+    {
+        
+    }
+    
+    public func getOrderList()
+    {
+        
+    }
+    
+    public func sendOrder()
+    {
+        
     }
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool

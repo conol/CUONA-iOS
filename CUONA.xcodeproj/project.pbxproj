@@ -467,13 +467,6 @@
 			path = Favor_sample;
 			sourceTree = "<group>";
 		};
-		A684FA1F20297C5F00B1AF56 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		A6F4FD5F202301CA00523677 /* Favor */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,7 +479,6 @@
 		A6F4FD662023023700523677 /* Favor */ = {
 			isa = PBXGroup;
 			children = (
-				A684FA1F20297C5F00B1AF56 /* Model */,
 				A6F4FD67202302D000523677 /* Favor.swift */,
 				A684FA1D20295ECA00B1AF56 /* Define.swift */,
 			);
