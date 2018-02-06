@@ -42,6 +42,7 @@
 		1454EA101FBDB01800DA77E0 /* CUONA.h in Headers */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1454EA191FBDB4FB00DA77E0 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
+		1465318420295A8700F7466B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465318320295A8700F7466B /* Define.swift */; };
 		14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824AC1FBA85B60097050B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14B824B61FBADE160097050B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B51FBADE160097050B /* AppDelegate.swift */; };
@@ -155,6 +156,7 @@
 		1454EA161FBDB01800DA77E0 /* CUONACore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CUONACore.plist; path = "/Users/mizotatakaaki/repositories/CUONA-iOS/CUONACore.plist"; sourceTree = "<absolute>"; };
 		1454EA181FBDB4FB00DA77E0 /* Cuona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuona.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
+		1465318320295A8700F7466B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		14B824A21FB9D09E0097050B /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		14B824B31FBADE160097050B /* CoreSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B824B51FBADE160097050B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				1454EA181FBDB4FB00DA77E0 /* Cuona.swift */,
+				1465318320295A8700F7466B /* Define.swift */,
 			);
 			path = CUONA;
 			sourceTree = "<group>";
@@ -899,6 +902,7 @@
 				14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */,
 				1446E6261FAF9E9200F06724 /* CUONAManager.swift in Sources */,
 				1446E6211FAF9E9200F06724 /* CUONABTManager.swift in Sources */,
+				1465318420295A8700F7466B /* Define.swift in Sources */,
 				59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */,
 				1446E6231FAF9E9200F06724 /* CUONAKeys.swift in Sources */,
 				145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */,
