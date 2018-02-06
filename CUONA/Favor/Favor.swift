@@ -19,7 +19,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
     var cuonaManager: CUONAManager?
     public var deviceManager: DeviceManager?
-    
+
     weak var delegate: FavorDelegate?
     
     required public init(delegate: FavorDelegate)
@@ -31,7 +31,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     public func register()
-    {
+    {        
         let url = ApiUrl.registerUesr
         let params = [
             "nickname": "test"
