@@ -8,7 +8,6 @@
 
 import UIKit
 import NetworkExtension
-import CUONACore
 
 public enum CUONAMode:Int
 {

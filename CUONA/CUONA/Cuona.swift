@@ -54,7 +54,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         cuonaManager?.startReadingNFC(message)
     }
     
-    public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
+    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         if sendLog == .on && serviceKey != .developer {
             deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: serviceKey.id(), addUniquId: "", note: "Read DeviceId by iOS")
@@ -64,27 +64,27 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         return bluetooth == .on ? true : false
     }
     
-    public func cuonaNFCCanceled()
+    func cuonaNFCCanceled()
     {
         delegate?.cancelNFC()
     }
     
-    public func cuonaIllegalNFCDetected()
+    func cuonaIllegalNFCDetected()
     {
         delegate?.failedNFC()
     }
     
-    public func cuonaUpdatedJSON()
+    func cuonaUpdatedJSON()
     {
         delegate?.successNFCData?()
     }
     
-    public func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
+    func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
     {
         delegate?.failedNFCData?(code: code, errortxt: errortxt)
     }
     
-    public func cuonaConnected()
+    func cuonaConnected()
     {
         if deviceManager?.device_password != nil {
             _ = cuonaManager?.enterAdminMode((deviceManager?.device_password!)!)
@@ -96,12 +96,12 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.successConnect?()
     }
     
-    public func cuonaConnectFailed(_ error:String)
+    func cuonaConnectFailed(_ error:String)
     {
         delegate?.failedConnect?(error)
     }
     
-    public func cuonaDisconnected()
+    func cuonaDisconnected()
     {
         cuonaManager?.requestDisconnect()
         delegate?.disconnect?()
@@ -162,12 +162,12 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         _ = cuonaManager?.writeWifiSSIDPw(ssid: ssid, password: password)
     }
     
-    public func successSignIn(json: [String : Any])
+    func successSignIn(json: [String : Any])
     {
         delegate?.successSignIn!(response: json)
     }
     
-    public func failedSignIn(status: NSInteger, json: [String : Any]?)
+    func failedSignIn(status: NSInteger, json: [String : Any]?)
     {
         delegate?.failedSignIn!(status: status, response: json)
     }
@@ -177,12 +177,12 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.getDeviceList(develop)
     }
     
-    public func successGetDeviceList(json: [String : Any])
+    func successGetDeviceList(json: [String : Any])
     {
         delegate?.successGetDeviceList?(response: json)
     }
     
-    public func failedGetDeviceList(status: NSInteger, json: [String : Any]?)
+    func failedGetDeviceList(status: NSInteger, json: [String : Any]?)
     {
         delegate?.failedGetDeviceList?(status: status, response: json)
     }
@@ -192,17 +192,17 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.pearingDevice(device_id, name: name, service_ids: service_ids, enabled: enabled)
     }
     
-    public func successPearing(json: [String : Any])
+    func successPearing(json: [String : Any])
     {
         delegate?.successPearing?(response: json)
     }
     
-    public func failedPearing(status: NSInteger, json: [String : Any]?)
+    func failedPearing(status: NSInteger, json: [String : Any]?)
     {
         delegate?.failedPearing?(status: status, response: json)
     }
     
-    public func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
+    func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
     {
         delegate?.successWiFi!(ssid: ssid, password: password)
     }
@@ -213,7 +213,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             do {
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             } catch {
-                print(error.localizedDescription)
+                print("ERROR:"+error.localizedDescription)
             }
         }
         return nil
@@ -232,11 +232,11 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // MARK:- DeviceManagerDelegate methods
-    public func successSendLog(json: [String : Any]) {
+    func successSendLog(json: [String : Any]) {
         delegate?.successSendLog?(response: json)
     }
     
-    public func failedSendLog(status: NSInteger, json: [String : Any]?) {
+    func failedSendLog(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSendLog?(status: status, response: json)
     }
 }

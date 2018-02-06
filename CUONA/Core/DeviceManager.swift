@@ -14,7 +14,7 @@ private let SAVE_LOGS = "saveLogs"
 private let APP_TOKEN = "appToken"
 private let DEVICE_PASS = "deviceMasterPassword"
 
-@objc public protocol DeviceManagerDelegate: class
+@objc protocol DeviceManagerDelegate: class
 {
     func successSendLog(json:[String : Any])
     func failedSendLog(status:NSInteger, json:[String : Any]?)
@@ -33,7 +33,7 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     
     public var device_password:String?
     
-    required public init(delegate: DeviceManagerDelegate)
+    init(delegate: DeviceManagerDelegate)
     {
         super.init()
         self.delegate = delegate
@@ -46,43 +46,43 @@ public class DeviceManager: NSObject, HttpRequestDelegate
         request = HttpRequest(delegate: self)
     }
     
-    public func successSendLog(json: [String : Any]) {
+    func successSendLog(json: [String : Any]) {
         delegate?.successSendLog(json: json)
     }
     
-    public func failedSendLog(status: NSInteger, json: [String : Any]?) {
+    func failedSendLog(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSendLog(status: status, json: json)
     }
     
-    public func successSignIn(json: [String : Any]) {
+    func successSignIn(json: [String : Any]) {
         let device_pass = json["device_password"] as? String
         device_password = device_pass
         UserDefaults.standard.set(device_pass, forKey: DEVICE_PASS)
         delegate?.successSignIn?(json: json)
     }
     
-    public func failedSignIn(status: NSInteger, json: [String : Any]?) {
+    func failedSignIn(status: NSInteger, json: [String : Any]?) {
         delegate?.failedSignIn?(status: status, json: json)
     }
     
-    public func successGetDeviceList(json: [String : Any]) {
+    func successGetDeviceList(json: [String : Any]) {
         delegate?.successGetDeviceList?(json: json)
     }
     
-    public func failedGetDeviceList(status: NSInteger, json: [String : Any]?) {
+    func failedGetDeviceList(status: NSInteger, json: [String : Any]?) {
         delegate?.failedGetDeviceList?(status: status, json: json)
     }
     
-    public func successPearing(json: [String : Any]) {
+    func successPearing(json: [String : Any]) {
         delegate?.successPearing?(json: json)
     }
     
-    public func failedPearing(status: NSInteger, json: [String : Any]?) {
+    func failedPearing(status: NSInteger, json: [String : Any]?) {
         delegate?.failedPearing?(status: status, json: json)
     }
 }
 
-@objc public protocol HttpRequestDelegate: class
+@objc protocol HttpRequestDelegate: class
 {
     func successSendLog(json:[String : Any])
     func failedSendLog(status:NSInteger, json:[String : Any]?)
@@ -100,7 +100,7 @@ public class HttpRequest
     weak var delegate: HttpRequestDelegate?
     public var app_token:String?
     
-    required public init(delegate: HttpRequestDelegate)
+    init(delegate: HttpRequestDelegate)
     {
         self.delegate = delegate
         

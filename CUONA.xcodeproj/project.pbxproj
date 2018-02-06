@@ -43,6 +43,16 @@
 		1454EA191FBDB4FB00DA77E0 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
 		1465318420295A8700F7466B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465318320295A8700F7466B /* Define.swift */; };
+		1465318520295DEF00F7466B /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
+		1465318620295DEF00F7466B /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
+		1465318720295DEF00F7466B /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
+		1465318820295DEF00F7466B /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
+		1465318920295DEF00F7466B /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
+		1465318A20295DEF00F7466B /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
+		1465318B20295DEF00F7466B /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		1465318C20295DEF00F7466B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
+		1465318D20295DEF00F7466B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
+		1465318E20295DEF00F7466B /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
 		14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824AC1FBA85B60097050B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14B824B61FBADE160097050B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B51FBADE160097050B /* AppDelegate.swift */; };
@@ -924,6 +934,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1465318520295DEF00F7466B /* CUONA.h in Sources */,
+				1465318620295DEF00F7466B /* CUONABTManager.swift in Sources */,
+				1465318720295DEF00F7466B /* CUONADecryptor.swift in Sources */,
+				1465318820295DEF00F7466B /* CUONAEncryptor.swift in Sources */,
+				1465318920295DEF00F7466B /* CUONAKeys.swift in Sources */,
+				1465318A20295DEF00F7466B /* CUONAManager.swift in Sources */,
+				1465318B20295DEF00F7466B /* CUONAMasterKey.swift in Sources */,
+				1465318C20295DEF00F7466B /* DeviceManager.swift in Sources */,
+				1465318D20295DEF00F7466B /* Extensions.swift in Sources */,
+				1465318E20295DEF00F7466B /* NFCReader.swift in Sources */,
 				1446E64C1FAFA41700F06724 /* WifiHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
