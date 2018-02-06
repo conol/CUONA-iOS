@@ -32,7 +32,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func register()
     {
-        let url = "http://favor-dev.cuona.io/api/users/register.json"
+        let url = ApiUrl.registerUesr
         let params = [
             "nickname": "test"
         ]

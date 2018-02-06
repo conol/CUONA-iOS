@@ -86,6 +86,7 @@
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		A66FF821202848AB008E262E /* Favor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; };
+		A684FA1E20295ECA00B1AF56 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684FA1D20295ECA00B1AF56 /* Define.swift */; };
 		A6F4FD62202301CA00523677 /* Favor.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F4FD60202301CA00523677 /* Favor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F4FD68202302D000523677 /* Favor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4FD67202302D000523677 /* Favor.swift */; };
 /* End PBXBuildFile section */
@@ -198,6 +199,7 @@
 		14F8767D202309C100BB24F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14F8767F202309C100BB24F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
+		A684FA1D20295ECA00B1AF56 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		A6F4FD5E202301CA00523677 /* Favor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Favor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6F4FD60202301CA00523677 /* Favor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favor.h; sourceTree = "<group>"; };
 		A6F4FD61202301CA00523677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				A6F4FD67202302D000523677 /* Favor.swift */,
+				A684FA1D20295ECA00B1AF56 /* Define.swift */,
 			);
 			path = Favor;
 			sourceTree = "<group>";
@@ -1040,6 +1043,7 @@
 				143F3A9B20288A5A00486FF8 /* DeviceManager.swift in Sources */,
 				143F3A9C20288A5A00486FF8 /* Extensions.swift in Sources */,
 				143F3A9D20288A5A00486FF8 /* NFCReader.swift in Sources */,
+				A684FA1E20295ECA00B1AF56 /* Define.swift in Sources */,
 				A6F4FD68202302D000523677 /* Favor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
