@@ -6,8 +6,6 @@
 //  Copyright © 2018年 conol, Inc. All rights reserved.
 //
 
-import UIKit
-
 struct ApiUrl {
     static let endPoint = "http://favor-dev.cuona.io"
     static let registerUesr = endPoint + "/api/users/register.json"
