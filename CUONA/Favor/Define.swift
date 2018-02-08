@@ -6,7 +6,8 @@
 //  Copyright © 2018年 conol, Inc. All rights reserved.
 //
 
-struct ApiUrl {
+struct ApiUrl
+{
     static let endPoint = "http://favor-dev.cuona.io"   // エンドポイント
     
     static let registerUesr = endPoint + "/api/users/register.json"                  // ユーザー登録
@@ -19,42 +20,42 @@ struct ApiUrl {
     static let getFavorite = endPoint + "/api/users/favorites.json"                  // お気に入り一覧取得
     
     // 店舗詳細取得
-    static func getShopDetail(shopId: Int) -> String {
+    static func getShopDetail(_ shopId: Int) -> String {
         return endPoint + "/api/users/shops/\(shopId).json"
     }
     
     // 店舗メニュー取得
-    static func getMenu(shopId: Int) -> String {
+    static func getMenu(_ shopId: Int) -> String {
         return endPoint + "/api/users/shops/\(shopId)/menu.json"
     }
     
     // 注文
-    static func order(visitHistoryId: Int) -> String {
+    static func order(_ visitHistoryId: Int) -> String {
         return endPoint + "/api/users/visit_histories/\(visitHistoryId)/orders.json"
     }
     
     // 注文履歴一覧(来店個人単位)
-    static func getUsersOrderInShop(visitHistoryId: Int) -> String {
+    static func getUsersOrderInShop(_ visitHistoryId: Int) -> String {
         return endPoint + "/api/users/visit_histories/\(visitHistoryId)/orders"
     }
     
     // 注文履歴一覧(来店グループ単位)
-    static func getUserGroupsOrderInShop(visitGroupId: Int) -> String {
+    static func getUserGroupsOrderInShop(_ visitGroupId: Int) -> String {
         return endPoint + "/api/users/visit_groups/\(visitGroupId)/orders"
     }
     
     // お会計
-    static func getUserGroupsOrderInShop(visitHistoryId: Int) -> String {
+    static func check(_ visitHistoryId: Int) -> String {
         return endPoint + "/api/users/visit_histories/\(visitHistoryId)/order_stop.json"
     }
     
     // お気に入り編集
-    static func editFavorite(favoriteId: Int) -> String {
+    static func editFavorite(_ favoriteId: Int) -> String {
         return endPoint + "/api/users/favorites/\(favoriteId).json"
     }
     
     // お気に入り削除
-    static func deleteFavorite(favoriteId: Int) -> String {
+    static func deleteFavorite(_ favoriteId: Int) -> String {
         return endPoint + "/api/users/favorites/\(favoriteId).json"
     }
 }

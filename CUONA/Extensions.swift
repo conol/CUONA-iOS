@@ -9,6 +9,9 @@
 import UIKit
 import Foundation
 
+let center = NotificationCenter.default
+let ud = UserDefaults.standard
+
 //MARK: - アラート画面をどこからでも出す機能
 public class Alert
 {
