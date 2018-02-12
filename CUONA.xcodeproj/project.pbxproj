@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141DA9002031948200CD301D /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
+		141DA9012031948200CD301D /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
+		141DA9022031948200CD301D /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
+		141DA9032031948200CD301D /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
+		141DA9042031948200CD301D /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
+		141DA9052031948200CD301D /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		141DA9062031948200CD301D /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
+		141DA9072031948200CD301D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
+		141DA9082031948200CD301D /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
 		14322FB51FD62D63007A78A1 /* CUONACore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; };
 		14322FB61FD62D63007A78A1 /* CUONACore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		143F3A9420288A5A00486FF8 /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
 		143F3A9520288A5A00486FF8 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
 		143F3A9620288A5A00486FF8 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
 		143F3A9720288A5A00486FF8 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
@@ -43,7 +51,6 @@
 		1454EA191FBDB4FB00DA77E0 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
 		1465318420295A8700F7466B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465318320295A8700F7466B /* Define.swift */; };
-		1465318520295DEF00F7466B /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
 		1465318620295DEF00F7466B /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
 		1465318720295DEF00F7466B /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
 		1465318820295DEF00F7466B /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
@@ -937,7 +944,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1465318520295DEF00F7466B /* CUONA.h in Sources */,
 				1465318620295DEF00F7466B /* CUONABTManager.swift in Sources */,
 				1465318720295DEF00F7466B /* CUONADecryptor.swift in Sources */,
 				1465318820295DEF00F7466B /* CUONAEncryptor.swift in Sources */,
@@ -979,6 +985,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141DA9002031948200CD301D /* CUONABTManager.swift in Sources */,
+				141DA9012031948200CD301D /* CUONADecryptor.swift in Sources */,
+				141DA9022031948200CD301D /* CUONAEncryptor.swift in Sources */,
+				141DA9032031948200CD301D /* CUONAKeys.swift in Sources */,
+				141DA9042031948200CD301D /* CUONAManager.swift in Sources */,
+				141DA9052031948200CD301D /* CUONAMasterKey.swift in Sources */,
+				141DA9062031948200CD301D /* DeviceManager.swift in Sources */,
+				141DA9072031948200CD301D /* Extensions.swift in Sources */,
+				141DA9082031948200CD301D /* NFCReader.swift in Sources */,
 				14B824B81FBADE160097050B /* ViewController.swift in Sources */,
 				14B824B61FBADE160097050B /* AppDelegate.swift in Sources */,
 			);
@@ -1033,7 +1048,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				143F3A9420288A5A00486FF8 /* CUONA.h in Sources */,
 				143F3A9520288A5A00486FF8 /* CUONABTManager.swift in Sources */,
 				143F3A9620288A5A00486FF8 /* CUONADecryptor.swift in Sources */,
 				143F3A9720288A5A00486FF8 /* CUONAEncryptor.swift in Sources */,

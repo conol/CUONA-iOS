@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CUONACore
 
 extension Data {
     func hexEncodedString() -> String {
@@ -146,10 +145,6 @@ UITextFieldDelegate {
         sheet.addAction(cancel)
         
         present(sheet, animated: true, completion: nil)
-    }
-    
-    @IBAction func changeEnv(_ sender: UISegmentedControl)
-    {
     }
     
     @IBAction func clearLog(_ sender: Any)
