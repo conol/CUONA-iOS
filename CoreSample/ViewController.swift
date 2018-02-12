@@ -195,13 +195,14 @@ UITextFieldDelegate {
     
     // cuonaManagerDelegate
     
-    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool {
+    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
+    {
         if let tv = logTextView {
             tv.text! += "NFC Detected: deviceId=\(deviceId), "
             tv.text! += "type=\(type), "
             tv.text! += "JSON=\(json)\n"
         }
-        return true
+        return type == CUONA_TAG_TYPE_CUONA ? true : false
     }
     
     func cuonaNFCCanceled() {
