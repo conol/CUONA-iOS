@@ -14,6 +14,15 @@ public class Shop: NSObject
     var history_id = 0
     var group_id = 0
     
+    public var name:String = ""
+    public var introduction:String = ""
+    public var genre:String = ""
+    public var zip_code:String = "0000000"
+    public var address:String = ""
+    public var phone_number:String? = nil
+    public var notes:String? = nil
+    public var extension_fields:[ExtensionField?] = []
+    public var shop_images:[ShopImage?] = []
     public var visit_count = 0
     public var last_visit_time:Date?
     
@@ -24,6 +33,18 @@ public class Shop: NSObject
         group_id = 0
         visit_count = 0
         last_visit_time = nil
+    }
+    
+    public class ExtensionField
+    {
+        public var id = 0
+        public var lavel = ""
+        public var value:String? = nil
+    }
+    
+    public class ShopImage
+    {
+        public var image_url = ""
     }
 }
 
@@ -43,6 +64,9 @@ public class Shop: NSObject
     
     @objc optional func successEnterShop(json:[String:Any]?)
     @objc optional func failedEnterShop(status:Int, json: [String:Any]?)
+    
+    @objc optional func successGetVisitedShopHistory(shops:[Shop]!)
+    @objc optional func failedGetVisitedShopHistory(status:Int, json: [String:Any]?)
     
     @objc optional func successGetMenuList(json:[String:Any]?)
     @objc optional func failedGetMenuList(status:Int, json: [String:Any]?)
@@ -156,6 +180,63 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 self.delegate?.successEnterShop?(json: data)
             } else {
                 self.delegate?.failedEnterShop?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+    
+    public func getVisitedShopHistory()
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getVisitedShopHistory, method: .get, params: nil, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var shops:[Shop] = []
+                
+                for data in datas
+                {
+                    let shop = Shop()
+                    
+                    let shop_json = data["shop"] as! [String : Any]
+                    let visit_history_json = data["visit_history"] as! [String : Any]
+                    
+                    shop.id = shop_json["id"] as! Int
+                    shop.name = shop_json["name"] as! String
+                    shop.introduction = shop_json["introduction"] as! String
+                    shop.genre = shop_json["genre"] as! String
+                    shop.zip_code = shop_json["zip_code"] as! String
+                    shop.address = shop_json["address"] as! String
+                    shop.phone_number = shop_json["phone_number"] as? String
+                    shop.notes = shop_json["notes"] as? String
+                    
+                    let extentsionFiles = shop_json["extension_fields"] as! [[String : Any]]
+                    shop.extension_fields = Array(repeating:Shop.ExtensionField(), count:extentsionFiles.count)
+                    for i in 0..<extentsionFiles.count
+                    {
+                        shop.extension_fields[i]?.id = extentsionFiles[i]["id"] as! Int
+                        shop.extension_fields[i]?.lavel = extentsionFiles[i]["lavel"] as! String
+                        shop.extension_fields[i]?.value = extentsionFiles[i]["value"] as? String
+                    }
+                    
+                    let shopImages = shop_json["shop_images"] as! [[String : Any]]
+                    shop.shop_images = Array(repeating:Shop.ShopImage(), count:shopImages.count)
+                    for i in 0..<shopImages.count
+                    {
+                        shop.shop_images[i]?.image_url = shopImages[i]["image_url"] as! String
+                    }
+                    
+                    shop.history_id  = visit_history_json["id"] as! Int
+                    shop.group_id    = visit_history_json["visit_group_id"] as! Int
+                    shop.visit_count = visit_history_json["num_visits"] as! Int
+                    let last_visit_at = visit_history_json["last_visit_at"] as? String
+                    shop.last_visit_time = last_visit_at?.dateFromISO8601
+                    
+                    shops.append(shop)
+                }
+                
+                self.delegate?.successGetVisitedShopHistory?(shops: shops)
+            } else {
+                self.delegate?.failedGetVisitedShopHistory?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
     }

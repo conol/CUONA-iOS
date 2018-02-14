@@ -232,6 +232,7 @@ public class HttpRequest
         req.httpMethod = method.rawValue
         if app_token != nil {
             req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
+//            req.addValue("Bearer JrskyU8DiGyvcWyM9cXUPtrA", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         if method == .post || method == .patch || method == .put {
