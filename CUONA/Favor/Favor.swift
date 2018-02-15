@@ -119,32 +119,9 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 
-                // レスポンスのdata部分の取得
-                let data = returnData["data"] as! [String : Any]
-                
-                // appTokenの保存
-                let token = data["app_token"] as! String!
-                self.deviceManager?.request?.app_token = token
-                ud.set(token, forKey: APP_TOKEN)
-                
                 // userインスタンスに値を設定
-                self.user.id             = data["id"] as! Int
-                self.user.master_user_id = data["master_user_id"] as! Int
-                self.user.owner_id       = data["owner_id"] as? Int
-                self.user.original_id    = data["original_id"] as? Int
-                self.user.language       = data["language"] as? String
-                self.user.nickname       = data["nickname"] as? String
-                self.user.gender         = data["gender"] as? String
-                self.user.age            = data["age"] as? Int
-                self.user.pref           = data["pref"] as? String
-                self.user.image_url      = data["image_url"] as? String
-                self.user.push_token     = data["push_token"] as? String
-                self.user.notifiable     = data["notifiable"] as! Bool
-                let created_at           = data["created_at"] as! String
-                self.user.created_time   = created_at.dateFromISO8601
-                let updated_at           = data["updated_at"] as! String
-                self.user.updated_time   = updated_at.dateFromISO8601
-
+                self.user = self.setUserInfoFromResponse(user: self.user, response: returnData)
+                
                 // userインスタンスを返す
                 self.delegate?.successRegister?(user: self.user)
             } else {
@@ -160,27 +137,9 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 
-                // レスポンスのdata部分の取得
-                let data = returnData["data"] as! [String : Any]
-                
                 // userインスタンスに値を設定
-                self.user.id             = data["id"] as! Int
-                self.user.master_user_id = data["master_user_id"] as! Int
-                self.user.owner_id       = data["owner_id"] as? Int
-                self.user.original_id    = data["original_id"] as? Int
-                self.user.language       = data["language"] as? String
-                self.user.nickname       = data["nickname"] as? String
-                self.user.gender         = data["gender"] as? String
-                self.user.age            = data["age"] as? Int
-                self.user.pref           = data["pref"] as? String
-                self.user.image_url      = data["image_url"] as? String
-                self.user.push_token     = data["push_token"] as? String
-                self.user.notifiable     = data["notifiable"] as! Bool
-                let created_at           = data["created_at"] as! String
-                self.user.created_time   = created_at.dateFromISO8601
-                let updated_at           = data["updated_at"] as! String
-                self.user.updated_time   = updated_at.dateFromISO8601
-                
+                self.user = self.setUserInfoFromResponse(user: self.user, response: returnData)
+
                 // userインスタンスを返す
                 self.delegate?.successEditUserInfo?(user: self.user)
             } else {
@@ -196,26 +155,8 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 
-                // レスポンスのdata部分の取得
-                let data = returnData["data"] as! [String : Any]
-                
                 // userインスタンスに値を設定
-                self.user.id             = data["id"] as! Int
-                self.user.master_user_id = data["master_user_id"] as! Int
-                self.user.owner_id       = data["owner_id"] as? Int
-                self.user.original_id    = data["original_id"] as? Int
-                self.user.language       = data["language"] as? String
-                self.user.nickname       = data["nickname"] as? String
-                self.user.gender         = data["gender"] as? String
-                self.user.age            = data["age"] as? Int
-                self.user.pref           = data["pref"] as? String
-                self.user.image_url      = data["image_url"] as? String
-                self.user.push_token     = data["push_token"] as? String
-                self.user.notifiable     = data["notifiable"] as! Bool
-                let created_at           = data["created_at"] as! String
-                self.user.created_time   = created_at.dateFromISO8601
-                let updated_at           = data["updated_at"] as! String
-                self.user.updated_time   = updated_at.dateFromISO8601
+                self.user = self.setUserInfoFromResponse(user: self.user, response: returnData)
                 
                 // userインスタンスを返す
                 self.delegate?.successGetUserInfo?(user: self.user)
@@ -223,6 +164,41 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 self.delegate?.failedGetUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
+    }
+    
+    // サーバーから返ってきたユーザー情報をuserインスタンスに設定する
+    private func setUserInfoFromResponse(user: User, response: [String : Any]) -> User
+    {
+        // レスポンスのdata部分の取得
+        let data = response["data"] as! [String : Any]
+
+        // appTokenに変更がある場合は保存
+        let token = data["app_token"] as! String!
+        let savedToken = ud.string(forKey: APP_TOKEN)
+        if(token != savedToken) {
+            self.deviceManager?.request?.app_token = token
+            ud.set(token, forKey: APP_TOKEN)
+        }
+        
+        // userインスタンスに値を設定
+        user.id             = data["id"] as! Int
+        user.master_user_id = data["master_user_id"] as! Int
+        user.owner_id       = data["owner_id"] as? Int
+        user.original_id    = data["original_id"] as? Int
+        user.language       = data["language"] as? String
+        user.nickname       = data["nickname"] as? String
+        user.gender         = data["gender"] as? String
+        user.age            = data["age"] as? Int
+        user.pref           = data["pref"] as? String
+        user.image_url      = data["image_url"] as? String
+        user.push_token     = data["push_token"] as? String
+        user.notifiable     = data["notifiable"] as! Bool
+        let created_at      = data["created_at"] as! String
+        user.created_time   = created_at.dateFromISO8601
+        let updated_at      = data["updated_at"] as! String
+        user.updated_time   = updated_at.dateFromISO8601
+
+        return user
     }
     
     public func getShopInfo()

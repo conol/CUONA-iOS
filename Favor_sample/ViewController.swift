@@ -17,7 +17,17 @@ class ViewController: UIViewController, FavorDelegate {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
-        favor!.getUserInfo()
+        favor!.registerUser(params: ["nickname" : "ito"])
+//        favor!.getUserInfo()
+    }
+    
+    func successRegister(user: User!) {
+        print("successRegister")
+        print(user.nickname ?? "nickname_nil")
+    }
+    
+    func failedRegister(status: Int, json: [String : Any]?) {
+        print("failedRegister")
     }
     
     func successGetUserInfo(user: User) {
