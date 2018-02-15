@@ -107,9 +107,10 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager = DeviceManager(delegate: self)
     }
     
-    public func hasToken() -> Bool
+    public static func hasToken() -> Bool
     {
-        return deviceManager?.request?.app_token != nil ? true : false
+        return ud.string(forKey: APP_TOKEN) != nil
+//        return deviceManager?.request?.app_token != nil ? true : false
     }
     
     // ユーザー登録

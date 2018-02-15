@@ -19,6 +19,7 @@ class ViewController: UIViewController, FavorDelegate {
         favor = Favor(delegate: self)
         favor!.registerUser(params: ["nickname" : "ito"])
 //        favor!.getUserInfo()
+        print("hasToken:\(Favor.hasToken())")
     }
     
     func successRegister(user: User!) {
