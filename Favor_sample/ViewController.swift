@@ -17,16 +17,16 @@ class ViewController: UIViewController, FavorDelegate {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
-        favor!.register()
+        favor!.getUserInfo()
     }
     
-    func successRegister(json: [String : Any]?) {
-        print("successRegister")
-        print(json!["nickname"] as Any)
+    func successGetUserInfo(user: User) {
+        print("successGetUserInfo")
+        print(user.nickname ?? "nickname")
     }
     
-    func failedRegister(status: Int, json: [String : Any]?) {
-        print("failedRegister")
+    func failedGetUserInfo(status: Int, json: [String : Any]?) {
+        print("failedGetUserInfo")
     }
 
     override func didReceiveMemoryWarning() {
