@@ -53,11 +53,11 @@ public class Shop: NSObject
     @objc optional func failedRegister(status:Int, json: [String:Any]?)
     
     // ユーザー情報編集
-    @objc optional func successEditUserInfo(json:[String:Any]?)
+    @objc optional func successEditUserInfo(user:User!)
     @objc optional func failedEditUserInfo(status:Int, json: [String:Any]?)
     
     // ユーザー情報取得
-    @objc optional func successGetUserInfo(json:[String:Any]?)
+    @objc optional func successGetUserInfo(user:User!)
     @objc optional func failedGetUserInfo(status:Int, json: [String:Any]?)
     
     // 店舗詳細取得
@@ -182,20 +182,43 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 self.user.updated_time   = updated_at.dateFromISO8601
                 
                 // userインスタンスを返す
-                self.delegate?.successEditUserInfo?(json: data)
+                self.delegate?.successEditUserInfo?(user: self.user)
             } else {
                 self.delegate?.failedEditUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
     }
     
+    // ユーザー情報取得
     public func getUserInfo()
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUser, method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
+                
+                // レスポンスのdata部分の取得
                 let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetUserInfo?(json: data)
+                
+                // userインスタンスに値を設定
+                self.user.id             = data["id"] as! Int
+                self.user.master_user_id = data["master_user_id"] as! Int
+                self.user.owner_id       = data["owner_id"] as? Int
+                self.user.original_id    = data["original_id"] as? Int
+                self.user.language       = data["language"] as? String
+                self.user.nickname       = data["nickname"] as? String
+                self.user.gender         = data["gender"] as? String
+                self.user.age            = data["age"] as? Int
+                self.user.pref           = data["pref"] as? String
+                self.user.image_url      = data["image_url"] as? String
+                self.user.push_token     = data["push_token"] as? String
+                self.user.notifiable     = data["notifiable"] as! Bool
+                let created_at           = data["created_at"] as! String
+                self.user.created_time   = created_at.dateFromISO8601
+                let updated_at           = data["updated_at"] as! String
+                self.user.updated_time   = updated_at.dateFromISO8601
+                
+                // userインスタンスを返す
+                self.delegate?.successGetUserInfo?(user: self.user)
             } else {
                 self.delegate?.failedGetUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
