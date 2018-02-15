@@ -213,7 +213,6 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 self.user.push_token     = data["push_token"] as? String
                 self.user.notifiable     = data["notifiable"] as! Bool
                 let created_at           = data["created_at"] as! String
-                print(created_at)
                 self.user.created_time   = created_at.dateFromISO8601
                 let updated_at           = data["updated_at"] as! String
                 self.user.updated_time   = updated_at.dateFromISO8601
