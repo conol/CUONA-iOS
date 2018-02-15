@@ -8,6 +8,21 @@
 
 import UIKit
 
+public class User: NSObject
+{
+    var owner_id:Int? = nil
+    var original_id:Int? = nil
+    var language:String? = nil
+
+    public var nickname:String? = nil
+    public var gender:String? = nil
+    public var age:Int? = nil
+    public var pref:String? = nil
+    public var image:String? = nil
+    public var push_token:String? = nil
+    public var notifiable:Bool? = nil
+}
+
 public class Shop: NSObject
 {
     var id = 0
