@@ -26,34 +26,31 @@ public class User: NSObject
     public private(set) var created_time:Date?
     public private(set) var updated_time:Date?
     
-    init(json: [String : Any]) {
-        
-        // サーバーからのレスポンスのdata部分を取得
-        let data = json["data"] as! [String : Any]
+    init(jsonData: [String : Any]) {
         
         // appTokenに変更がある場合は保存
-        let token = data["app_token"] as! String!
+        let token = jsonData["app_token"] as! String!
         let savedToken = ud.string(forKey: APP_TOKEN)
         if(token != savedToken) {
             ud.set(token, forKey: APP_TOKEN)
         }
         
         // 各メンバ変数に値を設定
-        self.id             = data["id"] as! Int
-        self.master_user_id = data["master_user_id"] as! Int
-        self.owner_id       = data["owner_id"] as? Int
-        self.original_id    = data["original_id"] as? Int
-        self.language       = data["language"] as? String
-        self.nickname       = data["nickname"] as? String
-        self.gender         = data["gender"] as? String
-        self.age            = data["age"] as? Int
-        self.pref           = data["pref"] as? String
-        self.image_url      = data["image_url"] as? String
-        self.push_token     = data["push_token"] as? String
-        self.notifiable     = data["notifiable"] as! Bool
-        let created_at      = data["created_at"] as! String
+        self.id             = jsonData["id"] as! Int
+        self.master_user_id = jsonData["master_user_id"] as! Int
+        self.owner_id       = jsonData["owner_id"] as? Int
+        self.original_id    = jsonData["original_id"] as? Int
+        self.language       = jsonData["language"] as? String
+        self.nickname       = jsonData["nickname"] as? String
+        self.gender         = jsonData["gender"] as? String
+        self.age            = jsonData["age"] as? Int
+        self.pref           = jsonData["pref"] as? String
+        self.image_url      = jsonData["image_url"] as? String
+        self.push_token     = jsonData["push_token"] as? String
+        self.notifiable     = jsonData["notifiable"] as! Bool
+        let created_at      = jsonData["created_at"] as! String
         self.created_time   = created_at.dateFromISO8601
-        let updated_at      = data["updated_at"] as! String
+        let updated_at      = jsonData["updated_at"] as! String
         self.updated_time   = updated_at.dateFromISO8601
     }
 }
@@ -148,7 +145,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.registerUesr, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                self.delegate?.successRegister?(user: User(json: returnData))
+                self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
                 self.delegate?.failedRegister?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
@@ -161,7 +158,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editUser, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                self.delegate?.successRegister?(user: User(json: returnData))
+                self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
                 self.delegate?.failedEditUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
@@ -174,7 +171,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUser, method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                self.delegate?.successRegister?(user: User(json: returnData))
+                self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
                 self.delegate?.failedGetUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
