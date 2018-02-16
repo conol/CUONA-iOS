@@ -17,12 +17,12 @@ class ViewController: UIViewController, FavorDelegate {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
-        favor!.registerUser(params: ["nickname" : "ito"])
-//        favor!.getUserInfo()
+//        favor!.registerUser(params: ["nickname" : "ito"])
+        favor!.getUserInfo()
         print("hasToken:\(Favor.hasToken())")
     }
     
-    func successRegister(user: User!) {
+    func successRegister(user: User) {
         print("successRegister")
         print(user.nickname ?? "nickname_nil")
     }
