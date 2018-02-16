@@ -115,7 +115,7 @@ public class Shop: NSObject
     @objc optional func successGetShopInfo(json:[String:Any]?)
     @objc optional func failedGetShopInfo(status:Int, json: [String:Any]?)
     
-    @objc optional func successEnterShop(json:[String:Any]?)
+    @objc optional func successEnterShop(shop:Shop!)
     @objc optional func failedEnterShop(status:Int, json: [String:Any]?)
     
     @objc optional func successGetVisitedShopHistory(shops:[Shop]!)
@@ -214,28 +214,18 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
-//    public func enterShop(device_id: String)
-//    {
-//        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.enterShop, method: .post, params: ["device_id":device_id], funcs: { (returnData, response) in
-//            let httpResponse = response as? HTTPURLResponse
-//            if httpResponse?.statusCode == 200 {
-//                let data = returnData["data"] as! [String : Any]
-//
-//                let shop = data["shop"] as! [String : Any]
-//                let visit_history = data["visit_history"] as! [String : Any]
-//                self.shop.id = shop["id"] as! Int
-//                self.shop.history_id  = visit_history["id"] as! Int
-//                self.shop.group_id    = visit_history["visit_group_id"] as! Int
-//                self.shop.visit_count = visit_history["num_visits"] as! Int
-//                let last_visit_at = visit_history["last_visit_at"] as! String
-//                self.shop.last_visit_time = last_visit_at.dateFromISO8601
-//
-//                self.delegate?.successEnterShop?(json: data)
-//            } else {
-//                self.delegate?.failedEnterShop?(status: httpResponse?.statusCode ?? 0, json: returnData)
-//            }
-//        })
-//    }
+    public func enterShop(device_id: String)
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.enterShop, method: .post, params: ["device_id":device_id], funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                let data = returnData["data"] as! [String : Any]
+                self.delegate?.successEnterShop?(shop: Shop(dataJson: data))
+            } else {
+                self.delegate?.failedEnterShop?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
     
     public func getVisitedShopHistory()
     {
