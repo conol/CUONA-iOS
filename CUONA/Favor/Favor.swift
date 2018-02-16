@@ -8,6 +8,25 @@
 
 import UIKit
 
+public class User: NSObject
+{
+    var id:Int = 0
+    var master_user_id:Int = 0
+    var owner_id:Int?
+    var original_id:Int?
+    var language:String?
+
+    public var nickname:String?
+    public var gender:String?
+    public var age:Int?
+    public var pref:String?
+    public var image_url:String?
+    public var push_token:String?
+    public var notifiable:Bool = true
+    public var created_time:Date?
+    public var updated_time:Date?
+}
+
 public class Shop: NSObject
 {
     var id = 0
@@ -29,33 +48,43 @@ public class Shop: NSObject
 
 @objc public protocol FavorDelegate: class
 {
-    @objc optional func successRegister(json:[String:Any]?)
+    // ユーザー登録
+    @objc optional func successRegister(user:User!)
     @objc optional func failedRegister(status:Int, json: [String:Any]?)
     
-    @objc optional func successEditUserInfo(json:[String:Any]?)
+    // ユーザー情報編集
+    @objc optional func successEditUserInfo(user:User!)
     @objc optional func failedEditUserInfo(status:Int, json: [String:Any]?)
     
-    @objc optional func successGetUserInfo(json:[String:Any]?)
+    // ユーザー情報取得
+    @objc optional func successGetUserInfo(user:User!)
     @objc optional func failedGetUserInfo(status:Int, json: [String:Any]?)
     
+    // 店舗詳細取得
     @objc optional func successGetShopInfo(json:[String:Any]?)
     @objc optional func failedGetShopInfo(status:Int, json: [String:Any]?)
     
+    // 入店
     @objc optional func successEnterShop(json:[String:Any]?)
     @objc optional func failedEnterShop(status:Int, json: [String:Any]?)
     
+    // メニュー一覧取得
     @objc optional func successGetMenuList(json:[String:Any]?)
     @objc optional func failedGetMenuList(status:Int, json: [String:Any]?)
     
+    // 注文履歴一覧取得(来店個人単位)
     @objc optional func successGetUsersOrderList(json:[String:Any]?)
     @objc optional func failedGetUsersOrderList(status:Int, json: [String:Any]?)
     
+    // 注文履歴一覧取得(来店グループ単位)
     @objc optional func successGetGroupsOrderList(json:[String:Any]?)
     @objc optional func failedGetGroupsOrderList(status:Int, json: [String:Any]?)
     
+    // 注文
     @objc optional func successOrder(json:[String:Any]?)
     @objc optional func failedOrder(status:Int, json: [String:Any]?)
     
+    // お会計
     @objc optional func successCheck(json:[String:Any]?)
     @objc optional func failedCheck(status:Int, json: [String:Any]?)
 }
@@ -68,6 +97,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 
     weak var delegate: FavorDelegate?
     var shop = Shop()
+    var user = User()
     
     required public init(delegate: FavorDelegate)
     {
@@ -77,51 +107,98 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager = DeviceManager(delegate: self)
     }
     
-    public func hasToken() -> Bool
+    public static func hasToken() -> Bool
     {
-        return deviceManager?.request?.app_token != nil ? true : false
+        return ud.string(forKey: APP_TOKEN) != nil
     }
     
+    // ユーザー登録
     public func registerUser(params:[String:Any])
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.registerUesr, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                let token = data["app_token"] as! String!
-                self.deviceManager?.request?.app_token = token
-                ud.set(token, forKey: APP_TOKEN)
-                self.delegate?.successRegister?(json: data)
+                
+                // userインスタンスに値を設定
+                self.user = self.setUserInfoFromResponse(user: self.user, response: returnData)
+                
+                // userインスタンスを返す
+                self.delegate?.successRegister?(user: self.user)
             } else {
                 self.delegate?.failedRegister?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
     }
     
+    // ユーザー情報編集
     public func editUserInfo(params:[String:Any]?)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editUser, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successEditUserInfo?(json: data)
+                
+                // userインスタンスに値を設定
+                self.user = self.setUserInfoFromResponse(user: self.user, response: returnData)
+
+                // userインスタンスを返す
+                self.delegate?.successEditUserInfo?(user: self.user)
             } else {
                 self.delegate?.failedEditUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
     }
     
+    // ユーザー情報取得
     public func getUserInfo()
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUser, method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetUserInfo?(json: data)
+                
+                // userインスタンスに値を設定
+                self.user = self.setUserInfoFromResponse(user: self.user, response: returnData)
+                
+                // userインスタンスを返す
+                self.delegate?.successGetUserInfo?(user: self.user)
             } else {
                 self.delegate?.failedGetUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
+    }
+    
+    // サーバーから返ってきたユーザー情報をuserインスタンスに設定する
+    private func setUserInfoFromResponse(user: User, response: [String : Any]) -> User
+    {
+        // レスポンスのdata部分の取得
+        let data = response["data"] as! [String : Any]
+
+        // appTokenに変更がある場合は保存
+        let token = data["app_token"] as! String!
+        let savedToken = ud.string(forKey: APP_TOKEN)
+        if(token != savedToken) {
+            self.deviceManager?.request?.app_token = token
+            ud.set(token, forKey: APP_TOKEN)
+        }
+        
+        // userインスタンスに値を設定
+        user.id             = data["id"] as! Int
+        user.master_user_id = data["master_user_id"] as! Int
+        user.owner_id       = data["owner_id"] as? Int
+        user.original_id    = data["original_id"] as? Int
+        user.language       = data["language"] as? String
+        user.nickname       = data["nickname"] as? String
+        user.gender         = data["gender"] as? String
+        user.age            = data["age"] as? Int
+        user.pref           = data["pref"] as? String
+        user.image_url      = data["image_url"] as? String
+        user.push_token     = data["push_token"] as? String
+        user.notifiable     = data["notifiable"] as! Bool
+        let created_at      = data["created_at"] as! String
+        user.created_time   = created_at.dateFromISO8601
+        let updated_at      = data["updated_at"] as! String
+        user.updated_time   = updated_at.dateFromISO8601
+
+        return user
     }
     
     public func getShopInfo()
