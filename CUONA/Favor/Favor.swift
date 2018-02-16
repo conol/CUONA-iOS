@@ -14,17 +14,17 @@ public class Shop: NSObject
     var history_id = 0
     var group_id = 0
     
-    public var name:String = ""
-    public var introduction:String = ""
-    public var genre:String = ""
-    public var zip_code:String = "0000000"
-    public var address:String = ""
-    public var phone_number:String? = nil
-    public var notes:String? = nil
-    public var extension_fields:[ExtensionField?] = []
-    public var shop_images:[ShopImage?] = []
-    public var visit_count = 0
-    public var last_visit_time:Date?
+    public private(set) var name:String = ""
+    public private(set) var introduction:String = ""
+    public private(set) var genre:String = ""
+    public private(set) var zip_code:String = "0000000"
+    public private(set) var address:String = ""
+    public private(set) var phone_number:String? = nil
+    public private(set) var notes:String? = nil
+    public private(set) var extension_fields:[ExtensionField?] = []
+    public private(set) var shop_images:[ShopImage?] = []
+    public private(set) var visit_count = 0
+    public private(set) var last_visit_time:Date?
     
     func leave()
     {
