@@ -26,6 +26,47 @@ public class Shop: NSObject
     public private(set) var visit_count = 0
     public private(set) var last_visit_time:Date?
     
+    override init()
+    {
+        super.init()
+    }
+    
+    init(dataJson: [String : Any]) {
+        
+        // jsonからshopとvisit_historyの内容を取得
+        let shopJson         = dataJson["shop"] as! [String : Any]
+        let visitHistoryJson = dataJson["visit_history"] as! [String : Any]
+        
+        // shopの情報を各メンバ変数に設定
+        self.id           = shopJson["id"] as! Int
+        self.name         = shopJson["name"] as! String
+        self.introduction = shopJson["introduction"] as! String
+        self.genre        = shopJson["genre"] as! String
+        self.zip_code     = shopJson["zip_code"] as! String
+        self.address      = shopJson["address"] as! String
+        self.phone_number = shopJson["phone_number"] as? String
+        self.notes        = shopJson["notes"] as? String
+        
+        // extension_fieldsの情報を設定
+        for extensionFiledJson in shopJson["extension_fields"] as! [[String : Any]]
+        {
+            self.extension_fields.append(ExtensionField(extensionFiledJson))
+        }
+        
+        // shop_imagesの情報を設定
+        for shopImageJson in shopJson["shop_images"] as! [[String : Any]]
+        {
+            self.shop_images.append(ShopImage(shopImageJson))
+        }
+        
+        // visit_historyの情報を各メンバ変数に設定
+        self.history_id      = visitHistoryJson["id"] as! Int
+        self.group_id        = visitHistoryJson["visit_group_id"] as! Int
+        self.visit_count     = visitHistoryJson["num_visits"] as! Int
+        let last_visit_at    = visitHistoryJson["last_visit_at"] as? String
+        self.last_visit_time = last_visit_at?.dateFromISO8601
+    }
+    
     func leave()
     {
         id = 0
@@ -37,14 +78,26 @@ public class Shop: NSObject
     
     public class ExtensionField
     {
-        public var id = 0
-        public var lavel = ""
-        public var value:String? = nil
+        public private(set) var id = 0
+        public private(set) var lavel = ""
+        public private(set) var value:String? = nil
+        
+        init(_ extensionFieldJson: [String : Any])
+        {
+            self.id    = extensionFieldJson["id"] as! Int
+            self.lavel = extensionFieldJson["lavel"] as! String
+            self.value = extensionFieldJson["value"] as? String
+        }
     }
     
     public class ShopImage
     {
-        public var image_url = ""
+        public private(set) var image_url = ""
+        
+        init(_ shopImageJson: [String : Any])
+        {
+            self.image_url = shopImageJson["image_url"] as! String
+        }
     }
 }
 
@@ -161,28 +214,28 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
-    public func enterShop(device_id: String)
-    {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.enterShop, method: .post, params: ["device_id":device_id], funcs: { (returnData, response) in
-            let httpResponse = response as? HTTPURLResponse
-            if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                
-                let shop = data["shop"] as! [String : Any]
-                let visit_history = data["visit_history"] as! [String : Any]
-                self.shop.id = shop["id"] as! Int
-                self.shop.history_id  = visit_history["id"] as! Int
-                self.shop.group_id    = visit_history["visit_group_id"] as! Int
-                self.shop.visit_count = visit_history["num_visits"] as! Int
-                let last_visit_at = visit_history["last_visit_at"] as! String
-                self.shop.last_visit_time = last_visit_at.dateFromISO8601
-                
-                self.delegate?.successEnterShop?(json: data)
-            } else {
-                self.delegate?.failedEnterShop?(status: httpResponse?.statusCode ?? 0, json: returnData)
-            }
-        })
-    }
+//    public func enterShop(device_id: String)
+//    {
+//        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.enterShop, method: .post, params: ["device_id":device_id], funcs: { (returnData, response) in
+//            let httpResponse = response as? HTTPURLResponse
+//            if httpResponse?.statusCode == 200 {
+//                let data = returnData["data"] as! [String : Any]
+//
+//                let shop = data["shop"] as! [String : Any]
+//                let visit_history = data["visit_history"] as! [String : Any]
+//                self.shop.id = shop["id"] as! Int
+//                self.shop.history_id  = visit_history["id"] as! Int
+//                self.shop.group_id    = visit_history["visit_group_id"] as! Int
+//                self.shop.visit_count = visit_history["num_visits"] as! Int
+//                let last_visit_at = visit_history["last_visit_at"] as! String
+//                self.shop.last_visit_time = last_visit_at.dateFromISO8601
+//
+//                self.delegate?.successEnterShop?(json: data)
+//            } else {
+//                self.delegate?.failedEnterShop?(status: httpResponse?.statusCode ?? 0, json: returnData)
+//            }
+//        })
+//    }
     
     public func getVisitedShopHistory()
     {
@@ -195,43 +248,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 for data in datas
                 {
-                    let shop = Shop()
-                    
-                    let shop_json = data["shop"] as! [String : Any]
-                    let visit_history_json = data["visit_history"] as! [String : Any]
-                    
-                    shop.id = shop_json["id"] as! Int
-                    shop.name = shop_json["name"] as! String
-                    shop.introduction = shop_json["introduction"] as! String
-                    shop.genre = shop_json["genre"] as! String
-                    shop.zip_code = shop_json["zip_code"] as! String
-                    shop.address = shop_json["address"] as! String
-                    shop.phone_number = shop_json["phone_number"] as? String
-                    shop.notes = shop_json["notes"] as? String
-                    
-                    let extentsionFiles = shop_json["extension_fields"] as! [[String : Any]]
-                    shop.extension_fields = Array(repeating:Shop.ExtensionField(), count:extentsionFiles.count)
-                    for i in 0..<extentsionFiles.count
-                    {
-                        shop.extension_fields[i]?.id = extentsionFiles[i]["id"] as! Int
-                        shop.extension_fields[i]?.lavel = extentsionFiles[i]["lavel"] as! String
-                        shop.extension_fields[i]?.value = extentsionFiles[i]["value"] as? String
-                    }
-                    
-                    let shopImages = shop_json["shop_images"] as! [[String : Any]]
-                    shop.shop_images = Array(repeating:Shop.ShopImage(), count:shopImages.count)
-                    for i in 0..<shopImages.count
-                    {
-                        shop.shop_images[i]?.image_url = shopImages[i]["image_url"] as! String
-                    }
-                    
-                    shop.history_id  = visit_history_json["id"] as! Int
-                    shop.group_id    = visit_history_json["visit_group_id"] as! Int
-                    shop.visit_count = visit_history_json["num_visits"] as! Int
-                    let last_visit_at = visit_history_json["last_visit_at"] as? String
-                    shop.last_visit_time = last_visit_at?.dateFromISO8601
-                    
-                    shops.append(shop)
+                    shops.append(Shop(dataJson: data))
                 }
                 
                 self.delegate?.successGetVisitedShopHistory?(shops: shops)
