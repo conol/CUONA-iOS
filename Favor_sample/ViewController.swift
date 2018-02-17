@@ -17,29 +17,26 @@ class ViewController: UIViewController, FavorDelegate {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
-//        favor!.registerUser(params: ["nickname" : "ito"])
-        favor!.getUserInfo()
-        print("hasToken:\(Favor.hasToken())")
+//        favor!.registerUser(params: ["nickname": "test"])
+        
+        favor!.getVisitedShopHistory()
     }
     
     func successRegister(user: User) {
         print("successRegister")
-        print(user.nickname ?? "nickname_nil")
     }
     
-    func failedRegister(status: Int, json: [String : Any]?) {
-        print("failedRegister")
+    func successGetVisitedShopHistory(shops: [Shop]!) {
+        print("successGetVisitedShopHistory")
+        print(shops.count)
+        print(shops[0].name)
+        print(shops[0].shop_images[0]?.image_url ?? "image_nil")
     }
     
-    func successGetUserInfo(user: User) {
-        print("successGetUserInfo")
-        print(user.nickname ?? "nickname")
+    func failedGetVisitedShopHistory(status: Int, json: [String : Any]?) {
+        print("failedGetVisitedShopHistory")
     }
     
-    func failedGetUserInfo(status: Int, json: [String : Any]?) {
-        print("failedGetUserInfo")
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
