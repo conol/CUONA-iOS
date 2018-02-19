@@ -19,27 +19,18 @@ class ViewController: UIViewController, FavorDelegate {
         favor = Favor(delegate: self)
 //        favor!.registerUser(params: ["nickname": "test"])
         
-        favor!.getVisitedShopHistory()
+//        favor!.addFavorite(params: ["name": "ハイボール", "level": 2])
+//        favor!.editFavorite(favoriteId: 3, params: ["name": "ハイボール2", "level": 2])
+        favor!.getFavoriteList()
+        favor!.deleteFavorite(favoriteId: 3)
+        
     }
     
-    func successRegister(user: User) {
-        print("successRegister")
-    }
-    
-    func successGetVisitedShopHistory(shops: [Shop]!) {
-        print("successGetVisitedShopHistory")
-        print(shops.count)
-        print(shops[0].name)
-        print(shops[0].shop_images[0]?.image_url ?? "image_nil")
-    }
-    
-    func failedGetVisitedShopHistory(status: Int, json: [String : Any]?) {
-        print("failedGetVisitedShopHistory")
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func successGetFavoriteList(favorites: [Favorite]) {
+        for favorite in favorites {
+            print(favorite.id)
+            print(favorite.name)
+        }
     }
 
 
