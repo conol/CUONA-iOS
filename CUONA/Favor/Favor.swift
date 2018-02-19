@@ -169,6 +169,11 @@ public class Order: NSObject
     public private(set) var notes:String? = nil
     public private(set) var images:[Image?] = []
     
+    init(menuItemId: Int, quantity: Int) {
+        self.menu_item_id = menuItemId
+        self.quantity = quantity
+    }
+    
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
