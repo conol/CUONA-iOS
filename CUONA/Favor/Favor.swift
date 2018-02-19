@@ -519,7 +519,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // 注文
-    public func sendOrder(_ visitHistoryId: Int, params:[String: Any])
+    public func sendOrder(visitHistoryId: Int, orders: [Order])
     {
         // リクエスト用パラメータを作成
         var orderParams:[[String : Any]] = []
