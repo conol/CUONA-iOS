@@ -21,18 +21,5 @@ class ViewController: UIViewController, FavorDelegate {
         
         favor!.getMenuList(shopId: 1)
     }
-    
-    func successGetMenuList(menus: [Menu]!) {
-        for menu in menus {
-            print(menu.name)
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
