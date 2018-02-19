@@ -148,6 +148,29 @@ public class Shop: NSObject
     }
 }
 
+public class Favorite: NSObject
+{
+    var id:Int = 0
+    
+    public private(set) var name = ""
+    public private(set) var level = 3
+    public private(set) var created_time:Date?
+    public private(set) var updated_time:Date?
+    
+    init(jsonData: [String : Any]) {
+        
+        // 各メンバ変数に値を設定
+        self.id           = jsonData["id"] as! Int
+        self.name         = jsonData["name"] as! String
+        self.level        = jsonData["level"] as! Int
+        let created_at    = jsonData["created_at"] as! String
+        self.created_time = created_at.dateFromISO8601
+        let updated_at    = jsonData["updated_at"] as! String
+        self.updated_time = updated_at.dateFromISO8601
+    }
+}
+
+
 @objc public protocol FavorDelegate: class
 {
     // ユーザー登録
