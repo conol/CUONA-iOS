@@ -57,10 +57,10 @@ public class User: NSObject
 
 public class Shop: NSObject
 {
-    var id = 0
     var history_id = 0
     var group_id = 0
     
+    public private(set) var id = 0
     public private(set) var name:String = ""
     public private(set) var introduction:String = ""
     public private(set) var genre:String = ""
@@ -151,25 +151,25 @@ public class Shop: NSObject
 public class Menu: NSObject
 {
     var id:Int = 0
-    var category_id:Int = 0
+    var category_id:Int? = nil
     
     public private(set) var name:String = ""
     public private(set) var price_cents:Int = 0
     public private(set) var price_format:String = ""
     public private(set) var notes:String? = nil
     public private(set) var images:[Image?] = []
-    public private(set) var category_name:String = ""
+    public private(set) var category_name:String? = nil
     
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
         self.id            = jsonData["id"] as! Int
-        self.category_id   = jsonData["category_id"] as! Int
+        self.category_id   = jsonData["category_id"] as? Int
         self.name          = jsonData["name"] as! String
         self.price_cents   = jsonData["price_cents"] as! Int
         self.price_format  = jsonData["price_format"] as! String
         self.notes         = jsonData["notes"] as? String
-        self.category_name = jsonData["category_name"] as! String
+        self.category_name = jsonData["category_name"] as? String
         
         // imagesの情報を設定
         for imageJson in jsonData["images"] as! [[String : Any]]
@@ -217,7 +217,7 @@ public class Menu: NSObject
     @objc optional func failedGetVisitedShopHistory(status:Int, json: [String:Any]?)
     
     // メニュー一覧取得
-    @objc optional func successGetMenuList(json:[String:Any]?)
+    @objc optional func successGetMenuList(menus:[Menu]!)
     @objc optional func failedGetMenuList(status:Int, json: [String:Any]?)
     
     // 注文履歴一覧取得(来店個人単位)
@@ -347,11 +347,19 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func getMenuList(shopId: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop.id), method: .get, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shopId), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetMenuList?(json: data)
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var menus:[Menu] = []
+                
+                for data in datas
+                {
+                    menus.append(Menu(jsonData: data))
+                }
+                
+                self.delegate?.successGetMenuList?(menus: menus)
             } else {
                 self.delegate?.failedGetMenuList?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
