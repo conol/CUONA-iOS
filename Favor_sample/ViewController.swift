@@ -19,27 +19,11 @@ class ViewController: UIViewController, FavorDelegate {
         favor = Favor(delegate: self)
 //        favor!.registerUser(params: ["nickname": "test"])
         
-        favor!.getVisitedShopHistory()
+        favor!.enterShop(device_id: <#T##String#>)
     }
     
-    func successRegister(user: User) {
-        print("successRegister")
-    }
-    
-    func successGetVisitedShopHistory(shops: [Shop]!) {
-        print("successGetVisitedShopHistory")
-        print(shops.count)
-        print(shops[0].name)
-        print(shops[0].shop_images[0]?.image_url ?? "image_nil")
-    }
-    
-    func failedGetVisitedShopHistory(status: Int, json: [String : Any]?) {
-        print("failedGetVisitedShopHistory")
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func successEnterShop(shop: Shop!) {
+        print(shop.)
     }
 
 

@@ -248,15 +248,15 @@ public class Order: NSObject
     @objc optional func failedGetMenuList(status:Int, json: [String:Any]?)
     
     // 注文履歴一覧取得(来店個人単位)
-    @objc optional func successGetUsersOrderList(json:[String:Any]?)
+    @objc optional func successGetUsersOrderList(orders:[Order]!)
     @objc optional func failedGetUsersOrderList(status:Int, json: [String:Any]?)
     
     // 注文履歴一覧取得(来店グループ単位)
-    @objc optional func successGetGroupsOrderList(json:[String:Any]?)
+    @objc optional func successGetGroupsOrderList(orders:[Order]!)
     @objc optional func failedGetGroupsOrderList(status:Int, json: [String:Any]?)
     
     // 注文
-    @objc optional func successOrder(json:[String:Any]?)
+    @objc optional func successOrder(orders:[Order]!)
     @objc optional func failedOrder(status:Int, json: [String:Any]?)
     
     // お会計
@@ -387,11 +387,19 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func getUsersOrderList(visitHistoryId: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUsersOrderInShop(shop.history_id), method: .get, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUsersOrderInShop(visitHistoryId), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetUsersOrderList?(json: data)
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var orders:[Order] = []
+                
+                for data in datas
+                {
+                    orders.append(Order(jsonData: data))
+                }
+                
+                self.delegate?.successGetUsersOrderList?(orders: orders)
             } else {
                 self.delegate?.failedGetUsersOrderList?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
@@ -400,24 +408,52 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func getGroupsOrderList(visitGroupId: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUserGroupsOrderInShop(shop.group_id), method: .get, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUserGroupsOrderInShop(visitGroupId), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetGroupsOrderList?(json: data)
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var orders:[Order] = []
+                
+                for data in datas
+                {
+                    orders.append(Order(jsonData: data))
+                }
+                
+                self.delegate?.successGetGroupsOrderList?(orders: orders)
             } else {
                 self.delegate?.failedGetGroupsOrderList?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
     }
     
-    public func sendOrder(_ visitHistoryId: Int, params:[String: Any])
+    public func sendOrder(visitHistoryId: Int, orders: [Order])
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.order(shop.history_id), method: .post, params: params, funcs: { (returnData, response) in
+        // リクエスト用パラメータを作成
+        var orderParams:[[String : Any]] = []
+        for order in orders
+        {
+            let orderParam = [
+                "menu_item_id" : order.menu_item_id,
+                "quantity" : order.quantity
+            ]
+            orderParams.append(orderParam)
+        }
+        let params = ["orders" : orderParams]
+        
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.order(visitHistoryId), method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successOrder?(json: data)
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var orders:[Order] = []
+                
+                for data in datas
+                {
+                    orders.append(Order(jsonData: data))
+                }
+                
+                self.delegate?.successOrder?(orders: orders)
             } else {
                 self.delegate?.failedOrder?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
