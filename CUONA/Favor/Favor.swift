@@ -170,7 +170,7 @@ public class Shop: NSObject
     @objc optional func successEnterShop(shop:Shop!)
     @objc optional func failedEnterShop(status:Int, json: [String:Any]?)
     
-    // 入店一覧
+    // 入店履歴一覧
     @objc optional func successGetVisitedShopHistory(shops:[Shop]!)
     @objc optional func failedGetVisitedShopHistory(status:Int, json: [String:Any]?)
     
@@ -256,6 +256,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 店舗詳細取得
     public func getShopInfo()
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop.id), method: .get, params: nil, funcs: { (returnData, response) in
@@ -269,6 +270,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 入店
     public func enterShop(device_id: String)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.enterShop, method: .post, params: ["device_id":device_id], funcs: { (returnData, response) in
@@ -282,6 +284,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 入店履歴一覧
     public func getVisitedShopHistory()
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getVisitedShopHistory, method: .get, params: nil, funcs: { (returnData, response) in
@@ -303,6 +306,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // メニュー一覧取得
     public func getMenuList(shopId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop.id), method: .get, params: nil, funcs: { (returnData, response) in
@@ -316,6 +320,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 注文履歴一覧取得(来店個人単位)
     public func getUsersOrderList(visitHistoryId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUsersOrderInShop(shop.history_id), method: .get, params: nil, funcs: { (returnData, response) in
@@ -329,6 +334,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 注文履歴一覧取得(来店グループ単位)
     public func getGroupsOrderList(visitGroupId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUserGroupsOrderInShop(shop.group_id), method: .get, params: nil, funcs: { (returnData, response) in
@@ -342,6 +348,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 注文
     public func sendOrder(_ visitHistoryId: Int, params:[String: Any])
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.order(shop.history_id), method: .post, params: params, funcs: { (returnData, response) in
@@ -355,6 +362,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // お会計
     public func sendCheck(visitHistoryId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.check(shop.history_id), method: .put, params: nil, funcs: { (returnData, response) in
