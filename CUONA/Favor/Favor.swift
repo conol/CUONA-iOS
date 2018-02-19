@@ -57,16 +57,9 @@ public class User: NSObject
 
 public class Shop: NSObject
 {
-<<<<<<< HEAD
     public private(set) var id = 0
     public private(set) var visit_history_id = 0
     public private(set) var visit_group_id = 0
-=======
-    var history_id = 0
-    var group_id = 0
-    
-    public private(set) var id = 0
->>>>>>> develop
     public private(set) var name:String = ""
     public private(set) var introduction:String = ""
     public private(set) var genre:String = ""
@@ -525,12 +518,8 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
-<<<<<<< HEAD
-    public func sendOrder(visitHistoryId: Int, orders: [Order])
-=======
     // 注文
     public func sendOrder(_ visitHistoryId: Int, params:[String: Any])
->>>>>>> develop
     {
         // リクエスト用パラメータを作成
         var orderParams:[[String : Any]] = []
