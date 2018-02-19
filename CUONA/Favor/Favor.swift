@@ -193,6 +193,22 @@ public class Shop: NSObject
     // お会計
     @objc optional func successCheck(json:[String:Any]?)
     @objc optional func failedCheck(status:Int, json: [String:Any]?)
+    
+    // お気に入り追加
+    @objc optional func successAddFavorite(json:[String:Any]?)
+    @objc optional func failedAddFavorite(status:Int, json: [String:Any]?)
+    
+    // お気に入り編集
+    @objc optional func successEditFavorite(json:[String:Any]?)
+    @objc optional func failedEditFavorite(status:Int, json: [String:Any]?)
+    
+    // お気に入り一覧取得
+    @objc optional func successGetFavoriteList(json:[String:Any]?)
+    @objc optional func failedGetFavoriteList(status:Int, json: [String:Any]?)
+    
+    // お気に入り削除
+    @objc optional func successDeleteFavorite(json:[String:Any]?)
+    @objc optional func failedDeleteFavorite(status:Int, json: [String:Any]?)
 }
 
 @available(iOS 11.0, *)
