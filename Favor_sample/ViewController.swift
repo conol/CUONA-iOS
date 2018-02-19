@@ -44,7 +44,5 @@ class ViewController: UIViewController, FavorDelegate {
     func failedEnterShop(status: Int, json: [String : Any]?) {
         print("failedEnterShop")
     }
-
-
 }
 

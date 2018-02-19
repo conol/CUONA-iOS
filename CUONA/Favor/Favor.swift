@@ -57,9 +57,16 @@ public class User: NSObject
 
 public class Shop: NSObject
 {
+<<<<<<< HEAD
     public private(set) var id = 0
     public private(set) var visit_history_id = 0
     public private(set) var visit_group_id = 0
+=======
+    var history_id = 0
+    var group_id = 0
+    
+    public private(set) var id = 0
+>>>>>>> develop
     public private(set) var name:String = ""
     public private(set) var introduction:String = ""
     public private(set) var genre:String = ""
@@ -147,74 +154,136 @@ public class Shop: NSObject
     }
 }
 
-//public class Order: NSObject
-//{
-//    var id:Int = 0
-//    var visit_history_id:Int = 0
-//    
-//    public private(set) var menu_item_id:Int = 0
-//    public private(set) var name:String = ""
-//    public private(set) var price_cents:Int = 0
-//    public private(set) var price_format:String = ""
-//    public private(set) var quantity:Int = 0
-//    public private(set) var status:String = ""
-//    public private(set) var created_time:Date?
-//    public private(set) var updated_time:Date?
-//    
-//    public private(set) var orderd_user_id:Int = 0
-//    public private(set) var orderd_user_nickname:String = ""
-//    public private(set) var orderd_user_image_url:String? = nil
-//    
-//    public private(set) var notes:String? = nil
-//    public private(set) var images:[Image?] = []
-//    
-//    public init(menuItemId: Int, quantity: Int) {
-//        self.menu_item_id = menuItemId
-//        self.quantity = quantity
-//    }
-//    
-//    init(jsonData: [String : Any]) {
-//        
-//        // 各メンバ変数に値を設定
-//        self.id                    = jsonData["id"] as! Int
-//        self.visit_history_id      = jsonData["visit_history_id"] as! Int
-//        self.menu_item_id          = jsonData["menu_item_id"] as! Int
-//        self.name                  = jsonData["name"] as! String
-//        self.price_cents           = jsonData["price_cents"] as! Int
-//        self.price_format          = jsonData["price_format"] as! String
-//        self.quantity              = jsonData["quantity"] as! Int
-//        self.status                = jsonData["status"] as! String
-//        let created_at             = jsonData["created_at"] as! String
-//        self.created_time          = created_at.dateFromISO8601
-//        let updated_at             = jsonData["updated_at"] as! String
-//        self.updated_time          = updated_at.dateFromISO8601
-//        
-//        let user                   = jsonData["user"] as! [String : Any]
-//        self.orderd_user_id        = user["id"] as! Int
-//        self.orderd_user_nickname  = user["nickname"] as! String
-//        self.orderd_user_image_url = user["image_url"] as? String
-//        
-//        let menu_item              = jsonData["menu_item"] as! [String : Any]
-//        self.notes                 = menu_item["notes"] as? String
-//        
-//        // imagesの情報を設定
-//        for imageJson in menu_item["images"] as! [[String : Any]]
-//        {
-//            self.images.append(Image(imageJson))
-//        }
-//    }
-//    
-//    public class Image
-//    {
-//        public private(set) var image_url = ""
-//        
-//        init(_ imageJson: [String : Any])
-//        {
-//            self.image_url = imageJson["image_url"] as! String
-//        }
-//    }
-//}
+public class Order: NSObject
+{
+    var id:Int = 0
+    var visit_history_id:Int = 0
+    
+    public private(set) var menu_item_id:Int = 0
+    public private(set) var name:String = ""
+    public private(set) var price_cents:Int = 0
+    public private(set) var price_format:String = ""
+    public private(set) var quantity:Int = 0
+    public private(set) var status:String = ""
+    public private(set) var created_time:Date?
+    public private(set) var updated_time:Date?
+    
+    public private(set) var orderd_user_id:Int = 0
+    public private(set) var orderd_user_nickname:String = ""
+    public private(set) var orderd_user_image_url:String? = nil
+    
+    public private(set) var notes:String? = nil
+    public private(set) var images:[Image?] = []
+    
+    public init(menuItemId: Int, quantity: Int) {
+        self.menu_item_id = menuItemId
+        self.quantity = quantity
+    }
+    
+    init(jsonData: [String : Any]) {
+        
+        // 各メンバ変数に値を設定
+        self.id                    = jsonData["id"] as! Int
+        self.visit_history_id      = jsonData["visit_history_id"] as! Int
+        self.menu_item_id          = jsonData["menu_item_id"] as! Int
+        self.name                  = jsonData["name"] as! String
+        self.price_cents           = jsonData["price_cents"] as! Int
+        self.price_format          = jsonData["price_format"] as! String
+        self.quantity              = jsonData["quantity"] as! Int
+        self.status                = jsonData["status"] as! String
+        let created_at             = jsonData["created_at"] as! String
+        self.created_time          = created_at.dateFromISO8601
+        let updated_at             = jsonData["updated_at"] as! String
+        self.updated_time          = updated_at.dateFromISO8601
+        
+        let user                   = jsonData["user"] as! [String : Any]
+        self.orderd_user_id        = user["id"] as! Int
+        self.orderd_user_nickname  = user["nickname"] as! String
+        self.orderd_user_image_url = user["image_url"] as? String
+        
+        let menu_item              = jsonData["menu_item"] as! [String : Any]
+        self.notes                 = menu_item["notes"] as? String
+        
+        // imagesの情報を設定
+        for imageJson in menu_item["images"] as! [[String : Any]]
+        {
+            self.images.append(Image(imageJson))
+        }
+    }
+    
+    public class Image
+    {
+        public private(set) var image_url = ""
+        
+        init(_ imageJson: [String : Any])
+        {
+            self.image_url = imageJson["image_url"] as! String
+        }
+    }
+}
 
+public class Menu: NSObject
+{
+    var id:Int = 0
+    var category_id:Int? = nil
+    
+    public private(set) var name:String = ""
+    public private(set) var price_cents:Int = 0
+    public private(set) var price_format:String = ""
+    public private(set) var notes:String? = nil
+    public private(set) var images:[Image?] = []
+    public private(set) var category_name:String? = nil
+    
+    init(jsonData: [String : Any]) {
+        
+        // 各メンバ変数に値を設定
+        self.id            = jsonData["id"] as! Int
+        self.category_id   = jsonData["category_id"] as? Int
+        self.name          = jsonData["name"] as! String
+        self.price_cents   = jsonData["price_cents"] as! Int
+        self.price_format  = jsonData["price_format"] as! String
+        self.notes         = jsonData["notes"] as? String
+        self.category_name = jsonData["category_name"] as? String
+        
+        // imagesの情報を設定
+        for imageJson in jsonData["images"] as! [[String : Any]]
+        {
+            self.images.append(Image(imageJson))
+        }
+    }
+    
+    public class Image
+    {
+        public private(set) var image_url = ""
+        
+        init(_ imageJson: [String : Any])
+        {
+            self.image_url = imageJson["image_url"] as! String
+        }
+    }
+}
+
+
+public class Favorite: NSObject
+{
+    public private(set) var id:Int = 0
+    public private(set) var name = ""
+    public private(set) var level = 3
+    public private(set) var created_time:Date?
+    public private(set) var updated_time:Date?
+    
+    init(jsonData: [String : Any]) {
+        
+        // 各メンバ変数に値を設定
+        self.id           = jsonData["id"] as! Int
+        self.name         = jsonData["name"] as! String
+        self.level        = jsonData["level"] as! Int
+        let created_at    = jsonData["created_at"] as! String
+        self.created_time = created_at.dateFromISO8601
+        let updated_at    = jsonData["updated_at"] as! String
+        self.updated_time = updated_at.dateFromISO8601
+    }
+}
 
 @objc public protocol FavorDelegate: class
 {
@@ -238,12 +307,12 @@ public class Shop: NSObject
     @objc optional func successEnterShop(shop:Shop!)
     @objc optional func failedEnterShop(status:Int, json: [String:Any]?)
     
-    // 入店一覧
+    // 入店履歴一覧
     @objc optional func successGetVisitedShopHistory(shops:[Shop]!)
     @objc optional func failedGetVisitedShopHistory(status:Int, json: [String:Any]?)
     
     // メニュー一覧取得
-    @objc optional func successGetMenuList(json:[String:Any]?)
+    @objc optional func successGetMenuList(menus:[Menu]!)
     @objc optional func failedGetMenuList(status:Int, json: [String:Any]?)
     
     // 注文履歴一覧取得(来店個人単位)
@@ -261,6 +330,22 @@ public class Shop: NSObject
     // お会計
     @objc optional func successCheck(json:[String:Any]?)
     @objc optional func failedCheck(status:Int, json: [String:Any]?)
+    
+    // お気に入り追加
+    @objc optional func successAddFavorite(favorite:Favorite!)
+    @objc optional func failedAddFavorite(status:Int, json: [String:Any]?)
+    
+    // お気に入り編集
+    @objc optional func successEditFavorite(favorite:Favorite!)
+    @objc optional func failedEditFavorite(status:Int, json: [String:Any]?)
+    
+    // お気に入り一覧取得
+    @objc optional func successGetFavoriteList(favorites:[Favorite]!)
+    @objc optional func failedGetFavoriteList(status:Int, json: [String:Any]?)
+    
+    // お気に入り削除
+    @objc optional func successDeleteFavorite(favorites:[Favorite]!)
+    @objc optional func failedDeleteFavorite(status:Int, json: [String:Any]?)
 }
 
 @available(iOS 11.0, *)
@@ -324,6 +409,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 店舗詳細取得
     public func getShopInfo()
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop.id), method: .get, params: nil, funcs: { (returnData, response) in
@@ -337,6 +423,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 入店
     public func enterShop(device_id: String)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.enterShop, method: .post, params: ["device_id":device_id], funcs: { (returnData, response) in
@@ -350,6 +437,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 入店履歴一覧
     public func getVisitedShopHistory()
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getVisitedShopHistory, method: .get, params: nil, funcs: { (returnData, response) in
@@ -371,19 +459,29 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // メニュー一覧取得
     public func getMenuList(shopId: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop.id), method: .get, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shopId), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetMenuList?(json: data)
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var menus:[Menu] = []
+                
+                for data in datas
+                {
+                    menus.append(Menu(jsonData: data))
+                }
+                
+                self.delegate?.successGetMenuList?(menus: menus)
             } else {
                 self.delegate?.failedGetMenuList?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         })
     }
     
+    // 注文履歴一覧取得(来店個人単位)
     public func getUsersOrderList(visitHistoryId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUsersOrderInShop(visitHistoryId), method: .get, params: nil, funcs: { (returnData, response) in
@@ -405,6 +503,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // 注文履歴一覧取得(来店グループ単位)
     public func getGroupsOrderList(visitGroupId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUserGroupsOrderInShop(visitGroupId), method: .get, params: nil, funcs: { (returnData, response) in
@@ -426,7 +525,12 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+<<<<<<< HEAD
     public func sendOrder(visitHistoryId: Int, orders: [Order])
+=======
+    // 注文
+    public func sendOrder(_ visitHistoryId: Int, params:[String: Any])
+>>>>>>> develop
     {
         // リクエスト用パラメータを作成
         var orderParams:[[String : Any]] = []
@@ -459,6 +563,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
     
+    // お会計
     public func sendCheck(visitHistoryId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.check(visitHistoryId), method: .put, params: nil, funcs: { (returnData, response) in
@@ -471,6 +576,77 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             }
         })
     }
+    
+    // お気に入り追加
+    public func addFavorite(params:[String:Any])
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.addFavorite, method: .post, params: params, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successAddFavorite?(favorite: Favorite(jsonData: returnData["data"] as! [String : Any]))
+            } else {
+                self.delegate?.failedAddFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+    
+    // お気に入り編集
+    public func editFavorite(favoriteId:Int, params:[String:Any])
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editFavorite(favoriteId), method: .patch, params: params, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successEditFavorite?(favorite: Favorite(jsonData: returnData["data"] as! [String : Any]))
+            } else {
+                self.delegate?.failedEditFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+    
+    // お気に入り一覧取得
+    public func getFavoriteList()
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getFavoriteList, method: .get, params: nil, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var favorites:[Favorite] = []
+                
+                for data in datas
+                {
+                    favorites.append(Favorite(jsonData: data))
+                }
+
+                self.delegate?.successGetFavoriteList?(favorites: favorites)
+            } else {
+                self.delegate?.failedGetFavoriteList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+
+    // お気に入り削除
+    public func deleteFavorite(favoriteId:Int)
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.deleteFavorite(favoriteId), method: .delete, params: nil, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var favorites:[Favorite] = []
+                
+                for data in datas
+                {
+                    favorites.append(Favorite(jsonData: data))
+                }
+                
+                self.delegate?.successDeleteFavorite?(favorites: favorites)
+            } else {
+                self.delegate?.failedDeleteFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {

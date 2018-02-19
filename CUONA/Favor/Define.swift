@@ -17,7 +17,7 @@ struct ApiUrl
     static let getVisitedShopHistory = endPoint + "/api/users/visit_histories.json"  // 入店履歴一覧取得
     static let getUsersAllOrder = endPoint + "/api/users/orders.json"                // 注文履歴一覧(ユーザーの全店舗での注文履歴)
     static let addFavorite = endPoint + "/api/users/favorites.json"                  // お気に入り登録
-    static let getFavorite = endPoint + "/api/users/favorites.json"                  // お気に入り一覧取得
+    static let getFavoriteList = endPoint + "/api/users/favorites.json"              // お気に入り一覧取得
     
     // 店舗詳細取得
     static func getShopDetail(_ shopId: Int) -> String {
