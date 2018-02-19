@@ -19,11 +19,13 @@ class ViewController: UIViewController, FavorDelegate {
         favor = Favor(delegate: self)
 //        favor!.registerUser(params: ["nickname": "test"])
         
-        favor!.enterShop(device_id: <#T##String#>)
+        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
     }
     
     func successEnterShop(shop: Shop!) {
-        print(shop.)
+        print(shop.id)
+        print(shop.history_id)
+        print(shop.name)
     }
 
 

@@ -58,8 +58,8 @@ public class User: NSObject
 public class Shop: NSObject
 {
     public private(set) var id = 0
-    public private(set) var history_id = 0
-    public private(set) var group_id = 0
+    public private(set) var visit_history_id = 0
+    public private(set) var visit_group_id = 0
     public private(set) var name:String = ""
     public private(set) var introduction:String = ""
     public private(set) var genre:String = ""
@@ -106,18 +106,18 @@ public class Shop: NSObject
         }
         
         // visit_historyの情報を各メンバ変数に設定
-        self.history_id      = visitHistoryJson["id"] as! Int
-        self.group_id        = visitHistoryJson["visit_group_id"] as! Int
-        self.visit_count     = visitHistoryJson["num_visits"] as! Int
-        let last_visit_at    = visitHistoryJson["last_visit_at"] as? String
-        self.last_visit_time = last_visit_at?.dateFromISO8601
+        self.visit_history_id = visitHistoryJson["id"] as! Int
+        self.visit_group_id   = visitHistoryJson["visit_group_id"] as! Int
+        self.visit_count      = visitHistoryJson["num_visits"] as! Int
+        let last_visit_at     = visitHistoryJson["last_visit_at"] as? String
+        self.last_visit_time  = last_visit_at?.dateFromISO8601
     }
     
     func leave()
     {
         id = 0
-        history_id = 0
-        group_id = 0
+        visit_history_id = 0
+        visit_group_id = 0
         visit_count = 0
         last_visit_time = nil
     }
@@ -461,7 +461,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func sendCheck(visitHistoryId: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.check(shop.history_id), method: .put, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.check(visitHistoryId), method: .put, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 let data = returnData["data"] as! [String : Any]
