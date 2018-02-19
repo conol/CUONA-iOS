@@ -57,10 +57,9 @@ public class User: NSObject
 
 public class Shop: NSObject
 {
-    var id = 0
-    var history_id = 0
-    var group_id = 0
-    
+    public private(set) var id = 0
+    public private(set) var history_id = 0
+    public private(set) var group_id = 0
     public private(set) var name:String = ""
     public private(set) var introduction:String = ""
     public private(set) var genre:String = ""
