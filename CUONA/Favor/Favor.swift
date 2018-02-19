@@ -163,12 +163,12 @@ public class Order: NSObject
     
     public private(set) var orderd_user_id:Int = 0
     public private(set) var orderd_user_nickname:String = ""
-    public private(set) var orderd_user_image_url:String = ""
+    public private(set) var orderd_user_image_url:String? = nil
     
     public private(set) var notes:String? = nil
     public private(set) var images:[Image?] = []
     
-    init(menuItemId: Int, quantity: Int) {
+    public init(menuItemId: Int, quantity: Int) {
         self.menu_item_id = menuItemId
         self.quantity = quantity
     }
@@ -192,7 +192,7 @@ public class Order: NSObject
         let user                   = jsonData["user"] as! [String : Any]
         self.orderd_user_id        = user["id"] as! Int
         self.orderd_user_nickname  = user["nickname"] as! String
-        self.orderd_user_image_url = user["image_url"] as! String
+        self.orderd_user_image_url = user["image_url"] as? String
         
         let menu_item              = jsonData["menu_item"] as! [String : Any]
         self.notes                 = menu_item["notes"] as? String
