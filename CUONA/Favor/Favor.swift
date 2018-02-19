@@ -150,8 +150,7 @@ public class Shop: NSObject
 
 public class Favorite: NSObject
 {
-    var id:Int = 0
-    
+    public private(set) var id:Int = 0
     public private(set) var name = ""
     public private(set) var level = 3
     public private(set) var created_time:Date?
@@ -218,19 +217,19 @@ public class Favorite: NSObject
     @objc optional func failedCheck(status:Int, json: [String:Any]?)
     
     // お気に入り追加
-    @objc optional func successAddFavorite(json:[String:Any]?)
+    @objc optional func successAddFavorite(favorite:Favorite!)
     @objc optional func failedAddFavorite(status:Int, json: [String:Any]?)
     
     // お気に入り編集
-    @objc optional func successEditFavorite(json:[String:Any]?)
+    @objc optional func successEditFavorite(favorite:Favorite!)
     @objc optional func failedEditFavorite(status:Int, json: [String:Any]?)
     
     // お気に入り一覧取得
-    @objc optional func successGetFavoriteList(json:[String:Any]?)
+    @objc optional func successGetFavoriteList(favorites:[Favorite]!)
     @objc optional func failedGetFavoriteList(status:Int, json: [String:Any]?)
     
     // お気に入り削除
-    @objc optional func successDeleteFavorite(json:[String:Any]?)
+    @objc optional func successDeleteFavorite(favorites:[Favorite]!)
     @objc optional func failedDeleteFavorite(status:Int, json: [String:Any]?)
 }
 
@@ -414,6 +413,77 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             }
         })
     }
+    
+    // お気に入り追加
+    public func addFavorite(params:[String:Any])
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.addFavorite, method: .post, params: params, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successAddFavorite?(favorite: Favorite(jsonData: returnData["data"] as! [String : Any]))
+            } else {
+                self.delegate?.failedAddFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+    
+    // お気に入り編集
+    public func editFavorite(favoriteId:Int, params:[String:Any])
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editFavorite(favoriteId), method: .patch, params: params, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successEditFavorite?(favorite: Favorite(jsonData: returnData["data"] as! [String : Any]))
+            } else {
+                self.delegate?.failedEditFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+    
+    // お気に入り一覧取得
+    public func getFavoriteList()
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getFavoriteList, method: .get, params: nil, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var favorites:[Favorite] = []
+                
+                for data in datas
+                {
+                    favorites.append(Favorite(jsonData: data))
+                }
+
+                self.delegate?.successGetFavoriteList?(favorites: favorites)
+            } else {
+                self.delegate?.failedGetFavoriteList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+
+    // お気に入り削除
+    public func deleteFavorite(favoriteId:Int)
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.deleteFavorite(favoriteId), method: .delete, params: nil, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var favorites:[Favorite] = []
+                
+                for data in datas
+                {
+                    favorites.append(Favorite(jsonData: data))
+                }
+                
+                self.delegate?.successDeleteFavorite?(favorites: favorites)
+            } else {
+                self.delegate?.failedDeleteFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
