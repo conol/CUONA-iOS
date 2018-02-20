@@ -433,19 +433,8 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        // josnをString型からDictionary型に変換
-        let data = json.data(using: .utf8)!
-        var jsonDic: [String: Any]? = nil
-        do {
-            jsonDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-        } catch {
-            print("Failed to read CUONA tag")
-            self.delegate?.failedScan?()
-            return false
-        }
-        
         // Favorが使用可能なCUONAか確認
-        guard let favorJson = jsonDic?[Constants.foverJsonKey] as? [String : Any] else {
+        guard let favorJson = json.ToDictionary?[Constants.foverJsonKey] as? [String : Any] else {
             print("Failed to read CUONA tag")
             self.delegate?.failedScan?()
             return false
