@@ -46,6 +46,10 @@ import UIKit
     @objc optional func successGetGroupsOrderList(orders:[Order]!)
     @objc optional func failedGetGroupsOrderList(status:Int, json: [String:Any]?)
     
+    // 注文履歴一覧(ユーザーの全店舗での注文履歴)
+    @objc optional func successGetUsersAllOrderList(orders:[Order]!)
+    @objc optional func failedGetUsersAllOrderList(status:Int, json: [String:Any]?)
+    
     // 注文
     @objc optional func successOrder(orders:[Order]!)
     @objc optional func failedOrder(status:Int, json: [String:Any]?)
@@ -247,6 +251,29 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             }
         })
     }
+    
+    // 注文履歴一覧(ユーザーの全店舗での注文履歴)
+    public func getUsersAllOrderList()
+    {
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUsersAllOrder, method: .get, params: nil, funcs: { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var orders:[Order] = []
+                
+                for data in datas
+                {
+                    orders.append(Order(jsonData: data))
+                }
+                
+                self.delegate?.successGetUsersAllOrderList?(orders: orders)
+            } else {
+                self.delegate?.failedGetUsersAllOrderList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        })
+    }
+
     
     // 注文
     public func sendOrder(visitHistoryId: Int, orders: [Order])

@@ -27,6 +27,10 @@ public class Order: NSObject
     public private(set) var notes:String? = nil
     public private(set) var images:[Image?] = []
     
+    public private(set) var shop_id:Int? = nil
+    public private(set) var shop_name:String? = nil
+    public private(set) var entered_time:Date? = nil
+    
     public init(menuItemId: Int, quantity: Int) {
         self.menu_item_id = menuItemId
         self.quantity = quantity
@@ -56,6 +60,10 @@ public class Order: NSObject
         let menu_item              = jsonData["menu_item"] as! [String : Any]
         self.notes                 = menu_item["notes"] as? String
         
+        self.shop_id               = jsonData["shop_id"] as? Int
+        self.shop_name             = jsonData["shop_name"] as? String
+        let enter_at               = jsonData["enter_at"] as? String
+        self.entered_time          = enter_at?.dateFromISO8601
         // imagesの情報を設定
         for imageJson in menu_item["images"] as! [[String : Any]]
         {
