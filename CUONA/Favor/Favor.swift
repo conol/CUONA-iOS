@@ -439,23 +439,28 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         do {
             jsonDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
         } catch {
+            print("Failed to read CUONA tag")
             self.delegate?.failedScan?()
+            return false
         }
         
         // Favorが使用可能なCUONAか確認
         guard let favorJson = jsonDic?[Constants.foverJsonKey] as? [String : Any] else {
+            print("Failed to read CUONA tag")
             self.delegate?.failedScan?()
             return false
         }
         
         // Favorのサービスキーが書き込まれているか確認
         guard let serviceKey = favorJson["id"] as? String else {
+            print("Favor's service key does not exist")
             self.delegate?.failedScan?()
             return false
         }
         
         // 書き込まれているサービスキーが正しいか確認
         if serviceKey != Constants.favorServiceKey {
+            print("Favor's service key is invalid")
             self.delegate?.failedScan?()
             return false
         }

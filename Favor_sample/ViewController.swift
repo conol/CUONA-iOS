@@ -10,26 +10,36 @@ import UIKit
 import Favor
 
 class ViewController: UIViewController, FavorDelegate {
-
+    
     var favor:Favor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
-//        favor!.registerUser(params: ["nickname": "test"])
+        //        favor!.registerUser(params: ["nickname": "test"])
         
-//        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
-//        print(Favor.hasToken())
-//        var orders = [Order]()
-//        orders.append(Order(menuItemId: 1, quantity: 1))
-//        favor!.sendOrder(visitHistoryId: 2, orders: orders)
+        //        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
+        //        print(Favor.hasToken())
+        //        var orders = [Order]()
+        //        orders.append(Order(menuItemId: 1, quantity: 1))
+        //        favor!.sendOrder(visitHistoryId: 2, orders: orders)
         favor!.getUsersAllOrderList()
+        favor!.startScan()
     }
     
     func successRegister(user: User!) {
         print("successRegister")
         print(user.nickname ?? "nill")
+    }
+    
+    func failedScan() {
+        print("failedScan")
+    }
+    
+    func successScan(deviceId: String, type: Int) {
+        print(deviceId)
+        print(type)
     }
     
     func successGetUsersAllOrderList(orders: [Order]!) {
