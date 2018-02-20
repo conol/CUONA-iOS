@@ -19,7 +19,7 @@ class ViewController: UIViewController, FavorDelegate {
         favor = Favor(delegate: self)
 //        favor!.registerUser(params: ["nickname": "test"])
         
-        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
+//        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
 //        print(Favor.hasToken())
 //        var orders = [Order]()
 //        orders.append(Order(menuItemId: 1, quantity: 1))
@@ -39,6 +39,10 @@ class ViewController: UIViewController, FavorDelegate {
         }
     }
     
+    func failedGetUsersAllOrderList(status: Int, json: [String : Any]?) {
+        print("failedGetUsersAllOrderList")
+    }
+    
     func successEnterShop(shop: Shop!) {
         print("successEnterShop")
         print(shop.id)
@@ -46,10 +50,12 @@ class ViewController: UIViewController, FavorDelegate {
         print(shop.name)
     }
     
-    func failedEnterShop(exception: FavorException!) {
+    func successOrder(orders: [Order]!) {
+        print(orders[0].name)
+    }
+    
+    func failedEnterShop(status: Int, json: [String : Any]?) {
         print("failedEnterShop")
-        print(exception.code)
-        print(exception.message)
     }
 }
 
