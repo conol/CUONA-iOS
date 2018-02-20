@@ -21,18 +21,18 @@ public class Menu: NSObject
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
-        self.id            = jsonData["id"] as! Int
-        self.category_id   = jsonData["category_id"] as? Int
-        self.name          = jsonData["name"] as! String
-        self.price_cents   = jsonData["price_cents"] as! Int
-        self.price_format  = jsonData["price_format"] as! String
-        self.notes         = jsonData["notes"] as? String
-        self.category_name = jsonData["category_name"] as? String
+        id            = jsonData["id"] as! Int
+        category_id   = jsonData["category_id"] as? Int
+        name          = jsonData["name"] as! String
+        price_cents   = jsonData["price_cents"] as! Int
+        price_format  = jsonData["price_format"] as! String
+        notes         = jsonData["notes"] as? String
+        category_name = jsonData["category_name"] as? String
         
         // imagesの情報を設定
         for imageJson in jsonData["images"] as! [[String : Any]]
         {
-            self.images.append(Image(imageJson))
+            images.append(Image(imageJson))
         }
     }
     
@@ -42,7 +42,7 @@ public class Menu: NSObject
         
         init(_ imageJson: [String : Any])
         {
-            self.image_url = imageJson["image_url"] as! String
+            image_url = imageJson["image_url"] as! String
         }
     }
 }

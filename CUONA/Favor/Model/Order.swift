@@ -32,42 +32,42 @@ public class Order: NSObject
     public private(set) var entered_time:Date? = nil
     
     public init(menuItemId: Int, quantity: Int) {
-        self.menu_item_id = menuItemId
+        menu_item_id  = menuItemId
         self.quantity = quantity
     }
     
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
-        self.id                    = jsonData["id"] as! Int
-        self.visit_history_id      = jsonData["visit_history_id"] as! Int
-        self.menu_item_id          = jsonData["menu_item_id"] as! Int
-        self.name                  = jsonData["name"] as! String
-        self.price_cents           = jsonData["price_cents"] as! Int
-        self.price_format          = jsonData["price_format"] as! String
-        self.quantity              = jsonData["quantity"] as! Int
-        self.status                = jsonData["status"] as! String
-        let created_at             = jsonData["created_at"] as! String
-        self.created_time          = created_at.dateFromISO8601
-        let updated_at             = jsonData["updated_at"] as! String
-        self.updated_time          = updated_at.dateFromISO8601
+        id               = jsonData["id"] as! Int
+        visit_history_id = jsonData["visit_history_id"] as! Int
+        menu_item_id     = jsonData["menu_item_id"] as! Int
+        name             = jsonData["name"] as! String
+        price_cents      = jsonData["price_cents"] as! Int
+        price_format     = jsonData["price_format"] as! String
+        quantity         = jsonData["quantity"] as! Int
+        status           = jsonData["status"] as! String
+        let created_at   = jsonData["created_at"] as! String
+        created_time     = created_at.dateFromISO8601
+        let updated_at   = jsonData["updated_at"] as! String
+        updated_time     = updated_at.dateFromISO8601
         
-        let user                   = jsonData["user"] as! [String : Any]
-        self.orderd_user_id        = user["id"] as! Int
-        self.orderd_user_nickname  = user["nickname"] as! String
-        self.orderd_user_image_url = user["image_url"] as? String
+        let user              = jsonData["user"] as! [String : Any]
+        orderd_user_id        = user["id"] as! Int
+        orderd_user_nickname  = user["nickname"] as! String
+        orderd_user_image_url = user["image_url"] as? String
         
-        let menu_item              = jsonData["menu_item"] as! [String : Any]
-        self.notes                 = menu_item["notes"] as? String
+        let menu_item = jsonData["menu_item"] as! [String : Any]
+        notes         = menu_item["notes"] as? String
         
-        self.shop_id               = jsonData["shop_id"] as? Int
-        self.shop_name             = jsonData["shop_name"] as? String
-        let enter_at               = jsonData["enter_at"] as? String
-        self.entered_time          = enter_at?.dateFromISO8601
+        shop_id       = jsonData["shop_id"] as? Int
+        shop_name     = jsonData["shop_name"] as? String
+        let enter_at  = jsonData["enter_at"] as? String
+        entered_time  = enter_at?.dateFromISO8601
         // imagesの情報を設定
         for imageJson in menu_item["images"] as! [[String : Any]]
         {
-            self.images.append(Image(imageJson))
+            images.append(Image(imageJson))
         }
     }
     
@@ -77,7 +77,7 @@ public class Order: NSObject
         
         init(_ imageJson: [String : Any])
         {
-            self.image_url = imageJson["image_url"] as! String
+            image_url = imageJson["image_url"] as! String
         }
     }
 }

@@ -35,33 +35,33 @@ public class Shop: NSObject
         let visitHistoryJson = dataJson["visit_history"] as! [String : Any]
         
         // shopの情報を各メンバ変数に設定
-        self.id           = shopJson["id"] as! Int
-        self.name         = shopJson["name"] as! String
-        self.introduction = shopJson["introduction"] as! String
-        self.genre        = shopJson["genre"] as! String
-        self.zip_code     = shopJson["zip_code"] as! String
-        self.address      = shopJson["address"] as! String
-        self.phone_number = shopJson["phone_number"] as? String
-        self.notes        = shopJson["notes"] as? String
+        id           = shopJson["id"] as! Int
+        name         = shopJson["name"] as! String
+        introduction = shopJson["introduction"] as! String
+        genre        = shopJson["genre"] as! String
+        zip_code     = shopJson["zip_code"] as! String
+        address      = shopJson["address"] as! String
+        phone_number = shopJson["phone_number"] as? String
+        notes        = shopJson["notes"] as? String
         
         // extension_fieldsの情報を設定
         for extensionFiledJson in shopJson["extension_fields"] as! [[String : Any]]
         {
-            self.extension_fields.append(ExtensionField(extensionFiledJson))
+            extension_fields.append(ExtensionField(extensionFiledJson))
         }
         
         // shop_imagesの情報を設定
         for shopImageJson in shopJson["shop_images"] as! [[String : Any]]
         {
-            self.shop_images.append(ShopImage(shopImageJson))
+            shop_images.append(ShopImage(shopImageJson))
         }
         
         // visit_historyの情報を各メンバ変数に設定
-        self.visit_history_id = visitHistoryJson["id"] as! Int
-        self.visit_group_id   = visitHistoryJson["visit_group_id"] as! Int
-        self.visit_count      = visitHistoryJson["num_visits"] as! Int
-        let last_visit_at     = visitHistoryJson["last_visit_at"] as? String
-        self.last_visit_time  = last_visit_at?.dateFromISO8601
+        visit_history_id  = visitHistoryJson["id"] as! Int
+        visit_group_id    = visitHistoryJson["visit_group_id"] as! Int
+        visit_count       = visitHistoryJson["num_visits"] as! Int
+        let last_visit_at = visitHistoryJson["last_visit_at"] as? String
+        last_visit_time   = last_visit_at?.dateFromISO8601
     }
     
     func leave()
@@ -81,9 +81,9 @@ public class Shop: NSObject
         
         init(_ extensionFieldJson: [String : Any])
         {
-            self.id    = extensionFieldJson["id"] as! Int
-            self.lavel = extensionFieldJson["lavel"] as! String
-            self.value = extensionFieldJson["value"] as? String
+            id    = extensionFieldJson["id"] as! Int
+            lavel = extensionFieldJson["lavel"] as! String
+            value = extensionFieldJson["value"] as? String
         }
     }
     
@@ -93,7 +93,7 @@ public class Shop: NSObject
         
         init(_ shopImageJson: [String : Any])
         {
-            self.image_url = shopImageJson["image_url"] as! String
+            image_url = shopImageJson["image_url"] as! String
         }
     }
 }

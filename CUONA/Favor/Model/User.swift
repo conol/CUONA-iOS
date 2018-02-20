@@ -34,22 +34,22 @@ public class User: NSObject
         }
         
         // 各メンバ変数に値を設定
-        self.id             = jsonData["id"] as! Int
-        self.master_user_id = jsonData["master_user_id"] as! Int
-        self.owner_id       = jsonData["owner_id"] as? Int
-        self.original_id    = jsonData["original_id"] as? Int
-        self.language       = jsonData["language"] as? String
-        self.nickname       = jsonData["nickname"] as? String
-        self.gender         = jsonData["gender"] as? String
-        self.age            = jsonData["age"] as? Int
-        self.pref           = jsonData["pref"] as? String
-        self.image_url      = jsonData["image_url"] as? String
-        self.push_token     = jsonData["push_token"] as? String
-        self.notifiable     = jsonData["notifiable"] as! Bool
-        let created_at      = jsonData["created_at"] as! String
-        self.created_time   = created_at.dateFromISO8601
-        let updated_at      = jsonData["updated_at"] as! String
-        self.updated_time   = updated_at.dateFromISO8601
+        id             = jsonData["id"] as! Int
+        master_user_id = jsonData["master_user_id"] as! Int
+        owner_id       = jsonData["owner_id"] as? Int
+        original_id    = jsonData["original_id"] as? Int
+        language       = jsonData["language"] as? String
+        nickname       = jsonData["nickname"] as? String
+        gender         = jsonData["gender"] as? String
+        age            = jsonData["age"] as? Int
+        pref           = jsonData["pref"] as? String
+        image_url      = jsonData["image_url"] as? String
+        push_token     = jsonData["push_token"] as? String
+        notifiable     = jsonData["notifiable"] as! Bool
+        let created_at = jsonData["created_at"] as! String
+        created_time   = created_at.dateFromISO8601
+        let updated_at = jsonData["updated_at"] as! String
+        updated_time   = updated_at.dateFromISO8601
     }
 }
 

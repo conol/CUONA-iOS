@@ -17,13 +17,13 @@ public class Favorite: NSObject
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
-        self.id           = jsonData["id"] as! Int
-        self.name         = jsonData["name"] as! String
-        self.level        = jsonData["level"] as! Int
-        let created_at    = jsonData["created_at"] as! String
-        self.created_time = created_at.dateFromISO8601
-        let updated_at    = jsonData["updated_at"] as! String
-        self.updated_time = updated_at.dateFromISO8601
+        id             = jsonData["id"] as! Int
+        name           = jsonData["name"] as! String
+        level          = jsonData["level"] as! Int
+        let created_at = jsonData["created_at"] as! String
+        created_time   = created_at.dateFromISO8601
+        let updated_at = jsonData["updated_at"] as! String
+        updated_time   = updated_at.dateFromISO8601
     }
 }
 
