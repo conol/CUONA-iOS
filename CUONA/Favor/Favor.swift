@@ -12,67 +12,67 @@ import UIKit
 {
     // ユーザー登録
     @objc optional func successRegister(user:User!)
-    @objc optional func failedRegister(status:Int, json: [String:Any]?)
+    @objc optional func failedRegister(exception:FavorException!)
     
     // ユーザー情報編集
     @objc optional func successEditUserInfo(user:User!)
-    @objc optional func failedEditUserInfo(status:Int, json: [String:Any]?)
+    @objc optional func failedEditUserInfo(exception:FavorException!)
 
     // ユーザー情報取得
     @objc optional func successGetUserInfo(user:User!)
-    @objc optional func failedGetUserInfo(status:Int, json: [String:Any]?)
+    @objc optional func failedGetUserInfo(exception:FavorException!)
     
     // 店舗詳細取得
     @objc optional func successGetShopInfo(json:[String:Any]?)
-    @objc optional func failedGetShopInfo(status:Int, json: [String:Any]?)
+    @objc optional func failedGetShopInfo(exception:FavorException!)
     
     // 入店
     @objc optional func successEnterShop(shop:Shop!)
-    @objc optional func failedEnterShop(status:Int, json: [String:Any]?)
+    @objc optional func failedEnterShop(exception:FavorException!)
     
     // 入店履歴一覧
     @objc optional func successGetVisitedShopHistory(shops:[Shop]!)
-    @objc optional func failedGetVisitedShopHistory(status:Int, json: [String:Any]?)
+    @objc optional func failedGetVisitedShopHistory(exception:FavorException!)
     
     // メニュー一覧取得
     @objc optional func successGetMenuList(menus:[Menu]!)
-    @objc optional func failedGetMenuList(status:Int, json: [String:Any]?)
+    @objc optional func failedGetMenuList(exception:FavorException!)
     
     // 注文履歴一覧取得(来店個人単位)
     @objc optional func successGetUsersOrderList(orders:[Order]!)
-    @objc optional func failedGetUsersOrderList(status:Int, json: [String:Any]?)
+    @objc optional func failedGetUsersOrderList(exception:FavorException!)
     
     // 注文履歴一覧取得(来店グループ単位)
     @objc optional func successGetGroupsOrderList(orders:[Order]!)
-    @objc optional func failedGetGroupsOrderList(status:Int, json: [String:Any]?)
+    @objc optional func failedGetGroupsOrderList(exception:FavorException!)
     
     // 注文履歴一覧(ユーザーの全店舗での注文履歴)
     @objc optional func successGetUsersAllOrderList(orders:[Order]!)
-    @objc optional func failedGetUsersAllOrderList(status:Int, json: [String:Any]?)
+    @objc optional func failedGetUsersAllOrderList(exception:FavorException!)
     
     // 注文
     @objc optional func successOrder(orders:[Order]!)
-    @objc optional func failedOrder(status:Int, json: [String:Any]?)
+    @objc optional func failedOrder(exception:FavorException!)
     
     // お会計
     @objc optional func successCheck(orders:[Order]!)
-    @objc optional func failedCheck(status:Int, json: [String:Any]?)
+    @objc optional func failedCheck(exception:FavorException!)
     
     // お気に入り追加
     @objc optional func successAddFavorite(favorite:Favorite!)
-    @objc optional func failedAddFavorite(status:Int, json: [String:Any]?)
+    @objc optional func failedAddFavorite(exception:FavorException!)
     
     // お気に入り編集
     @objc optional func successEditFavorite(favorite:Favorite!)
-    @objc optional func failedEditFavorite(status:Int, json: [String:Any]?)
+    @objc optional func failedEditFavorite(exception:FavorException!)
     
     // お気に入り一覧取得
     @objc optional func successGetFavoriteList(favorites:[Favorite]!)
-    @objc optional func failedGetFavoriteList(status:Int, json: [String:Any]?)
+    @objc optional func failedGetFavoriteList(exception:FavorException!)
     
     // お気に入り削除
     @objc optional func successDeleteFavorite(favorites:[Favorite]!)
-    @objc optional func failedDeleteFavorite(status:Int, json: [String:Any]?)
+    @objc optional func failedDeleteFavorite(exception:FavorException!)
 }
 
 @available(iOS 11.0, *)
@@ -105,7 +105,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             if httpResponse?.statusCode == 200 {
                 self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
-                self.delegate?.failedRegister?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedRegister?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -118,7 +118,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             if httpResponse?.statusCode == 200 {
                 self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
-                self.delegate?.failedEditUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedEditUserInfo?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -131,7 +131,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             if httpResponse?.statusCode == 200 {
                 self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
-                self.delegate?.failedGetUserInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetUserInfo?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -145,7 +145,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 let data = returnData["data"] as! [String : Any]
                 self.delegate?.successGetShopInfo?(json: data)
             } else {
-                self.delegate?.failedGetShopInfo?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetShopInfo?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -159,7 +159,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 let data = returnData["data"] as! [String : Any]
                 self.delegate?.successEnterShop?(shop: Shop(dataJson: data))
             } else {
-                self.delegate?.failedEnterShop?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedEnterShop?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -181,7 +181,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successGetVisitedShopHistory?(shops: shops)
             } else {
-                self.delegate?.failedGetVisitedShopHistory?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetVisitedShopHistory?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -203,7 +203,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successGetMenuList?(menus: menus)
             } else {
-                self.delegate?.failedGetMenuList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetMenuList?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -225,7 +225,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successGetUsersOrderList?(orders: orders)
             } else {
-                self.delegate?.failedGetUsersOrderList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetUsersOrderList?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -247,7 +247,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successGetGroupsOrderList?(orders: orders)
             } else {
-                self.delegate?.failedGetGroupsOrderList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetGroupsOrderList?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -269,7 +269,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successGetUsersAllOrderList?(orders: orders)
             } else {
-                self.delegate?.failedGetUsersAllOrderList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetUsersAllOrderList?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -304,7 +304,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successOrder?(orders: orders)
             } else {
-                self.delegate?.failedOrder?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedOrder?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -326,7 +326,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successCheck?(orders: orders)
             } else {
-                self.delegate?.failedCheck?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedCheck?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -339,7 +339,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             if httpResponse?.statusCode == 200 {
                 self.delegate?.successAddFavorite?(favorite: Favorite(jsonData: returnData["data"] as! [String : Any]))
             } else {
-                self.delegate?.failedAddFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedAddFavorite?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -352,7 +352,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             if httpResponse?.statusCode == 200 {
                 self.delegate?.successEditFavorite?(favorite: Favorite(jsonData: returnData["data"] as! [String : Any]))
             } else {
-                self.delegate?.failedEditFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedEditFavorite?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -374,7 +374,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 
                 self.delegate?.successGetFavoriteList?(favorites: favorites)
             } else {
-                self.delegate?.failedGetFavoriteList?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedGetFavoriteList?(exception: FavorException(jsonData: returnData))
             }
         })
     }
@@ -396,7 +396,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 self.delegate?.successDeleteFavorite?(favorites: favorites)
             } else {
-                self.delegate?.failedDeleteFavorite?(status: httpResponse?.statusCode ?? 0, json: returnData)
+                self.delegate?.failedDeleteFavorite?(exception: FavorException(jsonData: returnData))
             }
         })
     }
