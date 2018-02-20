@@ -56,7 +56,7 @@ extension String
         return Formatter.iso8601.date(from: self)
     }
     
-    var ToDictionary: [String: Any]? {
+    var toDictionary: [String: Any]? {
         let data = self.data(using: .utf8)!
         var jsonDic: [String: Any]? = nil
         do {

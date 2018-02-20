@@ -434,7 +434,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         // Favorが使用可能なCUONAか確認
-        guard let favorJson = json.ToDictionary?[Constants.foverJsonKey] as? [String : Any] else {
+        guard let favorJson = json.toDictionary?[Constants.foverJsonKey] as? [String : Any] else {
             print("Failed to read CUONA tag")
             self.delegate?.failedScan?()
             return false
