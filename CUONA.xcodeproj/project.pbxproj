@@ -94,6 +94,11 @@
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		A66FF821202848AB008E262E /* Favor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; };
 		A684FA1E20295ECA00B1AF56 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684FA1D20295ECA00B1AF56 /* Define.swift */; };
+		A6CEF12D203BC71E0067605F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF12C203BC71E0067605F /* User.swift */; };
+		A6CEF12F203BC7930067605F /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF12E203BC7930067605F /* Shop.swift */; };
+		A6CEF131203BC7C00067605F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF130203BC7C00067605F /* Order.swift */; };
+		A6CEF133203BC7E20067605F /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF132203BC7E20067605F /* Menu.swift */; };
+		A6CEF135203BC8040067605F /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF134203BC8040067605F /* Favorite.swift */; };
 		A6F4FD62202301CA00523677 /* Favor.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F4FD60202301CA00523677 /* Favor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F4FD68202302D000523677 /* Favor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4FD67202302D000523677 /* Favor.swift */; };
 /* End PBXBuildFile section */
@@ -207,6 +212,11 @@
 		14F8767F202309C100BB24F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
 		A684FA1D20295ECA00B1AF56 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		A6CEF12C203BC71E0067605F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A6CEF12E203BC7930067605F /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		A6CEF130203BC7C00067605F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		A6CEF132203BC7E20067605F /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		A6CEF134203BC8040067605F /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A6F4FD5E202301CA00523677 /* Favor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Favor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6F4FD60202301CA00523677 /* Favor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favor.h; sourceTree = "<group>"; };
 		A6F4FD61202301CA00523677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -474,6 +484,18 @@
 			path = Favor_sample;
 			sourceTree = "<group>";
 		};
+		A6CEF129203BC5390067605F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A6CEF12C203BC71E0067605F /* User.swift */,
+				A6CEF12E203BC7930067605F /* Shop.swift */,
+				A6CEF130203BC7C00067605F /* Order.swift */,
+				A6CEF132203BC7E20067605F /* Menu.swift */,
+				A6CEF134203BC8040067605F /* Favorite.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A6F4FD5F202301CA00523677 /* Favor */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +508,7 @@
 		A6F4FD662023023700523677 /* Favor */ = {
 			isa = PBXGroup;
 			children = (
+				A6CEF129203BC5390067605F /* Model */,
 				A6F4FD67202302D000523677 /* Favor.swift */,
 				A684FA1D20295ECA00B1AF56 /* Define.swift */,
 			);
@@ -1156,8 +1179,13 @@
 				143F3A9820288A5A00486FF8 /* CUONAKeys.swift in Sources */,
 				143F3A9920288A5A00486FF8 /* CUONAManager.swift in Sources */,
 				143F3A9A20288A5A00486FF8 /* CUONAMasterKey.swift in Sources */,
+				A6CEF131203BC7C00067605F /* Order.swift in Sources */,
 				143F3A9B20288A5A00486FF8 /* DeviceManager.swift in Sources */,
 				143F3A9C20288A5A00486FF8 /* Extensions.swift in Sources */,
+				A6CEF135203BC8040067605F /* Favorite.swift in Sources */,
+				A6CEF133203BC7E20067605F /* Menu.swift in Sources */,
+				A6CEF12F203BC7930067605F /* Shop.swift in Sources */,
+				A6CEF12D203BC71E0067605F /* User.swift in Sources */,
 				143F3A9D20288A5A00486FF8 /* NFCReader.swift in Sources */,
 				A684FA1E20295ECA00B1AF56 /* Define.swift in Sources */,
 				A6F4FD68202302D000523677 /* Favor.swift in Sources */,
