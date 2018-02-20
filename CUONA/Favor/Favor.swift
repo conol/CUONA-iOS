@@ -10,6 +10,10 @@ import UIKit
 
 @objc public protocol FavorDelegate: class
 {
+    // CUONAスキャン
+    @objc optional func successScan(deviceId:String, type:Int)
+    @objc optional func failedScan()
+    
     // ユーザー登録
     @objc optional func successRegister(user:User!)
     @objc optional func failedRegister(exception:FavorException!)
@@ -422,13 +426,43 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
 
     // CUONAスキャンダイアログを表示
-    public func scanCuona()
+    public func startScan()
     {
-        cuonaManager?.startReadingNFC("CUONAにタッチしてください")
+        cuonaManager?.startReadingNFC(Message.cuonaScan)
     }
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
+        // josnをString型からDictionary型に変換
+        let data = json.data(using: .utf8)!
+        var jsonDic: [String: Any]? = nil
+        do {
+            jsonDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            self.delegate?.failedScan?()
+        }
+        
+        // Favorが使用可能なCUONAか確認
+        guard let favorJson = jsonDic?[Constants.foverJsonKey] as? [String : Any] else {
+            self.delegate?.failedScan?()
+            return false
+        }
+        
+        // Favorのサービスキーが書き込まれているか確認
+        guard let serviceKey = favorJson["id"] as? String else {
+            self.delegate?.failedScan?()
+            return false
+        }
+        
+        // 書き込まれているサービスキーが正しいか確認
+        if serviceKey != Constants.favorServiceKey {
+            self.delegate?.failedScan?()
+            return false
+        }
+        
+        // デバイスIDとCUONAのタイプをデリゲートで返す
+        self.delegate?.successScan?(deviceId: deviceId, type: type)
+        
         return false
     }
     

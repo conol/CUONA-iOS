@@ -6,6 +6,17 @@
 //  Copyright © 2018年 conol, Inc. All rights reserved.
 //
 
+struct Constants
+{
+    static let foverJsonKey = "favor"            // Favorを使用可能なCUONAに書き込まれているkey
+    static let favorServiceKey = "UXbfYJ6SXm8G"  // Favorのサービスキー
+}
+
+struct Message
+{
+    static let cuonaScan = "CUONAにタッチしてください"    // CUONAスキャンダイアログのメッセージ
+}
+
 struct ApiUrl
 {
     static let endPoint = "http://favor-dev.cuona.io"   // エンドポイント
