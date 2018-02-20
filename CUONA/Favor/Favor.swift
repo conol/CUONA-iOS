@@ -51,7 +51,7 @@ import UIKit
     @objc optional func failedOrder(status:Int, json: [String:Any]?)
     
     // お会計
-    @objc optional func successCheck(json:[String:Any]?)
+    @objc optional func successCheck(orders:[Order]!)
     @objc optional func failedCheck(status:Int, json: [String:Any]?)
     
     // お気に入り追加
@@ -288,8 +288,16 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.check(visitHistoryId), method: .put, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                let data = returnData["data"] as! [String : Any]
-                self.delegate?.successCheck?(json: data)
+                
+                let datas = returnData["data"] as! [[String : Any]]
+                var orders:[Order] = []
+                
+                for data in datas
+                {
+                    orders.append(Order(jsonData: data))
+                }
+                
+                self.delegate?.successCheck?(orders: orders)
             } else {
                 self.delegate?.failedCheck?(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
