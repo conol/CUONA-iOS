@@ -17,17 +17,18 @@ class ViewController: UIViewController, FavorDelegate {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
-//        favor!.registerUser(params: ["nickname": "test"])
+        favor!.registerUser(params: ["nickname": "test"])
         
 //        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
 //        print(Favor.hasToken())
-        var orders = [Order]()
-        orders.append(Order(menuItemId: 1, quantity: 1))
-        favor!.sendOrder(visitHistoryId: 2, orders: orders)
+//        var orders = [Order]()
+//        orders.append(Order(menuItemId: 1, quantity: 1))
+//        favor!.sendOrder(visitHistoryId: 2, orders: orders)
     }
     
     func successRegister(user: User!) {
         print("successRegister")
+        print(user.nickname ?? "nill")
     }
     
     func successEnterShop(shop: Shop!) {
