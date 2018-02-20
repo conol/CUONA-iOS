@@ -421,6 +421,11 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         })
     }
 
+    // CUONAスキャンダイアログを表示
+    public func scanCuona()
+    {
+        cuonaManager?.startReadingNFC("CUONAにタッチしてください")
+    }
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
