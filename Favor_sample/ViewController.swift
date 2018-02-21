@@ -25,6 +25,8 @@ class ViewController: UIViewController, FavorDelegate {
 //        orders.append(Order(menuItemId: 1, quantity: 1))
 //        favor!.sendOrder(visitHistoryId: 2, orders: orders)
         favor!.getUsersAllOrderList()
+        favor!.startScan()
+
     }
     
     func successRegister(user: User!) {
