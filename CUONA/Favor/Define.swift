@@ -19,9 +19,9 @@ struct Message
 
 struct ErrorCode
 {
-    static let faildToReadCuona   = 1000    // CUONA読み込みに失敗
-    static let notExistServiseKey = 1001    // サービスキーが存在しない
-    static let invalidServiseKey  = 1002    // サービスキーが正しくない
+    static let faildToReadCuona   = 100000    // CUONA読み込みに失敗
+    static let notExistServiseKey = 100100    // サービスキーが存在しない
+    static let invalidServiseKey  = 100101    // サービスキーが正しくない
 }
 
 struct ErrorType {
