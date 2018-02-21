@@ -55,7 +55,7 @@ public class User: NSObject
         pref           = jsonData["pref"] as? String
         image_url      = jsonData["image_url"] as? String
         push_token     = jsonData["push_token"] as? String
-        notifiable     = jsonData["notifiable"] as! Bool
+        notifiable     = jsonData["notifiable"] as? Bool
         let created_at = jsonData["created_at"] as! String
         created_time   = created_at.dateFromISO8601
         let updated_at = jsonData["updated_at"] as! String

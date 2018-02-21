@@ -98,8 +98,18 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // ユーザー登録
-    public func registerUser(params:[String:Any]?)
+    public func registerUser(user: User)
     {
+        // リクエスト用パラメータを作成
+        let params: [String : Any?]? = [
+            "nickname" : user.nickname,
+            "gender" : user.gender,
+            "age" : user.age,
+            "pref" : user.pref,
+            "image" : user.image,
+            "notifiable" : user.notifiable
+        ]
+        
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.registerUesr, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
@@ -111,8 +121,18 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // ユーザー情報編集
-    public func editUserInfo(params:[String:Any]?)
+    public func editUserInfo(user: User)
     {
+        // リクエスト用パラメータを作成
+        let params: [String : Any?]? = [
+            "nickname" : user.nickname,
+            "gender" : user.gender,
+            "age" : user.age,
+            "pref" : user.pref,
+            "image" : user.image,
+            "notifiable" : user.notifiable
+        ]
+
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editUser, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
