@@ -98,7 +98,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // ユーザー登録
-    public func registerUser(params:[String:Any])
+    public func registerUser(params:[String:Any]?)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.registerUesr, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
