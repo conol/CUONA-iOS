@@ -25,7 +25,8 @@ public class User: NSObject
     public private(set) var created_time:Date?
     public private(set) var updated_time:Date?
     
-    init(nickname: String?, gender: String?, age: Int?, pref: String?, image: String?, notifiable: Bool?) {
+    public init(nickname: String? = nil, gender: String? = nil, age: Int? = nil,
+         pref: String? = nil, image: String? = nil, notifiable: Bool? = nil) {
         self.nickname   = nickname
         self.gender     = gender
         self.age        = age
