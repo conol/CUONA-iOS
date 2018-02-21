@@ -23,7 +23,7 @@ import UIKit
     @objc optional func failedGetUserInfo(exception:FavorException!)
     
     // 店舗詳細取得
-    @objc optional func successGetShopInfo(json:[String:Any]?)
+    @objc optional func successGetShopInfo(shop:Shop!)
     @objc optional func failedGetShopInfo(exception:FavorException!)
     
     // 入店
@@ -163,7 +163,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 let data = returnData["data"] as! [String : Any]
-                self.delegate?.successGetShopInfo?(json: data)
+                self.delegate?.successGetShopInfo?(shop: Shop(dataJson: data))
             } else {
                 self.delegate?.failedGetShopInfo?(exception: FavorException(jsonData: returnData))
             }
