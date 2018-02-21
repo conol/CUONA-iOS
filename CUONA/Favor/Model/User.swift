@@ -18,11 +18,21 @@ public class User: NSObject
     public private(set) var gender:String?
     public private(set) var age:Int?
     public private(set) var pref:String?
+    public private(set) var image:String?
     public private(set) var image_url:String?
     public private(set) var push_token:String?
-    public private(set) var notifiable:Bool = true
+    public private(set) var notifiable:Bool?
     public private(set) var created_time:Date?
     public private(set) var updated_time:Date?
+    
+    init(nickname: String?, gender: String?, age: Int?, pref: String?, image: String?, notifiable: Bool?) {
+        self.nickname   = nickname
+        self.gender     = gender
+        self.age        = age
+        self.pref       = pref
+        self.image      = image
+        self.notifiable = notifiable
+    }
     
     init(jsonData: [String : Any]) {
         
