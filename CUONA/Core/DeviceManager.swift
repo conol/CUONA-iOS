@@ -225,7 +225,7 @@ public class HttpRequest
     }
     
     //MARK: - 共通通信部分
-    public func sendRequestAsynchronous(_ url:String, method:Method, params:[String:Any]?, funcs:@escaping ([String : Any], URLResponse?) -> Void)
+    public func sendRequestAsynchronous(_ url:String, method:Method, params:[String:Any?]?, funcs:@escaping ([String : Any], URLResponse?) -> Void)
     {
         var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)

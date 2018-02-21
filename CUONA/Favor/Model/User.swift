@@ -18,11 +18,22 @@ public class User: NSObject
     public private(set) var gender:String?
     public private(set) var age:Int?
     public private(set) var pref:String?
+    public private(set) var image:String?
     public private(set) var image_url:String?
     public private(set) var push_token:String?
-    public private(set) var notifiable:Bool = true
+    public private(set) var notifiable:Bool?
     public private(set) var created_time:Date?
     public private(set) var updated_time:Date?
+    
+    public init(nickname: String? = nil, gender: String? = nil, age: Int? = nil,
+         pref: String? = nil, image: String? = nil, notifiable: Bool? = nil) {
+        self.nickname   = nickname
+        self.gender     = gender
+        self.age        = age
+        self.pref       = pref
+        self.image      = image
+        self.notifiable = notifiable
+    }
     
     init(jsonData: [String : Any]) {
         
@@ -45,7 +56,7 @@ public class User: NSObject
         pref           = jsonData["pref"] as? String
         image_url      = jsonData["image_url"] as? String
         push_token     = jsonData["push_token"] as? String
-        notifiable     = jsonData["notifiable"] as! Bool
+        notifiable     = jsonData["notifiable"] as? Bool
         let created_at = jsonData["created_at"] as! String
         created_time   = created_at.dateFromISO8601
         let updated_at = jsonData["updated_at"] as! String
