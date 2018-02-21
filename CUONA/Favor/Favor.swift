@@ -12,7 +12,7 @@ import UIKit
 {
     // CUONAスキャン
     @objc optional func successScan(deviceId:String, type:Int)
-    @objc optional func failedScan()
+    @objc optional func failedScan(exception:FavorException!)
     
     // ユーザー登録
     @objc optional func successRegister(user:User!)
@@ -435,22 +435,22 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     {
         // Favorが使用可能なCUONAか確認
         guard let favorJson = json.toDictionary?[Constants.foverJsonKey] as? [String : Any] else {
-            print("Failed to read CUONA tag")
-            self.delegate?.failedScan?()
+            print(ErrorMessage.faildToReadCuona)
+            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.faildToReadCuona))
             return false
         }
         
         // Favorのサービスキーが書き込まれているか確認
         guard let serviceKey = favorJson["id"] as? String else {
-            print("Favor's service key does not exist")
-            self.delegate?.failedScan?()
+            print(ErrorMessage.notExistServiseKey)
+            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.notExistServiseKey, type: ErrorType.cuonaTouchError, message: ErrorMessage.notExistServiseKey))
             return false
         }
         
         // 書き込まれているサービスキーが正しいか確認
         if serviceKey != Constants.favorServiceKey {
-            print("Favor's service key is invalid")
-            self.delegate?.failedScan?()
+            print(ErrorMessage.invalidServiseKey)
+            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.invalidServiseKey, type: ErrorType.cuonaTouchError, message: ErrorMessage.invalidServiseKey))
             return false
         }
         

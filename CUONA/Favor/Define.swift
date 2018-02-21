@@ -17,19 +17,22 @@ struct Message
     static let cuonaScan = "CUONAにタッチしてください"    // CUONAスキャンダイアログのメッセージ
 }
 
-struct ErrorMessage
-{
-    static let cuonaTouchError = "CuonaTouchError"                          // CUONAタッチ時のエラー
-    static let faildToReadCuona = "Failed to read CUONA tag"                // CUONA読み込みに失敗
-    static let notExistServiseKey = "Favor's service key does not exist"    // サービスキーが存在しない
-    static let invalidServiseKey = "Favor's service key is invalid"         // サービスキーが正しくない
-}
-
 struct ErrorCode
 {
     static let faildToReadCuona   = 1000    // CUONA読み込みに失敗
     static let notExistServiseKey = 1001    // サービスキーが存在しない
     static let invalidServiseKey  = 1002    // サービスキーが正しくない
+}
+
+struct ErrorType {
+    static let cuonaTouchError = "CuonaTouchError"  // CUONAタッチ時のエラー
+}
+
+struct ErrorMessage
+{
+    static let faildToReadCuona = "Failed to read CUONA tag"                // CUONA読み込みに失敗
+    static let notExistServiseKey = "Favor's service key does not exist"    // サービスキーが存在しない
+    static let invalidServiseKey = "Favor's service key is invalid"         // サービスキーが正しくない
 }
 
 struct ApiUrl
