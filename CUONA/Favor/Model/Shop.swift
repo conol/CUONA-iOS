@@ -19,7 +19,7 @@ public class Shop: NSObject
     public private(set) var phone_number:String? = nil
     public private(set) var notes:String? = nil
     public private(set) var extension_fields:[ExtensionField?] = []
-    public private(set) var shop_images:[ShopImage?] = []
+    public private(set) var image_urls:[String?] = []
     public private(set) var visit_count = 0
     public private(set) var last_visit_time:Date?
     
@@ -53,7 +53,7 @@ public class Shop: NSObject
         // shop_imagesの情報を設定
         for shopImageJson in shopJson["shop_images"] as! [[String : Any]]
         {
-            shop_images.append(ShopImage(shopImageJson))
+            image_urls.append(ShopImage(shopImageJson).image_url)
         }
         
         // visit_historyの情報を各メンバ変数に設定
@@ -87,7 +87,7 @@ public class Shop: NSObject
         }
     }
     
-    public class ShopImage
+    class ShopImage
     {
         public private(set) var image_url = ""
         

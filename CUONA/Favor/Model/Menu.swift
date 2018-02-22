@@ -15,7 +15,7 @@ public class Menu: NSObject
     public private(set) var price_cents:Int = 0
     public private(set) var price_format:String = ""
     public private(set) var notes:String? = nil
-    public private(set) var images:[Image?] = []
+    public private(set) var image_urls:[String?] = []
     public private(set) var category_name:String? = nil
     
     init(jsonData: [String : Any]) {
@@ -32,11 +32,11 @@ public class Menu: NSObject
         // imagesの情報を設定
         for imageJson in jsonData["images"] as! [[String : Any]]
         {
-            images.append(Image(imageJson))
+            image_urls.append(Image(imageJson).image_url)
         }
     }
     
-    public class Image
+    class Image
     {
         public private(set) var image_url = ""
         
