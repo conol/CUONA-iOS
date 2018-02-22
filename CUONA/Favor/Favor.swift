@@ -356,8 +356,14 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // お気に入り追加
-    public func addFavorite(params:[String:Any])
+    public func addFavorite(favorite: Favorite)
     {
+        // リクエスト用パラメータを作成
+        let params: [String : Any?]? = [
+            "name" : favorite.name,
+            "level" : favorite.level
+        ]
+
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.addFavorite, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
@@ -369,8 +375,14 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // お気に入り編集
-    public func editFavorite(favoriteId:Int, params:[String:Any])
+    public func editFavorite(favoriteId:Int, favorite: Favorite)
     {
+        // リクエスト用パラメータを作成
+        let params: [String : Any?]? = [
+            "name" : favorite.name,
+            "level" : favorite.level
+        ]
+        
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editFavorite(favoriteId), method: .patch, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {

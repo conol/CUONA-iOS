@@ -14,6 +14,11 @@ public class Favorite: NSObject
     public private(set) var created_time:Date?
     public private(set) var updated_time:Date?
     
+    public init(name: String!, level: Int!) {
+        self.name = name
+        self.level = level
+    }
+    
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
