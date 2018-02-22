@@ -93,6 +93,7 @@
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		A63191A4203BFC170076A8D8 /* FavorException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63191A3203BFC170076A8D8 /* FavorException.swift */; };
+		A668E6F2203D5B780095B62F /* Favor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A66FF821202848AB008E262E /* Favor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; };
 		A684FA1E20295ECA00B1AF56 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684FA1D20295ECA00B1AF56 /* Define.swift */; };
 		A6CEF12D203BC71E0067605F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF12C203BC71E0067605F /* User.swift */; };
@@ -140,6 +141,13 @@
 			remoteGlobalIDString = 14B824B21FBADE160097050B;
 			remoteInfo = CoreSample;
 		};
+		A668E6F3203D5B780095B62F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6F4FD5D202301CA00523677;
+			remoteInfo = Favor;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -150,6 +158,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				14322FB61FD62D63007A78A1 /* CUONACore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A668E6F5203D5B780095B62F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A668E6F2203D5B780095B62F /* Favor.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +232,7 @@
 		14F8767F202309C100BB24F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
 		A63191A3203BFC170076A8D8 /* FavorException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorException.swift; sourceTree = "<group>"; };
+		A668E6F6203D5B890095B62F /* Favor_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Favor_sample.entitlements; sourceTree = "<group>"; };
 		A684FA1D20295ECA00B1AF56 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		A6CEF12C203BC71E0067605F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A6CEF12E203BC7930067605F /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
@@ -476,6 +496,7 @@
 		14F87672202309C100BB24F9 /* Favor_sample */ = {
 			isa = PBXGroup;
 			children = (
+				A668E6F6203D5B890095B62F /* Favor_sample.entitlements */,
 				14F87673202309C100BB24F9 /* AppDelegate.swift */,
 				14F87675202309C100BB24F9 /* ViewController.swift */,
 				14F87677202309C100BB24F9 /* Main.storyboard */,
@@ -731,10 +752,12 @@
 				14F8766D202309C100BB24F9 /* Sources */,
 				14F8766E202309C100BB24F9 /* Frameworks */,
 				14F8766F202309C100BB24F9 /* Resources */,
+				A668E6F5203D5B780095B62F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A668E6F4203D5B780095B62F /* PBXTargetDependency */,
 			);
 			name = Favor_sample;
 			productName = Favor_sample;
@@ -821,6 +844,11 @@
 					14F87670202309C100BB24F9 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.NearFieldCommunicationTagReading = {
+								enabled = 1;
+							};
+						};
 					};
 					A6F4FD5D202301CA00523677 = {
 						CreatedOnToolsVersion = 9.2;
@@ -1223,6 +1251,11 @@
 			isa = PBXTargetDependency;
 			target = 14B824B21FBADE160097050B /* CoreSample */;
 			targetProxy = 14B824D21FBADE160097050B /* PBXContainerItemProxy */;
+		};
+		A668E6F4203D5B780095B62F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6F4FD5D202301CA00523677 /* Favor */;
+			targetProxy = A668E6F3203D5B780095B62F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1746,7 +1779,9 @@
 		14F87681202309C100BB24F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Favor_sample/Favor_sample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68WVY52GZ2;
 				INFOPLIST_FILE = Favor_sample/Info.plist;
@@ -1763,7 +1798,9 @@
 		14F87682202309C100BB24F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Favor_sample/Favor_sample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68WVY52GZ2;
 				INFOPLIST_FILE = Favor_sample/Info.plist;

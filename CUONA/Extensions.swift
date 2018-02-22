@@ -56,6 +56,17 @@ extension String
         return Formatter.iso8601.date(from: self)
     }
     
+    var toDictionary: [String: Any]? {
+        let data = self.data(using: .utf8)!
+        var jsonDic: [String: Any]? = nil
+        do {
+            jsonDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            return nil
+        }
+        return jsonDic
+    }
+    
     public func split(_ length: Int) -> String {
         guard length > 0 else {
             return ""

@@ -6,6 +6,35 @@
 //  Copyright © 2018年 conol, Inc. All rights reserved.
 //
 
+struct Constants
+{
+    static let foverJsonKey = "favor"            // Favorを使用可能なCUONAに書き込まれているkey
+    static let favorServiceKey = "UXbfYJ6SXm8G"  // Favorのサービスキー
+}
+
+struct Message
+{
+    static let cuonaScan = "CUONAにタッチしてください"    // CUONAスキャンダイアログのメッセージ
+}
+
+struct ErrorCode
+{
+    static let faildToReadCuona   = 100000    // CUONA読み込みに失敗
+    static let notExistServiseKey = 100100    // サービスキーが存在しない
+    static let invalidServiseKey  = 100101    // サービスキーが正しくない
+}
+
+struct ErrorType {
+    static let cuonaTouchError = "CuonaTouchError"  // CUONAタッチ時のエラー
+}
+
+struct ErrorMessage
+{
+    static let faildToReadCuona = "Failed to read CUONA tag"                // CUONA読み込みに失敗
+    static let notExistServiseKey = "Favor's service key does not exist"    // サービスキーが存在しない
+    static let invalidServiseKey = "Favor's service key is invalid"         // サービスキーが正しくない
+}
+
 struct ApiUrl
 {
     static let endPoint = "http://favor-dev.cuona.io"   // エンドポイント

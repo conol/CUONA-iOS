@@ -12,6 +12,13 @@ public class FavorException: NSObject
     public private(set) var type:String!
     public private(set) var message:String!
     
+    init(code: Int!, type: String!, message: String!)
+    {
+        self.code    = code
+        self.type    = type
+        self.message = message
+    }
+    
     init(jsonData: [String : Any])
     {
         // レスポンスのmeta部分を取得
