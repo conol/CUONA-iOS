@@ -77,7 +77,7 @@ public class Shop: NSObject
     class ExtensionField
     {
         public private(set) var id = 0
-        public private(set) var lavel:String = ""
+        public private(set) var lavel = ""
         public private(set) var value:String? = nil
         
         init(_ extensionFieldJson: [String : Any?])
