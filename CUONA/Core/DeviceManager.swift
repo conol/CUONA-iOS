@@ -120,6 +120,7 @@ public class HttpRequest
     }
     
     //MARK: - ログ送信
+    @available(iOS 11.0, *)
     public func sendLog(_ device_id:String, latlng:String, serviceKey:String, addUniquId:String, note:String)
     {
         let url = API_URL + "/api/device_logs/\(serviceKey).json"
