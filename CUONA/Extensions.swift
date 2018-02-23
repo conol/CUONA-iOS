@@ -31,20 +31,20 @@ public class Alert
     }
 }
 
+
 extension Formatter
 {
-    static let iso8601: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'"
+    @available(iOS 11.0, *)
+    static let iso8601: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
     }()
 }
 
 extension Date
 {
+    @available(iOS 11.0, *)
     var iso8601: String {
         return Formatter.iso8601.string(from: self)
     }
@@ -52,6 +52,7 @@ extension Date
 
 extension String
 {
+    @available(iOS 11.0, *)
     var dateFromISO8601: Date? {
         return Formatter.iso8601.date(from: self)
     }
