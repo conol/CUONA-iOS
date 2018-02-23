@@ -48,7 +48,7 @@ public class Shop: NSObject
         for extensionFiledJson in shopJson["extension_fields"] as! [[String : Any]]
         {
             let extensionFiled = ExtensionField(extensionFiledJson)
-            extension_fields.append((lavel: extensionFiled.lavel, value: extensionFiled.value) as (String, String?))
+            extension_fields.append((lavel: extensionFiled.label, value: extensionFiled.value) as (String, String?))
         }
         
         // shop_imagesの情報を設定
@@ -77,13 +77,13 @@ public class Shop: NSObject
     class ExtensionField
     {
         public private(set) var id = 0
-        public private(set) var lavel = ""
+        public private(set) var label = ""
         public private(set) var value:String? = nil
         
         init(_ extensionFieldJson: [String : Any?])
         {
             id    = extensionFieldJson["id"] as! Int
-            lavel = extensionFieldJson["label"] as! String
+            label = extensionFieldJson["label"] as! String
             value = extensionFieldJson["value"] as? String
         }
     }
