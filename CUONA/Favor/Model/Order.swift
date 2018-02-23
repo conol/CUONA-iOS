@@ -25,7 +25,7 @@ public class Order: NSObject
     public private(set) var orderd_user_image_url:String? = nil
     
     public private(set) var notes:String? = nil
-    public private(set) var images:[Image?] = []
+    public private(set) var image_urls:[String?] = []
     
     public private(set) var shop_id:Int? = nil
     public private(set) var shop_name:String? = nil
@@ -67,11 +67,11 @@ public class Order: NSObject
         // imagesの情報を設定
         for imageJson in menu_item["images"] as! [[String : Any]]
         {
-            images.append(Image(imageJson))
+            image_urls.append(Image(imageJson).image_url)
         }
     }
     
-    public class Image
+    class Image
     {
         public private(set) var image_url = ""
         
