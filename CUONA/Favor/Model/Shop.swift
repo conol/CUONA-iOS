@@ -48,6 +48,7 @@ public class Shop: NSObject
         for extensionFiledJson in shopJson["extension_fields"] as! [[String : Any]]
         {
             let extensionFiled = ExtensionField(extensionFiledJson)
+            
             extension_fields.append((lavel: extensionFiled.label, value: extensionFiled.value) as (String, String?))
         }
         
