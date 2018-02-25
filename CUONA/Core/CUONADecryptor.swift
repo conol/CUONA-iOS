@@ -15,7 +15,7 @@ func getSymmetryKey(deviceId: [UInt8]) -> [UInt8] {
 
 func getKeyCode() -> [UInt8] {
     let kc = CUONAKeys.keyCode
-    return [ UInt8(kc), UInt8(kc >> 8) ]
+    return [ UInt8(kc & 0xff), UInt8(kc >> 8) ]
 }
 
 class CUONADecryptor {
