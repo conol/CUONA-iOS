@@ -248,6 +248,7 @@ UITextFieldDelegate {
             {
                 self.logTextView.text! += "Entering admin mode....\n"
             }
+            _ = cm.requestSystemStatus()
         }
     }
     

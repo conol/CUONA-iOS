@@ -297,7 +297,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 if uuid16equal(char.uuid, CUONA_CHAR_UUID_SYSTEM_STATUS) {
                     CUONASystemStatusChar = char
                     peripheral.setNotifyValue(true, for: char)
-                    peripheral.readValue(for: char)
+                    //peripheral.readValue(for: char)
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_WIFI_SSID_PW) {
                     CUONAWiFiSSIDPwChar = char
                     peripheral.readValue(for: char)
