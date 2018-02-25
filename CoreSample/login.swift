@@ -8,7 +8,9 @@
 
 import UIKit
 
-class login: UIViewController {
+class login: UIViewController, DeviceManagerDelegate
+{
+    var deviceManager: DeviceManager?
     
     @IBOutlet var closeButton:UIButton!
     @IBOutlet var userEmail:UITextField!
@@ -21,6 +23,8 @@ class login: UIViewController {
         
         sendButtton.makeRoundButton("FFFFFF", backgroundColor: "00318E")
         closeButton.makeRoundButton("000000", backgroundColor: "CCCCCC")
+        
+        deviceManager = DeviceManager(delegate: self)
     }
     
     @IBAction func close()
@@ -34,12 +38,16 @@ class login: UIViewController {
             Alert.show(title: "エラー", message: "メールアドレスを入力してください")
             return
         }
-        if userEmail.isMoreThan(50) {
-            Alert.show(title: "エラー", message: "メールアドレスが長すぎます")
+        if userEmail.isLessThan(10) {
+            Alert.show(title: "エラー", message: "メールアドレスが短すぎます")
             return
         }
         if userPass.isBlank {
             Alert.show(title: "エラー", message: "パスワードを入力してください")
+            return
+        }
+        if userEmail.isLessThan(4) {
+            Alert.show(title: "エラー", message: "パスワードが短すぎます")
             return
         }
         doLogin()
@@ -47,7 +55,7 @@ class login: UIViewController {
     
     func doLogin()
     {
-        
+        deviceManager?.request?.signIn(email: userEmail.text!, password: userPass.text!)
     }
     
     @IBAction func hideKeyboard()
@@ -61,4 +69,29 @@ class login: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    //MARK: - Delegate
+    func successSendLog(json: [String : Any])
+    {
+        print("ログ送信成功")
+    }
+    
+    func failedSendLog(status: NSInteger, json: [String : Any]?)
+    {
+        print("ログ送信失敗")
+    }
+    
+    func successSignIn(json: [String : Any])
+    {
+        let data = json["data"] as! [String : Any]?
+        let device_pass = data!["device_password"] as! String
+        
+        center.post(name: NSNotification.Name(rawValue: "device_pass"), object: device_pass)
+        close()
+    }
+    
+    func failedSignIn(status: NSInteger, json: [String : Any]?)
+    {
+        print(json)
+        Alert.show(title: "ログインエラー", message: "が原因")
+    }
 }
