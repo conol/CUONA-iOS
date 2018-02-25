@@ -107,8 +107,6 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         self.deviceId = deviceId
         jsonDic  = convertToDictionary(json)
         
-        print(jsonDic)
-        
         switch mode {
         case .Admin: return connectedAndGetInfo(json)
         case .Write: return true
@@ -195,7 +193,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             let isWep = type == 2 ? true : false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.checkConnectedWifi(ssid: ssid, password: pass, isWEP: isWep, day: NSNumber(value: days))
+                self.checkConnectedWifi(ssid: ssid, password: pass, isWEP: isWep, day: days)
             }
         } else {
             showSettingNoneError()
@@ -228,14 +226,14 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     //MARK: - 便利メソッド
-    func checkConnectedWifi(ssid:String, password:String, isWEP:Bool, day:NSNumber)
+    func checkConnectedWifi(ssid:String, password:String, isWEP:Bool, day:Int)
     {
         let manager = NEHotspotConfigurationManager.shared
         let hotspotConfiguration = NEHotspotConfiguration(ssid: ssid, passphrase: password, isWEP: isWEP)
         hotspotConfiguration.joinOnce = false
         
-        if 0 < day as! Decimal {
-            hotspotConfiguration.lifeTimeInDays = day
+        if 0 < day {
+            hotspotConfiguration.lifeTimeInDays = NSNumber(value: day)
         }
         
         manager.apply(hotspotConfiguration) { (error) in
