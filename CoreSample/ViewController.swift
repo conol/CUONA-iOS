@@ -144,16 +144,16 @@ UITextFieldDelegate {
                         }
                     }
                 }
-                let changePW = UIAlertAction(title: "Write Zero Password", style: .default){ Void in
+                let changePW = UIAlertAction(title: "Password registered", style: .default){ Void in
                     if let manager = self.cuonaManager {
-                        _ = manager.setAdminPassword("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
-                        self.logTextView.text! += "Success: Password registered\n"
+                        _ = manager.setAdminPassword(self.device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+                        self.logTextView.text! += "Success: password registered\n"
                     }
                 }
                 let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
                     if let manager = self.cuonaManager {
                         _ = manager.unsetAdminPassword()
-                        self.logTextView.text! += "Success: Password initialized\n"
+                        self.logTextView.text! += "Success: password initialized\n"
                     }
                 }
                 sheet.addAction(updateFirmware)
@@ -204,7 +204,7 @@ UITextFieldDelegate {
     {
         device_pass = notificate.object as? String
         if let tv = logTextView {
-            tv.text! += "Get admin pass is '\(device_pass ?? "")'\n"
+            tv.text! += "Success sign in\nGet admin pass is '\(device_pass ?? "")'\n"
         }
     }
     
