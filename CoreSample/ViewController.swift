@@ -83,9 +83,7 @@ UITextFieldDelegate {
         if device_pass != nil {
             let logout = UIAlertAction(title: "Sign out", style: .default) { Void in
                 self.device_pass = nil
-                if let tv = self.logTextView {
-                    tv.text! += "Success sign out\n"
-                }
+                self.writeLog("Success: sign out\n")
             }
             sheet.addAction(logout)
         } else {
@@ -113,16 +111,14 @@ UITextFieldDelegate {
                 let updateFirmware = UIAlertAction(title: "Update firmware", style: .default) { Void in
                     if let manager = self.cuonaManager {
                         if !manager.requestOTAUpdate() {
-                            self.logTextView.text!
-                                += "This CUONA firmware does not support OTA\n"
+                            self.writeLog("This CUONA firmware does not support OTA\n")
                         }
                     }
                 }
                 let forceUpdateFirmware = UIAlertAction(title: "Force update firmware", style: .default) { Void in
                     if let manager = self.cuonaManager {
                         if !manager.requestOTAUpdate(force: true) {
-                            self.logTextView.text!
-                                += "This CUONA firmware does not support OTA\n"
+                            self.writeLog("This CUONA firmware does not support OTA\n")
                         }
                     }
                 }
@@ -130,8 +126,7 @@ UITextFieldDelegate {
                     if let manager = self.cuonaManager {
                         let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"ssid\",\"pass\":\"pass\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
                         if !manager.writeJSON(json) {
-                            self.logTextView.text!
-                                += "This CUONA firmware does not support JSON writing\n"
+                            self.writeLog("This CUONA firmware does not support JSON writing\n")
                         }
                     }
                 }
@@ -139,21 +134,20 @@ UITextFieldDelegate {
                     if let manager = self.cuonaManager {
                         let json = "{}"
                         if !manager.writeJSON(json) {
-                            self.logTextView.text!
-                                += "This CUONA firmware does not support JSON writing\n"
+                            self.writeLog("This CUONA firmware does not support JSON writing\n")
                         }
                     }
                 }
                 let changePW = UIAlertAction(title: "Password registered", style: .default){ Void in
                     if let manager = self.cuonaManager {
                         _ = manager.setAdminPassword(self.device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
-                        self.logTextView.text! += "Success: password registered\n"
+                        self.writeLog("Success: password registered\n")
                     }
                 }
                 let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
                     if let manager = self.cuonaManager {
                         _ = manager.unsetAdminPassword()
-                        self.logTextView.text! += "Success: password initialized\n"
+                        self.writeLog("Success: password initialized\n")
                     }
                 }
                 sheet.addAction(updateFirmware)
@@ -203,9 +197,7 @@ UITextFieldDelegate {
     @objc func getDevicePass(_ notificate:NSNotification)
     {
         device_pass = notificate.object as? String
-        if let tv = logTextView {
-            tv.text! += "Success sign in\nGet admin pass is '\(device_pass ?? "")'\n"
-        }
+        writeLog("Success: sign in\nSuccess: get admin pass '\(device_pass ?? "")'\n")
     }
     
     func layout()
@@ -244,38 +236,27 @@ UITextFieldDelegate {
     }
     
     // cuonaManagerDelegate
-    
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        if let tv = logTextView {
-            tv.text! += "NFC Detected: deviceId=\(deviceId), "
-            tv.text! += "type=\(type), "
-            tv.text! += "JSON=\(json)\n"
-        }
+        writeLog("NFC Detected: deviceId=\(deviceId), type=\(type), JSON=\(json)\n")
         return type == CUONA_TAG_TYPE_CUONA ? true : false
     }
     
     func cuonaNFCCanceled() {
-        if let tv = logTextView {
-            tv.text! += "NFC Canceled\n"
-        }
+        writeLog("Failed: NFC Canceled\n")
     }
     
     func cuonaIllegalNFCDetected() {
-        if let tv = logTextView {
-            tv.text! += "Illegal NFC Detected\n"
-        }
+        writeLog("Failed: illegal NFC Detected\n")
     }
     
     func cuonaConnected() {
-        if let tv = logTextView {
-            tv.text! += "Connected\n"
-        }
+        writeLog("Success: connected\n")
         // 管理モード（要パスワード）に入る
         if let cm = cuonaManager {
             if cm.enterAdminMode(device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
             {
-                self.logTextView.text! += "Entering admin mode....\n"
+                self.writeLog("Success: entering admin mode....\n")
             }
             _ = cm.requestSystemStatus()
             connected = true
@@ -283,25 +264,21 @@ UITextFieldDelegate {
     }
     
     func cuonaDisconnected() {
-        if let tv = logTextView {
-            tv.text! += "Disconnected\n"
-        }
+        writeLog("Success: disconnected\n")
         connected = false
     }
     
     func cuonaConnectFailed(_ error:String) {
-        if let tv = logTextView {
-            tv.text! += "Connect Failed\n"
-        }
+        writeLog("Failed: connect failed\n")
     }
     
     func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus) {
         if let tv = logTextView {
             let stringArray = status.nfcDeviceUID.flatMap({ String($0) }).joined(separator: ",")
-            let ps = status.isPowerFromUSB ? "USB" : "battery"
+            let ps = status.isPowerFromUSB ? "USB" : "Battery"
             tv.text! += "status: version: \(status.version),"
                 + " hardware: \(status.hardwareVersion)\n"
-                + "  wifi: started: \(status.wifiStarted),"
+                + "  wifi started: \(status.wifiStarted),"
                 + " connected: \(status.wifiConnected)\n"
                 + "  ip4addr: \(status.ip4addr)\n"
                 + "  nfcChipUID: [\(stringArray)]\n"
@@ -311,7 +288,7 @@ UITextFieldDelegate {
                 + " voltage: \(status.voltage),"
                 + " battery: \(status.batteryPercentage) %\n"
             
-            tv.text! += status.inAdminMode ? "Sign in admin mode\n" : "Can't sign in admin mode\n"
+            tv.text! += status.inAdminMode ? "Success: sign in admin mode\n" : "Failed: can't sign in admin mode\n"
             adminMode = status.inAdminMode
         }
         if status.wifiStarted {
@@ -330,7 +307,7 @@ UITextFieldDelegate {
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String) {
         ssidTextField?.text = ssid
         pwTextField?.text = password
-        self.logTextView.text! += "Loaded SSID and Password\n"
+        writeLog("Success: loaded SSID and Password\n")
     }
     
     func cuonaUpdatedServerHost(_ hostName: String) {
@@ -342,20 +319,21 @@ UITextFieldDelegate {
     }
     
     func cuonaUpdatedNetResponse(code: Int, message: String) {
-        if let tv = logTextView {
-            tv.text! += "Response: code=\(code) msg=\(message)\n"
-        }
+        writeLog("Response: code=\(code) msg=\(message)\n")
     }
     
     func cuonaUpdateOTAStatus(_ status: CUONAOTAStatus) {
-        if let tv = logTextView {
-            tv.text! += "OTA status: \(status.show())\n"
-        }
+        writeLog("OTA status: \(status.show())\n")
     }
     
     func cuonaUpdatedJSON() {
+        writeLog("Success: JSON written to NFC\n")
+    }
+    
+    func writeLog(_ text: String)
+    {
         if let tv = logTextView {
-            tv.text! += "JSON written to NFC\n"
+            tv.text! += text
         }
     }
     
@@ -367,5 +345,3 @@ UITextFieldDelegate {
     }
     
 }
-
-
