@@ -179,7 +179,7 @@ public class HttpRequest
                 let token = data["app_token"] as? String
                 self.app_token = token
                 UserDefaults.standard.set(token, forKey: APP_TOKEN)
-                self.delegate?.successSignIn(json: returnData)
+                self.delegate?.successSignIn(json: data)
             } else {
                 self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
