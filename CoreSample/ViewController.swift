@@ -8,25 +8,21 @@
 
 import UIKit
 
-extension Data {
-    func hexEncodedString() -> String {
-        return map { String(format: "%02hhx", $0) }.joined(separator: " ")
-    }
-}
-
 class MainViewController: UIViewController, CUONAManagerDelegate,
 UITextFieldDelegate {
     
     @IBOutlet weak var logTextView: UITextView!
-    @IBOutlet weak var ssidTextField: UITextField!
-    @IBOutlet weak var pwTextField: UITextField!
+    @IBOutlet weak var ssidTextField: CustomTextField!
+    @IBOutlet weak var pwTextField: CustomTextField!
     @IBOutlet weak var hostTextField: UITextField!
     @IBOutlet weak var pathTextField: UITextField!
     @IBOutlet weak var sendMessageTextField: UITextField!
-    @IBOutlet weak var resultMessageLabel: UILabel!
     @IBOutlet weak var statusLabel1: UILabel!
     @IBOutlet weak var statusLabel2: UILabel!
     @IBOutlet weak var statusView: UIView!
+    
+    @IBOutlet var setWiFiButton:UIButton!
+    @IBOutlet var menuButton:UIButton!
     
     var cuonaManager: CUONAManager?
     
@@ -38,11 +34,10 @@ UITextFieldDelegate {
         hostTextField?.text = ""
         pathTextField?.text = ""
         
-        resultMessageLabel?.text = ""
         statusLabel1?.text = ""
         statusLabel2?.text = ""
         
-        cuonaManager?.startReadingNFC("CUONAをタッチしてください")
+        cuonaManager?.startReadingNFC("Please touch a CUONA")
     }
     
     @IBAction func onSetWifiButton(_ sender: Any) {
@@ -75,67 +70,74 @@ UITextFieldDelegate {
     
     @IBAction func showMenu(_ sender: Any)
     {
-        let sheet = UIAlertController(title: "操作メニュー", message: nil, preferredStyle: .actionSheet)
-        let startNFC = UIAlertAction(title: "NFC開始", style: .default) { Void in
-            self.cuonaManager?.startReadingNFC("再度CUONAへタッチしてください")
+        let sheet = UIAlertController(title: "Control Menu List", message: nil, preferredStyle: .actionSheet)
+        let startNFC = UIAlertAction(title: "Start Touch NFC", style: .default) { Void in
+            self.cuonaManager?.startReadingNFC("Please touch a CUONA")
         }
-        let updateNFC = UIAlertAction(title: "端末情報更新", style: .default) { Void in
+        let updateNFC = UIAlertAction(title: "Update Connected CUONA Info", style: .default) { Void in
             _ = self.cuonaManager?.requestSystemStatus()
         }
-        let disconnectNFC = UIAlertAction(title: "BT切断", style: .default) { Void in
+        let login = UIAlertAction(title: "Logged In", style: .default) { Void in
+            let login = self.storyboard?.instantiateViewController(withIdentifier: "login")
+            self.present(login!, animated: true, completion: {
+                
+            })
+        }
+        let disconnectNFC = UIAlertAction(title: "Disconnect CUONA", style: .default) { Void in
             self.cuonaManager?.requestDisconnect()
         }
-        let updateFirmware = UIAlertAction(title: "ファームウェアアップデート", style: .default) { Void in
+        let updateFirmware = UIAlertAction(title: "Update farmware", style: .default) { Void in
             if let manager = self.cuonaManager {
                 if !manager.requestOTAUpdate() {
                     self.logTextView.text!
-                        += "OTAに対応していないファームウェアのようです\n"
+                        += "This CUONA firmware does not support OTA\n"
                 }
             }
         }
-        let forceUpdateFirmware = UIAlertAction(title: "ファームウェアアップデート（強制）", style: .default) { Void in
+        let forceUpdateFirmware = UIAlertAction(title: "Force update farmware", style: .default) { Void in
             if let manager = self.cuonaManager {
                 if !manager.requestOTAUpdate(force: true) {
                     self.logTextView.text!
-                        += "OTAに対応していないファームウェアのようです\n"
+                        += "This CUONA firmware does not support OTA\n"
                 }
             }
         }
-        let writeJSON = UIAlertAction(title: "サービスJSON書き込み", style: .default) { Void in
+        let writeJSON = UIAlertAction(title: "Write service JSON", style: .default) { Void in
             if let manager = self.cuonaManager {
-                let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"conol\",\"pass\":\"asasdasdsa\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
+                let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"ssid\",\"pass\":\"pass\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
                 if !manager.writeJSON(json) {
                     self.logTextView.text!
-                        += "JSON書き込みに対応していないファームウェアのようです\n"
+                        += "This CUONA firmware does not support JSON writing\n"
                 }
             }
         }
-        let writeJSON2 = UIAlertAction(title: "サービスJSONを消す", style: .default) { Void in
+        let writeJSON2 = UIAlertAction(title: "Delete service JSON", style: .default) { Void in
             if let manager = self.cuonaManager {
                 let json = "{}"
                 if !manager.writeJSON(json) {
                     self.logTextView.text!
-                        += "JSON書き込みに対応していないファームウェアのようです\n"
+                        += "This CUONA firmware does not support JSON writing\n"
                 }
             }
         }
-        let changePW = UIAlertAction(title: "パスワード書き込み", style: .default){ Void in
+        let changePW = UIAlertAction(title: "Write Zero Password", style: .default){ Void in
             if let manager = self.cuonaManager {
                 _ = manager.setAdminPassword("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
                 self.logTextView.text! += "success: Password registered\n"
             }
         }
-        let unsetPW = UIAlertAction(title: "パスワード解除", style: .default){ Void in
+        let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
             if let manager = self.cuonaManager {
                 _ = manager.unsetAdminPassword()
                 self.logTextView.text! += "success: Password initialized\n"
             }
         }
-        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         sheet.addAction(startNFC)
         sheet.addAction(updateNFC)
         sheet.addAction(disconnectNFC)
+        sheet.addAction(login)
         sheet.addAction(updateFirmware)
         sheet.addAction(forceUpdateFirmware)
         sheet.addAction(writeJSON)
@@ -168,20 +170,39 @@ UITextFieldDelegate {
         pathTextField.delegate = self
         sendMessageTextField.delegate = self
         
-        logTextView.layer.cornerRadius = 4.0
-        logTextView.clipsToBounds = true
-        
-        statusView.layer.cornerRadius = 4.0
-        statusView.clipsToBounds = true
-        
         cuonaManager = CUONAManager(delegate: self)
         
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(willEnterForeground),
-                       name: NSNotification.Name.UIApplicationWillEnterForeground,
-                       object: nil)
+        nc.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         
+        layout()
         scanNFC()
+    }
+    
+    func layout()
+    {
+        ssidTextField.layer.borderWidth = 0.5
+        ssidTextField.layer.borderColor = UIColor.lightGray.cgColor
+        pwTextField.layer.borderWidth = 0.5
+        pwTextField.layer.borderColor = UIColor.lightGray.cgColor
+        ssidTextField.layer.cornerRadius = 4.0
+        pwTextField.layer.cornerRadius = 4.0
+        ssidTextField.clipsToBounds = true
+        pwTextField.clipsToBounds = true
+        
+        logTextView.layer.cornerRadius = 4.0
+        logTextView.layer.borderWidth = 0.5
+        logTextView.layer.borderColor = UIColor.lightGray.cgColor
+        logTextView.clipsToBounds = true
+        
+        statusView.layer.cornerRadius = 4.0
+        statusView.layer.borderWidth = 0.5
+        statusView.layer.borderColor = UIColor.lightGray.cgColor
+        statusView.clipsToBounds = true
+        
+        setWiFiButton.makeRoundButton("FFFFFF", backgroundColor: "00318E")
+        menuButton.makeRoundButton("FFFFFF", backgroundColor: "00318E")
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -223,8 +244,10 @@ UITextFieldDelegate {
         }
         // 管理モード（要パスワード）に入る
         if let cm = cuonaManager {
-            _ = cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")//1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-            self.logTextView.text! += "Logged in admin mode\n"
+            if cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")//1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+            {
+                self.logTextView.text! += "Entering admin mode....\n"
+            }
         }
     }
     
@@ -255,6 +278,8 @@ UITextFieldDelegate {
                 + "  power from \(ps),"
                 + " voltage: \(status.voltage),"
                 + " battery: \(status.batteryPercentage) %\n"
+            
+            tv.text! += (status.inAdminMode || status.isPasswordAllZeros) ? "Logged in admin mode\n" : "Can't logged in admin mode\n"
         }
         if status.wifiStarted {
             if status.wifiConnected {
@@ -287,12 +312,6 @@ UITextFieldDelegate {
         if let tv = logTextView {
             tv.text! += "Response: code=\(code) msg=\(message)\n"
         }
-        if code == 200 {
-            resultMessageLabel?.textColor = .black
-        } else {
-            resultMessageLabel?.textColor = .red
-        }
-        resultMessageLabel?.text = message
     }
     
     func cuonaUpdateOTAStatus(_ status: CUONAOTAStatus) {

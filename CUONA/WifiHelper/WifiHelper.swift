@@ -119,10 +119,19 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         }
     }
     
-    public func cuonaNFCCanceled() {
+    public func cuonaNFCCanceled()
+    {
+        Alert.show(title: "Error", message: "cuonaNFCCanceled")
     }
     
-    public func cuonaIllegalNFCDetected() {
+    public func cuonaIllegalNFCDetected()
+    {
+        Alert.show(title: "Error", message: "cuonaIllegalNFCDetected")
+    }
+    
+    public func cuonaConnectFailed(_ error: String)
+    {
+        Alert.show(title: "Connection Error", message: error)
     }
     
     public func cuonaConnected()

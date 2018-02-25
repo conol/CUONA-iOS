@@ -60,6 +60,9 @@
 		1465318C20295DEF00F7466B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		1465318D20295DEF00F7466B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		1465318E20295DEF00F7466B /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
+		14B24EA12042B76500C7A4A8 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B24EA02042B76500C7A4A8 /* login.swift */; };
+		14B24EA32042BF2C00C7A4A8 /* SampleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B24EA22042BF2C00C7A4A8 /* SampleExtensions.swift */; };
+		14B24EA72042CE1F00C7A4A8 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B24EA62042CE1F00C7A4A8 /* CustomTextField.swift */; };
 		14B824A31FB9D09E0097050B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14B824AC1FBA85B60097050B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14B824B61FBADE160097050B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824B51FBADE160097050B /* AppDelegate.swift */; };
@@ -200,6 +203,9 @@
 		1454EA181FBDB4FB00DA77E0 /* Cuona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuona.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
 		1465318320295A8700F7466B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		14B24EA02042B76500C7A4A8 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
+		14B24EA22042BF2C00C7A4A8 /* SampleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleExtensions.swift; sourceTree = "<group>"; };
+		14B24EA62042CE1F00C7A4A8 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		14B824A21FB9D09E0097050B /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		14B824B31FBADE160097050B /* CoreSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B824B51FBADE160097050B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -453,6 +459,9 @@
 				14B824E61FBADEF00097050B /* CoreSample.entitlements */,
 				14B824B51FBADE160097050B /* AppDelegate.swift */,
 				14B824B71FBADE160097050B /* ViewController.swift */,
+				14B24EA02042B76500C7A4A8 /* login.swift */,
+				14B24EA22042BF2C00C7A4A8 /* SampleExtensions.swift */,
+				14B24EA62042CE1F00C7A4A8 /* CustomTextField.swift */,
 				14B824B91FBADE160097050B /* Main.storyboard */,
 				14B824BC1FBADE160097050B /* Assets.xcassets */,
 				14B824BE1FBADE160097050B /* LaunchScreen.storyboard */,
@@ -1148,8 +1157,11 @@
 				141DA9042031948200CD301D /* CUONAManager.swift in Sources */,
 				141DA9052031948200CD301D /* CUONAMasterKey.swift in Sources */,
 				141DA9062031948200CD301D /* DeviceManager.swift in Sources */,
+				14B24EA12042B76500C7A4A8 /* login.swift in Sources */,
+				14B24EA32042BF2C00C7A4A8 /* SampleExtensions.swift in Sources */,
 				141DA9072031948200CD301D /* Extensions.swift in Sources */,
 				141DA9082031948200CD301D /* NFCReader.swift in Sources */,
+				14B24EA72042CE1F00C7A4A8 /* CustomTextField.swift in Sources */,
 				14B824B81FBADE160097050B /* ViewController.swift in Sources */,
 				14B824B61FBADE160097050B /* AppDelegate.swift in Sources */,
 			);
@@ -1643,6 +1655,7 @@
 				INFOPLIST_FILE = CoreSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CoreSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)/CommonCryptoModuleMap/module.modulemap";
@@ -1662,6 +1675,7 @@
 				INFOPLIST_FILE = CoreSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.conol.apps.CoreSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)/CommonCryptoModuleMap/module.modulemap";
@@ -1787,6 +1801,7 @@
 				INFOPLIST_FILE = Favor_sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.Favor-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)/CommonCryptoModuleMap/module.modulemap";
@@ -1806,6 +1821,7 @@
 				INFOPLIST_FILE = Favor_sample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.Favor-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)/CommonCryptoModuleMap/module.modulemap";
