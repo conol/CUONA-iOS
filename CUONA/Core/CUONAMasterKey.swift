@@ -13,7 +13,7 @@ class CUONAMasterKey {
     
     class func getKey(keyCode: UInt16, deviceId: [UInt8]) -> [UInt8] {
         let kcHigh = UInt8(keyCode >> 8)
-        let kcLow = UInt8(keyCode)
+        let kcLow = UInt8(keyCode & 0xff)
 
         var data = masterKeySeed
         data[24] = kcHigh
