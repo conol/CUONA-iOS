@@ -21,6 +21,11 @@ extension UITextField {
     func isMoreThan(_ characterNum: Int) -> Bool {
         return characterNum <= (text?.count)!
     }
+    
+    // 指定文字数以下ならtrueを返す
+    func isLessThan(_ characterNum: Int) -> Bool {
+        return characterNum >= (text?.count)!
+    }
 }
 
 extension UIButton

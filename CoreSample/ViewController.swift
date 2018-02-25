@@ -21,10 +21,13 @@ UITextFieldDelegate {
     @IBOutlet weak var statusLabel2: UILabel!
     @IBOutlet weak var statusView: UIView!
     
-    @IBOutlet var setWiFiButton:UIButton!
-    @IBOutlet var menuButton:UIButton!
+    @IBOutlet var setWiFiButton: UIButton!
+    @IBOutlet var menuButton: UIButton!
     
     var cuonaManager: CUONAManager?
+    var device_pass: String?
+    var connected: Bool = false
+    var adminMode: Bool = false
     
     func scanNFC() {
         // clean up
@@ -71,79 +74,97 @@ UITextFieldDelegate {
     @IBAction func showMenu(_ sender: Any)
     {
         let sheet = UIAlertController(title: "Control Menu List", message: nil, preferredStyle: .actionSheet)
+        
         let startNFC = UIAlertAction(title: "Start Touch NFC", style: .default) { Void in
             self.cuonaManager?.startReadingNFC("Please touch a CUONA")
         }
-        let updateNFC = UIAlertAction(title: "Update Connected CUONA Info", style: .default) { Void in
-            _ = self.cuonaManager?.requestSystemStatus()
-        }
-        let login = UIAlertAction(title: "Logged In", style: .default) { Void in
-            let login = self.storyboard?.instantiateViewController(withIdentifier: "login")
-            self.present(login!, animated: true, completion: {
-                
-            })
-        }
-        let disconnectNFC = UIAlertAction(title: "Disconnect CUONA", style: .default) { Void in
-            self.cuonaManager?.requestDisconnect()
-        }
-        let updateFirmware = UIAlertAction(title: "Update farmware", style: .default) { Void in
-            if let manager = self.cuonaManager {
-                if !manager.requestOTAUpdate() {
-                    self.logTextView.text!
-                        += "This CUONA firmware does not support OTA\n"
+        sheet.addAction(startNFC)
+        
+        if device_pass != nil {
+            let logout = UIAlertAction(title: "Sign out", style: .default) { Void in
+                self.device_pass = nil
+                if let tv = self.logTextView {
+                    tv.text! += "Success sign out\n"
                 }
             }
+            sheet.addAction(logout)
+        } else {
+            let login = UIAlertAction(title: "Sign in", style: .default) { Void in
+                let sign = self.storyboard?.instantiateViewController(withIdentifier: "login")
+                self.present(sign!, animated: true, completion: nil)
+            }
+            sheet.addAction(login)
         }
-        let forceUpdateFirmware = UIAlertAction(title: "Force update farmware", style: .default) { Void in
-            if let manager = self.cuonaManager {
-                if !manager.requestOTAUpdate(force: true) {
-                    self.logTextView.text!
-                        += "This CUONA firmware does not support OTA\n"
+        
+        //以下はCUONAへ接続していたら利用可能な機能
+        if connected
+        {
+            let updateNFC = UIAlertAction(title: "Update Connected CUONA Info", style: .default) { Void in
+                _ = self.cuonaManager?.requestSystemStatus()
+            }
+            let disconnectNFC = UIAlertAction(title: "Disconnect CUONA", style: .default) { Void in
+                self.cuonaManager?.requestDisconnect()
+            }
+            sheet.addAction(disconnectNFC)
+            sheet.addAction(updateNFC)
+            
+            if adminMode
+            {
+                let updateFirmware = UIAlertAction(title: "Update firmware", style: .default) { Void in
+                    if let manager = self.cuonaManager {
+                        if !manager.requestOTAUpdate() {
+                            self.logTextView.text!
+                                += "This CUONA firmware does not support OTA\n"
+                        }
+                    }
                 }
-            }
-        }
-        let writeJSON = UIAlertAction(title: "Write service JSON", style: .default) { Void in
-            if let manager = self.cuonaManager {
-                let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"ssid\",\"pass\":\"pass\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
-                if !manager.writeJSON(json) {
-                    self.logTextView.text!
-                        += "This CUONA firmware does not support JSON writing\n"
+                let forceUpdateFirmware = UIAlertAction(title: "Force update firmware", style: .default) { Void in
+                    if let manager = self.cuonaManager {
+                        if !manager.requestOTAUpdate(force: true) {
+                            self.logTextView.text!
+                                += "This CUONA firmware does not support OTA\n"
+                        }
+                    }
                 }
-            }
-        }
-        let writeJSON2 = UIAlertAction(title: "Delete service JSON", style: .default) { Void in
-            if let manager = self.cuonaManager {
-                let json = "{}"
-                if !manager.writeJSON(json) {
-                    self.logTextView.text!
-                        += "This CUONA firmware does not support JSON writing\n"
+                let writeJSON = UIAlertAction(title: "Write service JSON", style: .default) { Void in
+                    if let manager = self.cuonaManager {
+                        let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"ssid\",\"pass\":\"pass\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
+                        if !manager.writeJSON(json) {
+                            self.logTextView.text!
+                                += "This CUONA firmware does not support JSON writing\n"
+                        }
+                    }
                 }
-            }
-        }
-        let changePW = UIAlertAction(title: "Write Zero Password", style: .default){ Void in
-            if let manager = self.cuonaManager {
-                _ = manager.setAdminPassword("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
-                self.logTextView.text! += "success: Password registered\n"
-            }
-        }
-        let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
-            if let manager = self.cuonaManager {
-                _ = manager.unsetAdminPassword()
-                self.logTextView.text! += "success: Password initialized\n"
+                let writeJSON2 = UIAlertAction(title: "Delete service JSON", style: .default) { Void in
+                    if let manager = self.cuonaManager {
+                        let json = "{}"
+                        if !manager.writeJSON(json) {
+                            self.logTextView.text!
+                                += "This CUONA firmware does not support JSON writing\n"
+                        }
+                    }
+                }
+                let changePW = UIAlertAction(title: "Write Zero Password", style: .default){ Void in
+                    if let manager = self.cuonaManager {
+                        _ = manager.setAdminPassword("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+                        self.logTextView.text! += "Success: Password registered\n"
+                    }
+                }
+                let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
+                    if let manager = self.cuonaManager {
+                        _ = manager.unsetAdminPassword()
+                        self.logTextView.text! += "Success: Password initialized\n"
+                    }
+                }
+                sheet.addAction(updateFirmware)
+                sheet.addAction(forceUpdateFirmware)
+                sheet.addAction(writeJSON)
+                sheet.addAction(writeJSON2)
+                sheet.addAction(changePW)
+                sheet.addAction(unsetPW)
             }
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        sheet.addAction(startNFC)
-        sheet.addAction(updateNFC)
-        sheet.addAction(disconnectNFC)
-        sheet.addAction(login)
-        sheet.addAction(updateFirmware)
-        sheet.addAction(forceUpdateFirmware)
-        sheet.addAction(writeJSON)
-        sheet.addAction(writeJSON2)
-        sheet.addAction(changePW)
-        sheet.addAction(unsetPW)
         sheet.addAction(cancel)
         
         present(sheet, animated: true, completion: nil)
@@ -172,11 +193,19 @@ UITextFieldDelegate {
         
         cuonaManager = CUONAManager(delegate: self)
         
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        center.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        center.addObserver(self, selector: #selector(getDevicePass(_ :)), name: NSNotification.Name(rawValue: "device_pass"), object: nil)
         
         layout()
         scanNFC()
+    }
+    
+    @objc func getDevicePass(_ notificate:NSNotification)
+    {
+        device_pass = notificate.object as? String
+        if let tv = logTextView {
+            tv.text! += "Get admin pass is '\(device_pass ?? "")'\n"
+        }
     }
     
     func layout()
@@ -244,11 +273,12 @@ UITextFieldDelegate {
         }
         // 管理モード（要パスワード）に入る
         if let cm = cuonaManager {
-            if cm.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")//1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+            if cm.enterAdminMode(device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
             {
                 self.logTextView.text! += "Entering admin mode....\n"
             }
             _ = cm.requestSystemStatus()
+            connected = true
         }
     }
     
@@ -256,6 +286,7 @@ UITextFieldDelegate {
         if let tv = logTextView {
             tv.text! += "Disconnected\n"
         }
+        connected = false
     }
     
     func cuonaConnectFailed(_ error:String) {
@@ -280,7 +311,8 @@ UITextFieldDelegate {
                 + " voltage: \(status.voltage),"
                 + " battery: \(status.batteryPercentage) %\n"
             
-            tv.text! += (status.inAdminMode || status.isPasswordAllZeros) ? "Logged in admin mode\n" : "Can't logged in admin mode\n"
+            tv.text! += status.inAdminMode ? "Sign in admin mode\n" : "Can't sign in admin mode\n"
+            adminMode = status.inAdminMode
         }
         if status.wifiStarted {
             if status.wifiConnected {
