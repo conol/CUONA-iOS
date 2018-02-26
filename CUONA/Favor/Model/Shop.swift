@@ -18,7 +18,7 @@ public class Shop: NSObject
     public private(set) var address:String = ""
     public private(set) var phone_number:String? = nil
     public private(set) var notes:String? = nil
-    public private(set) var extension_fields:[ExtensionField?] = []
+    public private(set) var extension_fields:[(label: String, value: String?)?] = []
     public private(set) var image_urls:[String?] = []
     public private(set) var visit_count = 0
     public private(set) var last_visit_time:Date?
@@ -47,7 +47,8 @@ public class Shop: NSObject
         // extension_fieldsの情報を設定
         for extensionFiledJson in shopJson["extension_fields"] as! [[String : Any]]
         {
-            extension_fields.append(ExtensionField(extensionFiledJson))
+            let extensionFiled = ExtensionField(extensionFiledJson)
+            extension_fields.append((lavel: extensionFiled.label, value: extensionFiled.value) as (String, String?))
         }
         
         // shop_imagesの情報を設定
@@ -73,16 +74,16 @@ public class Shop: NSObject
         last_visit_time = nil
     }
     
-    public class ExtensionField
+    class ExtensionField
     {
         public private(set) var id = 0
-        public private(set) var lavel = ""
+        public private(set) var label = ""
         public private(set) var value:String? = nil
         
-        init(_ extensionFieldJson: [String : Any])
+        init(_ extensionFieldJson: [String : Any?])
         {
             id    = extensionFieldJson["id"] as! Int
-            lavel = extensionFieldJson["lavel"] as! String
+            label = extensionFieldJson["label"] as! String
             value = extensionFieldJson["value"] as? String
         }
     }
