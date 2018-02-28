@@ -13,12 +13,12 @@ public class User: NSObject
     var owner_id:Int?
     var original_id:Int?
     var language:String?
+    var image:String?
     
     public private(set) var nickname:String?
     public private(set) var gender:String?
     public private(set) var age:Int?
     public private(set) var pref:String?
-    public private(set) var image:String?
     public private(set) var image_url:String?
     public private(set) var push_token:String?
     public private(set) var notifiable:Bool?
