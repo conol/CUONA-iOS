@@ -140,7 +140,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.editUser, method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
+                self.delegate?.successEditUserInfo?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
                 self.delegate?.failedEditUserInfo?(exception: FavorException(jsonData: returnData))
             }
@@ -153,7 +153,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getUser, method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
-                self.delegate?.successRegister?(user: User(jsonData: returnData["data"] as! [String : Any]))
+                self.delegate?.successGetUserInfo?(user: User(jsonData: returnData["data"] as! [String : Any]))
             } else {
                 self.delegate?.failedGetUserInfo?(exception: FavorException(jsonData: returnData))
             }
