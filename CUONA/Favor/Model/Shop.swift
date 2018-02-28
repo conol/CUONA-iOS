@@ -22,6 +22,7 @@ public class Shop: NSObject
     public private(set) var image_urls:[String?] = []
     public private(set) var visit_count = 0
     public private(set) var last_visit_time:Date?
+    public private(set) var entered_time:Date?
     
     override init()
     {
@@ -63,6 +64,8 @@ public class Shop: NSObject
         visit_count       = visitHistoryJson["num_visits"] as! Int
         let last_visit_at = visitHistoryJson["last_visit_at"] as? String
         last_visit_time   = last_visit_at?.dateFromISO8601
+        let created_at    = visitHistoryJson["created_at"] as? String
+        entered_time      = created_at?.dateFromISO8601
     }
     
     func leave()
