@@ -86,7 +86,6 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public var deviceManager: DeviceManager?
 
     weak var delegate: FavorDelegate?
-    var shop = Shop()
     
     required public init(delegate: FavorDelegate)
     {
@@ -161,9 +160,9 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // 店舗詳細取得
-    public func getShopInfo()
+    public func getShopInfo(shop_id: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop.id), method: .get, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop_id), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 let data = returnData["data"] as! [String : Any]
