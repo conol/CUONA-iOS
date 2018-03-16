@@ -232,6 +232,7 @@ public class HttpRequest
         var req = URLRequest(url: URL(string:url)!)
         req.httpMethod = method.rawValue
         if app_token != nil {
+            app_token = "SGZazjqXvjvWSz1WSpkg3tFi"
             req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")

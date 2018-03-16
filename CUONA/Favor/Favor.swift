@@ -162,7 +162,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     // 店舗詳細取得
     public func getShopInfo(shop_id: Int)
     {
-        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shop_id), method: .get, params: nil, funcs: { (returnData, response) in
+        deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getShopDetail(shop_id), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 let data = returnData["data"] as! [String : Any]

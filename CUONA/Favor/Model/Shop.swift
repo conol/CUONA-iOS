@@ -31,9 +31,8 @@ public class Shop: NSObject
     
     init(dataJson: [String : Any]) {
         
-        // jsonからshopとvisit_historyの内容を取得
+        // jsonからshopの内容を取得
         let shopJson         = dataJson["shop"] as! [String : Any]
-        let visitHistoryJson = dataJson["visit_history"] as! [String : Any]
         
         // shopの情報を各メンバ変数に設定
         id           = shopJson["id"] as! Int
@@ -56,6 +55,11 @@ public class Shop: NSObject
         for shopImageJson in shopJson["shop_images"] as! [[String : Any]]
         {
             image_urls.append(ShopImage(shopImageJson).image_url)
+        }
+        
+        // jsonからvisit_historyの内容を取得
+        guard let visitHistoryJson = dataJson["visit_history"] as? [String : Any] else {
+            return
         }
         
         // visit_historyの情報を各メンバ変数に設定

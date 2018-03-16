@@ -9,19 +9,23 @@
 public class Menu: NSObject
 {
     var id:Int = 0
-    var category_id:Int? = nil
     
     public private(set) var name:String = ""
+    public private(set) var menu_group_id:Int = 0
+    public private(set) var option:String? = nil
     public private(set) var price_cents:Int = 0
     public private(set) var price_format:String = ""
     public private(set) var notes:String? = nil
     public private(set) var image_urls:[String?] = []
+    public private(set) var category_id:Int? = nil
     public private(set) var category_name:String? = nil
     
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
         id            = jsonData["id"] as! Int
+        menu_group_id = jsonData["menu_group_id"] as! Int
+        option        = jsonData["option"] as? String
         category_id   = jsonData["category_id"] as? Int
         name          = jsonData["name"] as! String
         price_cents   = jsonData["price_cents"] as! Int
