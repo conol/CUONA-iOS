@@ -17,6 +17,7 @@ class ViewController: UIViewController, FavorDelegate {
         super.viewDidLoad()
         
         favor = Favor(delegate: self)
+        favor?.startScan()
 //        favor!.registerUser(params: ["nickname": "test"])
         
 //        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
@@ -24,7 +25,15 @@ class ViewController: UIViewController, FavorDelegate {
 //        var orders = [Order]()
 //        orders.append(Order(menuItemId: 1, quantity: 1))
 //        favor!.sendOrder(visitHistoryId: 2, orders: orders)
-        favor!.getUsersAllOrderList()
+//        favor!.getUsersAllOrderList()
+    }
+    
+    func successScan(deviceId: String, type: Int) {
+        print("successScan")
+    }
+    
+    func failedScan(exception: FavorException!) {
+        print("failedScan")
     }
     
     func successRegister(user: User!) {

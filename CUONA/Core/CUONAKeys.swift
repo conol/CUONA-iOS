@@ -15,3 +15,4 @@ public class CUONAKeys {
     public static let customerId: UInt16 = 0
     
 }
+
