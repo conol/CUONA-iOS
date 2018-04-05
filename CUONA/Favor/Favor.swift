@@ -472,11 +472,11 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     func cuonaNFCCanceled() {
-        
+        print("cuonaNFCCanceled")
     }
     
     func cuonaIllegalNFCDetected() {
-        
+        print("cuonaIllegalNFCDetected")
     }
     
     public func successSendLog(json: [String : Any]) {

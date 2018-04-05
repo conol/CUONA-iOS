@@ -38,7 +38,7 @@ public class User: NSObject
     init(jsonData: [String : Any]) {
         
         // appTokenに変更がある場合は保存
-        let token = jsonData["app_token"] as! String!
+        let token = jsonData["app_token"] as! String?
         let savedToken = ud.string(forKey: APP_TOKEN)
         if(token != savedToken) {
             ud.set(token, forKey: APP_TOKEN)

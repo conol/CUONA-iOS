@@ -8,6 +8,10 @@
 
 public class Shop: NSObject
 {
+    public static let active: String = "active"         // statusに入る値用（入店中）
+    public static let accounting: String = "accounting" // statusに入る値用（会計街）
+    public static let left: String = "left"             // statusに入る値用（未入店）
+    
     public private(set) var id = 0
     public private(set) var visit_history_id = 0
     public private(set) var visit_group_id = 0
@@ -21,6 +25,7 @@ public class Shop: NSObject
     public private(set) var extension_fields:[(label: String, value: String?)?] = []
     public private(set) var image_urls:[String?] = []
     public private(set) var visit_count = 0
+    public private(set) var status:String = "active"
     public private(set) var last_visit_time:Date?
     public private(set) var entered_time:Date?
     
@@ -66,6 +71,7 @@ public class Shop: NSObject
         visit_history_id  = visitHistoryJson["id"] as! Int
         visit_group_id    = visitHistoryJson["visit_group_id"] as! Int
         visit_count       = visitHistoryJson["num_visits"] as! Int
+        status            = visitHistoryJson["status"] as! String
         let last_visit_at = visitHistoryJson["last_visit_at"] as? String
         last_visit_time   = last_visit_at?.dateFromISO8601
         let created_at    = visitHistoryJson["created_at"] as? String
