@@ -27,6 +27,8 @@ let serviceKey:String = "H7Pa7pQaVxxG"
     @objc optional func failedSignIn(status: NSInteger, response: [String : Any]?)
     @objc optional func successWrite()
     @objc optional func failedWrite()
+    @objc optional func successBTConnection()
+    @objc optional func failedBTConnection(_ error: String)
 }
 
 public class Wifi: NSObject
@@ -78,10 +80,10 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager = DeviceManager(delegate: self)
     }
     
-    public func start(mode: CUONAMode)
+    public func start(mode: CUONAMode, comment: String)
     {
         self.mode = mode
-        cuonaManager?.startReadingNFC("CUONAにタッチしてください")
+        cuonaManager?.startReadingNFC(comment)
     }
     
     public func hasToken() -> Bool
@@ -95,7 +97,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         return true
     }
     
-    public func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
+    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         deviceManager?.request?.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
         if mode == .Write {
@@ -117,23 +119,25 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         }
     }
     
-    public func cuonaNFCCanceled()
+    func cuonaNFCCanceled()
     {
         Alert.show(title: "Error", message: "cuonaNFCCanceled")
     }
     
-    public func cuonaIllegalNFCDetected()
+    func cuonaIllegalNFCDetected()
     {
         Alert.show(title: "Error", message: "cuonaIllegalNFCDetected")
     }
     
-    public func cuonaConnectFailed(_ error: String)
+    func cuonaConnectFailed(_ error: String)
     {
-        Alert.show(title: "Connection Error", message: error)
+        delegate?.failedBTConnection?(error)
     }
     
     public func cuonaConnected()
     {
+        delegate?.successBTConnection?()
+        
         if mode == .Admin {
             _ = cuonaManager?.setAdminPassword((deviceManager?.device_password)!)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
