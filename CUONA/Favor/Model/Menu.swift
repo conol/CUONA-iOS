@@ -8,8 +8,7 @@
 
 public class Menu: NSObject
 {
-    var id:Int = 0
-    
+    public private(set) var id:Int = 0
     public private(set) var name:String = ""
     public private(set) var menu_group_id:Int = 0
     public private(set) var option:String? = nil

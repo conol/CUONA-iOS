@@ -9,7 +9,7 @@
 public class Shop: NSObject
 {
     public static let active: String = "active"         // statusに入る値用（入店中）
-    public static let accounting: String = "accounting" // statusに入る値用（会計街）
+    public static let accounting: String = "accounting" // statusに入る値用（会計待ち）
     public static let left: String = "left"             // statusに入る値用（未入店）
     
     public private(set) var id = 0
