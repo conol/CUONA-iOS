@@ -274,7 +274,7 @@ UITextFieldDelegate {
     
     func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus) {
         if let tv = logTextView {
-            let stringArray = status.nfcDeviceUID.flatMap({ String($0) }).joined(separator: ",")
+            let stringArray = status.nfcDeviceUID.compactMap({ String($0) }).joined(separator: ",")
             let ps = status.isPowerFromUSB ? "USB" : "Battery"
             tv.text! += "status: version: \(status.version),"
                 + " hardware: \(status.hardwareVersion)\n"

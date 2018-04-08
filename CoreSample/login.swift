@@ -21,6 +21,9 @@ class login: UIViewController, DeviceManagerDelegate
     {
         super.viewDidLoad()
         
+        userEmail.text = "owner1@example.com"
+        userPass.text  = "PASSWORD"
+        
         sendButtton.makeRoundButton("FFFFFF", backgroundColor: "00318E")
         closeButton.makeRoundButton("000000", backgroundColor: "CCCCCC")
         
@@ -82,8 +85,7 @@ class login: UIViewController, DeviceManagerDelegate
     
     func successSignIn(json: [String : Any])
     {
-        let data = json["data"] as! [String : Any]?
-        let device_pass = data!["device_password"] as! String
+        let device_pass = json["device_password"] as! String
         
         center.post(name: NSNotification.Name(rawValue: "device_pass"), object: device_pass)
         close()
@@ -91,7 +93,7 @@ class login: UIViewController, DeviceManagerDelegate
     
     func failedSignIn(status: NSInteger, json: [String : Any]?)
     {
-        print(json)
+        print(json!)
         Alert.show(title: "ログインエラー", message: "が原因")
     }
 }
