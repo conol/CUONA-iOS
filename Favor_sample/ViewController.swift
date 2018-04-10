@@ -26,7 +26,7 @@ class ViewController: UIViewController, FavorDelegate {
 //        orders.append(Order(menuItemId: 1, quantity: 1))
 //        favor!.sendOrder(visitHistoryId: 2, orders: orders)
 //        favor!.getUsersAllOrderList()
-        favor!.getMenuList(shopId: 1)
+        favor!.getMenuListByCategory(shopId: 1)
     }
     
     func successScan(deviceId: String, type: Int) {
@@ -60,6 +60,11 @@ class ViewController: UIViewController, FavorDelegate {
         print(shop.name)
     }
     
+    func failedEnterShop(exception: FavorException!) {
+        print("failedEnterShop")
+        print(exception.message)
+    }
+    
     func successOrder(orders: [Order]!) {
         print(orders[0].name)
     }
@@ -69,7 +74,11 @@ class ViewController: UIViewController, FavorDelegate {
     }
     
     func successGetMenuList(menus: [Menu]!) {
-        let menusTest = menus
+        print("successGetMenuList")
+    }
+    
+    func successGetMenuListByCategory(categories: [Test]!) {
+        print("successGetMenuListByCategory")
     }
 }
 
