@@ -25,6 +25,7 @@ public class Order: NSObject
     public private(set) var orderd_user_image_url:String? = nil
     
     public private(set) var notes:String? = nil
+    public private(set) var option:String? = nil
     public private(set) var image_urls:[String?] = []
     
     public private(set) var shop_id:Int? = nil
@@ -59,6 +60,7 @@ public class Order: NSObject
         
         let menu_item = jsonData["menu_item"] as! [String : Any]
         notes         = menu_item["notes"] as? String
+        option        = menu_item["option"] as? String
         
         shop_id       = jsonData["shop_id"] as? Int
         shop_name     = jsonData["shop_name"] as? String

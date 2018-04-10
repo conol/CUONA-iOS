@@ -218,10 +218,25 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 let datas = returnData["data"] as! [[String : Any]]
                 var menus:[Menu] = []
+                var previousGroupId: Int? = nil  // ひとつ前のメニューのグループID
+                var groupStartIndex: Int = 0     // グループの先頭メニューのインデックス
                 
-                for data in datas
+                for i in 0..<datas.count
                 {
-                    menus.append(Menu(jsonData: data))
+                    let menu = Menu(jsonData: datas[i])
+                    
+                    // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
+                    if i != 0 && previousGroupId == menu.menu_group_id {
+                        menus[groupStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], price_cents: menu.price_cents[0], price_format: menu.price_format[0])
+                    }
+                    // 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
+                    else {
+                        menus.append(menu)
+                        groupStartIndex = menus.count - 1
+                    }
+                    
+                    // ひとつ前の要素のカテゴリIDを保存
+                    previousGroupId = menu.menu_group_id
                 }
                 
                 self.delegate?.successGetMenuList?(menus: menus)
