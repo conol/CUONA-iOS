@@ -46,22 +46,22 @@ public class User: NSObject
         }
         
         // 各メンバ変数に値を設定
-        id             = jsonData["id"] as! Int
-        masterUserId   = jsonData["master_user_id"] as! Int
-        ownerId        = jsonData["owner_id"] as? Int
-        originalId     = jsonData["original_id"] as? Int
-        language       = jsonData["language"] as? String
-        nickname       = jsonData["nickname"] as? String
-        gender         = jsonData["gender"] as? String
-        age            = jsonData["age"] as? Int
-        pref           = jsonData["pref"] as? String
-        imageUrl       = jsonData["image_url"] as? String
-        pushToken      = jsonData["push_token"] as? String
-        notifiable     = jsonData["notifiable"] as? Bool
+        id            = jsonData["id"] as! Int
+        masterUserId  = jsonData["master_user_id"] as! Int
+        ownerId       = jsonData["owner_id"] as? Int
+        originalId    = jsonData["original_id"] as? Int
+        language      = jsonData["language"] as? String
+        nickname      = jsonData["nickname"] as? String
+        gender        = jsonData["gender"] as? String
+        age           = jsonData["age"] as? Int
+        pref          = jsonData["pref"] as? String
+        imageUrl      = jsonData["image_url"] as? String
+        pushToken     = jsonData["push_token"] as? String
+        notifiable    = jsonData["notifiable"] as? Bool
         let createdAt = jsonData["created_at"] as! String
-        createdTime    = createdAt.dateFromISO8601
+        createdTime   = createdAt.dateFromISO8601
         let updatedAt = jsonData["updated_at"] as! String
-        updatedTime    = updatedAt.dateFromISO8601
+        updatedTime   = updatedAt.dateFromISO8601
     }
 }
 
