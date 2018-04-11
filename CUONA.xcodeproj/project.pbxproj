@@ -97,7 +97,7 @@
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		A63191A4203BFC170076A8D8 /* FavorException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63191A3203BFC170076A8D8 /* FavorException.swift */; };
 		A668E6F2203D5B780095B62F /* Favor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A66CEF27207CEFFA00DCAA8B /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66CEF26207CEFFA00DCAA8B /* Test.swift */; };
+		A66CEF27207CEFFA00DCAA8B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66CEF26207CEFFA00DCAA8B /* Group.swift */; };
 		A66FF821202848AB008E262E /* Favor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; };
 		A684FA1E20295ECA00B1AF56 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = A684FA1D20295ECA00B1AF56 /* Define.swift */; };
 		A6CEF12D203BC71E0067605F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEF12C203BC71E0067605F /* User.swift */; };
@@ -240,7 +240,7 @@
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
 		A63191A3203BFC170076A8D8 /* FavorException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorException.swift; sourceTree = "<group>"; };
 		A668E6F6203D5B890095B62F /* Favor_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Favor_sample.entitlements; sourceTree = "<group>"; };
-		A66CEF26207CEFFA00DCAA8B /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		A66CEF26207CEFFA00DCAA8B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		A684FA1D20295ECA00B1AF56 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		A6CEF12C203BC71E0067605F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A6CEF12E203BC7930067605F /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
@@ -527,7 +527,7 @@
 				A6CEF132203BC7E20067605F /* Menu.swift */,
 				A6CEF134203BC8040067605F /* Favorite.swift */,
 				A63191A3203BFC170076A8D8 /* FavorException.swift */,
-				A66CEF26207CEFFA00DCAA8B /* Test.swift */,
+				A66CEF26207CEFFA00DCAA8B /* Group.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1230,7 +1230,7 @@
 				143F3A9B20288A5A00486FF8 /* DeviceManager.swift in Sources */,
 				143F3A9C20288A5A00486FF8 /* Extensions.swift in Sources */,
 				A6CEF135203BC8040067605F /* Favorite.swift in Sources */,
-				A66CEF27207CEFFA00DCAA8B /* Test.swift in Sources */,
+				A66CEF27207CEFFA00DCAA8B /* Group.swift in Sources */,
 				A6CEF133203BC7E20067605F /* Menu.swift in Sources */,
 				A6CEF12F203BC7930067605F /* Shop.swift in Sources */,
 				A6CEF12D203BC71E0067605F /* User.swift in Sources */,

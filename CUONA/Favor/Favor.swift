@@ -43,8 +43,8 @@ import UIKit
     @objc optional func failedGetMenuList(exception:FavorException!)
     
     // メニュー一覧取得（カテゴリ毎）
-    @objc optional func successGetMenuListByCategory(categories:[Test]!)
-    @objc optional func failedGetMenuListByCategory(exception:FavorException!)
+    @objc optional func successGetMenuListByGroup(groups:[Group]!)
+    @objc optional func failedGetMenuListByGroup(exception:FavorException!)
     
     // 注文履歴一覧取得(来店個人単位)
     @objc optional func successGetUsersOrderList(orders:[Order]!)
@@ -230,7 +230,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     let menu = Menu(jsonData: datas[i])
                     
                     // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
-                    if i != 0 && previousGroupId == menu.menu_group_id {
+                    if i != 0 && previousGroupId == menu.option_id {
                         menus[groupStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], price_cents: menu.price_cents[0], price_format: menu.price_format[0])
                     }
                     // 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
@@ -240,7 +240,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     }
                     
                     // ひとつ前の要素のカテゴリIDを保存
-                    previousGroupId = menu.menu_group_id
+                    previousGroupId = menu.option_id
                 }
                 
                 self.delegate?.successGetMenuList?(menus: menus)
@@ -251,56 +251,56 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // メニュー一覧取得（カテゴリ毎）
-    public func getMenuListByCategory(shopId: Int)
+    public func getMenuListByGroup(shopId: Int)
     {
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.getMenu(shopId), method: .get, params: nil, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 200 {
                 
                 let datas = returnData["data"] as! [[String : Any]]
-                var categories:[Test] = []
+                var groups:[Group] = []
                 var menus:[Menu] = []
-                var previousGroupId: Int? = -1     // ひとつ前のメニューのグループID
-                var groupStartIndex: Int = 0       // グループの先頭メニューのインデックス
-                var previousCategoryId: Int? = -1  // ひとつ前のメニューのカテゴリID
-                var categoryStartIndex: Int = 0    // カテゴリの先頭メニューのインデックス
+                var previousOptionId: Int? = -1    // ひとつ前のメニューのグループID
+                var optionStartIndex: Int = 0      // オプションの先頭メニューのインデックス
+                var previousGroupId: Int? = -1     // ひとつ前のメニューのカテゴリID
+                var groupStartIndex: Int = 0       // カテゴリの先頭メニューのインデックス
                 
                 for i in 0..<datas.count
                 {
                     let menu = Menu(jsonData: datas[i])
                     
                     // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
-                    if i != 0 && previousGroupId == menu.menu_group_id {
-                        menus[groupStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], price_cents: menu.price_cents[0], price_format: menu.price_format[0])
+                    if i != 0 && previousOptionId == menu.option_id {
+                        menus[optionStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], price_cents: menu.price_cents[0], price_format: menu.price_format[0])
                     }
                     // ひとつめ or 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
                     else {
                         menus.append(menu)
-                        groupStartIndex = menus.count - 1
+                        optionStartIndex = menus.count - 1
                     }
                     
                     // ひとつ前の要素のカテゴリIDを保存
-                    previousGroupId = menu.menu_group_id
+                    previousOptionId = menu.option_id
                 }
                 
                 for i in 0..<menus.count {
                     
                     // ひとつめ or カテゴリが切り替わった場合は新しいカテゴリオブジェクトを作成
-                    if i == 0 || previousCategoryId != menus[i].category_id {
-                        categories.append(Test(category_id: menus[i].category_id, category_name: menus[i].category_name))
-                        categoryStartIndex = categories.count - 1
+                    if i == 0 || previousGroupId != menus[i].group_id {
+                        groups.append(Group(group_id: menus[i].group_id, group_name: menus[i].group_name))
+                        groupStartIndex = groups.count - 1
                     }
                     
                     // カテゴリにメニューを追加していく
-                    categories[categoryStartIndex].appendMenu(menu: menus[i])
+                    groups[groupStartIndex].appendMenu(menu: menus[i])
                     
                     // ひとつ前の要素のカテゴリIDを保存
-                    previousCategoryId = menus[i].category_id
+                    previousGroupId = menus[i].group_id
                 }
                 
-                self.delegate?.successGetMenuListByCategory?(categories: categories)
+                self.delegate?.successGetMenuListByGroup?(groups: groups)
             } else {
-                self.delegate?.failedGetMenuListByCategory?(exception: FavorException(jsonData: returnData))
+                self.delegate?.failedGetMenuListByGroup?(exception: FavorException(jsonData: returnData))
             }
         })
     }

@@ -8,29 +8,30 @@
 
 public class Menu: NSObject
 {
+    var option_id:Int = 0
+    
     public private(set) var id:[Int] = []
     public private(set) var name:String = ""
-    public private(set) var menu_group_id:Int = 0
     public private(set) var option:[String?] = []
     public private(set) var price_cents:[Int] = []
     public private(set) var price_format:[String] = []
     public private(set) var notes:String? = nil
     public private(set) var image_urls:[String?] = []
-    public private(set) var category_id:Int? = nil
-    public private(set) var category_name:String? = nil
+    public private(set) var group_id:Int? = nil
+    public private(set) var group_name:String? = nil
     
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
         id.append(jsonData["id"] as! Int)
-        menu_group_id = jsonData["menu_group_id"] as! Int
+        option_id     = jsonData["menu_group_id"] as! Int
         option.append(jsonData["option"] as? String)
-        category_id   = jsonData["category_id"] as? Int
+        group_id   = jsonData["category_id"] as? Int
         name          = jsonData["name"] as! String
         price_cents.append(jsonData["price_cents"] as! Int)
         price_format.append(jsonData["price_format"] as! String)
         notes         = jsonData["notes"] as? String
-        category_name = jsonData["category_name"] as? String
+        group_name = jsonData["category_name"] as? String
         
         // imagesの情報を設定
         for imageJson in jsonData["images"] as! [[String : Any]]

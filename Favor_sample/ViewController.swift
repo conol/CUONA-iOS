@@ -26,7 +26,7 @@ class ViewController: UIViewController, FavorDelegate {
 //        orders.append(Order(menuItemId: 1, quantity: 1))
 //        favor!.sendOrder(visitHistoryId: 2, orders: orders)
 //        favor!.getUsersAllOrderList()
-        favor!.getMenuListByCategory(shopId: 1)
+        favor!.getMenuListByGroup(shopId: 1)
     }
     
     func successScan(deviceId: String, type: Int) {
@@ -77,8 +77,8 @@ class ViewController: UIViewController, FavorDelegate {
         print("successGetMenuList")
     }
     
-    func successGetMenuListByCategory(categories: [Test]!) {
-        print("successGetMenuListByCategory")
+    func successGetMenuListByGroup(groups: [Group]!) {
+        print("successGetMenuListByGroup")
     }
 }
 

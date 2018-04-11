@@ -26,11 +26,12 @@ public class User: NSObject
     public private(set) var updated_time:Date?
     
     public init(nickname: String? = nil, gender: String? = nil, age: Int? = nil,
-         pref: String? = nil, image: String? = nil, notifiable: Bool? = nil) {
+                pref: String? = nil, language: String? = nil, image: String? = nil, notifiable: Bool? = nil) {
         self.nickname   = nickname
         self.gender     = gender
         self.age        = age
         self.pref       = pref
+        self.language   = language
         self.image      = image
         self.notifiable = notifiable
     }
