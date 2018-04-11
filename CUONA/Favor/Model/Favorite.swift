@@ -11,8 +11,8 @@ public class Favorite: NSObject
     public private(set) var id:Int = 0
     public private(set) var name = ""
     public private(set) var level = 3
-    public private(set) var created_time:Date?
-    public private(set) var updated_time:Date?
+    public private(set) var createdTime:Date?
+    public private(set) var updatedTime:Date?
     
     public init(name: String!, level: Int!) {
         self.name = name
@@ -25,10 +25,10 @@ public class Favorite: NSObject
         id             = jsonData["id"] as! Int
         name           = jsonData["name"] as! String
         level          = jsonData["level"] as! Int
-        let created_at = jsonData["created_at"] as! String
-        created_time   = created_at.dateFromISO8601
-        let updated_at = jsonData["updated_at"] as! String
-        updated_time   = updated_at.dateFromISO8601
+        let createdAt = jsonData["created_at"] as! String
+        createdTime   = createdAt.dateFromISO8601
+        let updatedAt = jsonData["updated_at"] as! String
+        updatedTime   = updatedAt.dateFromISO8601
     }
 }
 
