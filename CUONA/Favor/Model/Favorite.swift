@@ -9,12 +9,12 @@
 public class Favorite: NSObject
 {
     public private(set) var id:Int = 0
-    public private(set) var name = ""
-    public private(set) var level = 3
+    public private(set) var name:String
+    public private(set) var level:Int = 3
     public private(set) var createdTime:Date?
     public private(set) var updatedTime:Date?
     
-    public init(name: String!, level: Int!) {
+    public init(name: String, level: Int) {
         self.name = name
         self.level = level
     }
