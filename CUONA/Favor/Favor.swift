@@ -380,7 +380,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         for order in orders
         {
             let orderParam = [
-                "menu_item_id" : order.menu_item_id,
+                "menu_item_id" : order.menuItemId,
                 "quantity" : order.quantity
             ]
             orderParams.append(orderParam)

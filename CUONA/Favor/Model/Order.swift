@@ -9,77 +9,77 @@
 public class Order: NSObject
 {
     var id:Int = 0
-    var visit_history_id:Int = 0
+    var visitHistoryId:Int = 0
     
-    public private(set) var menu_item_id:Int = 0
+    public private(set) var menuItemId:Int = 0
     public private(set) var name:String = ""
-    public private(set) var price_cents:Int = 0
-    public private(set) var price_format:String = ""
+    public private(set) var priceCents:Int = 0
+    public private(set) var priceFormat:String = ""
     public private(set) var quantity:Int = 0
     public private(set) var status:String = ""
-    public private(set) var created_time:Date?
-    public private(set) var updated_time:Date?
+    public private(set) var createdTime:Date?
+    public private(set) var updatedTime:Date?
     
-    public private(set) var orderd_user_id:Int = 0
-    public private(set) var orderd_user_nickname:String = ""
-    public private(set) var orderd_user_image_url:String? = nil
+    public private(set) var orderdUserId:Int = 0
+    public private(set) var orderdUserNickname:String = ""
+    public private(set) var orderdUserImageUrl:String? = nil
     
     public private(set) var notes:String? = nil
     public private(set) var option:String? = nil
-    public private(set) var image_urls:[String?] = []
+    public private(set) var imageUrls:[String?] = []
     
-    public private(set) var shop_id:Int? = nil
-    public private(set) var shop_name:String? = nil
-    public private(set) var entered_time:Date? = nil
+    public private(set) var shopId:Int? = nil
+    public private(set) var shopName:String? = nil
+    public private(set) var enteredTime:Date? = nil
     
     public init(menuItemId: Int, quantity: Int) {
-        menu_item_id  = menuItemId
-        self.quantity = quantity
+        self.menuItemId = menuItemId
+        self.quantity   = quantity
     }
     
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
-        id               = jsonData["id"] as! Int
-        visit_history_id = jsonData["visit_history_id"] as! Int
-        menu_item_id     = jsonData["menu_item_id"] as! Int
-        name             = jsonData["name"] as! String
-        price_cents      = jsonData["price_cents"] as! Int
-        price_format     = jsonData["price_format"] as! String
-        quantity         = jsonData["quantity"] as! Int
-        status           = jsonData["status"] as! String
-        let created_at   = jsonData["created_at"] as! String
-        created_time     = created_at.dateFromISO8601
-        let updated_at   = jsonData["updated_at"] as! String
-        updated_time     = updated_at.dateFromISO8601
+        id             = jsonData["id"] as! Int
+        visitHistoryId = jsonData["visit_history_id"] as! Int
+        menuItemId     = jsonData["menu_item_id"] as! Int
+        name           = jsonData["name"] as! String
+        priceCents     = jsonData["price_cents"] as! Int
+        priceFormat    = jsonData["price_format"] as! String
+        quantity       = jsonData["quantity"] as! Int
+        status         = jsonData["status"] as! String
+        let createdAt  = jsonData["created_at"] as! String
+        createdTime    = createdAt.dateFromISO8601
+        let updatedAt  = jsonData["updated_at"] as! String
+        updatedTime    = updatedAt.dateFromISO8601
         
-        let user              = jsonData["user"] as! [String : Any]
-        orderd_user_id        = user["id"] as! Int
-        orderd_user_nickname  = user["nickname"] as! String
-        orderd_user_image_url = user["image_url"] as? String
+        let user           = jsonData["user"] as! [String : Any]
+        orderdUserId       = user["id"] as! Int
+        orderdUserNickname = user["nickname"] as! String
+        orderdUserImageUrl = user["image_url"] as? String
         
-        let menu_item = jsonData["menu_item"] as! [String : Any]
-        notes         = menu_item["notes"] as? String
-        option        = menu_item["option"] as? String
+        let menuItem = jsonData["menu_item"] as! [String : Any]
+        notes        = menuItem["notes"] as? String
+        option       = menuItem["option"] as? String
         
-        shop_id       = jsonData["shop_id"] as? Int
-        shop_name     = jsonData["shop_name"] as? String
-        let enter_at  = jsonData["enter_at"] as? String
-        entered_time  = enter_at?.dateFromISO8601
+        shopId      = jsonData["shop_id"] as? Int
+        shopName    = jsonData["shop_name"] as? String
+        let enterAt = jsonData["enter_at"] as? String
+        enteredTime = enterAt?.dateFromISO8601
         // imagesの情報を設定
-        for imageJson in menu_item["images"] as! [[String : Any]]
+        for imageJson in menuItem["images"] as! [[String : Any]]
         {
-            image_urls.append(Image(imageJson).image_url)
+            imageUrls.append(Image(imageJson).imageUrl)
         }
     }
     
     class Image
     {
-        public private(set) var image_url = ""
+        public private(set) var imageUrl = ""
         
         init(_ imageJson: [String : Any])
         {
-            image_url = imageJson["image_url"] as! String
+            imageUrl = imageJson["image_url"] as! String
         }
     }
 }
