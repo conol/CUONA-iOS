@@ -230,8 +230,8 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     let menu = Menu(jsonData: datas[i])
                     
                     // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
-                    if i != 0 && previousGroupId == menu.option_id {
-                        menus[groupStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], price_cents: menu.price_cents[0], price_format: menu.price_format[0])
+                    if i != 0 && previousGroupId == menu.optionId {
+                        menus[groupStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], priceCents: menu.priceCents[0], priceFormat: menu.priceFormat[0])
                     }
                     // 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
                     else {
@@ -240,7 +240,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     }
                     
                     // ひとつ前の要素のカテゴリIDを保存
-                    previousGroupId = menu.option_id
+                    previousGroupId = menu.optionId
                 }
                 
                 self.delegate?.successGetMenuList?(menus: menus)
@@ -270,8 +270,8 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     let menu = Menu(jsonData: datas[i])
                     
                     // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
-                    if i != 0 && previousOptionId == menu.option_id {
-                        menus[optionStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], price_cents: menu.price_cents[0], price_format: menu.price_format[0])
+                    if i != 0 && previousOptionId == menu.optionId {
+                        menus[optionStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], priceCents: menu.priceCents[0], priceFormat: menu.priceFormat[0])
                     }
                     // ひとつめ or 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
                     else {
@@ -280,14 +280,14 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     }
                     
                     // ひとつ前の要素のカテゴリIDを保存
-                    previousOptionId = menu.option_id
+                    previousOptionId = menu.optionId
                 }
                 
                 for i in 0..<menus.count {
                     
                     // ひとつめ or カテゴリが切り替わった場合は新しいカテゴリオブジェクトを作成
-                    if i == 0 || previousGroupId != menus[i].group_id {
-                        groups.append(Group(group_id: menus[i].group_id, group_name: menus[i].group_name))
+                    if i == 0 || previousGroupId != menus[i].groupId {
+                        groups.append(Group(groupId: menus[i].groupId, groupName: menus[i].groupName))
                         groupStartIndex = groups.count - 1
                     }
                     
@@ -295,7 +295,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     groups[groupStartIndex].appendMenu(menu: menus[i])
                     
                     // ひとつ前の要素のカテゴリIDを保存
-                    previousGroupId = menus[i].group_id
+                    previousGroupId = menus[i].groupId
                 }
                 
                 self.delegate?.successGetMenuListByGroup?(groups: groups)

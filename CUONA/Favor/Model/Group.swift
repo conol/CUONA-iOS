@@ -8,13 +8,13 @@
 
 public class Group: NSObject
 {
-    public private(set) var group_id:Int? = nil
-    public private(set) var group_name:String? = nil
+    public private(set) var groupId:Int? = nil
+    public private(set) var groupName:String? = nil
     public private(set) var menus:[Menu] = []
     
-    init(group_id: Int?, group_name: String?) {
-        self.group_id = group_id
-        self.group_name = group_name
+    init(groupId: Int?, groupName: String?) {
+        self.groupId = groupId
+        self.groupName = groupName
     }
     
     func appendMenu(menu: Menu) {
