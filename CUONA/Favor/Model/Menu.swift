@@ -10,12 +10,12 @@ public class Menu: NSObject
 {
     var optionId:Int = 0
     
-    public private(set) var id:[Int] = []
+    public private(set) var ids:[Int] = []
     public private(set) var name:String = ""
-    public private(set) var option:[String?] = []
+    public private(set) var options:[String?] = []
     public private(set) var priceCents:[Int] = []
-    public private(set) var priceFormat:[String] = []
-    public private(set) var notes:String? = nil
+    public private(set) var priceFormats:[String] = []
+    public private(set) var note:String? = nil
     public private(set) var imageUrls:[String?] = []
     public private(set) var groupId:Int? = nil
     public private(set) var groupName:String? = nil
@@ -23,14 +23,14 @@ public class Menu: NSObject
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
-        id.append(jsonData["id"] as! Int)
+        ids.append(jsonData["id"] as! Int)
         priceCents.append(jsonData["price_cents"] as! Int)
-        priceFormat.append(jsonData["price_format"] as! String)
-        option.append(jsonData["option"] as? String)
+        priceFormats.append(jsonData["price_format"] as! String)
+        options.append(jsonData["option"] as? String)
         optionId  = jsonData["menu_group_id"] as! Int
         groupId   = jsonData["category_id"] as? Int
         name      = jsonData["name"] as! String
-        notes     = jsonData["notes"] as? String
+        note      = jsonData["notes"] as? String
         groupName = jsonData["category_name"] as? String
         
         // imagesの情報を設定
@@ -42,10 +42,10 @@ public class Menu: NSObject
     
     // メニューにオプションのメニュー内容を追加する
     func setOptionMenu(id: Int, option: String?, priceCents: Int, priceFormat: String) {
-        self.id.append(id)
-        self.option.append(option)
+        self.ids.append(id)
+        self.options.append(option)
         self.priceCents.append(priceCents)
-        self.priceFormat.append(priceFormat)
+        self.priceFormats.append(priceFormat)
     }
     
     class Image

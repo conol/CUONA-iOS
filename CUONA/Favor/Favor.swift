@@ -222,8 +222,8 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                 
                 let datas = returnData["data"] as! [[String : Any]]
                 var menus:[Menu] = []
-                var previousGroupId: Int? = nil  // ひとつ前のメニューのグループID
-                var groupStartIndex: Int = 0     // グループの先頭メニューのインデックス
+                var previousGroupId: Int? = -1  // ひとつ前のメニューのグループID
+                var groupStartIndex: Int = 0    // グループの先頭メニューのインデックス
                 
                 for i in 0..<datas.count
                 {
@@ -231,7 +231,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     
                     // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
                     if i != 0 && previousGroupId == menu.optionId {
-                        menus[groupStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], priceCents: menu.priceCents[0], priceFormat: menu.priceFormat[0])
+                        menus[groupStartIndex].setOptionMenu(id: menu.ids[0], option: menu.options[0], priceCents: menu.priceCents[0], priceFormat: menu.priceFormats[0])
                     }
                     // 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
                     else {
@@ -271,7 +271,7 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
                     
                     // 同じグループのメニューの場合はグループの先頭メニューに情報を追加
                     if i != 0 && previousOptionId == menu.optionId {
-                        menus[optionStartIndex].setOptionMenu(id: menu.id[0], option: menu.option[0], priceCents: menu.priceCents[0], priceFormat: menu.priceFormat[0])
+                        menus[optionStartIndex].setOptionMenu(id: menu.ids[0], option: menu.options[0], priceCents: menu.priceCents[0], priceFormat: menu.priceFormats[0])
                     }
                     // ひとつめ or 異なるグループのメニューの場合はそのまま追加し先頭のインデックスを保存
                     else {

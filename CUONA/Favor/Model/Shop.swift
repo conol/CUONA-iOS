@@ -12,9 +12,9 @@ public class Shop: NSObject
     public static let accounting: String = "accounting" // statusに入る値用（会計待ち）
     public static let left: String = "left"             // statusに入る値用（未入店）
     
-    public private(set) var id = 0
-    public private(set) var visitHistoryId = 0
-    public private(set) var visitGroupId = 0
+    public private(set) var id: Int = 0
+    public private(set) var visitHistoryId: Int = 0
+    public private(set) var visitGroupId: Int = 0
     public private(set) var name:String = ""
     public private(set) var introduction:String = ""
     public private(set) var genre:String = ""

@@ -22,9 +22,9 @@ public class Favorite: NSObject
     init(jsonData: [String : Any]) {
         
         // 各メンバ変数に値を設定
-        id             = jsonData["id"] as! Int
-        name           = jsonData["name"] as! String
-        level          = jsonData["level"] as! Int
+        id            = jsonData["id"] as! Int
+        name          = jsonData["name"] as! String
+        level         = jsonData["level"] as! Int
         let createdAt = jsonData["created_at"] as! String
         createdTime   = createdAt.dateFromISO8601
         let updatedAt = jsonData["updated_at"] as! String

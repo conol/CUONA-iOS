@@ -56,7 +56,7 @@ class ViewController: UIViewController, FavorDelegate {
     func successEnterShop(shop: Shop!) {
         print("successEnterShop")
         print(shop.id)
-        print(shop.visit_history_id)
+        print(shop.visitHistoryId)
         print(shop.name)
     }
     
