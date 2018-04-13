@@ -54,6 +54,11 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         cuonaManager?.startReadingNFC(message)
     }
     
+    public func disconnect()
+    {
+        cuonaManager?.requestDisconnect()
+    }
+    
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         if sendLog == .on && serviceKey != .developer {
