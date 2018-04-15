@@ -33,6 +33,8 @@ import UIKit
     @objc optional func failedRelease(status: NSInteger, response: [String : Any]?)
     @objc optional func successEditDevice(response: [String : Any]?)
     @objc optional func failedEditDevice(status: NSInteger, response: [String : Any]?)
+    @objc optional func successCheckFirmware(response: [String : Any]?)
+    @objc optional func failedEditCheckFirmware(status: NSInteger, response: [String : Any]?)
 }
 
 @available(iOS 11.0, *)
@@ -173,6 +175,20 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         json += "}"
         
         return cuonaManager!.writeJSON(json)
+    }
+    
+    // MARK:- Check CUONA's firmware version
+    public func checkFirmware()
+    {
+        deviceManager?.request?.checkFirmware()
+    }
+    
+    func successCheckFirmware(json: [String : Any]) {
+        delegate?.successCheckFirmware?(response: json)
+    }
+    
+    func failedCheckFirmware(status: NSInteger, json: [String : Any]?) {
+        delegate?.failedEditCheckFirmware?(status: status, response: json)
     }
     
     // MARK:- Sign in CDMS by owner

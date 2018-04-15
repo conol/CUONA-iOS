@@ -37,6 +37,8 @@ public enum Method:String
     @objc optional func failedRelease(status:NSInteger, json:[String : Any]?)
     @objc optional func successEditDevice(json:[String : Any])
     @objc optional func failedEditDevice(status:NSInteger, json:[String : Any]?)
+    @objc optional func successCheckFirmware(json:[String : Any])
+    @objc optional func failedCheckFirmware(status:NSInteger, json:[String : Any]?)
 }
 
 public class DeviceManager: NSObject, HttpRequestDelegate
@@ -109,6 +111,14 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     func failedEditDevice(status:NSInteger, json:[String : Any]?){
         delegate?.failedEditDevice?(status: status, json: json)
     }
+    
+    func successCheckFirmware(json:[String : Any]){
+        delegate?.successCheckFirmware?(json: json)
+    }
+    
+    func failedCheckFirmware(status:NSInteger, json:[String : Any]?){
+        delegate?.failedCheckFirmware?(status: status, json: json)
+    }
 }
 
 @objc protocol HttpRequestDelegate: class
@@ -125,6 +135,8 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     func failedRelease(status:NSInteger, json:[String : Any]?)
     func successEditDevice(json:[String : Any])
     func failedEditDevice(status:NSInteger, json:[String : Any]?)
+    func successCheckFirmware(json:[String : Any])
+    func failedCheckFirmware(status:NSInteger, json:[String : Any]?)
 }
 
 public class HttpRequest
@@ -286,14 +298,32 @@ public class HttpRequest
         }
     }
     
+    //MARK: - ファームウェアアップデートのバージョンチェック
+    public func checkFirmware()
+    {
+        let url = "https://conol-nfc-ota.s3.amazonaws.com/update.json"
+        
+        sendRequestAsynchronous(url, method: .get, params: nil, useToken: false) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successCheckFirmware(json: returnData)
+            } else {
+                self.delegate?.failedCheckFirmware(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
     //MARK: - 共通通信部分
-    public func sendRequestAsynchronous(_ url:String, method:Method, params:[String:Any?]?, funcs:@escaping ([String : Any], URLResponse?) -> Void)
+    public func sendRequestAsynchronous(_ url:String, method:Method, params:[String:Any?]?, useToken:Bool? = true, funcs:@escaping ([String : Any], URLResponse?) -> Void)
     {
         var returnData:[String:Any] = [:]
         var req = URLRequest(url: URL(string:url)!)
         req.httpMethod = method.rawValue
-        if app_token != nil {
-            req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
+        if useToken == true {
+            if app_token != nil {
+                req.addValue("Bearer \(app_token!)", forHTTPHeaderField: "Authorization")
+            }
         }
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         if method == .post || method == .patch || method == .put {
