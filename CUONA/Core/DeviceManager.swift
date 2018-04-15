@@ -252,7 +252,7 @@ public class HttpRequest
     //MARK: - オーナーのデバイスペアリングを解除
     public func releaseDevice(_ device_id:String)
     {
-        let url = API_URL + "api/owners/devices/" + device_id + "/release.json"
+        let url = API_URL + "/api/owners/devices/" + device_id.encodeUrl()! + "/release.json"
         
         sendRequestAsynchronous(url, method: .patch, params: nil) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
@@ -268,7 +268,7 @@ public class HttpRequest
     //MARK: - オーナーデバイスの設定編集
     public func editDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
     {
-        let url = API_URL + "/api/owners/devices/" + device_id + ".json"
+        let url = API_URL + "/api/owners/devices/" + device_id.encodeUrl()! + ".json"
         let params = [
             "name": name,
             "status": enabled ? "enable" : "disable",
