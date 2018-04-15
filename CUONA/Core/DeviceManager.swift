@@ -33,6 +33,10 @@ public enum Method:String
     @objc optional func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
     @objc optional func successPearing(json:[String : Any])
     @objc optional func failedPearing(status:NSInteger, json:[String : Any]?)
+    @objc optional func successRelease(json:[String : Any])
+    @objc optional func failedRelease(status:NSInteger, json:[String : Any]?)
+    @objc optional func successEditDevice(json:[String : Any])
+    @objc optional func failedEditDevice(status:NSInteger, json:[String : Any]?)
 }
 
 public class DeviceManager: NSObject, HttpRequestDelegate
@@ -89,6 +93,22 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     func failedPearing(status: NSInteger, json: [String : Any]?) {
         delegate?.failedPearing?(status: status, json: json)
     }
+    
+    func successRelease(json:[String : Any]) {
+        delegate?.successRelease?(json: json)
+    }
+    
+    func failedRelease(status:NSInteger, json:[String : Any]?) {
+        delegate?.failedRelease?(status: status, json: json)
+    }
+    
+    func successEditDevice(json:[String : Any]){
+        delegate?.successEditDevice?(json: json)
+    }
+    
+    func failedEditDevice(status:NSInteger, json:[String : Any]?){
+        delegate?.failedEditDevice?(status: status, json: json)
+    }
 }
 
 @objc protocol HttpRequestDelegate: class
@@ -101,6 +121,10 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
     func successPearing(json:[String : Any])
     func failedPearing(status:NSInteger, json:[String : Any]?)
+    func successRelease(json:[String : Any])
+    func failedRelease(status:NSInteger, json:[String : Any]?)
+    func successEditDevice(json:[String : Any])
+    func failedEditDevice(status:NSInteger, json:[String : Any]?)
 }
 
 public class HttpRequest
@@ -221,6 +245,43 @@ public class HttpRequest
                 self.delegate?.successPearing(json: returnData)
             } else {
                 self.delegate?.failedPearing(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
+    //MARK: - オーナーのデバイスペアリングを解除
+    public func releaseDevice(_ device_id:String)
+    {
+        let url = API_URL + "api/owners/devices/" + device_id + "/release.json"
+        
+        sendRequestAsynchronous(url, method: .patch, params: nil) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successRelease(json: returnData)
+            } else {
+                self.delegate?.failedRelease(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
+    //MARK: - オーナーデバイスの設定編集
+    public func editDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
+    {
+        let url = API_URL + "/api/owners/devices/" + device_id + ".json"
+        let params = [
+            "name": name,
+            "status": enabled ? "enable" : "disable",
+            "service_ids": service_ids
+            ] as [String : Any]
+        
+        sendRequestAsynchronous(url, method: .patch, params: params) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successEditDevice(json: returnData)
+            } else {
+                self.delegate?.failedEditDevice(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         }
     }
