@@ -35,6 +35,7 @@ import UIKit
     @objc optional func failedEditDevice(status: NSInteger, response: [String : Any]?)
     @objc optional func successCheckFirmware(response: [String : Any]?)
     @objc optional func failedEditCheckFirmware(status: NSInteger, response: [String : Any]?)
+    @objc optional func updateStatus(_ status: CUONAOTAStatus)
 }
 
 @available(iOS 11.0, *)
@@ -275,6 +276,11 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     func failedEditDevice(status: NSInteger, json: [String : Any]?)
     {
         delegate?.failedEditDevice?(status: status, response: json)
+    }
+    
+    //MARK: - Delegate OTA Status
+    func cuonaUpdateOTAStatus(_ status: CUONAOTAStatus) {
+        delegate?.updateStatus?(status)
     }
     
     // MARK:-
