@@ -10,10 +10,11 @@ import UIKit
 
 @objc public protocol CuonaDelegate: class
 {
-    func catchNFC(device_id: String, type: CUONAType, data: [String:Any]?)
+    func catchNFC(device_id: String, type: CUONAType, data: [String:Any]?) -> Bool
     func cancelNFC()
     func failedNFC()
     
+    @objc optional func successStatus(_ status: CUONASystemStatus)
     @objc optional func successNFCData()
     @objc optional func failedNFCData(code: Int, errortxt: String)
     @objc optional func disconnect()
@@ -37,13 +38,12 @@ import UIKit
 @available(iOS 11.0, *)
 public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
-    public var bluetooth:Bluetooth = .off
     public var sendLog:Logging = .on
     public var serviceKey:Service = .developer
+    public weak var delegate: CuonaDelegate?
     
     var cuonaManager: CUONAManager?
     var deviceManager: DeviceManager?
-    weak var delegate: CuonaDelegate?
     
     required public init(delegate: CuonaDelegate)
     {
@@ -63,14 +63,23 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         cuonaManager?.requestDisconnect()
     }
     
+    public func getStatus()
+    {
+        _ = cuonaManager?.requestSystemStatus()
+    }
+    
+    func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus)
+    {
+        delegate?.successStatus?(status)
+    }
+    
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         if sendLog == .on && serviceKey != .developer {
             deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: serviceKey.id(), addUniquId: "", note: "Read DeviceId by iOS")
         }
         let data = convertToDictionary(json)
-        delegate?.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
-        return bluetooth == .on ? true : false
+        return delegate!.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
     }
     
     func cuonaNFCCanceled()

@@ -6,12 +6,6 @@
 //  Copyright © 2018年 conol, Inc. All rights reserved.
 //
 
-public enum Bluetooth:Int
-{
-    case on  = 1
-    case off = 2
-}
-
 public enum Logging:Int
 {
     case on  = 1
