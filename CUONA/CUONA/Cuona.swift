@@ -28,6 +28,10 @@ import UIKit
     @objc optional func failedGetDeviceList(status: NSInteger, response: [String : Any]?)
     @objc optional func successPearing(response: [String : Any]?)
     @objc optional func failedPearing(status: NSInteger, response: [String : Any]?)
+    @objc optional func successRelease(response: [String : Any]?)
+    @objc optional func failedRelease(status: NSInteger, response: [String : Any]?)
+    @objc optional func successEditDevice(response: [String : Any]?)
+    @objc optional func failedEditDevice(status: NSInteger, response: [String : Any]?)
 }
 
 @available(iOS 11.0, *)
@@ -79,16 +83,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.failedNFC()
     }
     
-    func cuonaUpdatedJSON()
-    {
-        delegate?.successNFCData?()
-    }
-    
-    func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
-    {
-        delegate?.failedNFCData?(code: code, errortxt: errortxt)
-    }
-    
+    // MARK:- CUONA's Bluetooth Return check methods
     func cuonaConnected()
     {
         if deviceManager?.device_password != nil {
@@ -106,23 +101,37 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.failedConnect?(error)
     }
     
+    // MARK:- Disconnect to CUONA's Bluetooth.
     func cuonaDisconnected()
     {
         cuonaManager?.requestDisconnect()
         delegate?.disconnect?()
     }
     
+    // MARK:- Update CUONA's firmware
     public func updateFirmware(force: Bool) -> Bool
     {
         return cuonaManager!.requestOTAUpdate(force: force)
     }
     
+    // MARK:- Write json data to CUONA by owner
     public func writeNFC(_ data:[String:Any]?)
     {
         let data = convertToString(data)
         _ = cuonaManager?.writeJSON(data!)
     }
     
+    func cuonaUpdatedJSON()
+    {
+        delegate?.successNFCData?()
+    }
+    
+    func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
+    {
+        delegate?.failedNFCData?(code: code, errortxt: errortxt)
+    }
+    
+    // MARK:- Make CUONA's service data format
     public func makeServiceData(enabled_services:[String:Bool]) -> Bool//[wifi,favor,rounds,members]
     {
         var flg = false
@@ -157,14 +166,10 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         return cuonaManager!.writeJSON(json)
     }
     
+    // MARK:- Sign in CDMS by owner
     public func signIn(email:String, password:String)
     {
         deviceManager?.request?.signIn(email: email, password: password)
-    }
-    
-    public func updateCuonaWifi(ssid:String, password:String)
-    {
-        _ = cuonaManager?.writeWifiSSIDPw(ssid: ssid, password: password)
     }
     
     func successSignIn(json: [String : Any])
@@ -177,6 +182,13 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.failedSignIn!(status: status, response: json)
     }
     
+    // MARK:- Cuona device's wifi change by owner
+    public func updateCuonaWifi(ssid:String, password:String)
+    {
+        _ = cuonaManager?.writeWifiSSIDPw(ssid: ssid, password: password)
+    }
+    
+    // MARK:- Get device list by owner
     public func getDeviceList(_ develop: Bool = false)
     {
         deviceManager?.request?.getDeviceList(develop)
@@ -192,6 +204,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.failedGetDeviceList?(status: status, response: json)
     }
     
+    // MARK:- Pearing device by owner
     public func pearing(device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
     {
         deviceManager?.request?.pearingDevice(device_id, name: name, service_ids: service_ids, enabled: enabled)
@@ -207,9 +220,42 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         delegate?.failedPearing?(status: status, response: json)
     }
     
+    // MARK:- Release device by owner
+    public func release(_ device_id:String)
+    {
+        deviceManager?.request?.releaseDevice(device_id)
+    }
+    
+    func successRelease(json: [String : Any])
+    {
+        delegate?.successRelease?(response: json)
+    }
+    
+    func failedRelease(status: NSInteger, json: [String : Any]?)
+    {
+        delegate?.failedRelease?(status: status, response: json)
+    }
+    
+    // MARK:- Edit device methods for already pearing device
+    public func editDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
+    {
+        deviceManager?.request?.editDevice(device_id, name: name, service_ids: service_ids, enabled: enabled)
+    }
+    
+    func successEditDevice(json: [String : Any])
+    {
+        delegate?.successEditDevice?(response: json)
+    }
+    
+    func failedEditDevice(status: NSInteger, json: [String : Any]?)
+    {
+        delegate?.failedEditDevice?(status: status, response: json)
+    }
+    
+    // MARK:-
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
     {
-        delegate?.successWiFi!(ssid: ssid, password: password)
+        delegate?.successWiFi?(ssid: ssid, password: password)
     }
     
     public func convertToDictionary(_ text: String) -> [String: Any]?
