@@ -80,4 +80,14 @@ extension String
         }
         return results.joined(separator: " ")
     }
+    
+    func encodeUrl() -> String?
+    {
+        return self.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)
+    }
+    
+    func decodeUrl() -> String?
+    {
+        return self.removingPercentEncoding
+    }
 }
