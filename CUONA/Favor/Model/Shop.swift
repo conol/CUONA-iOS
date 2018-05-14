@@ -73,7 +73,7 @@ public class Shop: NSObject
         visitCount      = visitHistoryJson["num_visits"] as! Int
         status          = visitHistoryJson["status"] as! String
         let lastVisitAt = visitHistoryJson["last_visit_at"] as? String
-        lastVisitTime = lastVisitAt?.dateFromISO8601
+        lastVisitTime   = lastVisitAt?.dateFromISO8601
         let createdAt   = visitHistoryJson["created_at"] as? String
         enteredTime     = createdAt?.dateFromISO8601
     }

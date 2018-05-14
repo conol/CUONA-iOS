@@ -34,7 +34,7 @@ public class Menu: NSObject
         groupName = jsonData["category_name"] as? String
         
         // imagesの情報を設定
-        for imageJson in jsonData["images"] as! [[String : Any]]
+        for imageJson in jsonData["menu_images"] as! [[String : Any]]
         {
             imageUrls.append(Image(imageJson).imageUrl)
         }
