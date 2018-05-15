@@ -37,8 +37,8 @@ struct ErrorMessage
 
 struct ApiUrl
 {
-//    static let endPoint = "http://favor-dev.cuona.io"   // エンドポイント
-    static let endPoint = "http://favor-test.cuona.io"   // エンドポイント
+    static let endPoint = "http://favor-dev.cuona.io"   // エンドポイント（開発サーバー）
+//    static let endPoint = "http://favor-test.cuona.io"   // エンドポイント（テストサーバー）
     
     static let registerUesr = endPoint + "/api/users/register.json"                  // ユーザー登録
     static let getUser = endPoint + "/api/users/setting.json"                        // ユーザー情報取得
