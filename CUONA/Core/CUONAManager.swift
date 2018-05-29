@@ -285,6 +285,11 @@ class CUONAManager: NFCReaderDelegate {
                     password: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
     }
     
+    func playSound(soundId: Int, volume: Float) -> Bool {
+        // TODO: Stub
+        return true
+    }
+    
     // NFCReaderDelegate
     
     func nfcReaderGotRecord(_ record: String) {
