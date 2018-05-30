@@ -150,12 +150,19 @@ UITextFieldDelegate {
                         self.writeLog("Success: password initialized\n")
                     }
                 }
+                let soundPlay = UIAlertAction(title: "Play Sound", style: .default) { Void in
+                    if let manager = self.cuonaManager {
+                        _ = manager.playSound(soundId: 1, volume: 1)
+                    }
+                    
+                }
                 sheet.addAction(updateFirmware)
                 sheet.addAction(forceUpdateFirmware)
                 sheet.addAction(writeJSON)
                 sheet.addAction(writeJSON2)
                 sheet.addAction(changePW)
                 sheet.addAction(unsetPW)
+                sheet.addAction(soundPlay)
             }
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

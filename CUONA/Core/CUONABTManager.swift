@@ -13,7 +13,7 @@ let CUONA_CHAR_UUID_OTA_CTRL: UInt16      = 0xff07 // protected
 let CUONA_CHAR_UUID_PLAIN_JSON: UInt16    = 0xff08 // protected, legacy
 let CUONA_CHAR_UUID_NFC_DATA: UInt16      = 0xff09 // protected, secure
 let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
-
+let CUONA_CHAR_UUID_PLAYSOUND: UInt16     = 0xff0b
 
 let CUONA_OTA_REQ_NORMAL: [UInt8]         = [ 0x00, 0x01 ]
 let CUONA_OTA_REQ_FORCE: [UInt8]          = [ 0x00, 0x03 ]
@@ -60,6 +60,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var CUONAPlainJSONChar: CBCharacteristic?
     var CUONANFCDataChar: CBCharacteristic?
     var CUONAPWProtectChar: CBCharacteristic?
+    var CUONAPlaySoundChar: CBCharacteristic?
     
     var writeWiFiValue: CUONAWiFiSSIDPw?
     var writeHostValue: String?
@@ -207,7 +208,16 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
     
-
+    func sendPlaySound(id: UInt8, vol: UInt8) -> Bool {
+        let reqdata: [UInt8] = [ id, vol ]
+        guard let peripheral = currentPeripheral,
+            let char = CUONAPlaySoundChar else {
+                return false
+        }
+        peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
+        return true
+    }
+    
     // CBCentralManagerDelegate
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -322,6 +332,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     CUONANFCDataChar = char
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PWPROTECT) {
                     CUONAPWProtectChar = char
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PLAYSOUND) {
+                    CUONAPlaySoundChar = char
                 }
             }
         }

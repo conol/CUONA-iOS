@@ -54,6 +54,7 @@ func CUONADebugPrint(_ message: String) {
     private let MISC_STATUS_CORONA3    = UInt8(1 << 1)
     private let MISC_STATUS_USB_POWER  = UInt8(1 << 2)
     private let MISC_STATUS_PW_ALLZERO = UInt8(1 << 3)
+    private let MISC_STATUS_CUONA4     = UInt8(1 << 4)
 
     private let BATTERY_VOLTAGE_HIGH   = 4.2
     private let BATTERY_VOLTAGE_LOW    = 3.2
@@ -67,7 +68,15 @@ func CUONADebugPrint(_ message: String) {
         wifiConnected = data[2] != 0
         let miscStatus = data[3]
         inAdminMode = (miscStatus & MISC_STATUS_ADMIN_MODE) != 0
-        hardwareVersion = (miscStatus & MISC_STATUS_CORONA3) != 0 ? 3 : 1
+        if (miscStatus & MISC_STATUS_CORONA3) != 0 {
+            if (miscStatus & MISC_STATUS_CUONA4) != 0 {
+                hardwareVersion = 4
+            } else {
+                hardwareVersion = 3
+            }
+        } else {
+            hardwareVersion = 1
+        }
         isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
         isPasswordAllZeros = (miscStatus & MISC_STATUS_PW_ALLZERO) != 0
         
@@ -286,8 +295,17 @@ class CUONAManager: NFCReaderDelegate {
     }
     
     func playSound(soundId: Int, volume: Float) -> Bool {
-        // TODO: Stub
-        return true
+        if (soundId < 0 || soundId >= 64) {
+            return false
+        }
+        var intVolume = (volume * 127).rounded()
+        if intVolume < 0 {
+            intVolume = 0
+        } else if intVolume > 127 {
+            intVolume = 127
+        }
+        return CUONABTManager.shared.sendPlaySound(id: UInt8(soundId),
+                                                   vol: UInt8(intVolume))
     }
     
     // NFCReaderDelegate
