@@ -152,7 +152,7 @@ UITextFieldDelegate {
                 }
                 let soundPlay = UIAlertAction(title: "Play Sound", style: .default) { Void in
                     if let manager = self.cuonaManager {
-                        _ = manager.playSound(soundId: 1, volume: 1)
+                        _ = manager.playSound(soundId: 1, volume: 0.5)
                     }
                     
                 }
