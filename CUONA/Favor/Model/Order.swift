@@ -28,9 +28,9 @@ public class Order: NSObject
     public private(set) var option:String? = nil
     public private(set) var imageUrls:[String?] = []
     
-    public private(set) var shopId:Int? = nil
-    public private(set) var shopName:String? = nil
-    public private(set) var enteredTime:Date? = nil
+//    public private(set) var shopId:Int? = nil
+//    public private(set) var shopName:String? = nil
+//    public private(set) var enteredTime:Date? = nil
     
     public init(menuItemId: Int, quantity: Int) {
         self.menuItemId = menuItemId
@@ -62,12 +62,12 @@ public class Order: NSObject
         notes        = menuItem["notes"] as? String
         option       = menuItem["option"] as? String
         
-        shopId      = jsonData["shop_id"] as? Int
-        shopName    = jsonData["shop_name"] as? String
-        let enterAt = jsonData["enter_at"] as? String
-        enteredTime = enterAt?.dateFromISO8601
+//        shopId      = jsonData["shop_id"] as? Int
+//        shopName    = jsonData["shop_name"] as? String
+//        let enterAt = jsonData["enter_at"] as? String
+//        enteredTime = enterAt?.dateFromISO8601
         // imagesの情報を設定
-        for imageJson in menuItem["images"] as! [[String : Any]]
+        for imageJson in menuItem["menu_images"] as! [[String : Any]]
         {
             imageUrls.append(Image(imageJson).imageUrl)
         }
