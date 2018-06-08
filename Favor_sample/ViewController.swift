@@ -18,15 +18,16 @@ class ViewController: UIViewController, FavorDelegate {
         
         favor = Favor(delegate: self)
 //        favor?.startScan()
-//        favor!.registerUser(params: ["nickname": "test"])
+//        let user = User(nickname: "test")
+//        favor!.registerUser(user: user)
         
-//        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
+//        favor!.enterShop(device_id: "04 b5 53 6a 6a 79 4d 80 de")
 //        print(Favor.hasToken())
-//        var orders = [Order]()
-//        orders.append(Order(menuItemId: 1, quantity: 1))
-//        favor!.sendOrder(visitHistoryId: 2, orders: orders)
+        var orders = [Order]()
+        orders.append(Order(menuItemId: 14, quantity: 1))
+        favor!.sendOrder(visitHistoryId: 142, orders: orders)
 //        favor!.getUsersAllOrderList()
-        favor!.getMenuListByGroup(shopId: 1)
+//        favor!.getMenuListByGroup(shopId: 1)
     }
     
     func successScan(deviceId: String, type: Int) {
@@ -56,7 +57,7 @@ class ViewController: UIViewController, FavorDelegate {
     func successEnterShop(shop: Shop!) {
         print("successEnterShop")
         print(shop.id)
-        print(shop.visitHistoryId)
+        print("visitHistoryId:\(shop.visitHistoryId)")
         print(shop.name)
     }
     
@@ -66,7 +67,12 @@ class ViewController: UIViewController, FavorDelegate {
     }
     
     func successOrder(orders: [Order]!) {
+        print("successOrder")
         print(orders[0].name)
+    }
+    
+    func failedOrder(exception: FavorException!) {
+        print("failedOrder")
     }
     
     func failedEnterShop(status: Int, json: [String : Any]?) {
