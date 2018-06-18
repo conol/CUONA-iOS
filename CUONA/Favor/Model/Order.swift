@@ -21,7 +21,7 @@ public class Order: NSObject
     public private(set) var updatedTime:Date?
     
     public private(set) var orderdUserId:Int = 0
-    public private(set) var orderdUserNickname:String = ""
+    public private(set) var orderdUserNickname:String? = nil
     public private(set) var orderdUserImageUrl:String? = nil
     
     public private(set) var notes:String? = nil
@@ -59,7 +59,7 @@ public class Order: NSObject
         
         let user           = jsonData["user"] as! [String : Any]
         orderdUserId       = user["id"] as! Int
-        orderdUserNickname = user["nickname"] as! String
+        orderdUserNickname = user["nickname"] as? String
         orderdUserImageUrl = user["image_url"] as? String
         
         // カスタム注文時はmenuItemがnilになるため確認
