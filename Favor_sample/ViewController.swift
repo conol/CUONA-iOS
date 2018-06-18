@@ -18,14 +18,16 @@ class ViewController: UIViewController, FavorDelegate {
         
         favor = Favor(delegate: self)
 //        favor?.startScan()
-//        let user = User(nickname: "test")
+//        let user = User(nickname: "ios_test")
 //        favor!.registerUser(user: user)
+        print(Favor.hasToken())
         
-//        favor!.enterShop(device_id: "04 b5 53 6a 6a 79 4d 80 de")
+//        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
 //        print(Favor.hasToken())
         var orders = [Order]()
-        orders.append(Order(menuItemId: 14, quantity: 1))
-        favor!.sendOrder(visitHistoryId: 142, orders: orders)
+//        orders.append(Order(menuItemId: 6, quantity: 1))
+        orders.append(Order(name: "custom", option: "option", priceCents: 1000, quantity: 1))
+        favor!.sendOrder(visitHistoryId: 166, orders: orders)
 //        favor!.getUsersAllOrderList()
 //        favor!.getMenuListByGroup(shopId: 1)
     }
@@ -40,7 +42,7 @@ class ViewController: UIViewController, FavorDelegate {
     
     func successRegister(user: User!) {
         print("successRegister")
-        print(user.nickname ?? "nill")
+        print(user.nickname ?? "nil")
     }
     
     func successGetUsersAllOrderList(orders: [Order]!) {

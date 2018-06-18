@@ -11,7 +11,7 @@ public class Order: NSObject
     var id:Int = 0
     var visitHistoryId:Int = 0
     
-    public private(set) var menuItemId:Int = 0
+    public private(set) var menuItemId:Int = -1
     public private(set) var name:String = ""
     public private(set) var priceCents:Int = 0
     public private(set) var priceFormat:String = ""
@@ -28,8 +28,17 @@ public class Order: NSObject
     public private(set) var option:String? = nil
     public private(set) var imageUrls:[String?] = []
     
+    // 通常注文作成用イニシャライザ
     public init(menuItemId: Int, quantity: Int) {
         self.menuItemId = menuItemId
+        self.quantity   = quantity
+    }
+    
+    // カスタム注文作成用イニシャライザ
+    public init(name: String, option: String? = nil, priceCents: Int, quantity: Int) {
+        self.name       = name
+        self.option     = option
+        self.priceCents = priceCents
         self.quantity   = quantity
     }
     
@@ -38,7 +47,6 @@ public class Order: NSObject
         // 各メンバ変数に値を設定
         id             = jsonData["id"] as! Int
         visitHistoryId = jsonData["visit_history_id"] as! Int
-        menuItemId     = jsonData["menu_item_id"] as! Int
         name           = jsonData["name"] as! String
         priceCents     = jsonData["price_cents"] as! Int
         priceFormat    = jsonData["price_format"] as! String
@@ -54,9 +62,13 @@ public class Order: NSObject
         orderdUserNickname = user["nickname"] as! String
         orderdUserImageUrl = user["image_url"] as? String
         
-        let menuItem = jsonData["menu_item"] as! [String : Any]
-        notes        = menuItem["notes"] as? String
-        option       = menuItem["option"] as? String
+        // カスタム注文時はmenuItemがnilになるため確認
+        guard let menuItem = jsonData["menu_item"] as? [String : Any] else {
+            return
+        }
+        menuItemId = jsonData["menu_item_id"] as! Int
+        notes      = menuItem["notes"] as? String
+        option     = menuItem["option"] as? String
         
         // imagesの情報を設定
         for imageJson in menuItem["menu_images"] as! [[String : Any]]

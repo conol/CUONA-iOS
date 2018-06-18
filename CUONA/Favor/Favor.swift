@@ -376,16 +376,42 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     public func sendOrder(visitHistoryId: Int, orders: [Order])
     {
         // リクエスト用パラメータを作成
-        var orderParams:[[String : Any]] = []
+        var normalOrderParams:[[String : Any]] = [] // 通常注文用
+        var customOrderParams:[[String : Any]] = [] // カスタム注文用
         for order in orders
         {
-            let orderParam = [
-                "menu_item_id" : order.menuItemId,
-                "quantity" : order.quantity
-            ]
-            orderParams.append(orderParam)
+            // カスタム注文
+            if order.menuItemId == -1 {
+                if let orderOption = order.option {
+                    let orderParam = [
+                        "name" : order.name,
+                        "option" : orderOption,
+                        "price_cents" : order.priceCents,
+                        "quantity" : order.quantity
+                        ] as [String : Any]
+                    customOrderParams.append(orderParam)
+                } else {
+                    let orderParam = [
+                        "name" : order.name,
+                        "price_cents" : order.priceCents,
+                        "quantity" : order.quantity
+                        ] as [String : Any]
+                    customOrderParams.append(orderParam)
+                }
+            }
+            // 通常注文
+            else {
+                let orderParam = [
+                    "menu_item_id" : order.menuItemId,
+                    "quantity" : order.quantity
+                ] as [String : Any]
+                normalOrderParams.append(orderParam)
+            }
         }
-        let params = ["orders" : orderParams]
+        let params = [
+            "orders" : normalOrderParams,
+            "custom_orders" : customOrderParams
+        ]
         
         deviceManager?.request?.sendRequestAsynchronous(ApiUrl.order(visitHistoryId), method: .post, params: params, funcs: { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
