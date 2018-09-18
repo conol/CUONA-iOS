@@ -307,8 +307,15 @@ UITextFieldDelegate {
         } else {
             statusLabel1?.text = "Wifi not started"
         }
-        statusLabel2?.text = String(format: "Voltage: %.3f, Battery: %.0f %%",
-                                    status.voltage, status.batteryPercentage)
+        if status.environmentDataAvailable {
+            statusLabel2?.text = String(format:
+                    "T: %.2f, P: %.3f, H: %.3f, G: %d",
+                    status.temperature, status.pressure, status.humidity,
+                    status.gasResistance)
+        } else {
+            statusLabel2?.text = String(format: "Voltage: %.3f, Battery: %.0f %%",
+                                        status.voltage, status.batteryPercentage)
+        }
     }
     
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String) {

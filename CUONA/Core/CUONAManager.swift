@@ -7,6 +7,20 @@ public let CUONA_TAG_TYPE_UNKNOWN = 0
 public let CUONA_TAG_TYPE_CUONA = 1
 public let CUONA_TAG_TYPE_SEAL = 2
 
+private func readInt16(data: Data, offset: Int) -> Int16 {
+    let low = Int16(data[offset]) & 0xff
+    let high = Int16(data[offset + 1])
+    return high << 8 | low
+}
+
+private func readUInt32(data: Data, offset: Int) -> UInt32 {
+    let b0 = UInt32(data[offset]) & 0xff
+    let b1 = UInt32(data[offset + 1]) & 0xff
+    let b2 = UInt32(data[offset + 2]) & 0xff
+    let b3 = UInt32(data[offset + 3]) & 0xff
+    return (((((b3 << 8) | b2) << 8) | b1) << 8) | b0
+}
+
 private func tagTypeFromDeviceId(_ deviceId: Data?) -> Int {
     if let deviceId = deviceId {
         let firstByte = Array(deviceId)[0]
@@ -50,11 +64,19 @@ func CUONADebugPrint(_ message: String) {
     public let isPowerFromUSB: Bool
     public let isPasswordAllZeros: Bool
     
+    public let environmentDataAvailable: Bool
+    
+    public let temperature: Float
+    public let pressure: Float
+    public let humidity: Float
+    public let gasResistance: UInt32
+    
     private let MISC_STATUS_ADMIN_MODE = UInt8(1 << 0)
     private let MISC_STATUS_CORONA3    = UInt8(1 << 1)
     private let MISC_STATUS_USB_POWER  = UInt8(1 << 2)
     private let MISC_STATUS_PW_ALLZERO = UInt8(1 << 3)
     private let MISC_STATUS_CUONA4     = UInt8(1 << 4)
+    private let MISC_STATUS_CUONA5     = UInt8(1 << 5)
 
     private let BATTERY_VOLTAGE_HIGH   = 4.2
     private let BATTERY_VOLTAGE_LOW    = 3.2
@@ -68,7 +90,9 @@ func CUONADebugPrint(_ message: String) {
         wifiConnected = data[2] != 0
         let miscStatus = data[3]
         inAdminMode = (miscStatus & MISC_STATUS_ADMIN_MODE) != 0
-        if (miscStatus & MISC_STATUS_CORONA3) != 0 {
+        if (miscStatus & MISC_STATUS_CUONA5) != 0 {
+            hardwareVersion = 5
+        } else if (miscStatus & MISC_STATUS_CORONA3) != 0 {
             if (miscStatus & MISC_STATUS_CUONA4) != 0 {
                 hardwareVersion = 4
             } else {
@@ -77,26 +101,43 @@ func CUONADebugPrint(_ message: String) {
         } else {
             hardwareVersion = 1
         }
-        isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
         isPasswordAllZeros = (miscStatus & MISC_STATUS_PW_ALLZERO) != 0
         
         ip4addr = String(format: "%d.%d.%d.%d",
                          data[4], data[5], data[6], data[7])
         nfcDeviceUID = [data[8], data[9], data[10], data[11],
                        data[12], data[13], data[14]]
-        var adcValue = (Int32(data[15]) << 30)
-        adcValue += (Int32(data[16]) << 22)
-        adcValue += (Int32(data[17]) << 14)
-        voltage = 2.048 * (Double(adcValue) / 2_147_483_648.0) * 3.0
         
-        var p = (voltage - BATTERY_VOLTAGE_LOW) /
-            (BATTERY_VOLTAGE_HIGH - BATTERY_VOLTAGE_LOW)
-        if p < 0 {
-            p = 0
-        } else if p > 1 {
-            p = 1
+        if hardwareVersion >= 5 && data.count >= 32 {
+            isPowerFromUSB = true
+            voltage = 0
+            batteryPercentage = 0
+            temperature = Float(readInt16(data: data, offset: 18)) / 100
+            pressure = Float(readUInt32(data: data, offset: 20)) / 100
+            humidity = Float(readUInt32(data: data, offset: 24)) / 1000
+            gasResistance = readUInt32(data: data, offset: 28)
+            environmentDataAvailable = true
+        } else {
+            isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
+            var adcValue = (Int32(data[15]) << 30)
+            adcValue += (Int32(data[16]) << 22)
+            adcValue += (Int32(data[17]) << 14)
+            voltage = 2.048 * (Double(adcValue) / 2_147_483_648.0) * 3.0
+            
+            var p = (voltage - BATTERY_VOLTAGE_LOW) /
+                (BATTERY_VOLTAGE_HIGH - BATTERY_VOLTAGE_LOW)
+            if p < 0 {
+                p = 0
+            } else if p > 1 {
+                p = 1
+            }
+            batteryPercentage = 100 * p
+            environmentDataAvailable = false
+            temperature = 0
+            pressure = 0
+            humidity = 0
+            gasResistance = 0
         }
-        batteryPercentage = 100 * p
     }
 }
 
