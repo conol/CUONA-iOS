@@ -25,8 +25,8 @@ public class FavorException: NSObject
         let meta = jsonData["meta"] as! [String : Any]
         
         // 各メンバ変数を設定
-        code    = meta["code"] as! Int
-        type    = meta["type"] as! String
-        message = meta["message"] as! String
+        code    = meta["code"] as? Int
+        type    = meta["type"] as? String
+        message = meta["message"] as? String
     }
 }
