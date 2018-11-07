@@ -13,7 +13,9 @@ let CUONA_CHAR_UUID_OTA_CTRL: UInt16      = 0xff07 // protected
 let CUONA_CHAR_UUID_PLAIN_JSON: UInt16    = 0xff08 // protected, legacy
 let CUONA_CHAR_UUID_NFC_DATA: UInt16      = 0xff09 // protected, secure
 let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
-let CUONA_CHAR_UUID_PLAYSOUND: UInt16     = 0xff0b
+let CUONA_CHAR_UUID_PLAY_SOUND: UInt16    = 0xff0b
+let CUONA_CHAR_UUID_SET_TOUCH_SOUND: UInt16 = 0xff0c
+let CUONA_CHAR_UUID_DOWNLOAD_SOUND: UInt16 = 0xff0d
 
 let CUONA_OTA_REQ_NORMAL: [UInt8]         = [ 0x00, 0x01 ]
 let CUONA_OTA_REQ_FORCE: [UInt8]          = [ 0x00, 0x03 ]
@@ -61,6 +63,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var CUONANFCDataChar: CBCharacteristic?
     var CUONAPWProtectChar: CBCharacteristic?
     var CUONAPlaySoundChar: CBCharacteristic?
+    var CUONASetTouchSoundChar: CBCharacteristic?
+    var CUONADownloadSoundChar: CBCharacteristic?
     
     var writeWiFiValue: CUONAWiFiSSIDPw?
     var writeHostValue: String?
@@ -218,6 +222,26 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
     
+    func sendSetTouchSound(id: UInt8, vol: UInt8) -> Bool {
+        let reqdata: [UInt8] = [ id, vol ]
+        guard let peripheral = currentPeripheral,
+            let char = CUONASetTouchSoundChar else {
+                return false
+        }
+        peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
+        return true
+    }
+    
+    func sendDownloadSound(id: UInt8, name: String) -> Bool {
+        let reqdata = [id] + [UInt8](name.utf8)
+        guard let peripheral = currentPeripheral,
+            let char = CUONADownloadSoundChar else {
+                return false
+        }
+        peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
+        return true
+    }
+
     // CBCentralManagerDelegate
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -332,8 +356,14 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     CUONANFCDataChar = char
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PWPROTECT) {
                     CUONAPWProtectChar = char
-                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PLAYSOUND) {
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PLAY_SOUND) {
                     CUONAPlaySoundChar = char
+                } else if uuid16equal(char.uuid,
+                                      CUONA_CHAR_UUID_SET_TOUCH_SOUND) {
+                    CUONASetTouchSoundChar = char
+                } else if uuid16equal(char.uuid,
+                                      CUONA_CHAR_UUID_DOWNLOAD_SOUND) {
+                    CUONADownloadSoundChar = char
                 }
             }
         }

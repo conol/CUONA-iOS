@@ -348,7 +348,29 @@ class CUONAManager: NFCReaderDelegate {
         return CUONABTManager.shared.sendPlaySound(id: UInt8(soundId),
                                                    vol: UInt8(intVolume))
     }
-    
+
+    func setTouchSound(soundId: Int, volume: Float) -> Bool {
+        if (soundId < 0 || soundId >= 64) {
+            return false
+        }
+        var intVolume = (volume * 127).rounded()
+        if intVolume < 0 {
+            intVolume = 0
+        } else if intVolume > 127 {
+            intVolume = 127
+        }
+        return CUONABTManager.shared.sendSetTouchSound(id: UInt8(soundId),
+                                                       vol: UInt8(intVolume))
+    }
+
+    func downloadSound(soundId: Int, fileName: String) -> Bool {
+        if (soundId < 0 || soundId >= 64) {
+            return false
+        }
+        return CUONABTManager.shared.sendDownloadSound(id: UInt8(soundId),
+                                                       name: fileName)
+    }
+
     // NFCReaderDelegate
     
     func nfcReaderGotRecord(_ record: String) {

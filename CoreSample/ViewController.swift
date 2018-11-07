@@ -150,24 +150,96 @@ UITextFieldDelegate {
                         self.writeLog("Success: password initialized\n")
                     }
                 }
-                let soundPlay = UIAlertAction(title: "Play Sound", style: .default) { Void in
-                    if let manager = self.cuonaManager {
-                        _ = manager.playSound(soundId: 1, volume: 0.5)
-                    }
-                    
-                }
                 sheet.addAction(updateFirmware)
                 sheet.addAction(forceUpdateFirmware)
                 sheet.addAction(writeJSON)
                 sheet.addAction(writeJSON2)
                 sheet.addAction(changePW)
                 sheet.addAction(unsetPW)
-                sheet.addAction(soundPlay)
             }
+            let soundMenu = UIAlertAction(title: "Sound...", style: .default)
+            { Void in
+                self.showSoundMenu()
+            }
+            sheet.addAction(soundMenu)
         }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         sheet.addAction(cancel)
         
+        present(sheet, animated: true, completion: nil)
+    }
+    
+    func showSoundMenu() {
+        let sheet = UIAlertController(title: "Sound Menu List", message: nil,
+                                      preferredStyle: .actionSheet)
+        
+        let setTS0 = UIAlertAction(title: "Set Touch Sound 0 / 1.0",
+                                   style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.setTouchSound(soundId: 0, volume: 1.0)
+            }
+        }
+        sheet.addAction(setTS0)
+        let setTS1 = UIAlertAction(title: "Set Touch Sound 1 / 0.5",
+                                   style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.setTouchSound(soundId: 1, volume: 0.5)
+            }
+        }
+        sheet.addAction(setTS1)
+        let setTS2 = UIAlertAction(title: "Set Touch Sound 2 / 0.5",
+                                   style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.setTouchSound(soundId: 2, volume: 0.5)
+            }
+        }
+        sheet.addAction(setTS2)
+
+        let soundPlay0 = UIAlertAction(title: "Play Sound 0", style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.playSound(soundId: 0, volume: 0.5)
+            }
+        }
+        sheet.addAction(soundPlay0)
+        let soundPlay1 = UIAlertAction(title: "Play Sound 1", style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.playSound(soundId: 1, volume: 0.5)
+            }
+        }
+        sheet.addAction(soundPlay1)
+        let soundPlay2 = UIAlertAction(title: "Play Sound 2", style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.playSound(soundId: 2, volume: 0.5)
+            }
+        }
+        sheet.addAction(soundPlay2)
+        let download1 = UIAlertAction(title: "Download A.mp3",
+                                      style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.downloadSound(soundId: 2, fileName: "A.mp3")
+            }
+        }
+        sheet.addAction(download1)
+        let download2 = UIAlertAction(title: "Download B.mp3",
+                                      style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.downloadSound(soundId: 2, fileName: "B.mp3")
+            }
+        }
+        sheet.addAction(download2)
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        sheet.addAction(cancel)
+
         present(sheet, animated: true, completion: nil)
     }
     
