@@ -220,19 +220,19 @@ UITextFieldDelegate {
             }
         }
         sheet.addAction(soundPlay2)
-        let download1 = UIAlertAction(title: "Download A.mp3",
+        let download1 = UIAlertAction(title: "Download A.wav",
                                       style: .default)
         { Void in
             if let manager = self.cuonaManager {
-                _ = manager.downloadSound(soundId: 2, fileName: "A.mp3")
+                _ = manager.downloadSound(soundId: 2, fileName: "A.wav")
             }
         }
         sheet.addAction(download1)
-        let download2 = UIAlertAction(title: "Download B.mp3",
+        let download2 = UIAlertAction(title: "Download B.wav",
                                       style: .default)
         { Void in
             if let manager = self.cuonaManager {
-                _ = manager.downloadSound(soundId: 2, fileName: "B.mp3")
+                _ = manager.downloadSound(soundId: 2, fileName: "B.wav")
             }
         }
         sheet.addAction(download2)
