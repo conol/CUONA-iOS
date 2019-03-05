@@ -2,6 +2,7 @@ import UIKit
 import CoreNFC
 
 private let CUONA_NFC_TYPENAME_Secure = "conol.jp:cuona"
+private let CUONA_NFC_TYPENAME_Insecure = "conol.co.jp:cuona_bt_manu_data"
 private let CUONA_NFC_TYPENAME_Legacy = "conol.co.jp:cnfc_bt_manu_data"
 
 let CUONA_MAGIC_1 = 0x63
@@ -161,7 +162,8 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
                     let s = "type=\(typeName) payload=\(record.payload)"
                     CUONADebugPrint(s)
                     delegate?.nfcReaderGotRecord(s)
-                    if typeName == CUONA_NFC_TYPENAME_Legacy {
+                    if typeName == CUONA_NFC_TYPENAME_Insecure ||
+                        typeName == CUONA_NFC_TYPENAME_Legacy {
                         handleLegacyNDEF(payload)
                     } else if typeName == CUONA_NFC_TYPENAME_Secure {
                         handleSecureNDEF(payload)
