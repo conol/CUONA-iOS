@@ -41,7 +41,7 @@ class ViewController: UIViewController, CUONAManagerDelegate
     }
     
     func cuonaConnected() {
-        
+        Alert.show(title: "成功", message: "問題ありません！")
     }
 }
 
