@@ -259,6 +259,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         case .poweredOn:
             CUONADebugPrint("centralManagerDidUpdateState: poweredOn");
             central.scanForPeripherals(withServices: nil, options: nil)
+        @unknown default:
+            CUONADebugPrint("centralManagerDidUpdateState: \(central.state)")
         }
     }
     
