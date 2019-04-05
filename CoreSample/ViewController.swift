@@ -311,8 +311,15 @@ UITextFieldDelegate {
     
     func cuonaConnected() {
         writeLog("Success: connected\n")
-        // 管理モード（要パスワード）に入る
         if let cm = cuonaManager {
+            // ログデータを設定する（サンプル）
+            cm.logData.customer_id = 4000
+            cm.logData.event_id = "sample event id"
+            cm.logData.note = "sample note"
+            // ログデータを送信する
+            _ = cm.logRequest()
+            
+            // 管理モード（要パスワード）に入る
             if cm.enterAdminMode(device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
             {
                 self.writeLog("Success: entering admin mode....\n")

@@ -11,6 +11,7 @@ let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
 let CUONA_CHAR_UUID_PLAY_SOUND: UInt16    = 0xff0b
 let CUONA_CHAR_UUID_SET_TOUCH_SOUND: UInt16 = 0xff0c
 let CUONA_CHAR_UUID_DOWNLOAD_SOUND: UInt16 = 0xff0d
+let CUONA_CHAR_UUID_LOG_REQUEST: UInt16   = 0xff0e
 
 let CUONA_OTA_REQ_NORMAL: [UInt8]         = [ 0x00, 0x01 ]
 let CUONA_OTA_REQ_FORCE: [UInt8]          = [ 0x00, 0x03 ]
@@ -55,6 +56,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var CUONAPlaySoundChar: CBCharacteristic?
     var CUONASetTouchSoundChar: CBCharacteristic?
     var CUONADownloadSoundChar: CBCharacteristic?
+    var CUONALogRequestChar: CBCharacteristic?
     
     var writeWiFiValue: CUONAWiFiSSIDPw?
     var writeHostValue: String?
@@ -186,6 +188,20 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
         return true
     }
+    
+    func sendLogRequest(json: String) -> Bool {
+        guard let peripheral = currentPeripheral,
+            let char = CUONALogRequestChar,
+            let data = json.data(using: .utf8) else {
+                return false
+        }
+        peripheral.writeValue(data, for: char, type: .withResponse)
+        return true
+    }
+    
+    func isSupportLogRequest() -> Bool {
+        return CUONALogRequestChar != nil
+    }
 
     // CBCentralManagerDelegate
 
@@ -298,6 +314,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 } else if uuid16equal(char.uuid,
                                       CUONA_CHAR_UUID_DOWNLOAD_SOUND) {
                     CUONADownloadSoundChar = char
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_LOG_REQUEST) {
+                    CUONALogRequestChar = char
                 }
             }
         }

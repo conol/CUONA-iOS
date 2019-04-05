@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 private let CUONA_SCAN_SIGNATURE_LENGTH = 10
 private let CUONA_SCAN_SIGNATURE_PREFIX_LENGTH = 3
@@ -239,10 +240,22 @@ public struct CUONAWiFiSSIDPw {
     @objc optional func cuonaUpdateOTAStatus(_ status: CUONAOTAStatus)
 }
 
+struct CUONALogData: Codable {
+    let phone_os_type: String = "iOS"
+    let phone_os_version: String = UIDevice.current.systemVersion
+    var event_id: String = ""
+    var customer_id: Int = 0
+    let app_id: String = Bundle.main.bundleIdentifier ?? "?"
+    var used_at: Date = Date()
+    var note: String = ""
+}
+
 @available(iOS 11.0, *)
 class CUONAManager: NFCReaderDelegate {
     
     public static var isDebugMode: Bool = CUONAGetDebugMode()
+    
+    public var logData: CUONALogData = CUONALogData()
     
     weak var delegate: CUONAManagerDelegate?
     var nfc: NFCReader?
@@ -367,6 +380,24 @@ class CUONAManager: NFCReaderDelegate {
         }
         return CUONABTManager.shared.sendDownloadSound(id: UInt8(soundId),
                                                        name: fileName)
+    }
+    
+    func logRequest() -> Bool {
+        if (CUONABTManager.shared.isSupportLogRequest()) {
+            logData.used_at = Date() // set current time
+            let enc = JSONEncoder()
+            enc.dateEncodingStrategy = .iso8601
+            do {
+                let data = try enc.encode(logData)
+                let json = String(data: data, encoding: .utf8)!
+                return CUONABTManager.shared.sendLogRequest(json: json)
+            } catch {
+                print(error.localizedDescription)
+                return false
+            }
+        } else {
+            return false
+        }
     }
 
     // NFCReaderDelegate
