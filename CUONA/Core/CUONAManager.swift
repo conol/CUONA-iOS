@@ -278,16 +278,19 @@ class CUONAManager: NFCReaderDelegate {
                                                     password: password)
     }
     
+    @available(iOS, deprecated)
     func writeServerHost(_ host: String) -> Bool {
-        return CUONABTManager.shared.writeServerHost(host)
+        return false
     }
     
+    @available(iOS, deprecated)
     func writeServerPath(_ path: String) -> Bool {
-        return CUONABTManager.shared.writeServerPath(path)
+        return false
     }
     
+    @available(iOS, deprecated)
     func writeNetRequest(_ req: String) -> Bool {
-        return CUONABTManager.shared.writeNetRequest(req)
+        return false
     }
     
     func requestOTAUpdate(force: Bool = false) -> Bool {
@@ -296,26 +299,21 @@ class CUONAManager: NFCReaderDelegate {
     
     func writeJSON(_ json: String) -> Bool {
         if let data = json.data(using: .utf8) {
-            if CUONABTManager.shared.isSecureNFCSupported {
-                if let deviceId = deviceId {
-                    let enc = CUONAEncryptor(deviceId: deviceId)
-                    if let nfcData = enc.encrypt(jsonData: data) {
-                        return CUONABTManager.shared.writeSecureNFCData(nfcData)
-                    } else {
-                        delegate?.cuonaUpdatedFailedJSON!(code: 10001, errortxt: "CUONAEncryptor.encrypt failed")
-                        CUONADebugPrint("CUONAEncryptor.encrypt failed")
-                        return false
-                    }
+            if let deviceId = deviceId {
+                let enc = CUONAEncryptor(deviceId: deviceId)
+                if let nfcData = enc.encrypt(jsonData: data) {
+                    return CUONABTManager.shared.writeSecureNFCData(nfcData)
                 } else {
-                    delegate?.cuonaUpdatedFailedJSON!(code: 10002, errortxt: "deviceId is not available")
-                    CUONADebugPrint("deviceId is not available")
+                    delegate?.cuonaUpdatedFailedJSON!(code: 10001, errortxt: "CUONAEncryptor.encrypt failed")
+                    CUONADebugPrint("CUONAEncryptor.encrypt failed")
                     return false
                 }
             } else {
-                CUONADebugPrint("WARNING: writing insecure JSON")
-                return CUONABTManager.shared.writePlainJSON(data)
+                delegate?.cuonaUpdatedFailedJSON!(code: 10002, errortxt: "deviceId is not available")
+                CUONADebugPrint("deviceId is not available")
+                return false
             }
-       } else {
+        } else {
             delegate?.cuonaUpdatedFailedJSON!(code: 10004, errortxt: "Cannot convert JSON string to UTF-8")
             CUONADebugPrint("Cannot convert JSON string to UTF-8")
             return false

@@ -51,26 +51,6 @@ UITextFieldDelegate {
         _ = cuonaManager?.writeWifiSSIDPw(ssid: ssid, password: pw)
     }
     
-    @IBAction func onSetHostButton(_ sender: Any) {
-        guard let host  = hostTextField?.text else {
-            return
-        }
-        _ = cuonaManager?.writeServerHost(host)
-    }
-    
-    @IBAction func onSetPathButton(_ sender: Any) {
-        guard let path  = pathTextField?.text else {
-            return
-        }
-        _ = cuonaManager?.writeServerPath(path)
-    }
-    
-    @IBAction func onSendMessageButton(_ sender: Any) {
-        if let msg = sendMessageTextField?.text {
-            _ = cuonaManager?.writeNetRequest(msg)
-        }
-    }
-    
     @IBAction func showMenu(_ sender: Any)
     {
         let sheet = UIAlertController(title: "Control Menu List", message: nil, preferredStyle: .actionSheet)

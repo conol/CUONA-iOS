@@ -5,12 +5,7 @@ let CUONA_SERVICE_UUID: UInt16            = 0xff00
 
 let CUONA_CHAR_UUID_SYSTEM_STATUS: UInt16 = 0xff01
 let CUONA_CHAR_UUID_WIFI_SSID_PW: UInt16  = 0xff02 // protected
-let CUONA_CHAR_UUID_SERVER_HOST: UInt16   = 0xff03 // protected
-let CUONA_CHAR_UUID_SERVER_PATH: UInt16   = 0xff04 // protected
-let CUONA_CHAR_UUID_NET_REQUEST: UInt16   = 0xff05
-let CUONA_CHAR_UUID_NET_RESPONSE: UInt16  = 0xff06
 let CUONA_CHAR_UUID_OTA_CTRL: UInt16      = 0xff07 // protected
-let CUONA_CHAR_UUID_PLAIN_JSON: UInt16    = 0xff08 // protected, legacy
 let CUONA_CHAR_UUID_NFC_DATA: UInt16      = 0xff09 // protected, secure
 let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
 let CUONA_CHAR_UUID_PLAY_SOUND: UInt16    = 0xff0b
@@ -54,12 +49,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var CUONASystemStatusChar: CBCharacteristic?
     var CUONAWiFiSSIDPwChar: CBCharacteristic?
-    var CUONAServerHostChar: CBCharacteristic?
-    var CUONAServerPathChar: CBCharacteristic?
-    var CUONANetRequestChar: CBCharacteristic?
-    var CUONANetResponseChar: CBCharacteristic?
     var CUONAOTACtrlChar: CBCharacteristic?
-    var CUONAPlainJSONChar: CBCharacteristic?
     var CUONANFCDataChar: CBCharacteristic?
     var CUONAPWProtectChar: CBCharacteristic?
     var CUONAPlaySoundChar: CBCharacteristic?
@@ -118,38 +108,6 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
     
-    func writeServerHost(_ host: String) -> Bool {
-        guard let peripheral = currentPeripheral,
-            let char = CUONAServerHostChar,
-            let data = host.data(using: .utf8) else {
-                return false
-        }
-        peripheral.writeValue(data, for: char, type: .withResponse)
-        writeHostValue = host
-        return true
-    }
-    
-    func writeServerPath(_ path: String) -> Bool {
-        guard let peripheral = currentPeripheral,
-            let char = CUONAServerPathChar,
-            let data = path.data(using: .utf8) else {
-                return false
-        }
-        peripheral.writeValue(data, for: char, type: .withResponse)
-        writePathValue = path
-        return true
-    }
-
-    func writeNetRequest(_ req: String) -> Bool {
-        guard let peripheral = currentPeripheral,
-            let char = CUONANetRequestChar,
-            let data = req.data(using: .utf8) else {
-                return false
-        }
-        peripheral.writeValue(data, for: char, type: .withResponse)
-        return true
-    }
-    
     func requestOTAUpdate(force: Bool) -> Bool {
         guard let peripheral = currentPeripheral else {
             return false
@@ -163,15 +121,6 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
     
-    func writePlainJSON(_ data: Data) -> Bool {
-        guard let peripheral = currentPeripheral,
-            let char = CUONAPlainJSONChar else {
-                return false
-        }
-        peripheral.writeValue(data, for: char, type: .withResponse)
-        return true
-    }
-    
     func writeSecureNFCData(_ data: Data) -> Bool {
         guard let peripheral = currentPeripheral,
             let char = CUONANFCDataChar else {
@@ -181,10 +130,6 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
 
-    var isSecureNFCSupported: Bool {
-        return CUONANFCDataChar != nil
-    }
-    
     func sendPWProtect(cmd: Int, password: String) -> Bool {
         var reqdata = [UInt8](repeating: 0, count: CUONA_PASSWORD_LENGTH + 1)
         reqdata[0] = UInt8(cmd)
@@ -337,23 +282,10 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_WIFI_SSID_PW) {
                     CUONAWiFiSSIDPwChar = char
                     peripheral.readValue(for: char)
-                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_SERVER_HOST) {
-                    CUONAServerHostChar = char
-                    peripheral.readValue(for: char)
-                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_SERVER_PATH) {
-                    CUONAServerPathChar = char
-                    peripheral.readValue(for: char)
-                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_NET_REQUEST) {
-                    CUONANetRequestChar = char
-                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_NET_RESPONSE) {
-                    CUONANetResponseChar = char
-                    peripheral.setNotifyValue(true, for: char)
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_OTA_CTRL) {
                     CUONAOTACtrlChar = char
                     peripheral.setNotifyValue(true, for: char)
                     peripheral.readValue(for: char)
-                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PLAIN_JSON) {
-                    CUONAPlainJSONChar = char
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_NFC_DATA) {
                     CUONANFCDataChar = char
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PWPROTECT) {
@@ -396,30 +328,6 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                                                     password: wifi.password)
                 }
             }
-        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_SERVER_HOST) {
-            if let data = characteristic.value {
-                if let str = String(data: data, encoding: .utf8) {
-                    CUONADebugPrint("serverHost=\(str)")
-                    delegate?.cuonaUpdatedServerHost?(str)
-                }
-            }
-        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_SERVER_PATH) {
-            if let data = characteristic.value {
-                if let str = String(data: data, encoding: .utf8) {
-                    CUONADebugPrint("serverPath=\(str)")
-                    delegate?.cuonaUpdatedServerPath?(str)
-                }
-            }
-        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_NET_RESPONSE) {
-            if let data = characteristic.value {
-                if data.count >= 2 {
-                    let code = Int(data[0]) + (Int(data[1]) << 8)
-                    let msg = String(data: data.dropFirst(2), encoding: .utf8)
-                        ?? "?"
-                    CUONADebugPrint("response: code=\(code) message=\(msg)")
-                    delegate?.cuonaUpdatedNetResponse?(code: code, message: msg)
-                }
-            }
         } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_OTA_CTRL) {
             if let data = characteristic.value {
                 if data.count >= 2 {
@@ -455,20 +363,8 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 delegate?.cuonaUpdatedWiFiSSIDPw?(ssid: wifi.ssid,
                                                 password: wifi.password)
             }
-        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_SERVER_HOST) {
-            if let host = writeHostValue {
-                CUONADebugPrint("serverHost=\(host)")
-                delegate?.cuonaUpdatedServerHost?(host)
-            }
-        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_SERVER_PATH) {
-            if let path = writePathValue {
-                CUONADebugPrint("serverPath=\(path)")
-                delegate?.cuonaUpdatedServerPath?(path)
-            }
         } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_OTA_CTRL) {
             delegate?.cuonaUpdateOTAStatus?(.updating)
-        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_PLAIN_JSON) {
-            delegate?.cuonaUpdatedJSON?()
         } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_NFC_DATA) {
             delegate?.cuonaUpdatedJSON?()
         }
