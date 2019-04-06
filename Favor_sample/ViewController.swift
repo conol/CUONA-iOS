@@ -18,16 +18,16 @@ class ViewController: UIViewController, FavorDelegate {
         
         favor = Favor(delegate: self)
 //        favor?.startScan()
-//        let user = User(nickname: "ios_test")
+//        let user = User(nickname: "ios_test_user")
 //        favor!.registerUser(user: user)
-        print(Favor.hasToken())
+//        print(Favor.hasToken())
         
-//        favor!.enterShop(device_id: "02 84 00 6a a1 0d 2f")
+//        favor!.enterShop(device_id: "02 84 66 69 e0 f5 06")
 //        print(Favor.hasToken())
         var orders = [Order]()
-//        orders.append(Order(menuItemId: 6, quantity: 1))
+        orders.append(Order(menuItemId: 6, quantity: 1))
         orders.append(Order(name: "custom", option: "option", priceCents: 1000, quantity: 1))
-        favor!.sendOrder(visitHistoryId: 166, orders: orders)
+        favor!.sendOrder(visitHistoryId: 6, orders: orders)
 //        favor!.getUsersAllOrderList()
 //        favor!.getMenuListByGroup(shopId: 1)
     }
@@ -65,7 +65,7 @@ class ViewController: UIViewController, FavorDelegate {
     
     func failedEnterShop(exception: FavorException!) {
         print("failedEnterShop")
-        print(exception.message)
+        print(exception.message ?? "error")
     }
     
     func successOrder(orders: [Order]!) {

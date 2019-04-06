@@ -99,7 +99,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        deviceManager?.request?.sendLog(deviceId, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "タッチされました")
+        deviceManager?.request?.sendLog(deviceId, event_id: "", customer_id: 5, note: "タッチされました")
         if mode == .Write {
             if self.deviceId != deviceId {
                 Alert.show(title: "不正エラー", message: "書込するためにタッチしたCUONAが最初にタッチしたCUONAと異なります")
@@ -163,7 +163,7 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func cuonaUpdatedJSON()
     {
-        deviceManager?.request?.sendLog(deviceId!, latlng:"", serviceKey: serviceKey, addUniquId: "", note: "NFCデータを書き込みました")
+        deviceManager?.request?.sendLog(deviceId!, event_id: "", customer_id: 5, note: "NFCデータを書き込みました")
         cuonaManager?.requestDisconnect()
         delegate?.successWrite!()
         print("データ書込完了!")
