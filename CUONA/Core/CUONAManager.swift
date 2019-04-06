@@ -405,7 +405,7 @@ class CUONAManager: NFCReaderDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         formatter.timeZone = .current
-        return formatter as DateFormatter
+        return formatter
     }
 
     // NFCReaderDelegate
