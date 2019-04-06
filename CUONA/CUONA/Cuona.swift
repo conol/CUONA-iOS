@@ -78,8 +78,9 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        if sendLog == .on && serviceKey != .developer {
-            deviceManager?.request?.sendLog(deviceId, latlng: "--", serviceKey: serviceKey.id(), addUniquId: "", note: "Read DeviceId by iOS")
+        #warning("IF文書き直し")
+        if sendLog == .on && servｓiceKey != .developer {
+            deviceManager?.request?.sendLog(deviceId, event_id:"", customer_id: 0, note: "Read DeviceId by iOS")
         }
         let data = convertToDictionary(json)
         return delegate!.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)

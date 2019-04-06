@@ -9,7 +9,7 @@
 import UIKit
 import SystemConfiguration
 
-private let API_URL = "https://api.cuona.io" // 本番サーバー
+private let API_URL = "https://api.bleeding-edge.cuona.io"
 private let SAVE_LOGS = "saveLogs"
 private let DEVICE_PASS = "deviceMasterPassword"
 public let APP_TOKEN = "appToken"
@@ -157,16 +157,21 @@ public class HttpRequest
     
     //MARK: - ログ送信
     @available(iOS 11.0, *)
-    public func sendLog(_ device_id:String, latlng:String, serviceKey:String, addUniquId:String, note:String)
+    public func sendLog(_ device_id:String, event_id:String, customer_id:Int, note:String)
     {
-        let url = API_URL + "/api/device_logs/\(serviceKey).json"
+        let url = API_URL + "/device_logs.json"
         
         let log = [
-            "lat_lng": latlng,
             "device_id": device_id.split(2),
             "used_at": Date().iso8601,
+            "sender": "Smartphone",
+            "phone_os_type": "ios",
+            "phone_os_version": UIDevice.current.systemVersion,
+            "event_id": event_id,
+            "customer_id": customer_id,
+            "app_id": Bundle.main.bundleIdentifier ?? "",
             "notes": note
-        ]
+        ] as [String : Any]
         let logs = makeLogData(log)
         let params:[String:Any] = [
             "device_logs": logs

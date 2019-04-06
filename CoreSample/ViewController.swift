@@ -14,9 +14,6 @@ UITextFieldDelegate {
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var ssidTextField: CustomTextField!
     @IBOutlet weak var pwTextField: CustomTextField!
-    @IBOutlet weak var hostTextField: UITextField!
-    @IBOutlet weak var pathTextField: UITextField!
-    @IBOutlet weak var sendMessageTextField: UITextField!
     @IBOutlet weak var statusLabel1: UILabel!
     @IBOutlet weak var statusLabel2: UILabel!
     @IBOutlet weak var statusView: UIView!
@@ -34,8 +31,6 @@ UITextFieldDelegate {
         logTextView?.text = ""
         ssidTextField?.text = ""
         pwTextField?.text = ""
-        hostTextField?.text = ""
-        pathTextField?.text = ""
         
         statusLabel1?.text = ""
         statusLabel2?.text = ""
@@ -130,31 +125,31 @@ UITextFieldDelegate {
                         self.writeLog("Success: password initialized\n")
                     }
                 }
+                let soundMenu = UIAlertAction(title: "Sound...", style: .default)
+                { Void in
+                    self.showSoundMenu()
+                }
                 sheet.addAction(updateFirmware)
                 sheet.addAction(forceUpdateFirmware)
                 sheet.addAction(writeJSON)
                 sheet.addAction(writeJSON2)
                 sheet.addAction(changePW)
                 sheet.addAction(unsetPW)
+                sheet.addAction(soundMenu)
             }
-            let soundMenu = UIAlertAction(title: "Sound...", style: .default)
-            { Void in
-                self.showSoundMenu()
-            }
-            sheet.addAction(soundMenu)
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         sheet.addAction(cancel)
-        
         present(sheet, animated: true, completion: nil)
     }
     
-    func showSoundMenu() {
+    func showSoundMenu()
+    {
         let sheet = UIAlertController(title: "Sound Menu List", message: nil,
                                       preferredStyle: .actionSheet)
         
-        let setTS0 = UIAlertAction(title: "Set Touch Sound 0 / 1.0",
+        let setTS0 = UIAlertAction(title: "Set Touch Sound 0 / 2.0",
                                    style: .default)
         { Void in
             if let manager = self.cuonaManager {
@@ -162,22 +157,31 @@ UITextFieldDelegate {
             }
         }
         sheet.addAction(setTS0)
-        let setTS1 = UIAlertAction(title: "Set Touch Sound 1 / 0.5",
+        let setTS1 = UIAlertAction(title: "Set Touch Sound 0 / 1.0",
                                    style: .default)
         { Void in
             if let manager = self.cuonaManager {
-                _ = manager.setTouchSound(soundId: 1, volume: 0.5)
+                _ = manager.setTouchSound(soundId: 0, volume: 1.0)
             }
         }
         sheet.addAction(setTS1)
-        let setTS2 = UIAlertAction(title: "Set Touch Sound 2 / 0.5",
+        let setTS2 = UIAlertAction(title: "Set Touch Sound 1 / 2.0",
                                    style: .default)
         { Void in
             if let manager = self.cuonaManager {
-                _ = manager.setTouchSound(soundId: 2, volume: 0.5)
+                _ = manager.setTouchSound(soundId: 1, volume: 2.0)
             }
         }
         sheet.addAction(setTS2)
+        
+        let setTS3 = UIAlertAction(title: "Set Touch Sound 2 / 1.0",
+                                   style: .default)
+        { Void in
+            if let manager = self.cuonaManager {
+                _ = manager.setTouchSound(soundId: 2, volume: 1.0)
+            }
+        }
+        sheet.addAction(setTS3)
 
         let soundPlay0 = UIAlertAction(title: "Play Sound 0", style: .default)
         { Void in
@@ -219,7 +223,6 @@ UITextFieldDelegate {
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         sheet.addAction(cancel)
-
         present(sheet, animated: true, completion: nil)
     }
     
@@ -240,9 +243,6 @@ UITextFieldDelegate {
         
         ssidTextField.delegate = self
         pwTextField.delegate = self
-        hostTextField.delegate = self
-        pathTextField.delegate = self
-        sendMessageTextField.delegate = self
         
         cuonaManager = CUONAManager(delegate: self)
         
@@ -381,14 +381,6 @@ UITextFieldDelegate {
         ssidTextField?.text = ssid
         pwTextField?.text = password
         writeLog("Success: loaded SSID and Password\n")
-    }
-    
-    func cuonaUpdatedServerHost(_ hostName: String) {
-        hostTextField?.text = hostName
-    }
-    
-    func cuonaUpdatedServerPath(_ path: String) {
-        pathTextField?.text = path
     }
     
     func cuonaUpdatedNetResponse(code: Int, message: String) {
