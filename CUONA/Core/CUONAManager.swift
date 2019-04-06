@@ -386,7 +386,7 @@ class CUONAManager: NFCReaderDelegate {
         if (CUONABTManager.shared.isSupportLogRequest()) {
             logData.used_at = Date() // set current time
             let enc = JSONEncoder()
-            enc.dateEncodingStrategy = .iso8601
+            enc.dateEncodingStrategy = .formatted(getISO8601DateFormat())
             do {
                 let data = try enc.encode(logData)
                 let json = String(data: data, encoding: .utf8)!
@@ -398,6 +398,14 @@ class CUONAManager: NFCReaderDelegate {
         } else {
             return false
         }
+    }
+    
+    func getISO8601DateFormat() -> DateFormatter
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.timeZone = .current
+        return formatter as DateFormatter
     }
 
     // NFCReaderDelegate
