@@ -8,8 +8,8 @@
 
 struct Constants
 {
-    static let foverJsonKey = "favor"            // Favorを使用可能なCUONAに書き込まれているkey
-    static let favorServiceKey = "UXbfYJ6SXm8G"  // Favorのサービスキー
+    static let foverEventAction = "favor"        // Favorを使用可能なCUONAに書き込まれているkey
+    static let favorEventToken = "UXbfYJ6SXm8G"  // Favorのイベントトークン
 }
 
 struct Message
@@ -19,9 +19,9 @@ struct Message
 
 struct ErrorCode
 {
-    static let faildToReadCuona   = 100000    // CUONA読み込みに失敗
-    static let notExistServiseKey = 100100    // サービスキーが存在しない
-    static let invalidServiseKey  = 100101    // サービスキーが正しくない
+    static let faildToReadCuona    = 100000    // CUONA読み込みに失敗
+    static let notExistEventAction = 100100    // Favorイベントアクションが存在しない
+    static let invalidEventToken   = 100101    // Favorトークンが正しくない
 }
 
 struct ErrorType {
@@ -31,8 +31,8 @@ struct ErrorType {
 struct ErrorMessage
 {
     static let faildToReadCuona = "Failed to read CUONA tag"                // CUONA読み込みに失敗
-    static let notExistServiseKey = "Favor's service key does not exist"    // サービスキーが存在しない
-    static let invalidServiseKey = "Favor's service key is invalid"         // サービスキーが正しくない
+    static let notExistEventToken = "Favor's event action does not exist"    // イベントアクションが存在しない
+    static let invalidEventToken = "Favor's event token is invalid"         // イベントトークンが正しくない
 }
 
 struct ApiUrl

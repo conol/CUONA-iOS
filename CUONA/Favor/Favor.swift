@@ -545,23 +545,33 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         // Favorが使用可能なCUONAか確認
-        guard let favorJson = json.toDictionary?[Constants.foverJsonKey] as? [String : Any] else {
+        let favorJson1 = json.toDictionary?["events"] as? Array<[String : Any]>
+        print(favorJson1!)
+        guard let events = json.toDictionary?["events"] as? Array<[String : Any]> else {
             print(ErrorMessage.faildToReadCuona)
             self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.faildToReadCuona))
             return false
         }
         
         // Favorのサービスキーが書き込まれているか確認
-        guard let serviceKey = favorJson["id"] as? String else {
-            print(ErrorMessage.notExistServiseKey)
-            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.notExistServiseKey, type: ErrorType.cuonaTouchError, message: ErrorMessage.notExistServiseKey))
+        var eventToken = ""
+        for event in events {
+            let action = event["action"] as! String
+            if Constants.foverEventAction == action {
+                eventToken = event["token"] as! String
+            }
+        }
+        if eventToken == "" {
+            print(ErrorMessage.notExistEventToken)
+            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.notExistEventAction, type: ErrorType.cuonaTouchError, message: ErrorMessage.notExistEventToken))
             return false
         }
         
+        
         // 書き込まれているサービスキーが正しいか確認
-        if serviceKey != Constants.favorServiceKey {
-            print(ErrorMessage.invalidServiseKey)
-            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.invalidServiseKey, type: ErrorType.cuonaTouchError, message: ErrorMessage.invalidServiseKey))
+        if eventToken != Constants.favorEventToken {
+            print(ErrorMessage.invalidEventToken)
+            self.delegate?.failedScan?(exception: FavorException(code: ErrorCode.invalidEventToken, type: ErrorType.cuonaTouchError, message: ErrorMessage.invalidEventToken))
             return false
         }
         
