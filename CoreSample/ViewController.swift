@@ -97,15 +97,19 @@ UITextFieldDelegate {
                         }
                     }
                 }
-                let writeJSON = UIAlertAction(title: "Write service JSON", style: .default) { Void in
+                let writeJSON = UIAlertAction(title: "Write Demo JSON", style: .default) { Void in
                     if let manager = self.cuonaManager {
-                        let json = "{\"rounds\":{\"id\":\"yhNuCERUMM58\"},\"wifi\":{\"id\":\"H7Pa7pQaVxxG\",\"ssid\":\"ssid\",\"pass\":\"pass\"},\"favor\":{\"id\":\"UXbfYJ6SXm8G\"}}"
+                        let formatter = ISO8601DateFormatter()
+                        formatter.formatOptions = [.withInternetDateTime, .withFullTime]
+                        formatter.timeZone = .current
+                        let datetime = formatter.string(from: Date())
+                        let json = "{\"timestamp\":\"\(datetime)\",\"events\":[{\"token\":\"yhNuCERUMM58\",\"action\":\"checkin\"},{\"token\":\"H7Pa7pQaVxxG\",\"action\":\"wifi\",\"ssid\":\"ssid\",\"pass\":\"pass\"},{\"token\":\"UXbfYJ6SXm8G\",\"action\":\"favor\"}]}"
                         if !manager.writeJSON(json) {
                             self.writeLog("This CUONA firmware does not support JSON writing\n")
                         }
                     }
                 }
-                let writeJSON2 = UIAlertAction(title: "Delete service JSON", style: .default) { Void in
+                let writeJSON2 = UIAlertAction(title: "Delete JSON", style: .default) { Void in
                     if let manager = self.cuonaManager {
                         let json = "{}"
                         if !manager.writeJSON(json) {
