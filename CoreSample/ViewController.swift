@@ -123,9 +123,7 @@ UITextFieldDelegate {
                 }
                 let writeJSON = UIAlertAction(title: "Write Demo JSON", style: .default) { Void in
                     if let manager = self.cuonaManager {
-                        let formatter = ISO8601DateFormatter()
-                        formatter.formatOptions = [.withInternetDateTime, .withFullTime]
-                        formatter.timeZone = .current
+                        let formatter = manager.getISO8601DateFormat()
                         let datetime = formatter.string(from: Date())
                         let json = "{\"timestamp\":\"\(datetime)\",\"events\":[{\"token\":\"yhNuCERUMM58\",\"action\":\"checkin\"},{\"token\":\"H7Pa7pQaVxxG\",\"action\":\"wifi\",\"ssid\":\"ssid\",\"pass\":\"pass\"},{\"token\":\"UXbfYJ6SXm8G\",\"action\":\"favor\"}]}"
                         if !manager.writeJSON(json) {
