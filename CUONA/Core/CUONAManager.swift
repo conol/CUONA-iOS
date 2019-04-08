@@ -248,6 +248,7 @@ struct CUONALogData: Codable {
     let app_id: String = Bundle.main.bundleIdentifier ?? "?"
     var used_at: Date = Date()
     var note: String = ""
+    var url: URL? = nil
 }
 
 @available(iOS 11.0, *)
@@ -276,6 +277,15 @@ class CUONAManager: NFCReaderDelegate {
         anyNfcRead = false
         nfc = NFCReader(delegate: self)
         nfc?.scan(message)
+    }
+    
+    func stopNFC() -> Bool
+    {
+        if nfc != nil {
+            nfc?.stopScan()
+            return true
+        }
+        return false
     }
     
     func requestDisconnect() {
@@ -382,9 +392,10 @@ class CUONAManager: NFCReaderDelegate {
                                                        name: fileName)
     }
     
-    func logRequest() -> Bool {
+    func logRequest(_ url:URL? = nil) -> Bool {
         if (CUONABTManager.shared.isSupportLogRequest()) {
             logData.used_at = Date() // set current time
+            logData.url = url
             let enc = JSONEncoder()
             enc.dateEncodingStrategy = .formatted(getISO8601DateFormat())
             do {

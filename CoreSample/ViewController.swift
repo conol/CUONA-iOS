@@ -46,6 +46,23 @@ UITextFieldDelegate {
         _ = cuonaManager?.writeWifiSSIDPw(ssid: ssid, password: pw)
     }
     
+    func sendLog(_ urlstring:String?)
+    {
+        if let manager = cuonaManager {
+            // ログデータを設定する（サンプル）
+            manager.logData.customer_id = 4000
+            manager.logData.event_id = "sample event id"
+            manager.logData.note = "sample note"
+            // ログデータを送信する
+            let url = urlstring != nil ? URL(string: urlstring!) : nil
+            if manager.logRequest(url != nil ? url : nil) {
+                self.writeLog("Success: Send Log Data\n")
+            } else {
+                self.writeLog("Failed: Send Log Data...\n")
+            }
+        }
+    }
+    
     @IBAction func showMenu(_ sender: Any)
     {
         let sheet = UIAlertController(title: "Control Menu List", message: nil, preferredStyle: .actionSheet)
@@ -83,12 +100,19 @@ UITextFieldDelegate {
             
             if adminMode
             {
-                let updateFirmware = UIAlertAction(title: "Update firmware", style: .default) { Void in
-                    if let manager = self.cuonaManager {
-                        if !manager.requestOTAUpdate() {
-                            self.writeLog("This CUONA firmware does not support OTA\n")
-                        }
-                    }
+                let sendlog = UIAlertAction(title: "Send Log", style: .default) { Void in
+                    let alert = UIAlertController(title: "URL", message: "Please input send url. null is default url", preferredStyle: .alert)
+                    alert.addTextField(configurationHandler: { (input) in
+                        input.placeholder = "http://"
+                        input.keyboardType = .URL
+                    })
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.sendLog(alert.textFields?.first?.text)
+                    })
+                    alert.addAction(cancel)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
                 }
                 let forceUpdateFirmware = UIAlertAction(title: "Force update firmware", style: .default) { Void in
                     if let manager = self.cuonaManager {
@@ -133,7 +157,7 @@ UITextFieldDelegate {
                 { Void in
                     self.showSoundMenu()
                 }
-                sheet.addAction(updateFirmware)
+                sheet.addAction(sendlog)
                 sheet.addAction(forceUpdateFirmware)
                 sheet.addAction(writeJSON)
                 sheet.addAction(writeJSON2)
@@ -316,12 +340,6 @@ UITextFieldDelegate {
     func cuonaConnected() {
         writeLog("Success: connected\n")
         if let cm = cuonaManager {
-            // ログデータを設定する（サンプル）
-            cm.logData.customer_id = 4000
-            cm.logData.event_id = "sample event id"
-            cm.logData.note = "sample note"
-            // ログデータを送信する
-            _ = cm.logRequest()
             
             // 管理モード（要パスワード）に入る
             if cm.enterAdminMode(device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
