@@ -61,6 +61,11 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         cuonaManager?.startReadingNFC(message)
     }
     
+    public func stop() -> Bool
+    {
+        return cuonaManager?.stopNFC()
+    }
+    
     public func disconnect()
     {
         cuonaManager?.requestDisconnect()

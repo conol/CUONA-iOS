@@ -91,6 +91,13 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
         session?.begin()
     }
     
+    func stopScan()
+    {
+        if session != nil {
+            session?.invalidate()
+        }
+    }
+    
     private func handleLegacyNDEF(_ payload: Data) {
         if payload.count <= 3 ||
             payload[0] != CUONA_MAGIC_1 ||

@@ -542,6 +542,11 @@ public class Favor: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         cuonaManager?.startReadingNFC(Message.cuonaScan)
     }
     
+    public func stopScan() -> Bool
+    {
+        return cuonaManager?.stopNFC() ?? false
+    }
+    
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         // Favorが使用可能なCUONAか確認
