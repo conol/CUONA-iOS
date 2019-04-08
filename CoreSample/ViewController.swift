@@ -103,11 +103,14 @@ UITextFieldDelegate {
                 let sendlog = UIAlertAction(title: "Send Log", style: .default) { Void in
                     let alert = UIAlertController(title: "URL", message: "Please input send url. null is default url", preferredStyle: .alert)
                     alert.addTextField(configurationHandler: { (input) in
+                        let url = ud.object(forKey: "send_log_url") as? String
+                        input.text = url != nil ? url : ""
                         input.placeholder = "http://"
                         input.keyboardType = .URL
                     })
                     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        ud.set(alert.textFields?.first?.text, forKey: "send_log_url")
                         self.sendLog(alert.textFields?.first?.text)
                     })
                     alert.addAction(cancel)
