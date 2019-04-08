@@ -395,7 +395,7 @@ class CUONAManager: NFCReaderDelegate {
     func logRequest(_ url:URL? = nil) -> Bool {
         if (CUONABTManager.shared.isSupportLogRequest()) {
             logData.used_at = Date() // set current time
-            if url?.host != "http" {
+            if url != nil && url?.scheme != "http" {
                 return false
             }
             logData.url = url
