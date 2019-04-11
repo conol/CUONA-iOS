@@ -243,6 +243,7 @@ public struct CUONAWiFiSSIDPw {
 struct CUONALogData: Codable {
     let phone_os_type: String = "iOS"
     let phone_os_version: String = UIDevice.current.systemVersion
+    let model: String = UIDevice.modelName
     var event_id: String = ""
     var customer_id: Int = 0
     let app_id: String = Bundle.main.bundleIdentifier ?? "?"
