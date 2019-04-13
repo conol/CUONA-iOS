@@ -63,40 +63,41 @@ UITextFieldDelegate {
         }
     }
     
-    @IBAction func showMenu(_ sender: Any)
+    @IBAction func showMenu()
     {
+        var actions:[UIAlertAction] = []
         let sheet = UIAlertController(title: "Control Menu List", message: nil, preferredStyle: .actionSheet)
         
         let startNFC = UIAlertAction(title: "Start Touch NFC", style: .default) { Void in
             self.cuonaManager?.startReadingNFC("Please touch a CUONA")
         }
-        sheet.addAction(startNFC)
+        actions.append(startNFC)
         
         if device_pass != nil {
             let logout = UIAlertAction(title: "Sign out", style: .default) { Void in
                 self.device_pass = nil
                 self.writeLog("Success: sign out\n")
             }
-            sheet.addAction(logout)
+            actions.append(logout)
         } else {
             let login = UIAlertAction(title: "Sign in", style: .default) { Void in
                 let sign = self.storyboard?.instantiateViewController(withIdentifier: "login")
                 self.present(sign!, animated: true, completion: nil)
             }
-            sheet.addAction(login)
+            actions.append(login)
         }
         
         //以下はCUONAへ接続していたら利用可能な機能
         if connected
         {
-            let updateNFC = UIAlertAction(title: "Update Connected CUONA Info", style: .default) { Void in
+            let updateNFC = UIAlertAction(title: "Get Status", style: .default) { Void in
                 _ = self.cuonaManager?.requestSystemStatus()
             }
             let disconnectNFC = UIAlertAction(title: "Disconnect CUONA", style: .default) { Void in
                 self.cuonaManager?.requestDisconnect()
             }
-            sheet.addAction(disconnectNFC)
-            sheet.addAction(updateNFC)
+            actions.append(disconnectNFC)
+            actions.append(updateNFC)
             
             if adminMode
             {
@@ -124,134 +125,154 @@ UITextFieldDelegate {
                         }
                     }
                 }
-                let writeJSON = UIAlertAction(title: "Write Demo JSON", style: .default) { Void in
-                    if let manager = self.cuonaManager {
-                        let formatter = manager.getISO8601DateFormat()
-                        let datetime = formatter.string(from: Date())
-                        let json = "{\"timestamp\":\"\(datetime)\",\"events\":[{\"token\":\"yhNuCERUMM58\",\"action\":\"checkin\"},{\"token\":\"H7Pa7pQaVxxG\",\"action\":\"wifi\",\"ssid\":\"ssid\",\"pass\":\"pass\"},{\"token\":\"UXbfYJ6SXm8G\",\"action\":\"favor\"}]}"
-                        if !manager.writeJSON(json) {
-                            self.writeLog("This CUONA firmware does not support JSON writing\n")
-                        }
-                    }
+                let CoreMenu = UIAlertAction(title: "Admin Functions", style: .default)
+                { Void in
+                    self.showCoreMenu()
                 }
-                let writeJSON2 = UIAlertAction(title: "Delete JSON", style: .default) { Void in
-                    if let manager = self.cuonaManager {
-                        let json = "{}"
-                        if !manager.writeJSON(json) {
-                            self.writeLog("This CUONA firmware does not support JSON writing\n")
-                        }
-                    }
-                }
-                let changePW = UIAlertAction(title: "Password registered", style: .default){ Void in
-                    if let manager = self.cuonaManager {
-                        _ = manager.setAdminPassword(self.device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
-                        self.writeLog("Success: password registered\n")
-                    }
-                }
-                let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
-                    if let manager = self.cuonaManager {
-                        _ = manager.unsetAdminPassword()
-                        self.writeLog("Success: password initialized\n")
-                    }
+                let JsonMenu = UIAlertAction(title: "JSON Functions", style: .default)
+                { Void in
+                    self.showJsonMenu()
                 }
                 let soundMenu = UIAlertAction(title: "Sound...", style: .default)
                 { Void in
                     self.showSoundMenu()
                 }
-                sheet.addAction(sendlog)
-                sheet.addAction(forceUpdateFirmware)
-                sheet.addAction(writeJSON)
-                sheet.addAction(writeJSON2)
-                sheet.addAction(changePW)
-                sheet.addAction(unsetPW)
-                sheet.addAction(soundMenu)
+                actions.append(contentsOf: [sendlog,forceUpdateFirmware,CoreMenu,JsonMenu,soundMenu])
             }
         }
-        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        sheet.addAction(cancel)
+        actions.append(cancel)
+        
+        for action in actions {
+            sheet.addAction(action)
+        }
         present(sheet, animated: true, completion: nil)
+    }
+    
+    func showCoreMenu()
+    {
+        let coreMenu = UIAlertController(title: "Admin Menu List", message: nil,
+                                         preferredStyle: .actionSheet)
+        let onDevelopmentMode = UIAlertAction(title: "Change Development Mode", style: .default) { Void in
+            if let manager = self.cuonaManager {
+                if !manager.isDevelopment(true) {
+                    self.writeLog("This CUONA change Development Mode\n")
+                }
+            }
+        }
+        let offDevelopmentMode = UIAlertAction(title: "Change Production Mode", style: .default) { Void in
+            if let manager = self.cuonaManager {
+                if !manager.isDevelopment(false) {
+                    self.writeLog("This CUONA change Production Mode\n")
+                }
+            }
+        }
+        let changePW = UIAlertAction(title: "Password registered", style: .default){ Void in
+            if let manager = self.cuonaManager {
+                _ = manager.setAdminPassword(self.device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
+                self.writeLog("Success: password registered\n")
+            }
+        }
+        let unsetPW = UIAlertAction(title: "Password initialize", style: .default){ Void in
+            if let manager = self.cuonaManager {
+                _ = manager.unsetAdminPassword()
+                self.writeLog("Success: password initialized\n")
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { Void in
+            self.showMenu()
+        }
+        let actions = [onDevelopmentMode,offDevelopmentMode,changePW,unsetPW,cancel]
+        for action in actions {
+            coreMenu.addAction(action)
+        }
+        present(coreMenu, animated: true, completion: nil)
+    }
+    
+    func showJsonMenu()
+    {
+        let jsonMenu = UIAlertController(title: "Json Menu List", message: nil,
+                                      preferredStyle: .actionSheet)
+        let writeJSON = UIAlertAction(title: "Write Demo JSON", style: .default) { Void in
+            if let manager = self.cuonaManager {
+                let formatter = manager.getISO8601DateFormat()
+                let datetime = formatter.string(from: Date())
+                let json = "{\"timestamp\":\"\(datetime)\",\"events\":[{\"token\":\"yhNuCERUMM58\",\"action\":\"checkin\"},{\"token\":\"H7Pa7pQaVxxG\",\"action\":\"wifi\",\"ssid\":\"ssid\",\"pass\":\"pass\"},{\"token\":\"UXbfYJ6SXm8G\",\"action\":\"favor\"}]}"
+                if !manager.writeJSON(json) {
+                    self.writeLog("This CUONA firmware does not support JSON writing\n")
+                }
+            }
+        }
+        let deleteJSON = UIAlertAction(title: "Delete JSON", style: .default) { Void in
+            if let manager = self.cuonaManager {
+                let json = "{}"
+                if !manager.writeJSON(json) {
+                    self.writeLog("This CUONA firmware does not support JSON writing\n")
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { Void in
+            self.showMenu()
+        }
+        jsonMenu.addAction(writeJSON)
+        jsonMenu.addAction(deleteJSON)
+        jsonMenu.addAction(cancel)
+        present(jsonMenu, animated: true, completion: nil)
     }
     
     func showSoundMenu()
     {
-        let sheet = UIAlertController(title: "Sound Menu List", message: nil,
-                                      preferredStyle: .actionSheet)
-        
-        let setTS0 = UIAlertAction(title: "Set Touch Sound 0 / 2.0",
-                                   style: .default)
+        let sheet = UIAlertController(title: "Sound Menu List", message: nil, preferredStyle: .actionSheet)
+        let setTS0 = UIAlertAction(title: "Set Touch Sound 0 / 2.0", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.setTouchSound(soundId: 0, volume: 1.0)
             }
         }
-        sheet.addAction(setTS0)
-        let setTS1 = UIAlertAction(title: "Set Touch Sound 0 / 1.0",
-                                   style: .default)
+        let setTS1 = UIAlertAction(title: "Set Touch Sound 0 / 1.0", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.setTouchSound(soundId: 0, volume: 1.0)
             }
         }
-        sheet.addAction(setTS1)
-        let setTS2 = UIAlertAction(title: "Set Touch Sound 1 / 2.0",
-                                   style: .default)
+        let setTS2 = UIAlertAction(title: "Set Touch Sound 1 / 2.0", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.setTouchSound(soundId: 1, volume: 2.0)
             }
         }
-        sheet.addAction(setTS2)
-        
-        let setTS3 = UIAlertAction(title: "Set Touch Sound 2 / 1.0",
-                                   style: .default)
+        let setTS3 = UIAlertAction(title: "Set Touch Sound 2 / 1.0", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.setTouchSound(soundId: 2, volume: 1.0)
             }
         }
-        sheet.addAction(setTS3)
-
         let soundPlay0 = UIAlertAction(title: "Play Sound 0", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.playSound(soundId: 0, volume: 0.5)
             }
         }
-        sheet.addAction(soundPlay0)
         let soundPlay1 = UIAlertAction(title: "Play Sound 1", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.playSound(soundId: 1, volume: 0.5)
             }
         }
-        sheet.addAction(soundPlay1)
         let soundPlay2 = UIAlertAction(title: "Play Sound 2", style: .default)
         { Void in
             if let manager = self.cuonaManager {
                 _ = manager.playSound(soundId: 2, volume: 0.5)
             }
         }
-        sheet.addAction(soundPlay2)
-        let download1 = UIAlertAction(title: "Download A.wav",
-                                      style: .default)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         { Void in
-            if let manager = self.cuonaManager {
-                _ = manager.downloadSound(soundId: 2, fileName: "A.wav")
-            }
+            self.showMenu()
         }
-        sheet.addAction(download1)
-        let download2 = UIAlertAction(title: "Download B.wav",
-                                      style: .default)
-        { Void in
-            if let manager = self.cuonaManager {
-                _ = manager.downloadSound(soundId: 2, fileName: "B.wav")
-            }
+        let actions = [setTS0,setTS1,setTS2,setTS3,soundPlay0,soundPlay1,soundPlay2,cancel]
+        for action in actions {
+            sheet.addAction(action)
         }
-        sheet.addAction(download2)
-
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        sheet.addAction(cancel)
         present(sheet, animated: true, completion: nil)
     }
     

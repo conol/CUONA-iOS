@@ -10,8 +10,8 @@ let CUONA_CHAR_UUID_NFC_DATA: UInt16      = 0xff09 // protected, secure
 let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
 let CUONA_CHAR_UUID_PLAY_SOUND: UInt16    = 0xff0b
 let CUONA_CHAR_UUID_SET_TOUCH_SOUND: UInt16 = 0xff0c
-let CUONA_CHAR_UUID_DOWNLOAD_SOUND: UInt16 = 0xff0d
-let CUONA_CHAR_UUID_LOG_REQUEST: UInt16   = 0xff0e
+let CUONA_CHAR_UUID_LOG_REQUEST: UInt16     = 0xff0e
+let CUONA_CHAR_UUID_DEV_MODE: UInt16        = 0xff0f
 
 let CUONA_OTA_REQ_NORMAL: [UInt8]         = [ 0x00, 0x01 ]
 let CUONA_OTA_REQ_FORCE: [UInt8]          = [ 0x00, 0x03 ]
@@ -57,6 +57,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var CUONASetTouchSoundChar: CBCharacteristic?
     var CUONADownloadSoundChar: CBCharacteristic?
     var CUONALogRequestChar: CBCharacteristic?
+    var CUONADevelopModeChar: CBCharacteristic?
     
     var writeWiFiValue: CUONAWiFiSSIDPw?
     var writeHostValue: String?
@@ -179,16 +180,6 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
     
-    func sendDownloadSound(id: UInt8, name: String) -> Bool {
-        let reqdata = [id] + [UInt8](name.utf8)
-        guard let peripheral = currentPeripheral,
-            let char = CUONADownloadSoundChar else {
-                return false
-        }
-        peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
-        return true
-    }
-    
     func sendLogRequest(json: String) -> Bool {
         guard let peripheral = currentPeripheral,
             let char = CUONALogRequestChar,
@@ -201,6 +192,16 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func isSupportLogRequest() -> Bool {
         return CUONALogRequestChar != nil
+    }
+    
+    func sendDevelopmentMode(mode: UInt8) -> Bool {
+        let reqdata: [UInt8] = [ mode ]
+        guard let peripheral = currentPeripheral,
+            let char = CUONADevelopModeChar else {
+                return false
+        }
+        peripheral.writeValue(Data(reqdata), for: char, type: .withResponse)
+        return true
     }
 
     // CBCentralManagerDelegate
@@ -308,14 +309,12 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     CUONAPWProtectChar = char
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_PLAY_SOUND) {
                     CUONAPlaySoundChar = char
-                } else if uuid16equal(char.uuid,
-                                      CUONA_CHAR_UUID_SET_TOUCH_SOUND) {
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_SET_TOUCH_SOUND) {
                     CUONASetTouchSoundChar = char
-                } else if uuid16equal(char.uuid,
-                                      CUONA_CHAR_UUID_DOWNLOAD_SOUND) {
-                    CUONADownloadSoundChar = char
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_LOG_REQUEST) {
                     CUONALogRequestChar = char
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_DEV_MODE) {
+                    CUONADevelopModeChar = char
                 }
             }
         }
@@ -387,5 +386,4 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             delegate?.cuonaUpdatedJSON?()
         }
     }
-
 }

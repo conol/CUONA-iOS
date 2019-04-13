@@ -298,8 +298,7 @@ class CUONAManager: NFCReaderDelegate {
     }
     
     func writeWifiSSIDPw(ssid: String, password: String) -> Bool {
-        return CUONABTManager.shared.writeWiFiSSIDPw(ssid: ssid,
-                                                    password: password)
+        return CUONABTManager.shared.writeWiFiSSIDPw(ssid: ssid, password: password)
     }
     
     @available(iOS, deprecated)
@@ -367,8 +366,7 @@ class CUONAManager: NFCReaderDelegate {
         } else if intVolume > 127 {
             intVolume = 127
         }
-        return CUONABTManager.shared.sendPlaySound(id: UInt8(soundId),
-                                                   vol: UInt8(intVolume))
+        return CUONABTManager.shared.sendPlaySound(id: UInt8(soundId), vol: UInt8(intVolume))
     }
 
     func setTouchSound(soundId: Int, volume: Float) -> Bool {
@@ -381,16 +379,7 @@ class CUONAManager: NFCReaderDelegate {
         } else if intVolume > 127 {
             intVolume = 127
         }
-        return CUONABTManager.shared.sendSetTouchSound(id: UInt8(soundId),
-                                                       vol: UInt8(intVolume))
-    }
-
-    func downloadSound(soundId: Int, fileName: String) -> Bool {
-        if (soundId < 0 || soundId >= 64) {
-            return false
-        }
-        return CUONABTManager.shared.sendDownloadSound(id: UInt8(soundId),
-                                                       name: fileName)
+        return CUONABTManager.shared.sendSetTouchSound(id: UInt8(soundId), vol: UInt8(intVolume))
     }
     
     func logRequest(_ url:URL? = nil) -> Bool {
@@ -413,6 +402,11 @@ class CUONAManager: NFCReaderDelegate {
         } else {
             return false
         }
+    }
+    
+    func isDevelopment(_ mode:Bool = false) -> Bool
+    {
+        return CUONABTManager.shared.sendDevelopmentMode(mode: UInt8(mode.intValue))
     }
     
     func getISO8601DateFormat() -> DateFormatter
