@@ -93,10 +93,10 @@ UITextFieldDelegate {
             let updateNFC = UIAlertAction(title: "Get Status", style: .default) { Void in
                 _ = self.cuonaManager?.requestSystemStatus()
             }
-            let disconnectNFC = UIAlertAction(title: "Disconnect CUONA", style: .default) { Void in
+            let disconnect = UIAlertAction(title: "Disconnect BLE", style: .default) { Void in
                 self.cuonaManager?.requestDisconnect()
             }
-            actions.append(disconnectNFC)
+            actions.append(disconnect)
             actions.append(updateNFC)
             
             if adminMode
@@ -118,13 +118,6 @@ UITextFieldDelegate {
                     alert.addAction(ok)
                     self.present(alert, animated: true, completion: nil)
                 }
-                let forceUpdateFirmware = UIAlertAction(title: "Force update firmware", style: .default) { Void in
-                    if let manager = self.cuonaManager {
-                        if !manager.requestOTAUpdate(force: true) {
-                            self.writeLog("This CUONA firmware does not support OTA\n")
-                        }
-                    }
-                }
                 let CoreMenu = UIAlertAction(title: "Admin Functions", style: .default)
                 { Void in
                     self.showCoreMenu()
@@ -133,11 +126,11 @@ UITextFieldDelegate {
                 { Void in
                     self.showJsonMenu()
                 }
-                let soundMenu = UIAlertAction(title: "Sound...", style: .default)
+                let soundMenu = UIAlertAction(title: "Sound Functions", style: .default)
                 { Void in
                     self.showSoundMenu()
                 }
-                actions.append(contentsOf: [sendlog,forceUpdateFirmware,CoreMenu,JsonMenu,soundMenu])
+                actions.append(contentsOf: [sendlog,CoreMenu,JsonMenu,soundMenu])
             }
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -151,18 +144,24 @@ UITextFieldDelegate {
     
     func showCoreMenu()
     {
-        let coreMenu = UIAlertController(title: "Admin Menu List", message: nil,
-                                         preferredStyle: .actionSheet)
+        let coreMenu = UIAlertController(title: "Admin Menu List", message: nil, preferredStyle: .actionSheet)
+        let UpdateFirmware = UIAlertAction(title: "Update firmware", style: .default) { Void in
+            if let manager = self.cuonaManager {
+                if !manager.requestOTAUpdate(force: true) {
+                    self.writeLog("This CUONA firmware does not support OTA\n")
+                }
+            }
+        }
         let onDevelopmentMode = UIAlertAction(title: "Change Development Mode", style: .default) { Void in
             if let manager = self.cuonaManager {
-                if !manager.isDevelopment(true) {
+                if manager.isDevelopment(true) {
                     self.writeLog("This CUONA change Development Mode\n")
                 }
             }
         }
         let offDevelopmentMode = UIAlertAction(title: "Change Production Mode", style: .default) { Void in
             if let manager = self.cuonaManager {
-                if !manager.isDevelopment(false) {
+                if manager.isDevelopment(false) {
                     self.writeLog("This CUONA change Production Mode\n")
                 }
             }
@@ -182,7 +181,7 @@ UITextFieldDelegate {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { Void in
             self.showMenu()
         }
-        let actions = [onDevelopmentMode,offDevelopmentMode,changePW,unsetPW,cancel]
+        let actions = [UpdateFirmware,onDevelopmentMode,offDevelopmentMode,changePW,unsetPW,cancel]
         for action in actions {
             coreMenu.addAction(action)
         }
