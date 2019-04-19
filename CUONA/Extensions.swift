@@ -86,6 +86,11 @@ extension String
         return results.joined(separator: " ")
     }
     
+    func removingWhitespaces() -> String
+    {
+        return components(separatedBy: .whitespaces).joined()
+    }
+    
     func encodeUrl() -> String?
     {
         return self.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)

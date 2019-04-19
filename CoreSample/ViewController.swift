@@ -361,7 +361,6 @@ UITextFieldDelegate {
     func cuonaConnected() {
         writeLog("Success: connected\n")
         if let cm = cuonaManager {
-            
             // 管理モード（要パスワード）に入る
             if cm.enterAdminMode(device_pass ?? "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0")
             {

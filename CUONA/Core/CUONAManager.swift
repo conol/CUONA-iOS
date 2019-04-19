@@ -235,7 +235,7 @@ public struct CUONAWiFiSSIDPw {
     @objc optional func cuonaUpdatedNetResponse(code: Int, message: String)
     @objc optional func cuonaUpdatedJSON()
     @objc optional func cuonaUpdatedFailedJSON(code: Int, errortxt: String)
-
+    
     // OTA status update
     @objc optional func cuonaUpdateOTAStatus(_ status: CUONAOTAStatus)
 }

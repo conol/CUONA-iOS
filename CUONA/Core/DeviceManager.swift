@@ -31,6 +31,10 @@ public enum Method:String
     @objc optional func failedSignIn(status:NSInteger, json:[String : Any]?)
     @objc optional func successGetDeviceList(json:[String : Any])
     @objc optional func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
+    @objc optional func successPing(json:[String : Any])
+    @objc optional func failedPing(status:NSInteger, json:[String : Any]?)
+    @objc optional func successAddDevice(json:[String : Any])
+    @objc optional func failedAddDevice(status:NSInteger, json:[String : Any]?)
     @objc optional func successPearing(json:[String : Any])
     @objc optional func failedPearing(status:NSInteger, json:[String : Any]?)
     @objc optional func successRelease(json:[String : Any])
@@ -88,6 +92,22 @@ public class DeviceManager: NSObject, HttpRequestDelegate
         delegate?.failedGetDeviceList?(status: status, json: json)
     }
     
+    func successPing(json:[String : Any]) {
+        delegate?.successPing?(json: json)
+    }
+    
+    func failedPing(status:NSInteger, json:[String : Any]?) {
+        delegate?.failedPing?(status: status, json: json)
+    }
+    
+    func successAddDevice(json:[String : Any]) {
+        delegate?.successAddDevice?(json: json)
+    }
+    
+    func failedAddDevice(status:NSInteger, json:[String : Any]?) {
+        delegate?.failedAddDevice?(status: status, json: json)
+    }
+    
     func successPearing(json: [String : Any]) {
         delegate?.successPearing?(json: json)
     }
@@ -129,6 +149,10 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     func failedSignIn(status:NSInteger, json:[String : Any]?)
     func successGetDeviceList(json:[String : Any])
     func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
+    func successPing(json:[String : Any])
+    func failedPing(status:NSInteger, json:[String : Any]?)
+    func successAddDevice(json:[String : Any])
+    func failedAddDevice(status:NSInteger, json:[String : Any]?)
     func successPearing(json:[String : Any])
     func failedPearing(status:NSInteger, json:[String : Any]?)
     func successRelease(json:[String : Any])
@@ -206,7 +230,7 @@ public class HttpRequest
     //MARK: - サインイン送信
     public func signIn(email:String, password:String)
     {
-        let url = API_URL + "/api/owners/sign_in.json"
+        let url = API_URL + "/sign_in"
         let params = [
             "email": email,
             "password": password
@@ -223,6 +247,21 @@ public class HttpRequest
                 self.delegate?.successSignIn(json: data)
             } else {
                 self.delegate?.failedSignIn(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
+    //MARK: - MQTT GET_STATUS
+    public func Ping(_ nfc_uid:String)
+    {
+        let url = API_URL + "/devices/ping/" + nfc_uid
+        sendRequestAsynchronous(url, method: .post, params: nil) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successPing(json: returnData)
+            } else {
+                self.delegate?.failedPing(status: httpResponse?.statusCode ?? 0, json: returnData)
             }
         }
     }
@@ -244,10 +283,30 @@ public class HttpRequest
         }
     }
     
+    //MARK: - 工場出荷用追加API
+    public func addDevice(_ device_id:String)
+    {
+        let url = API_URL + "/devices"
+        let params = [
+            "nfc_uid": device_id,
+            "device_type": "cube"
+            ] as [String : Any]
+        
+        sendRequestAsynchronous(url, method: .post, params: params) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successAddDevice(json: returnData)
+            } else {
+                self.delegate?.failedAddDevice(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
     //MARK: - オーナーにデバイスをペアリング
     public func pearingDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
     {
-        let url = API_URL + "/api/owners/devices/pairing.json"
+        let url = API_URL + "/pairing"
         let params = [
             "device_id": device_id,
             "name": name,
