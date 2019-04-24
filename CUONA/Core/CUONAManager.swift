@@ -56,6 +56,7 @@ func CUONADebugPrint(_ message: String) {
     public let version: UInt8
     public let wifiStarted: Bool
     public let wifiConnected: Bool
+    public let mqttConnected: Bool
     public let ip4addr: String
     public let nfcDeviceUID: [UInt8]
     public let voltage: Double
@@ -89,7 +90,8 @@ func CUONADebugPrint(_ message: String) {
         version  = data[0]
         wifiStarted = data[1] != 0
         wifiConnected = data[2] != 0
-        let miscStatus = data[3]
+        mqttConnected = data[3] != 0
+        let miscStatus = data[4]
         inAdminMode = (miscStatus & MISC_STATUS_ADMIN_MODE) != 0
         if (miscStatus & MISC_STATUS_CUONA5) != 0 {
             hardwareVersion = 5
@@ -105,18 +107,18 @@ func CUONADebugPrint(_ message: String) {
         isPasswordAllZeros = (miscStatus & MISC_STATUS_PW_ALLZERO) != 0
         
         ip4addr = String(format: "%d.%d.%d.%d",
-                         data[4], data[5], data[6], data[7])
-        nfcDeviceUID = [data[8], data[9], data[10], data[11],
-                       data[12], data[13], data[14]]
+                         data[8], data[9], data[10], data[11])
+        nfcDeviceUID = [data[12], data[13], data[14], data[15],
+                       data[16], data[17], data[18]]
         
         if hardwareVersion >= 5 && data.count >= 32 {
             isPowerFromUSB = true
             voltage = 0
             batteryPercentage = 0
-            temperature = Float(readInt16(data: data, offset: 18)) / 100
-            pressure = Float(readUInt32(data: data, offset: 20)) / 100
-            humidity = Float(readUInt32(data: data, offset: 24)) / 1000
-            gasResistance = readUInt32(data: data, offset: 28)
+            temperature = Float(readInt16(data: data, offset: 22)) / 100
+            pressure = Float(readUInt32(data: data, offset: 24)) / 100
+            humidity = Float(readUInt32(data: data, offset: 28)) / 1000
+            gasResistance = readUInt32(data: data, offset: 32)
             environmentDataAvailable = true
         } else {
             isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0

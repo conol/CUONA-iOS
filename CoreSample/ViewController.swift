@@ -388,6 +388,7 @@ UITextFieldDelegate {
                 + " hardware: \(status.hardwareVersion)\n"
                 + "  wifi started: \(status.wifiStarted),"
                 + " connected: \(status.wifiConnected)\n"
+                + "  MQTT connected: \(status.mqttConnected)\n"
                 + "  ip4addr: \(status.ip4addr)\n"
                 + "  nfcChipUID: [\(stringArray)]\n"
                 + "  adminMode: \(status.inAdminMode),"
