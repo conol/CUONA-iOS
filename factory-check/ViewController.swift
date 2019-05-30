@@ -155,6 +155,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                 if status.wifiConnected {
                     results[3] = 1
                 } else {
+                    
                     print("error:wifi")
                     let alert = UIAlertController(title: "エラー", message: "WiFiに接続できません！", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)

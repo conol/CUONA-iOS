@@ -358,6 +358,11 @@ UITextFieldDelegate {
         writeLog("Failed: illegal NFC Detected\n")
     }
     
+    func cuonaConnectedWifi(_ status: CUONASystemStatus) {
+        writeLog("Success: Connected WiFi\n")
+        print(status)
+    }
+    
     func cuonaConnected() {
         writeLog("Success: connected\n")
         if let cm = cuonaManager {

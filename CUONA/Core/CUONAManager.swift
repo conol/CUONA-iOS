@@ -231,6 +231,7 @@ public struct CUONAWiFiSSIDPw {
 
     // value update
     @objc optional func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus)
+    @objc optional func cuonaConnectedWifi(_ status: CUONASystemStatus)
     @objc optional func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
     @objc optional func cuonaUpdatedServerHost(_ hostName: String)
     @objc optional func cuonaUpdatedServerPath(_ path: String)
