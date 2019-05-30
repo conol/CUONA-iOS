@@ -169,7 +169,6 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
     {
         if checkNowStep() == 4 {
-            print("cuonaUpdatedWiFiSSIDPw")
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                 if !self.isConnectingWifi {
                     self.setStepStatus(stepNum: 4, status: .error)
