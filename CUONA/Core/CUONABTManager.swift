@@ -6,6 +6,7 @@ let CUONA_SERVICE_UUID: UInt16            = 0xff00
 let CUONA_CHAR_UUID_SYSTEM_STATUS: UInt16 = 0xff01
 let CUONA_CHAR_UUID_WIFI_SSID_PW: UInt16  = 0xff02 // protected
 let CUONA_CHAR_UUID_CONNECTED_WIFI: UInt16 = 0xff03
+let CUONA_CHAR_UUID_CONNECTED_MQTT: UInt16 = 0xff04
 let CUONA_CHAR_UUID_OTA_CTRL: UInt16      = 0xff07 // protected
 let CUONA_CHAR_UUID_NFC_DATA: UInt16      = 0xff09 // protected, secure
 let CUONA_CHAR_UUID_PWPROTECT: UInt16     = 0xff0a // for protection
@@ -52,6 +53,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var CUONASystemStatusChar: CBCharacteristic?
     var CUONAWiFiSSIDPwChar: CBCharacteristic?
     var CUONAConnectedWifiChar: CBCharacteristic?
+    var CUONAConnectedMqttChar: CBCharacteristic?
     var CUONAOTACtrlChar: CBCharacteristic?
     var CUONANFCDataChar: CBCharacteristic?
     var CUONAPWProtectChar: CBCharacteristic?
@@ -301,6 +303,9 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_CONNECTED_WIFI) {
                     CUONAConnectedWifiChar = char
                     peripheral.setNotifyValue(true, for: char)
+                } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_CONNECTED_MQTT) {
+                    CUONAConnectedMqttChar = char
+                    peripheral.setNotifyValue(true, for: char)
                 } else if uuid16equal(char.uuid, CUONA_CHAR_UUID_WIFI_SSID_PW) {
                     CUONAWiFiSSIDPwChar = char
                     peripheral.readValue(for: char)
@@ -347,6 +352,13 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 if let systemStatus = CUONASystemStatus(data: data) {
                     CUONADebugPrint("wifiConnected=\(systemStatus)")
                     delegate?.cuonaConnectedWifi?(systemStatus)
+                }
+            }
+        } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_CONNECTED_MQTT) {
+            if let data = characteristic.value {
+                if let systemStatus = CUONASystemStatus(data: data) {
+                    CUONADebugPrint("wifiConnected=\(systemStatus)")
+                    delegate?.cuonaConnectedMqtt?(systemStatus)
                 }
             }
         } else if uuid16equal(characteristic.uuid, CUONA_CHAR_UUID_WIFI_SSID_PW) {

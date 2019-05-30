@@ -363,6 +363,11 @@ UITextFieldDelegate {
         print(status)
     }
     
+    func cuonaConnectedMqtt(_ status: CUONASystemStatus) {
+        writeLog("Success: Connected MQTT\n")
+        print(status)
+    }
+    
     func cuonaConnected() {
         writeLog("Success: connected\n")
         if let cm = cuonaManager {
