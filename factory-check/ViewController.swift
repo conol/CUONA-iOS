@@ -68,23 +68,22 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     @IBAction func startNFC()
     {
-        cuonaManager?.startReadingNFC("Please touch to CUONA")
-//        let ssid = ud.object(forKey: "ssid") as! String?
-//        let pass = ud.object(forKey: "pass") as! String?
-//
-//        if 3 < ssid!.count && 3 < pass!.count {
-//            cuonaManager?.startReadingNFC("Please touch to CUONA")
-//        } else {
-//            let alert = UIAlertController(title: "WiFi設定がありません", message: "CUONAが接続する先のWiFi設定を入力してください。STEP4,5が検査出来ません", preferredStyle: .alert)
-//            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//            let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-//                self.setWiFi()
-//            })
-//            alert.addAction(cancel)
-//            alert.addAction(ok)
-//
-//            present(alert, animated: true, completion: nil)
-//        }
+        let ssid = ud.object(forKey: "ssid") as! String?
+        let pass = ud.object(forKey: "pass") as! String?
+
+        if 3 < ssid!.count && 3 < pass!.count {
+            cuonaManager?.startReadingNFC("Please touch to CUONA")
+        } else {
+            let alert = UIAlertController(title: "WiFi設定がありません", message: "CUONAが接続する先のWiFi設定を入力してください。STEP4,5が検査出来ません", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.setWiFi()
+            })
+            alert.addAction(cancel)
+            alert.addAction(ok)
+
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
@@ -157,13 +156,13 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                     results[3] = 1
                 } else {
                     print("error:wifi")
-//                    let alert = UIAlertController(title: "エラー", message: "WiFiに接続できません！", preferredStyle: .alert)
-//                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                    alert.addAction(ok)
-//                    present(alert, animated: true) {
-//                        self.results[3] = 2
-//                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//                    }
+                    let alert = UIAlertController(title: "エラー", message: "WiFiに接続できません！", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(ok)
+                    present(alert, animated: true) {
+                        self.results[3] = 2
+                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                    }
                 }
             }
         }
