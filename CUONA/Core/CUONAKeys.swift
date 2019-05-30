@@ -10,7 +10,7 @@ public class CUONAKeys {
         0x7E, 0xD3, 0x84, 0x5D, 0xDC, 0x44, 0x0D, 0x27, 0x6E, 0x9E,
         0x6A, 0xE8,
         ]
-    static let keyCode: UInt16 = 40000 //65536がMAX
+    static let keyCode: UInt16 = 65000 //65536がMAX
     
     public static let customerId: UInt16 = 0
     

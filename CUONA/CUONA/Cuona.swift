@@ -12,7 +12,7 @@ import UIKit
 {
     func catchNFC(device_id: String, type: CUONAType, data: [String:Any]?) -> Bool
     func cancelNFC()
-    func failedNFC()
+    func failedNFC(_ exception:CuonaException!)
     
     @objc optional func successStatus(_ status: CUONASystemStatus)
     @objc optional func successNFCData()
@@ -42,8 +42,10 @@ import UIKit
 public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
     public var sendLog:Logging = .on
-    public var serviceKey:Service = .developer
     public weak var delegate: CuonaDelegate?
+    
+    var use_event_token:String?
+    var all_events:Array<[String:Any]>?
     
     var cuonaManager: CUONAManager?
     var deviceManager: DeviceManager?
@@ -56,14 +58,30 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         deviceManager = DeviceManager(delegate: self)
     }
     
-    public func start(message:String)
+    public func getEvents()
+    {
+        deviceManager?.request?.getEventList()
+    }
+    
+    func successGetEventList(json: [String : Any])
+    {
+        let data = json["data"] as! Array<[String:Any]>?
+        all_events = data
+    }
+    
+    func failedGetEventList(status: NSInteger, json: [String : Any]?)
+    {
+        
+    }
+    
+    public func start(_ token:String?, message:String?)
     {
         cuonaManager?.startReadingNFC(message)
     }
     
     public func stop() -> Bool
     {
-        return cuonaManager?.stopNFC()
+        return cuonaManager?.stopNFC() ?? false
     }
     
     public func disconnect()
@@ -84,11 +102,76 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         #warning("IF文書き直し")
-        if sendLog == .on && servｓiceKey != .developer {
+        if sendLog == .on {
             deviceManager?.request?.sendLog(deviceId, event_id:"", customer_id: 0, note: "Read DeviceId by iOS")
         }
+        
+        guard let events = json.toDictionary?["events"] as? Array<[String : Any]> else {
+            print(ErrorMessage.faildToReadCuona)
+            self.delegate?.failedNFC(CuonaException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.faildToReadCuona))
+            return false
+        }
+        
+        // 取得済みのイベントリスト内に該当するトークンが書き込まれているか確認
+        var event:[String : Any]? = nil
+        if use_event_token != nil {
+            event = getEventByToken(events)
+        } else if 0 < all_events?.count ?? 0 {
+            event = getEventByList(events)
+        }
+        var eventToken = ""
+        for event in events
+        {
+            var token = event["token"] as! String
+            for all_event in all_events
+            {
+                
+            }
+            
+            if Constants.foverEventAction == action {
+                eventToken = event["token"] as! String
+            }
+        }
+        if eventToken == "" {
+            print(ErrorMessage.notExistEventToken)
+            self.delegate?.failedNFC(CuonaException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.invalidEventToken))
+            return false
+        }
+        
+        
         let data = convertToDictionary(json)
         return delegate!.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
+    }
+    
+    //指定イベントトークンからイベントを抽出
+    func getEventByToken(_ events: Array<[String : Any]>) -> [String : Any]?
+    {
+        for event in events
+        {
+            if use_event_token == event["token"] as? String {
+                return event
+            }
+        }
+        return nil
+    }
+    
+    func getEventByList(_ events: Array<[String : Any]>) -> [String : Any]?
+    {
+        if all_events == nil {
+            return nil
+        }
+        for event in events
+        {
+            let e = event["token"] as! String?
+            for event2 in all_events!
+            {
+                let e2 = event2["event_token"] as! String?
+                if e == e2 {
+                    return event
+                }
+            }
+        }
+        return nil
     }
     
     func cuonaNFCCanceled()
@@ -98,7 +181,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func cuonaIllegalNFCDetected()
     {
-        delegate?.failedNFC()
+        delegate?.failedNFC(CuonaException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.faildToReadCuona))
     }
     
     // MARK:- CUONA's Bluetooth Return check methods

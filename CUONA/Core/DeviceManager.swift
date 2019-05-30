@@ -31,6 +31,8 @@ public enum Method:String
     @objc optional func failedSignIn(status:NSInteger, json:[String : Any]?)
     @objc optional func successGetDeviceList(json:[String : Any])
     @objc optional func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
+    @objc optional func successGetEventList(json:[String : Any])
+    @objc optional func failedGetEventList(status:NSInteger, json:[String : Any]?)
     @objc optional func successPing(json:[String : Any])
     @objc optional func failedPing(status:NSInteger, json:[String : Any]?)
     @objc optional func successAddDevice(json:[String : Any])
@@ -92,6 +94,14 @@ public class DeviceManager: NSObject, HttpRequestDelegate
         delegate?.failedGetDeviceList?(status: status, json: json)
     }
     
+    func successGetEventList(json:[String : Any]) {
+        delegate?.successGetEventList?(json: json)
+    }
+    
+    func failedGetEventList(status:NSInteger, json:[String : Any]?) {
+        delegate?.failedGetEventList?(status: status, json: json)
+    }
+    
     func successPing(json:[String : Any]) {
         delegate?.successPing?(json: json)
     }
@@ -149,6 +159,8 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     func failedSignIn(status:NSInteger, json:[String : Any]?)
     func successGetDeviceList(json:[String : Any])
     func failedGetDeviceList(status:NSInteger, json:[String : Any]?)
+    func successGetEventList(json:[String : Any])
+    func failedGetEventList(status:NSInteger, json:[String : Any]?)
     func successPing(json:[String : Any])
     func failedPing(status:NSInteger, json:[String : Any]?)
     func successAddDevice(json:[String : Any])
@@ -266,6 +278,21 @@ public class HttpRequest
         }
     }
     
+    //MARK: - イベント一覧を取得
+    public func getEventList()
+    {
+        let url = API_URL + "/events/all.json"
+        
+        sendRequestAsynchronous(url, method: .get, params: nil) { (returnData, response) in
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 200 {
+                self.delegate?.successGetEventList(json: returnData)
+            } else {
+                self.delegate?.failedGetEventList(status: httpResponse?.statusCode ?? 0, json: returnData)
+            }
+        }
+    }
+    
     //MARK: - オーナーのデバイス一覧を取得
     public func getDeviceList(_ develop:Bool = false)
     {
@@ -310,7 +337,7 @@ public class HttpRequest
         let params = [
             "device_id": device_id,
             "name": name,
-            "status": enabled ? "enable" : "disable",
+            "status": "normal", //将来廃止予定
             "service_ids": service_ids
             ] as [String : Any]
         
@@ -347,7 +374,7 @@ public class HttpRequest
         let url = API_URL + "/api/owners/devices/" + device_id.encodeUrl()! + ".json"
         let params = [
             "name": name,
-            "status": enabled ? "enable" : "disable",
+            "status": "normal", //将来廃止予定
             "service_ids": service_ids
             ] as [String : Any]
         

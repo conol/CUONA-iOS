@@ -6,10 +6,37 @@
 //  Copyright © 2018年 conol, Inc. All rights reserved.
 //
 
+
+
 public enum Logging:Int
 {
     case on  = 1
     case off = 2
+}
+
+struct ErrorCode
+{
+    static let faildToReadCuona    = 100000    // CUONA読み込みに失敗
+    static let notExistEventAction = 100100    // イベントアクションが存在しない
+    static let invalidEventToken   = 100101    // トークンが正しくない
+}
+
+struct ErrorType {
+    static let cuonaTouchError = "CuonaTouchError"  // CUONAタッチ時のエラー
+}
+
+struct ErrorMessage
+{
+    static let faildToReadCuona = "Failed to read CUONA tag"                // CUONA読み込みに失敗
+    static let notExistEventToken = "CUONA's event action does not exist"    // イベントアクションが存在しない
+    static let invalidEventToken = "CUONA's event token is invalid"         // イベントトークンが正しくない
+}
+
+struct ApiUrl
+{
+    static let endPoint = "https://api.cuona.io"
+    
+    static let allEvents = endPoint + "/events/all.json"
 }
 
 struct NFCJsonData: Codable
