@@ -30,22 +30,27 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     @IBOutlet weak var loading6: UIActivityIndicatorView!
     @IBOutlet weak var loading7: UIActivityIndicatorView!
     
+    enum StepStatus: Int {
+        case yet
+        case success
+        case error
+    }
+    
     var deviceManager: DeviceManager?
     var cuonaManager: CUONAManager?
     var cuona_uuid: String?
     var steps:[UIImageView]?
     var loadings:[UIActivityIndicatorView]?
-    var results = [0,0,0,0,0,0,0] {// 0:default 1:success, 2:error
+    var isConnectingWifi = false
+    var results = [StepStatus.yet, .yet, .yet, .yet, .yet, .yet, .yet] {
         didSet {
             for (index, result) in results.enumerated() {
                 var image:UIImage?
                 switch result {
-                    case 0:  image = UIImage(named: "yet")
-                    case 1:  image = UIImage(named: "success")
-                    case 2:  image = UIImage(named: "error")
-                    default: image = UIImage(named: "yet")
+                    case .yet:  image = UIImage(named: "yet")
+                    case .success:  image = UIImage(named: "success")
+                    case .error:  image = UIImage(named: "error")
                 }
-                loadings?[index].isHidden = true
                 steps?[index].image = image
             }
         }
@@ -61,9 +66,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         deviceManager?.request?.app_token = FACTORY_APP_TOKEN
         checkButton.makeRoundButton("FFFFFF", backgroundColor: "00318E")
         
-        for loading in loadings! {
-            loading.isHidden = true
-        }
+        resetLoading()
     }
     
     @IBAction func startNFC()
@@ -88,8 +91,9 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
+        reset()
         cuona_uuid = deviceId.removingWhitespaces().uppercased()
-        results[0] = 1
+        setStepStatus(stepNum: 1, status: .success)
         return true
     }
     
@@ -106,7 +110,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     func cuonaConnected()
     {
-        results[1] = 1
+        setStepStatus(stepNum: 2, status: .success)
         if cuonaManager?.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0") ?? false
         {
             _ = cuonaManager?.requestSystemStatus()
@@ -114,14 +118,16 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     }
     
     func cuonaConnectFailed(_ error: String) {
-        results[1] = 2
+        setStepStatus(stepNum: 2, status: .error)
         Alert.show(title: "エラー", message: error)
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
     
     func cuonaDisconnected() {
-        Alert.show(title: "エラー", message: "BLEが切断されました")
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        if  checkNowStep() < results.count {
+            Alert.show(title: "エラー", message: "BLEが切断されました")
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
     }
     
     func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus)
@@ -136,33 +142,25 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                 }
                 alert.addAction(ok)
                 present(alert, animated: true) {
-                    self.results[2] = 1
+                    self.setStepStatus(stepNum: 3, status: .success)
                 }
             } else {
                 let alert = UIAlertController(title: "エラー", message: "センサーの情報が取得出来ていません", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(ok)
                 present(alert, animated: true) {
-                    self.results[2] = 2
+                    self.setStepStatus(stepNum: 3, status: .error)
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                 }
             }
         }
         if checkNowStep() == 4
         {
-            if status.wifiStarted {
-                // STEP.4
-                if status.wifiConnected {
-                    results[3] = 1
-                } else {
-                    print("error:wifi")
-                    let alert = UIAlertController(title: "エラー", message: "WiFiに接続できません！", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(ok)
-                    present(alert, animated: true) {
-                        self.results[3] = 2
-                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-                    }
+            if status.wifiConnected {
+                isConnectingWifi = true
+                setStepStatus(stepNum: 4, status: .success)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                    self.deviceManager?.request?.Ping(self.cuona_uuid!)
                 }
             }
         }
@@ -171,23 +169,13 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func cuonaUpdatedWiFiSSIDPw(ssid: String, password: String)
     {
         if checkNowStep() == 4 {
-            if 3 < ssid.count && 3 < password.count {
-                if cuona_uuid != nil {
-                    results[3] = 1
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                        self.deviceManager?.request?.Ping(self.cuona_uuid!)
-                    }
+            print("cuonaUpdatedWiFiSSIDPw")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                if !self.isConnectingWifi {
+                    self.setStepStatus(stepNum: 4, status: .error)
+                    Alert.show(title: "エラー", message: "WiFiの接続に失敗しました")
                 }
             }
-        }
-        if checkNowStep() == 7 {
-            cuonaManager?.requestDisconnect()
-            let alert = UIAlertController(title: "検査終了", message: "このCUONAは想定する品質を満たしています", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK", style: .default) { (action) in
-                self.reset()
-            }
-            alert.addAction(ok)
-            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -195,7 +183,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     {
         var count = 1
         for result in results {
-            if result == 1 {
+            if result == .success && count < results.count {
                 count += 1
             }
         }
@@ -225,18 +213,24 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         let timeout = data["timeout"] as! Bool
         
         if code == 200 && success && !timeout {
-            results[4] = 1
+            setStepStatus(stepNum: 5, status: .success)
             if cuona_uuid != nil {
                 deviceManager?.request?.addDevice(cuona_uuid!)
             }
         } else {
-            results[4] = 2
+            let alert = UIAlertController(title: "エラー", message: "MQTT接続に失敗しました", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true) {
+                self.setStepStatus(stepNum: 5, status: .error)
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            }
         }
     }
     
     func failedPing(status: NSInteger, json: [String : Any]?)
     {
-        results[4] = 2
+        setStepStatus(stepNum: 5, status: .error)
     }
     
     func successAddDevice(json: [String : Any])
@@ -245,16 +239,30 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         let code = meta["code"] as? Int
         
         if code == 200 {
-            results[5] = 1
+            setStepStatus(stepNum: 6, status: .success)
             finish()
         } else {
-            results[5] = 2
+            setStepStatus(stepNum: 6, status: .error)
         }
     }
     
     func failedAddDevice(status: NSInteger, json: [String : Any]?)
     {
-        results[5] = 2
+        let meta = json!["meta"] as! [String : Any]
+        let message = meta["message"] as? String
+        
+        if message == "Device already exists." {
+            setStepStatus(stepNum: 6, status: .success)
+            let alert = UIAlertController(title: "警告", message: "すでにテスト済みのCUONAです", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                self.finish()
+            }
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+        } else {
+            setStepStatus(stepNum: 6, status: .error)
+            Alert.show(title: "エラー", message: "DBへのCUONAの登録に失敗しました")
+        }
     }
     
     ///
@@ -287,13 +295,32 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     func finish()
     {
+        cuonaManager?.requestDisconnect()
         _ = cuonaManager?.writeWifiSSIDPw(ssid: "", password: "")
+        Alert.show(title: "検査終了", message: "このCUONAは想定する品質を満たしています")
+        setStepStatus(stepNum: 7, status: .success)
     }
     
     func reset()
     {
-        results = [0,0,0,0,0,0,0]
+        results = [.yet, .yet, .yet, .yet, .yet, .yet, .yet]
         cuona_uuid = nil
+        isConnectingWifi = false
+    }
+    
+    func resetLoading() {
+        for loading in loadings! {
+            loading.isHidden = true
+        }
+    }
+    
+    func setStepStatus(stepNum: Int, status: StepStatus) {
+        let index = stepNum - 1
+        resetLoading()
+        results[index] = status
+        if status == .success && index < results.count - 1 {
+            loadings![index + 1].isHidden = false
+        }
     }
 }
 
