@@ -68,6 +68,8 @@
 		1465318C20295DEF00F7466B /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		1465318D20295DEF00F7466B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		1465318E20295DEF00F7466B /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
+		1469681922AF57E800E3D22C /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1469681822AF57E800E3D22C /* LogViewController.swift */; };
+		1469681B22AF7F8E00E3D22C /* LogViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1469681A22AF7F8E00E3D22C /* LogViewCell.swift */; };
 		14B24EA12042B76500C7A4A8 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B24EA02042B76500C7A4A8 /* login.swift */; };
 		14B24EA32042BF2C00C7A4A8 /* SampleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B24EA22042BF2C00C7A4A8 /* SampleExtensions.swift */; };
 		14B24EA72042CE1F00C7A4A8 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B24EA62042CE1F00C7A4A8 /* CustomTextField.swift */; };
@@ -297,6 +299,8 @@
 		1454EA181FBDB4FB00DA77E0 /* Cuona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuona.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
 		1465318320295A8700F7466B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		1469681822AF57E800E3D22C /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		1469681A22AF7F8E00E3D22C /* LogViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewCell.swift; sourceTree = "<group>"; };
 		148451EA224C82E900E31051 /* factory-check.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "factory-check.entitlements"; sourceTree = "<group>"; };
 		14B24EA02042B76500C7A4A8 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		14B24EA22042BF2C00C7A4A8 /* SampleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleExtensions.swift; sourceTree = "<group>"; };
@@ -698,6 +702,8 @@
 				14E20DBB223B912E00EFAE70 /* AppDelegate.swift */,
 				14E20DE7223B92DF00EFAE70 /* SampleExtensions.swift */,
 				14E20DBD223B912E00EFAE70 /* ViewController.swift */,
+				1469681822AF57E800E3D22C /* LogViewController.swift */,
+				1469681A22AF7F8E00E3D22C /* LogViewCell.swift */,
 				14E20DBF223B912E00EFAE70 /* Main.storyboard */,
 				14E20DC2223B913000EFAE70 /* Assets.xcassets */,
 				14E20DC4223B913000EFAE70 /* LaunchScreen.storyboard */,
@@ -1576,9 +1582,11 @@
 			files = (
 				14E20DE9223B933200EFAE70 /* CUONA.h in Sources */,
 				14E20DEA223B933200EFAE70 /* CUONABTManager.swift in Sources */,
+				1469681B22AF7F8E00E3D22C /* LogViewCell.swift in Sources */,
 				14E20DEB223B933200EFAE70 /* CUONADecryptor.swift in Sources */,
 				14E20DEC223B933200EFAE70 /* CUONAEncryptor.swift in Sources */,
 				14E20DED223B933200EFAE70 /* CUONAKeys.swift in Sources */,
+				1469681922AF57E800E3D22C /* LogViewController.swift in Sources */,
 				14E20DEE223B933200EFAE70 /* CUONAManager.swift in Sources */,
 				14E20DEF223B933200EFAE70 /* CUONAMasterKey.swift in Sources */,
 				14E20DF0223B933200EFAE70 /* DeviceManager.swift in Sources */,

@@ -13,6 +13,8 @@ var FACTORY_APP_TOKEN = "J5B4o9y2iJTbckKfxsLsKq23"
 
 class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDelegate
 {
+    var logs:[[String:Any]]?
+    
     @IBOutlet var checkButton:UIButton!
     
     @IBOutlet weak var step1Icon: UIImageView!
@@ -59,6 +61,8 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        logs = ud.array(forKey: "logs") as? [[String : Any]] ?? [[String:Any]]()
+        
         steps = [step1Icon,step2Icon,step3Icon,step4Icon,step5Icon,step6Icon,step7Icon]
         loadings = [loading1,loading2,loading3,loading4,loading5,loading6,loading7]
         cuonaManager = CUONAManager(delegate: self)
@@ -71,10 +75,10 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     @IBAction func startNFC()
     {
-        let ssid = ud.object(forKey: "ssid") as! String?
-        let pass = ud.object(forKey: "pass") as! String?
+        let ssid = ud.object(forKey: "ssid") as? String
+        let pass = ud.object(forKey: "pass") as? String
 
-        if 3 < ssid!.count && 3 < pass!.count {
+        if 3 < ssid?.count ?? 0 && 3 < pass?.count ?? 0 {
             cuonaManager?.startReadingNFC("Please touch to CUONA")
         } else {
             let alert = UIAlertController(title: "WiFi設定がありません", message: "CUONAが接続する先のWiFi設定を入力してください。STEP4,5が検査出来ません", preferredStyle: .alert)
@@ -94,6 +98,15 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         reset()
         cuona_uuid = deviceId.removingWhitespaces().uppercased()
         setStepStatus(stepNum: 1, status: .success)
+        
+        let log = [
+            "time": getNowDatetime(),
+            "data": "",
+            "type": "success",
+            "message": "Read to devive id:\(cuona_uuid!)"
+            ] as [String : Any]
+        logs?.append(log)
+        ud.set(logs, forKey: "logs")
         return true
     }
     
@@ -120,13 +133,29 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func cuonaConnectFailed(_ error: String) {
         setStepStatus(stepNum: 2, status: .error)
         Alert.show(title: "エラー", message: error)
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        let log = [
+            "time": getNowDatetime(),
+            "data": "",
+            "type": "error",
+            "message": "Cannot connect to BLE.."
+            ] as [String : Any]
+        logs?.append(log)
+        ud.set(logs, forKey: "logs")
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
     func cuonaDisconnected() {
         if  checkNowStep() < results.count {
-            Alert.show(title: "エラー", message: "BLEが切断されました")
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            Alert.show(title: "", message: "BLEが切断されました")
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+//            let log = [
+//                "time": getNowDatetime(),
+//                "data": "",
+//                "type": "error",
+//                "message": "Disconnect to BLE.."
+//                ] as [String : Any]
+//            logs?.append(log)
+//            ud.set(logs, forKey: "logs")
         }
     }
     
@@ -143,6 +172,14 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                 alert.addAction(ok)
                 present(alert, animated: true) {
                     self.setStepStatus(stepNum: 3, status: .success)
+                    let log = [
+                        "time": self.getNowDatetime(),
+                        "data": "",
+                        "type": "success",
+                        "message": "Get sensor's data"
+                        ] as [String : Any]
+                    self.logs?.append(log)
+                    ud.set(self.logs, forKey: "logs")
                 }
             } else {
                 let alert = UIAlertController(title: "エラー", message: "センサーの情報が取得出来ていません", preferredStyle: .alert)
@@ -150,7 +187,16 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                 alert.addAction(ok)
                 present(alert, animated: true) {
                     self.setStepStatus(stepNum: 3, status: .error)
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                    let log = [
+                        "time": self.getNowDatetime(),
+                        "data": "",
+                        "type": "error",
+                        "message": "Cannot get sensor's data..."
+                        ] as [String : Any]
+                    self.logs?.append(log)
+                    ud.set(self.logs, forKey: "logs")
+                    self.disconnect()
                 }
             }
         }
@@ -160,6 +206,14 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                 isConnectingWifi = true
                 setStepStatus(stepNum: 4, status: .success)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                    let log = [
+                        "time": self.getNowDatetime(),
+                        "data": "",
+                        "type": "success",
+                        "message": "Connected to wifi"
+                        ] as [String : Any]
+                    self.logs?.append(log)
+                    ud.set(self.logs, forKey: "logs")
                     self.deviceManager?.request?.Ping(self.cuona_uuid!)
                 }
             }
@@ -172,6 +226,14 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                 if !self.isConnectingWifi {
                     self.setStepStatus(stepNum: 4, status: .error)
+                    let log = [
+                        "time": self.getNowDatetime(),
+                        "data": "",
+                        "type": "error",
+                        "message": "Cannot connect to wifi"
+                        ] as [String : Any]
+                    self.logs?.append(log)
+                    ud.set(self.logs, forKey: "logs")
                     Alert.show(title: "エラー", message: "WiFiの接続に失敗しました")
                 }
             }
@@ -200,7 +262,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func successSendLog(json: [String : Any]) {
     }
     
-    func failedSendLog(status: NSInteger, json: [String : Any]?) {
+    func failedSendLog(status: NSInteger, json: [String : Any]?){
     }
     
     func successPing(json: [String : Any])
@@ -211,44 +273,81 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         let success = data["success"] as! Bool
         let timeout = data["timeout"] as! Bool
         
+        var type = ""
         if code == 200 && success && !timeout {
             setStepStatus(stepNum: 5, status: .success)
             if cuona_uuid != nil {
                 deviceManager?.request?.addDevice(cuona_uuid!)
             }
+            type = "success"
         } else {
             let alert = UIAlertController(title: "エラー", message: "MQTT接続に失敗しました", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(ok)
             present(alert, animated: true) {
                 self.setStepStatus(stepNum: 5, status: .error)
-                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                self.disconnect()
             }
+            type = "error"
         }
+        let log = [
+            "time": getNowDatetime(),
+            "data": convertToString(json),
+            "type": type,
+            "message": ""
+            ] as [String : Any]
+        logs?.append(log)
+        ud.set(logs, forKey: "logs")
     }
     
     func failedPing(status: NSInteger, json: [String : Any]?)
     {
         setStepStatus(stepNum: 5, status: .error)
+        disconnect()
+        
+        if json != nil {
+            let log = [
+                "time": getNowDatetime(),
+                "data": convertToString(json!),
+                "type": "error",
+                "message": ""
+                ] as [String : Any]
+            logs?.append(log)
+            ud.set(logs, forKey: "logs")
+        }
     }
     
     func successAddDevice(json: [String : Any])
     {
         let meta = json["meta"] as! [String : Any]
         let code = meta["code"] as? Int
+        var type = ""
         
         if code == 200 {
             setStepStatus(stepNum: 6, status: .success)
             finish()
+            type = "success"
         } else {
             setStepStatus(stepNum: 6, status: .error)
+            disconnect()
+            type = "error"
         }
+        let log = [
+            "time": getNowDatetime(),
+            "data": convertToString(json),
+            "type": type,
+            "message": ""
+            ] as [String : Any]
+        logs?.append(log)
+        ud.set(logs, forKey: "logs")
     }
     
     func failedAddDevice(status: NSInteger, json: [String : Any]?)
     {
         let meta = json!["meta"] as! [String : Any]
         let message = meta["message"] as? String
+        var type = ""
         
         if message == "Device already exists." {
             setStepStatus(stepNum: 6, status: .success)
@@ -258,9 +357,22 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
             }
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
+            type = "success"
         } else {
             setStepStatus(stepNum: 6, status: .error)
             Alert.show(title: "エラー", message: "DBへのCUONAの登録に失敗しました")
+            disconnect()
+            type = "error"
+        }
+        if json != nil {
+            let log = [
+                "time": getNowDatetime(),
+                "data": convertToString(json!),
+                "type": type,
+                "message": ""
+                ] as [String : Any]
+            logs?.append(log)
+            ud.set(logs, forKey: "logs")
         }
     }
     
@@ -294,10 +406,26 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     func finish()
     {
-        cuonaManager?.requestDisconnect()
-        _ = cuonaManager?.writeWifiSSIDPw(ssid: "", password: "")
+        disconnect()
         Alert.show(title: "検査終了", message: "このCUONAは想定する品質を満たしています")
         setStepStatus(stepNum: 7, status: .success)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            let log = [
+                "time": self.getNowDatetime(),
+                "data": "",
+                "type": "success",
+                "message": "Finish Quality Check. No problems."
+                ] as [String : Any]
+            self.logs?.append(log)
+            ud.set(self.logs, forKey: "logs")
+        }
+    }
+    
+    func disconnect()
+    {
+        _ = cuonaManager?.writeWifiSSIDPw(ssid: "", password: "")
+        cuonaManager?.requestDisconnect()
     }
     
     func reset()
@@ -320,6 +448,30 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         if status == .success && index < results.count - 1 {
             loadings![index + 1].isHidden = false
         }
+    }
+    
+    func getNowDatetime() -> String
+    {
+        let now = NSDate() // 現在日時の取得
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale // ロケールの設定
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss" // 日付フォーマットの設定
+        
+        return dateFormatter.string(from: now as Date)
+    }
+    
+    func convertToString(_ dict:[String:Any]) -> String
+    {
+        var json: String = ""
+        do {
+            // Dict -> JSON
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
+            json = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        } catch {
+            print("Error!: \(error)")
+        }
+        return json
     }
 }
 
