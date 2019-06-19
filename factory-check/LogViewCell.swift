@@ -13,6 +13,7 @@ class LogViewCell: UITableViewCell
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var datetime: UILabel!
     @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var step: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

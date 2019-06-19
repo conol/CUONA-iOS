@@ -322,7 +322,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TU-C5-AKA">
-                                            <rect key="frame" x="56" y="6" width="303" height="20"/>
+                                            <rect key="frame" x="56" y="6" width="144" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="mUR-4n-qeq"/>
                                             </constraints>
@@ -339,22 +339,36 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEP1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a84-jF-oZT">
+                                            <rect key="frame" x="222" y="7" width="50" height="17"/>
+                                            <color key="backgroundColor" red="0.82354607161491511" green="0.95021018401015223" blue="0.92720646570675236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="19g-SL-zLm"/>
+                                                <constraint firstAttribute="width" constant="50" id="Hhc-wB-KJ9"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.090196078430000007" green="0.40784313729999999" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="fIZ-Lr-tH5" secondAttribute="bottom" constant="2" id="2M0-Th-cue"/>
                                         <constraint firstItem="fIZ-Lr-tH5" firstAttribute="trailing" secondItem="U0k-ds-1xe" secondAttribute="trailingMargin" id="9RH-5E-HTG"/>
                                         <constraint firstItem="R8M-XC-sJe" firstAttribute="leading" secondItem="U0k-ds-1xe" secondAttribute="leadingMargin" id="AGZ-0F-cEt"/>
                                         <constraint firstItem="7TU-C5-AKA" firstAttribute="leading" secondItem="R8M-XC-sJe" secondAttribute="trailing" constant="8" id="IkD-2v-igH"/>
+                                        <constraint firstItem="a84-jF-oZT" firstAttribute="leading" secondItem="7TU-C5-AKA" secondAttribute="trailing" constant="22" id="N1e-gn-AWp"/>
                                         <constraint firstItem="7TU-C5-AKA" firstAttribute="top" secondItem="U0k-ds-1xe" secondAttribute="top" constant="6" id="OOY-Wq-4qE"/>
-                                        <constraint firstAttribute="trailing" secondItem="7TU-C5-AKA" secondAttribute="trailing" constant="16" id="cri-9h-aVi"/>
+                                        <constraint firstAttribute="trailing" secondItem="7TU-C5-AKA" secondAttribute="trailing" constant="175" id="cri-9h-aVi"/>
                                         <constraint firstItem="fIZ-Lr-tH5" firstAttribute="leading" secondItem="R8M-XC-sJe" secondAttribute="trailing" constant="8" id="iuC-kG-FKy"/>
                                         <constraint firstItem="R8M-XC-sJe" firstAttribute="top" secondItem="U0k-ds-1xe" secondAttribute="topMargin" constant="3" id="qxq-T9-uDB"/>
+                                        <constraint firstItem="a84-jF-oZT" firstAttribute="top" secondItem="U0k-ds-1xe" secondAttribute="top" constant="7" id="tCf-8r-hXc"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="ImageView" destination="R8M-XC-sJe" id="sVE-IG-bYm"/>
                                     <outlet property="datetime" destination="7TU-C5-AKA" id="QGy-1v-CbK"/>
                                     <outlet property="message" destination="fIZ-Lr-tH5" id="ReM-IH-etT"/>
+                                    <outlet property="step" destination="a84-jF-oZT" id="auj-G0-HJp"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

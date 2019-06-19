@@ -49,7 +49,13 @@ class LogViewController: UITableViewController {
             cell.datetime.text = dict?["time"] as? String
             cell.ImageView.image = UIImage(named: dict?["type"] as! String)
             cell.message.text = dict?["message"] as? String
-            
+            let no = dict?["step"] as? Int
+            if no != nil {
+                cell.step.isHidden = false
+                cell.step.text = "STEP\(no!)"
+            } else {
+                cell.step.isHidden = true
+            }
             let data = dict?["data"] as! String
             if data != "" {
                 cell.message.text = data

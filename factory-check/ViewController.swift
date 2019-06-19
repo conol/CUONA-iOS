@@ -102,6 +102,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         let log = [
             "time": getNowDatetime(),
             "data": "",
+            "step": 1,
             "type": "success",
             "message": "Read to devive id:\(cuona_uuid!)"
             ] as [String : Any]
@@ -128,14 +129,25 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         {
             _ = cuonaManager?.requestSystemStatus()
         }
+        let log = [
+            "time": getNowDatetime(),
+            "data": "",
+            "step": 2,
+            "type": "success",
+            "message": "Can connect to BLE"
+            ] as [String : Any]
+        logs?.append(log)
+        ud.set(logs, forKey: "logs")
     }
     
-    func cuonaConnectFailed(_ error: String) {
+    func cuonaConnectFailed(_ error: String)
+    {
         setStepStatus(stepNum: 2, status: .error)
         Alert.show(title: "エラー", message: error)
         let log = [
             "time": getNowDatetime(),
             "data": "",
+            "step": 2,
             "type": "error",
             "message": "Cannot connect to BLE.."
             ] as [String : Any]
@@ -175,6 +187,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                     let log = [
                         "time": self.getNowDatetime(),
                         "data": "",
+                        "step": 3,
                         "type": "success",
                         "message": "Get sensor's data"
                         ] as [String : Any]
@@ -191,6 +204,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                     let log = [
                         "time": self.getNowDatetime(),
                         "data": "",
+                        "step": 3,
                         "type": "error",
                         "message": "Cannot get sensor's data..."
                         ] as [String : Any]
@@ -209,6 +223,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                     let log = [
                         "time": self.getNowDatetime(),
                         "data": "",
+                        "step": 4,
                         "type": "success",
                         "message": "Connected to wifi"
                         ] as [String : Any]
@@ -229,6 +244,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                     let log = [
                         "time": self.getNowDatetime(),
                         "data": "",
+                        "step": 4,
                         "type": "error",
                         "message": "Cannot connect to wifi"
                         ] as [String : Any]
@@ -294,6 +310,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         let log = [
             "time": getNowDatetime(),
             "data": convertToString(json),
+            "step": 5,
             "type": type,
             "message": ""
             ] as [String : Any]
@@ -310,6 +327,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
             let log = [
                 "time": getNowDatetime(),
                 "data": convertToString(json!),
+                "step": 5,
                 "type": "error",
                 "message": ""
                 ] as [String : Any]
@@ -336,6 +354,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         let log = [
             "time": getNowDatetime(),
             "data": convertToString(json),
+            "step": 6,
             "type": type,
             "message": ""
             ] as [String : Any]
@@ -368,6 +387,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
             let log = [
                 "time": getNowDatetime(),
                 "data": convertToString(json!),
+                "step": 6,
                 "type": type,
                 "message": ""
                 ] as [String : Any]
@@ -415,6 +435,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                 "time": self.getNowDatetime(),
                 "data": "",
                 "type": "success",
+                "step": 7,
                 "message": "Finish Quality Check. No problems."
                 ] as [String : Any]
             self.logs?.append(log)
