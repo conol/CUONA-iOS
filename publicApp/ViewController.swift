@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import CUONA
 
 class ViewController: UIViewController, CuonaDelegate
@@ -30,6 +31,12 @@ class ViewController: UIViewController, CuonaDelegate
     {
         super.viewDidLoad()
         cuona = Cuona(delegate: self)
+        
+        // プッシュ通知の許諾ダイアログを出したいタイミングで呼んであげる. 必ずしもここじゃなくても良い
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in
+            print("push permission finished")
+        }
     }
     
     func showStatusView(_ background:Color, textColor:UIColor)
@@ -76,7 +83,7 @@ class ViewController: UIViewController, CuonaDelegate
         print("cancelNFC")
     }
     
-    func failedNFC() {
+    func failedNFC(_ exception: CuonaException!) {
         print("failedNFC")
     }
 }

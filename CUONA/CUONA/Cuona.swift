@@ -120,18 +120,18 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             event = getEventByList(events)
         }
         var eventToken = ""
-        for event in events
-        {
-            var token = event["token"] as! String
-            for all_event in all_events
-            {
-                
-            }
-            
-            if Constants.foverEventAction == action {
-                eventToken = event["token"] as! String
-            }
-        }
+//        for event in events
+//        {
+//            var token = event["token"] as! String
+//            for all_event in all_events
+//            {
+//                
+//            }
+//            
+//            if Constants.foverEventAction == action {
+//                eventToken = event["token"] as! String
+//            }
+//        }
         if eventToken == "" {
             print(ErrorMessage.notExistEventToken)
             self.delegate?.failedNFC(CuonaException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.invalidEventToken))
