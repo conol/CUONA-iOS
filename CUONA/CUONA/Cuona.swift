@@ -10,7 +10,7 @@ import UIKit
 
 @objc public protocol CuonaDelegate: class
 {
-    func catchNFC(device_id: String, type: CUONAType, data: [String:Any]?) -> Bool
+    func catchNFC(device_id: String, type: CUONAType, data: [String:Any]?)
     func cancelNFC()
     func failedNFC(_ exception:CuonaException!)
     
@@ -101,11 +101,6 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        #warning("IF文書き直し")
-        if sendLog == .on {
-            deviceManager?.request?.sendLog(deviceId, event_id:"", customer_id: 0, note: "Read DeviceId by iOS")
-        }
-        
         guard let events = json.toDictionary?["events"] as? Array<[String : Any]> else {
             print(ErrorMessage.faildToReadCuona)
             self.delegate?.failedNFC(CuonaException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.faildToReadCuona))
@@ -138,9 +133,15 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
             return false
         }
         
-        
         let data = convertToDictionary(json)
-        return delegate!.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
+        delegate!.catchNFC(device_id: deviceId, type: CUONAType(rawValue: type)!, data: data)
+        
+        if type == CUONAType.cuona.rawValue {
+            return true
+        } else if type == CUONAType.tag.rawValue {
+            deviceManager?.request?.sendLog(deviceId, event_id:use_event_token ?? "", customer_id: 0, note: "Read DeviceId by iOS")
+        }
+        return false
     }
     
     //指定イベントトークンからイベントを抽出
@@ -190,9 +191,14 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         if deviceManager?.device_password != nil {
             _ = cuonaManager?.enterAdminMode((deviceManager?.device_password!)!)
         } else {
-            cuonaManager?.requestDisconnect()
-            cuonaConnectFailed("ログインしていないため機能が有効になりません")
-            return
+            cuonaManager?.logData.event_id = use_event_token ?? ""
+#warning("customer_idはSDK内にカスタマーユーザー作成用のAPIを作って取得する")
+            cuonaManager?.logData.customer_id = 0
+            cuonaManager?.logData.note = "SDK TOUCH"
+            
+            if cuonaManager!.logRequest() {
+                cuonaManager?.requestDisconnect()
+            }
         }
         delegate?.successConnect?()
     }

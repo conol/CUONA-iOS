@@ -66,13 +66,13 @@ struct NFCJsonData: Codable
 {
     case unknown = 0
     case cuona   = 1
-    case seal    = 2
+    case tag     = 2
     
     public func name() -> String
     {
         switch self {
-        case .cuona: return "CUONA本体"
-        case .seal: return "シール"
+        case .cuona:   return "CUONA本体"
+        case .tag:     return "タグ"
         case .unknown: return "認識できない形式"
         }
     }

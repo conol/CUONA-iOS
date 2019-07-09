@@ -51,13 +51,14 @@ func CUONADebugPrint(_ message: String) {
     }
 }
 
-@objc public class CUONASystemStatus :NSObject {
-
+@objc public class CUONASystemStatus :NSObject
+{
     public let version: UInt8
     public let wifiStarted: Bool
     public let wifiConnected: Bool
     public let mqttConnected: Bool
     public let ip4addr: String
+    public let isMode: Bool
     public let nfcDeviceUID: [UInt8]
     public let voltage: Double
     public let batteryPercentage: Double
@@ -71,10 +72,9 @@ func CUONADebugPrint(_ message: String) {
     public let temperature: Float
     public let pressure: Float
     public let humidity: Float
-    public let gasResistance: UInt32
     
     private let MISC_STATUS_ADMIN_MODE = UInt8(1 << 0)
-    private let MISC_STATUS_CORONA3    = UInt8(1 << 1)
+    private let MISC_STATUS_CUONA3     = UInt8(1 << 1)
     private let MISC_STATUS_USB_POWER  = UInt8(1 << 2)
     private let MISC_STATUS_PW_ALLZERO = UInt8(1 << 3)
     private let MISC_STATUS_CUONA4     = UInt8(1 << 4)
@@ -95,7 +95,7 @@ func CUONADebugPrint(_ message: String) {
         inAdminMode = (miscStatus & MISC_STATUS_ADMIN_MODE) != 0
         if (miscStatus & MISC_STATUS_CUONA5) != 0 {
             hardwareVersion = 5
-        } else if (miscStatus & MISC_STATUS_CORONA3) != 0 {
+        } else if (miscStatus & MISC_STATUS_CUONA3) != 0 {
             if (miscStatus & MISC_STATUS_CUONA4) != 0 {
                 hardwareVersion = 4
             } else {
@@ -108,8 +108,9 @@ func CUONADebugPrint(_ message: String) {
         
         ip4addr = String(format: "%d.%d.%d.%d",
                          data[8], data[9], data[10], data[11])
-        nfcDeviceUID = [data[12], data[13], data[14], data[15],
-                       data[16], data[17], data[18]]
+        isMode = data[12] != 0
+        nfcDeviceUID = [data[13], data[14], data[15], data[16],
+                       data[17], data[18], data[19]]
         
         if hardwareVersion >= 5 && data.count >= 32 {
             isPowerFromUSB = true
@@ -118,7 +119,6 @@ func CUONADebugPrint(_ message: String) {
             temperature = Float(readInt16(data: data, offset: 22)) / 100
             pressure = Float(readUInt32(data: data, offset: 24)) / 100
             humidity = Float(readUInt32(data: data, offset: 28)) / 1000
-            gasResistance = readUInt32(data: data, offset: 32)
             environmentDataAvailable = true
         } else {
             isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
@@ -139,7 +139,6 @@ func CUONADebugPrint(_ message: String) {
             temperature = 0
             pressure = 0
             humidity = 0
-            gasResistance = 0
         }
     }
 }
