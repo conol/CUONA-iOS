@@ -32,10 +32,10 @@ class ViewController: UIViewController, CuonaDelegate
         super.viewDidLoad()
         cuona = Cuona(delegate: self)
         
-        // プッシュ通知の許諾ダイアログを出したいタイミングで呼んであげる. 必ずしもここじゃなくても良い
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in
-            print("push permission finished")
+        let token = ud.object(forKey: "pushToken") as? String ?? ""
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            Alert.show(title: "PUSH TOKEN", message: "", nil, [token])
         }
     }
     

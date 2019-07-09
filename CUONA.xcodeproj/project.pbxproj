@@ -60,7 +60,6 @@
 		1454EA101FBDB01800DA77E0 /* CUONA.h in Headers */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1454EA191FBDB4FB00DA77E0 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
 		145750D51FB19947000C0C96 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		145AB50F22D37A2B003660C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145AB50E22D37A2B003660C6 /* GoogleService-Info.plist */; };
 		1465318420295A8700F7466B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1465318320295A8700F7466B /* Define.swift */; };
 		1465318620295DEF00F7466B /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
 		1465318720295DEF00F7466B /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
@@ -321,7 +320,6 @@
 		1454EA161FBDB01800DA77E0 /* CUONACore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CUONACore.plist; path = "/Users/mizotatakaaki/repositories/CUONA-iOS/CUONACore.plist"; sourceTree = "<absolute>"; };
 		1454EA181FBDB4FB00DA77E0 /* Cuona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cuona.swift; sourceTree = "<group>"; };
 		145750D41FB19947000C0C96 /* CUONAEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUONAEncryptor.swift; sourceTree = "<group>"; };
-		145AB50E22D37A2B003660C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		145AB51022D37C8F003660C6 /* publicApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = publicApp.entitlements; sourceTree = "<group>"; };
 		1465318320295A8700F7466B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		1469681822AF57E800E3D22C /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
@@ -590,7 +588,6 @@
 			isa = PBXGroup;
 			children = (
 				145AB51022D37C8F003660C6 /* publicApp.entitlements */,
-				145AB50E22D37A2B003660C6 /* GoogleService-Info.plist */,
 				143E5BB2228C07BC0062725E /* AppDelegate.swift */,
 				143E5BB4228C07BC0062725E /* ViewController.swift */,
 				143E5BDE228C27C40062725E /* EventBtn.swift */,
@@ -999,7 +996,6 @@
 				143E5BAD228C07BC0062725E /* Frameworks */,
 				143E5BAE228C07BC0062725E /* Resources */,
 				14F0BEED228C555C0062C679 /* Embed Frameworks */,
-				556FB059CB9EAF00321A5A21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1481,7 +1477,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				143E5BBD228C07C00062725E /* LaunchScreen.storyboard in Resources */,
-				145AB50F22D37A2B003660C6 /* GoogleService-Info.plist in Resources */,
 				143E5BBA228C07C00062725E /* Assets.xcassets in Resources */,
 				143E5BB8228C07BC0062725E /* Main.storyboard in Resources */,
 			);
@@ -1722,32 +1717,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		556FB059CB9EAF00321A5A21 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-publicApp/Pods-publicApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-publicApp/Pods-publicApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B303AF859BAA4F3C677A1EE /* [CP] Check Pods Manifest.lock */ = {

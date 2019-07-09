@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseMessaging
 import UserNotifications
+
+let ud = UserDefaults.standard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,37 +17,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
         
-        // 以下を追加する
+        if #available(iOS 10.0, *) {
+            // iOS 10 以降の設定
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            // iOS 10 より前の設定
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
         application.registerForRemoteNotifications()
-        Messaging.messaging().delegate = self
-        UNUserNotificationCenter.current().delegate = self
         
         return true
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print(userInfo)
+        // アプリが起動している間に通知を受け取った場合の処理を行う。
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print(userInfo)
-        
+        // アプリがバックグラウンド状態の時に通知を受け取った場合の処理を行う。
         completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // システムへのプッシュ通知の登録が失敗した時の処理を行う。
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Device Token を取得した時の処理を行う。
+        
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
+        
+        ud.set(token, forKey: "pushToken")
+        print("APNs token retrieved: \(token)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -83,13 +97,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        
-        // for analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
+        print("userInfo: \(userInfo)")
         
         completionHandler([.alert])
     }
@@ -99,22 +107,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
-        
-        completionHandler()
-    }
-}
+        print("userInfo: \(userInfo)")
 
-// MARK: - MessagingDelegate
-extension AppDelegate: MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
-    }
-    
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
+        completionHandler()
     }
 }

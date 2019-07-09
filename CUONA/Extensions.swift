@@ -17,10 +17,25 @@ public class Alert
 {
     public static var alert:UIAlertController!
     
-    public static func show(title:String, message:String)
+    public static func show(title:String, message:String, _ actions:[UIAlertAction]? = nil, _ textfields:[String]? = nil)
     {
         alert = UIAlertController(title: title, message:message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        if actions != nil {
+            for action in actions! {
+                alert.addAction(action)
+            }
+        } else {
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        }
+        
+        if textfields != nil {
+            for textfield in textfields! {
+                alert.addTextField { (text) in
+                    text.text = textfield
+                }
+            }
+        }
         
         if let controller = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
             controller.present(alert, animated: true, completion: nil)

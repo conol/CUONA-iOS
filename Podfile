@@ -87,8 +87,6 @@ target 'publicApp' do
   use_frameworks!
 
   # Pods for publicApp
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
 
   target 'publicAppTests' do
     inherit! :search_paths
