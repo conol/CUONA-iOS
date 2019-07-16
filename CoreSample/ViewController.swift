@@ -394,8 +394,10 @@ UITextFieldDelegate {
         if let tv = logTextView {
             let stringArray = status.nfcDeviceUID.compactMap({ String($0) }).joined(separator: ",")
             let ps = status.isPowerFromUSB ? "USB" : "Battery"
+            let mode = status.isMode ? "Development" : "Prodcution"
             tv.text! += "status: version: \(status.version),"
                 + " hardware: \(status.hardwareVersion)\n"
+                + "  action mode: \(mode)\n"
                 + "  wifi started: \(status.wifiStarted),"
                 + " connected: \(status.wifiConnected)\n"
                 + "  MQTT connected: \(status.mqttConnected)\n"
@@ -421,9 +423,8 @@ UITextFieldDelegate {
         }
         if status.environmentDataAvailable {
             statusLabel2?.text = String(format:
-                    "T: %.2f, P: %.3f, H: %.3f, G: %d",
-                    status.temperature, status.pressure, status.humidity,
-                    status.gasResistance)
+                    "T: %.2f, P: %.3f, H: %.3f",
+                    status.temperature, status.pressure, status.humidity)
         } else {
             statusLabel2?.text = String(format: "Voltage: %.3f, Battery: %.0f %%",
                                         status.voltage, status.batteryPercentage)
