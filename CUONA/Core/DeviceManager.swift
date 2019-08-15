@@ -196,7 +196,7 @@ public class HttpRequest
     @available(iOS 11.0, *)
     public func sendLog(_ device_id:String, event_id:String, customer_id:Int, note:String)
     {
-        let url = API_URL + "/device_logs.json"
+        let url = API_URL + "/log"
         
         let log = [
             "device_id": device_id.split(2),
@@ -332,14 +332,12 @@ public class HttpRequest
     }
     
     //MARK: - オーナーにデバイスをペアリング
-    public func pearingDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
+    public func pearingDevice(_ device_id:String, name:String, enabled:Bool)
     {
         let url = API_URL + "/pairing"
         let params = [
             "device_id": device_id,
-            "name": name,
-            "status": "normal", //将来廃止予定
-            "service_ids": service_ids
+            "name": name
             ] as [String : Any]
         
         sendRequestAsynchronous(url, method: .patch, params: params) { (returnData, response) in

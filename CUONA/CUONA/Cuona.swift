@@ -114,19 +114,8 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         } else if 0 < all_events?.count ?? 0 {
             event = getEventByList(events)
         }
-        var eventToken = ""
-//        for event in events
-//        {
-//            var token = event["token"] as! String
-//            for all_event in all_events
-//            {
-//                
-//            }
-//            
-//            if Constants.foverEventAction == action {
-//                eventToken = event["token"] as! String
-//            }
-//        }
+        
+        let eventToken = event?["token"] as! String
         if eventToken == "" {
             print(ErrorMessage.notExistEventToken)
             self.delegate?.failedNFC(CuonaException(code: ErrorCode.faildToReadCuona, type: ErrorType.cuonaTouchError, message: ErrorMessage.invalidEventToken))
@@ -326,9 +315,9 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     }
     
     // MARK:- Pearing device by owner
-    public func pearing(device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
+    public func pearing(device_id:String, name:String, enabled:Bool)
     {
-        deviceManager?.request?.pearingDevice(device_id, name: name, service_ids: service_ids, enabled: enabled)
+        deviceManager?.request?.pearingDevice(device_id, name: name, enabled: enabled)
     }
     
     func successPearing(json: [String : Any])
