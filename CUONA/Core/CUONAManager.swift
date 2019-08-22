@@ -116,9 +116,9 @@ func CUONADebugPrint(_ message: String) {
             isPowerFromUSB = true
             voltage = 0
             batteryPercentage = 0
-            temperature = Float(readInt16(data: data, offset: 22)) / 100
-            pressure = Float(readUInt32(data: data, offset: 24)) / 100
-            humidity = Float(readUInt32(data: data, offset: 28)) / 1000
+            temperature = Float(readInt16(data: data, offset: 24)) / 100
+            pressure = Float(readUInt32(data: data, offset: 28)) / 100
+            humidity = Float(readUInt32(data: data, offset: 32)) / 1000
             environmentDataAvailable = true
         } else {
             isPowerFromUSB = (miscStatus & MISC_STATUS_USB_POWER) != 0
