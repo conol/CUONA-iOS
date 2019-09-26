@@ -17,8 +17,8 @@ class LogViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        logs = ud.array(forKey: "logs") as? [[String:Any]]
+        let logs_order = ud.array(forKey: "logs") as? [[String:Any]]
+        logs = logs_order?.reversed()
         tableView.reloadData()
     }
     
