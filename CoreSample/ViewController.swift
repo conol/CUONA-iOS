@@ -52,7 +52,7 @@ UITextFieldDelegate {
             // ログデータを設定する（サンプル）
             manager.logData.customer_id = 4000
             manager.logData.event_id = "sample event id"
-            manager.logData.note = "sample note"
+            manager.logData.note = "ios develop app send sample data"
             // ログデータを送信する
             let url = urlstring != nil ? URL(string: urlstring!) : nil
             if manager.logRequest(url != nil ? url : nil) {
