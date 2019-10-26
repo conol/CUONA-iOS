@@ -137,6 +137,7 @@
 		47BF2E9E160568245C55F051 /* Pods_publicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35DE9EAC96CE5E867FF9CB1 /* Pods_publicApp.framework */; };
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		59E91A88236462EC00B66472 /* SealWriterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E91A87236462EC00B66472 /* SealWriterViewController.swift */; };
 		73C621F4B31257E7E746A35D /* Pods_factory_checkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37889205FDB78CCCC07DFEBD /* Pods_factory_checkTests.framework */; };
 		74DF7C90B33938F50D78E167 /* Pods_CUONA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1F0DBB6FF6FAF85639CA79 /* Pods_CUONA.framework */; };
 		79CE6EBFB690ADCC2C86350F /* Pods_cuona_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1371E36650C1F1BCC9DCC0 /* Pods_cuona_sample.framework */; };
@@ -396,6 +397,7 @@
 		4F9D802408A9D3CDA861061B /* Pods-CoreSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreSample.release.xcconfig"; path = "Target Support Files/Pods-CoreSample/Pods-CoreSample.release.xcconfig"; sourceTree = "<group>"; };
 		58746109D781AF3AB3D8EF7C /* Pods-factory-checkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-factory-checkTests.debug.xcconfig"; path = "Target Support Files/Pods-factory-checkTests/Pods-factory-checkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
+		59E91A87236462EC00B66472 /* SealWriterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SealWriterViewController.swift; sourceTree = "<group>"; };
 		5D1371E36650C1F1BCC9DCC0 /* Pods_cuona_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cuona_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		693A59C7267E87A00AB81EDC /* Pods-CoreSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreSampleTests.release.xcconfig"; path = "Target Support Files/Pods-CoreSampleTests/Pods-CoreSampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		6BE26E62BAA2D5CF63B857C8 /* Pods-Favor_sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Favor_sample.release.xcconfig"; path = "Target Support Files/Pods-Favor_sample/Pods-Favor_sample.release.xcconfig"; sourceTree = "<group>"; };
@@ -778,6 +780,7 @@
 				14B824BC1FBADE160097050B /* Assets.xcassets */,
 				14B824BE1FBADE160097050B /* LaunchScreen.storyboard */,
 				14B824C11FBADE160097050B /* Info.plist */,
+				59E91A87236462EC00B66472 /* SealWriterViewController.swift */,
 			);
 			path = CoreSample;
 			sourceTree = "<group>";
@@ -2097,6 +2100,7 @@
 				141DA9062031948200CD301D /* DeviceManager.swift in Sources */,
 				14B24EA12042B76500C7A4A8 /* login.swift in Sources */,
 				14B24EA32042BF2C00C7A4A8 /* SampleExtensions.swift in Sources */,
+				59E91A88236462EC00B66472 /* SealWriterViewController.swift in Sources */,
 				141DA9072031948200CD301D /* Extensions.swift in Sources */,
 				141DA9082031948200CD301D /* NFCReader.swift in Sources */,
 				14B24EA72042CE1F00C7A4A8 /* CustomTextField.swift in Sources */,

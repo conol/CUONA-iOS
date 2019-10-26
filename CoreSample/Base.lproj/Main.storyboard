@@ -141,6 +141,9 @@
                                     <segment title="CUBE"/>
                                     <segment title="TAG"/>
                                 </segments>
+                                <connections>
+                                    <action selector="cubeTagChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="EOO-XR-MQK"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -166,8 +169,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="brJ-UW-vfs"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="cubeTagSegCtrl" destination="6O8-Ob-Ybs" id="29g-bV-d8S"/>
                         <outlet property="logTextView" destination="i1P-NI-gZY" id="OlA-Io-12K"/>
                         <outlet property="menuButton" destination="td7-tm-nXq" id="Ut3-CR-zUx"/>
                         <outlet property="pwTextField" destination="CON-MU-IMD" id="g91-DH-cz0"/>
@@ -176,6 +181,7 @@
                         <outlet property="statusLabel1" destination="Xvx-LX-lDj" id="syc-A8-f1T"/>
                         <outlet property="statusLabel2" destination="2E2-Rv-7gU" id="PWk-F1-Jj2"/>
                         <outlet property="statusView" destination="7oU-sB-nwa" id="Hso-oO-XeO"/>
+                        <segue destination="cwf-re-83b" kind="show" identifier="sealWriter" id="N1y-zB-9MU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -288,7 +294,23 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="794.39999999999998" y="137.18140929535232"/>
+            <point key="canvasLocation" x="1538" y="137"/>
+        </scene>
+        <!--Seal Writer View Controller-->
+        <scene sceneID="dTb-Ef-R4b">
+            <objects>
+                <viewController id="cwf-re-83b" customClass="SealWriterViewController" customModule="CoreSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cRL-SR-nKh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93604493141174316" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="FE6-H3-UZL"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RX3-2r-ACA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B00-vl-Sbg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="137"/>
         </scene>
     </scenes>
     <resources>

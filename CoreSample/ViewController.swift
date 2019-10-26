@@ -21,6 +21,8 @@ UITextFieldDelegate {
     @IBOutlet var setWiFiButton: UIButton!
     @IBOutlet var menuButton: UIButton!
     
+    @IBOutlet weak var cubeTagSegCtrl: UISegmentedControl!
+    
     var cuonaManager: CUONAManager?
     var device_pass: String?
     var connected: Bool = false
@@ -278,6 +280,16 @@ UITextFieldDelegate {
     @IBAction func clearLog(_ sender: Any)
     {
         logTextView.text = ""
+    }
+    
+    @IBAction func cubeTagChanged(_ sender: Any) {
+        guard let segctl = cubeTagSegCtrl else {
+            return
+        }
+        if segctl.selectedSegmentIndex == 1 {
+            // Go Seal Writer
+            performSegue(withIdentifier: "sealWriter", sender: nil)
+        }
     }
     
     // UIApplicationWillEnterForeground notification handler
