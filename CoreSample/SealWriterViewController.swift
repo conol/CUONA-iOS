@@ -10,6 +10,15 @@ import UIKit
 
 class SealWriterViewController: UIViewController {
 
+    @IBOutlet weak var jsonTextField: UITextField!
+    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var wifiSsidTextField: UITextField!
+    @IBOutlet weak var wifiPasswordTextField: UITextField!
+    
+    @IBOutlet weak var jsonSwitch: UISwitch!
+    @IBOutlet weak var urlSwitch: UISwitch!
+    @IBOutlet weak var wifiSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +31,12 @@ class SealWriterViewController: UIViewController {
         }
     }
 
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+    }
+    
+    @IBAction func onWriteButton(_ sender: UIButton) {
+    }
+    
     /*
     // MARK: - Navigation
 
