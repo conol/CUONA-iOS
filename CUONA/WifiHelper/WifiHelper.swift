@@ -17,6 +17,13 @@ public enum CUONAMode:Int
     case Other = 4
 }
 
+enum WiFiEncode:String
+{
+    case WPA  = "WPA/WPA2"
+    case WEP  = "WEP"
+    case FREE = "NONE"
+}
+
 let serviceKey:String = "H7Pa7pQaVxxG"
 
 @objc public protocol WifiHelperDelegate: class
@@ -33,28 +40,32 @@ let serviceKey:String = "H7Pa7pQaVxxG"
 
 public class Wifi: NSObject
 {
-    var id:String = serviceKey
+    public var token:String?
+    var plugin_token:String?
     public var ssid:String?
     public var pass:String?
-    public var kind:Int = 0
-    public var days:Int = 0
+    public var enc :String? // WPA or WEP or FREE
+    public var expire:Int = 0
     
     func convertWifiObj(_ data: [String:Any])
     {
+        token = data["token"] as? String
+        plugin_token = data["plugin_token"] as? String
         ssid = data["ssid"] as? String
         pass = data["pass"] as? String
-        days = data["days"] as? Int ?? 0
-        kind = data["kind"] as? Int ?? 0
+        expire = data["expire"] as? Int ?? 0
+        enc  = data["enc"] as? String
     }
     
     public func getDict() -> [String:Any]
     {
         return [
-            "id"   : serviceKey,
-            "ssid" : ssid ?? "",
-            "pass" : pass ?? "",
-            "days" : days,
-            "kind" : kind
+            "token"  : token ?? "",
+            "plugin_token" : plugin_token ?? "",
+            "ssid"   : ssid ?? "",
+            "pass"   : pass ?? "",
+            "expire" : expire,
+            "enc"    : enc ?? ""
         ]
     }
 }
@@ -99,7 +110,6 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
-        deviceManager?.request?.sendLog(deviceId, event_id: "", customer_id: 5, note: "タッチされました")
         if mode == .Write {
             if self.deviceId != deviceId {
                 Alert.show(title: "不正エラー", message: "書込するためにタッチしたCUONAが最初にタッチしたCUONAと異なります")
@@ -109,10 +119,20 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         self.deviceId = deviceId
         jsonDic  = convertToDictionary(json)
         
+        let events = jsonDic?["events"] as! [[String:Any]]
+        
+        var wifi:[String:Any]?
+        for event:[String:Any] in events {
+            if event["ssid"] != nil && event["pass"] != nil {
+                wifi = event
+                break;
+            }
+        }
+        
         switch mode {
-        case .Admin: return connectedAndGetInfo(json)
+        case .Admin: return connectedAndGetInfo(wifi)
         case .Write: return true
-        case .User:  return connectedAndReadWifi(json)
+        case .User:  return connectedAndReadWifi(wifi)
         case .Other:
             Alert.show(title: "不正エラー", message: "認識出来ない形式です")
             return false
@@ -169,11 +189,9 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         print("データ書込完了!")
     }
     
-    func connectedAndGetInfo(_ json: String) -> Bool
+    func connectedAndGetInfo(_ wifi: [String:Any]?) -> Bool
     {
-        let wifi = jsonDic?["wifi"] as? [String:Any]
-        
-        if (wifi != nil && 0 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
+        if wifi != nil && 0 < (wifi?.count)! {
             self.wifi.convertWifiObj(wifi!)
             self.delegate?.successScan?()
             return true
@@ -184,17 +202,16 @@ public class WifiHelper: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         return false
     }
     
-    func connectedAndReadWifi(_ json: String) -> Bool
+    func connectedAndReadWifi(_ wifi: [String: Any]?) -> Bool
     {
-        let wifi = jsonDic?["wifi"] as? [String: Any]
-        
-        if (wifi != nil && 1 < (wifi?.count)! && (wifi!["id"] as? String) == serviceKey) {
+        if wifi != nil && 1 < (wifi?.count)!
+        {
             let ssid = wifi!["ssid"] as! String
             let pass = wifi!["pass"] as! String
-            let type = wifi!["kind"] as! Int
-            let days = wifi!["days"] as? Int ?? 0
+            let enc  = wifi!["enc"] as! String
+            let days = wifi!["expire"] as? Int ?? 0
             
-            let isWep = type == 2 ? true : false
+            let isWep = enc == "WEP" ? true : false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.checkConnectedWifi(ssid: ssid, password: pass, isWEP: isWep, day: days)
