@@ -1,9 +1,9 @@
 import UIKit
 import CoreNFC
 
-private let CUONA_NFC_TYPENAME_Secure = "conol.jp:cuona"
-private let CUONA_NFC_TYPENAME_Insecure = "conol.co.jp:cuona_bt_manu_data"
-private let CUONA_NFC_TYPENAME_Legacy = "conol.co.jp:cnfc_bt_manu_data"
+let CUONA_NFC_TYPENAME_Secure = "conol.jp:cuona"
+let CUONA_NFC_TYPENAME_Insecure = "conol.co.jp:cuona_bt_manu_data"
+let CUONA_NFC_TYPENAME_Legacy = "conol.co.jp:cnfc_bt_manu_data"
 
 let CUONA_MAGIC_1 = 0x63
 let CUONA_MAGIC_2 = 0x6f

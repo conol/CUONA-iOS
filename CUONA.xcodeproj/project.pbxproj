@@ -135,8 +135,11 @@
 		2B105E652225DD523276CF7C /* Pods_CoreSampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A668F868543930A5655260 /* Pods_CoreSampleUITests.framework */; };
 		451079165161007439877087 /* Pods_CUONACore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4FBA84C2DEED8C8AE087A8C /* Pods_CUONACore.framework */; };
 		47BF2E9E160568245C55F051 /* Pods_publicApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35DE9EAC96CE5E867FF9CB1 /* Pods_publicApp.framework */; };
+		592CBCBD2364DAC500583EE0 /* CUONASealWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C68B7F2364D021004FF8A6 /* CUONASealWriter.swift */; };
+		592CBCBE2364DCC000583EE0 /* CUONASealWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C68B7F2364D021004FF8A6 /* CUONASealWriter.swift */; };
 		59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
 		595666842022136000B8213A /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		59C68B802364D021004FF8A6 /* CUONASealWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C68B7F2364D021004FF8A6 /* CUONASealWriter.swift */; };
 		59E91A88236462EC00B66472 /* SealWriterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E91A87236462EC00B66472 /* SealWriterViewController.swift */; };
 		73C621F4B31257E7E746A35D /* Pods_factory_checkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37889205FDB78CCCC07DFEBD /* Pods_factory_checkTests.framework */; };
 		74DF7C90B33938F50D78E167 /* Pods_CUONA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1F0DBB6FF6FAF85639CA79 /* Pods_CUONA.framework */; };
@@ -397,6 +400,7 @@
 		4F9D802408A9D3CDA861061B /* Pods-CoreSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreSample.release.xcconfig"; path = "Target Support Files/Pods-CoreSample/Pods-CoreSample.release.xcconfig"; sourceTree = "<group>"; };
 		58746109D781AF3AB3D8EF7C /* Pods-factory-checkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-factory-checkTests.debug.xcconfig"; path = "Target Support Files/Pods-factory-checkTests/Pods-factory-checkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		59566682202203D300B8213A /* CUONAMasterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONAMasterKey.swift; sourceTree = "<group>"; };
+		59C68B7F2364D021004FF8A6 /* CUONASealWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUONASealWriter.swift; sourceTree = "<group>"; };
 		59E91A87236462EC00B66472 /* SealWriterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SealWriterViewController.swift; sourceTree = "<group>"; };
 		5D1371E36650C1F1BCC9DCC0 /* Pods_cuona_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cuona_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		693A59C7267E87A00AB81EDC /* Pods-CoreSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreSampleTests.release.xcconfig"; path = "Target Support Files/Pods-CoreSampleTests/Pods-CoreSampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -739,6 +743,7 @@
 				14B824A21FB9D09E0097050B /* DeviceManager.swift */,
 				1446E64D1FAFA43800F06724 /* Extensions.swift */,
 				1446E61F1FAF9E9200F06724 /* NFCReader.swift */,
+				59C68B7F2364D021004FF8A6 /* CUONASealWriter.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2027,6 +2032,7 @@
 				14F0BEF2228D37D40062C679 /* Checkin.swift in Sources */,
 				1465318420295A8700F7466B /* Define.swift in Sources */,
 				14F0BEF4228D38240062C679 /* Precheckin.swift in Sources */,
+				59C68B802364D021004FF8A6 /* CUONASealWriter.swift in Sources */,
 				14F0BEF8228D38850062C679 /* CustomUrl.swift in Sources */,
 				59566683202203D300B8213A /* CUONAMasterKey.swift in Sources */,
 				1446E6231FAF9E9200F06724 /* CUONAKeys.swift in Sources */,
@@ -2075,6 +2081,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592CBCBD2364DAC500583EE0 /* CUONASealWriter.swift in Sources */,
 				595666842022136000B8213A /* CUONAMasterKey.swift in Sources */,
 				1454EA061FBDB01800DA77E0 /* Extensions.swift in Sources */,
 				1454EA071FBDB01800DA77E0 /* DeviceManager.swift in Sources */,
@@ -2091,6 +2098,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592CBCBE2364DCC000583EE0 /* CUONASealWriter.swift in Sources */,
 				141DA9002031948200CD301D /* CUONABTManager.swift in Sources */,
 				141DA9012031948200CD301D /* CUONADecryptor.swift in Sources */,
 				141DA9022031948200CD301D /* CUONAEncryptor.swift in Sources */,
