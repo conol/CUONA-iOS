@@ -73,6 +73,15 @@ class SealWriterViewController: UIViewController, CUONASealWriterDelegate {
             sealWriter?.urlWriteData = nil
         }
         
+        if wifiSwitch.isOn {
+            sealWriter?.wifiConfigData = NFCWifiConfig(
+                ssid: wifiSsidTextField.text ?? "",
+                password: wifiPasswordTextField.text ?? "",
+                authType: .wpa2_personal, encryption: .aes)
+        } else {
+            sealWriter?.wifiConfigData = nil
+        }
+        
         _ = sealWriter?.scan()
     }
     

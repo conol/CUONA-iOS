@@ -22,6 +22,7 @@ public class CUONASealWriter: NSObject {
     
     public var jsonWriteData: String? = nil
     public var urlWriteData: String? = nil
+    public var wifiConfigData: NFCWifiConfig? = nil
 
     func scan() -> Bool {
         return false
@@ -138,6 +139,14 @@ class CUONASealWriterImpl: CUONASealWriter, NFCTagReaderSessionDelegate {
                 ndefPayloads.append(ndef)
             } else {
                 CUONADebugPrint("NFCNDEFPayload.wellKnownTypeURIPayload failed")
+            }
+        }
+        
+        if let wifi = wifiConfigData {
+            if let ndef = wifi.createNdef() {
+                ndefPayloads.append(ndef)
+            } else {
+                CUONADebugPrint("NFCWifiConfig.createNdef failed")
             }
         }
         
