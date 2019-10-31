@@ -81,6 +81,9 @@ class SealWriterViewController: UIViewController, CUONASealWriterDelegate {
         } else {
             sealWriter?.wifiConfigData = nil
         }
+
+        // set true if do permanent lock (BE CAREFUL !!!)
+        //sealWriter?.doPermanentLock = true
         
         _ = sealWriter?.scan()
     }

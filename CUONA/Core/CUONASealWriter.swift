@@ -23,6 +23,8 @@ public class CUONASealWriter: NSObject {
     public var jsonWriteData: String? = nil
     public var urlWriteData: String? = nil
     public var wifiConfigData: NFCWifiConfig? = nil
+    
+    public var doPermanentLock: Bool = false
 
     func scan() -> Bool {
         return false
@@ -68,15 +70,27 @@ class CUONASealWriterImpl: CUONASealWriter, NFCTagReaderSessionDelegate {
             
             let ndefMessage = self.buildNDEFMessage(deviceId: deviceId)
             mifare.writeNDEF(ndefMessage) { (error) in
-                if (error != nil) {
+                if error != nil {
                     CUONADebugPrint("writeNDEF: error: \(error!)")
                     session.invalidate(errorMessage: "error: \(error!)")
                 } else {
                     CUONADebugPrint("writeNDEF success")
-                    session.invalidate()
+                    
+                    if self.doPermanentLock {
+                        mifare.writeLock(completionHandler: { (error) in
+                            if let error = error {
+                                CUONADebugPrint("writeLock: error \(error)")
+                                session.invalidate(errorMessage: "Lock failed!")
+                            } else {
+                                CUONADebugPrint("writeLock: success")
+                                session.invalidate()
+                            }
+                        })
+                    } else {
+                        session.invalidate()
+                    }
                 }
             }
-
         }
     }
     
