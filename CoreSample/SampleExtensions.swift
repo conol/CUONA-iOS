@@ -117,3 +117,14 @@ extension Data {
         return map { String(format: "%02hhx", $0) }.joined(separator: " ")
     }
 }
+
+extension UITraitCollection {
+
+    public static var isDarkMode: Bool {
+        if #available(iOS 13, *), current.userInterfaceStyle == .dark {
+            return true
+        }
+        return false
+    }
+
+}

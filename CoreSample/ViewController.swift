@@ -28,6 +28,36 @@ UITextFieldDelegate {
     var connected: Bool = false
     var adminMode: Bool = false
     
+    /// 背景色
+    public static var backgroundColor: UIColor {
+        return dynamicColor(
+            light: .white,
+            dark: .black
+        )
+    }
+
+    /// メインのテキストの色
+    public static var textColor: UIColor {
+        return dynamicColor(
+            light: UIColor.hexStr("212121", alpha: 1),
+            dark: UIColor.hexStr("F5F5F5", alpha: 1)
+        )
+    }
+    
+    /// ライト/ダーク用の色を受け取ってDynamic Colorを作って返す
+    public class func dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
+        if #available(iOS 13, *) {
+            return UIColor { (traitCollection) -> UIColor in
+                if traitCollection.userInterfaceStyle == .dark {
+                    return dark
+                } else {
+                    return light
+                }
+            }
+        }
+        return light
+    }
+    
     func scanNFC() {
         // clean up
         logTextView?.text = ""
@@ -36,6 +66,17 @@ UITextFieldDelegate {
         
         statusLabel1?.text = ""
         statusLabel2?.text = ""
+        
+        ssidTextField.textColor = MainViewController.textColor
+        pwTextField.textColor   = MainViewController.textColor
+        statusLabel1.textColor  = MainViewController.textColor
+        statusLabel2.textColor  = MainViewController.textColor
+        
+        ssidTextField.backgroundColor = MainViewController.backgroundColor
+        pwTextField.backgroundColor   = MainViewController.backgroundColor
+        statusLabel1.backgroundColor  = MainViewController.backgroundColor
+        statusLabel2.backgroundColor  = MainViewController.backgroundColor
+        statusView.backgroundColor    = MainViewController.backgroundColor
         
         cuonaManager?.startReadingNFC("Please touch a CUONA")
     }
