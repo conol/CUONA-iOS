@@ -42,6 +42,7 @@ import UIKit
 public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
 {
     public var sendLog:Logging = .on
+    public var log_note:String?
     public weak var delegate: CuonaDelegate?
     
     var use_event_token:String?
@@ -76,6 +77,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
     
     public func start(_ token:String?, message:String?)
     {
+        use_event_token = token
         cuonaManager?.startReadingNFC(message)
     }
     
@@ -128,7 +130,7 @@ public class Cuona: NSObject, CUONAManagerDelegate, DeviceManagerDelegate
         if type == CUONAType.cuona.rawValue {
             return true
         } else if type == CUONAType.tag.rawValue {
-            deviceManager?.request?.sendLog(deviceId, event_id:use_event_token ?? "", customer_id: 0, note: "Read DeviceId by iOS")
+            deviceManager?.request?.sendLog(deviceId, event_id:use_event_token ?? "", customer_id: 502, note: log_note ?? "Read Device by iOS APP")
         }
         return false
     }

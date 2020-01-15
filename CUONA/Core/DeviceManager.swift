@@ -199,19 +199,21 @@ public class HttpRequest
         let url = API_URL + "/log"
         
         let log = [
-            "device_id": device_id.split(2),
-            "used_at": Date().iso8601,
-            "sender": "Smartphone",
+            "app_id": Bundle.main.bundleIdentifier ?? "",
+            "customer_id": customer_id,
+            "nfc_uid": device_id.removingWhitespaces(),
+            "event_token": event_id,
+            "notes": note,
             "phone_os_type": "ios",
             "phone_os_version": UIDevice.current.systemVersion,
-            "event_id": event_id,
-            "customer_id": customer_id,
-            "app_id": Bundle.main.bundleIdentifier ?? "",
-            "notes": note
-        ] as [String : Any]
+            "sender": "Smartphone",
+            "used_at": Date().iso8601
+        ] as Dictionary
+        #warning("複数ログを入れる機能を想定している気がする")
         let logs = makeLogData(log)
         let params:[String:Any] = [
-            "device_logs": logs
+            "version": 0,
+            "data": log
         ]
         
         if Reachability.isConnectedToNetwork() {

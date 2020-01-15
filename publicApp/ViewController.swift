@@ -31,12 +31,13 @@ class ViewController: UIViewController, CuonaDelegate
     {
         super.viewDidLoad()
         cuona = Cuona(delegate: self)
+        cuona?.log_note = "CheckIn Demo APP for NTT"
         
-        let token = ud.object(forKey: "pushToken") as? String ?? ""
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            Alert.show(title: "PUSH TOKEN", message: "", nil, [token])
-        }
+//        let token = ud.object(forKey: "pushToken") as? String ?? ""
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            Alert.show(title: "PUSH TOKEN", message: "", nil, [token])
+//        }
     }
     
     func showStatusView(_ background:Color, textColor:UIColor)
@@ -63,20 +64,32 @@ class ViewController: UIViewController, CuonaDelegate
         }
     }
     
-    @IBAction func show()
+    @IBAction func checkIn()
     {
-        showStatusView(.Checkin, textColor: .white)
+        cuona?.start("djC9xy3", message: "チェックインするCUONAにタッチしてください")
     }
     
-    @IBAction func hide()
-    {
-        hideStatusView()
-    }
+//    @IBAction func show()
+//    {
+//        showStatusView(.Checkin, textColor: .white)
+//    }
+//    
+//    @IBAction func hide()
+//    {
+//        hideStatusView()
+//    }
     
     //MARK: - CUONA Delegate
-    func catchNFC(device_id: String, type: CUONAType, data: [String : Any]?) -> Bool {
-        
-        return true
+    func catchNFC(device_id: String, type: CUONAType, data: [String : Any]?)
+    {
+        print("device_id=\(device_id)")
+        print("type=\(type)")
+        print("data=\(data)")
+    }
+    
+    func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
+    {
+        return type == CUONA_TAG_TYPE_CUONA ? true : false
     }
     
     func cancelNFC() {
@@ -84,7 +97,17 @@ class ViewController: UIViewController, CuonaDelegate
     }
     
     func failedNFC(_ exception: CuonaException!) {
+        print(exception.debugDescription)
+        print(exception.code ?? 444444)
         print("failedNFC")
+    }
+    
+    func failedSendLog(status: NSInteger, response: [String : Any]?) {
+        print("failed log send. status=\(status),response=\(String(describing: response))")
+    }
+    
+    func successSendLog(response: [String : Any]?) {
+        print("success log send. response=\(String(describing: response))")
     }
 }
 
