@@ -18,6 +18,7 @@
 		141DA9062031948200CD301D /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		141DA9072031948200CD301D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		141DA9082031948200CD301D /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
+		1422B31F23CEC3C10069F2FC /* CUONA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14322FB51FD62D63007A78A1 /* CUONACore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; };
 		14322FB61FD62D63007A78A1 /* CUONACore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		143E5BB3228C07BC0062725E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E5BB2228C07BC0062725E /* AppDelegate.swift */; };
@@ -102,24 +103,6 @@
 		14E20DF0223B933200EFAE70 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
 		14E20DF1223B933200EFAE70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
 		14E20DF2223B933200EFAE70 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
-		14E3A8EF1FD8104700428950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E3A8EE1FD8104700428950 /* AppDelegate.swift */; };
-		14E3A8F11FD8104700428950 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E3A8F01FD8104700428950 /* ViewController.swift */; };
-		14E3A8F41FD8104700428950 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E3A8F21FD8104700428950 /* Main.storyboard */; };
-		14E3A8F61FD8104700428950 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14E3A8F51FD8104700428950 /* Assets.xcassets */; };
-		14E3A8F91FD8104700428950 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E3A8F71FD8104700428950 /* LaunchScreen.storyboard */; };
-		14E3A8FE1FD8105600428950 /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
-		14E3A8FF1FD8105600428950 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
-		14E3A9001FD8105600428950 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
-		14E3A9011FD8105600428950 /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
-		14E3A9021FD8105600428950 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
-		14E3A9031FD8105600428950 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
-		14E3A9041FD8105600428950 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
-		14E3A9051FD8105600428950 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
-		14E3A9061FD8105600428950 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
-		14E3A9071FD8105600428950 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6051FAF9E4100F06724 /* Info.plist */; };
-		14E3A9081FD8105600428950 /* Cuona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454EA181FBDB4FB00DA77E0 /* Cuona.swift */; };
-		14F0BEE9228C555C0062C679 /* CUONA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; };
-		14F0BEEA228C555C0062C679 /* CUONA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14F0BEF0228C58370062C679 /* CuonaException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0BEEF228C58370062C679 /* CuonaException.swift */; };
 		14F0BEF2228D37D40062C679 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0BEF1228D37D40062C679 /* Checkin.swift */; };
 		14F0BEF4228D38240062C679 /* Precheckin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0BEF3228D38240062C679 /* Precheckin.swift */; };
@@ -146,7 +129,6 @@
 		59E91A88236462EC00B66472 /* SealWriterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E91A87236462EC00B66472 /* SealWriterViewController.swift */; };
 		73C621F4B31257E7E746A35D /* Pods_factory_checkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37889205FDB78CCCC07DFEBD /* Pods_factory_checkTests.framework */; };
 		74DF7C90B33938F50D78E167 /* Pods_CUONA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1F0DBB6FF6FAF85639CA79 /* Pods_CUONA.framework */; };
-		79CE6EBFB690ADCC2C86350F /* Pods_cuona_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1371E36650C1F1BCC9DCC0 /* Pods_cuona_sample.framework */; };
 		9A29C085B36F7C9070E1B733 /* Pods_Favor_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6DA6A54DFFD9788D12C8D7A /* Pods_Favor_sample.framework */; };
 		A63191A4203BFC170076A8D8 /* FavorException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63191A3203BFC170076A8D8 /* FavorException.swift */; };
 		A668E6F2203D5B780095B62F /* Favor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6F4FD5E202301CA00523677 /* Favor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -266,7 +248,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				14F0BEEA228C555C0062C679 /* CUONA.framework in Embed Frameworks */,
+				1422B31F23CEC3C10069F2FC /* CUONA.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,14 +346,6 @@
 		14E20DDB223B913100EFAE70 /* factory_checkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = factory_checkUITests.swift; sourceTree = "<group>"; };
 		14E20DDD223B913100EFAE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14E20DE7223B92DF00EFAE70 /* SampleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleExtensions.swift; sourceTree = "<group>"; };
-		14E3A8EC1FD8104700428950 /* cuona_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cuona_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		14E3A8EE1FD8104700428950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		14E3A8F01FD8104700428950 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		14E3A8F31FD8104700428950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		14E3A8F51FD8104700428950 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		14E3A8F81FD8104700428950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		14E3A8FA1FD8104700428950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14E3A9091FD8110F00428950 /* cuona_sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cuona_sample.entitlements; sourceTree = "<group>"; };
 		14F0BEEF228C58370062C679 /* CuonaException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuonaException.swift; sourceTree = "<group>"; };
 		14F0BEF1228D37D40062C679 /* Checkin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
 		14F0BEF3228D38240062C679 /* Precheckin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precheckin.swift; sourceTree = "<group>"; };
@@ -454,7 +428,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14F0BEE9228C555C0062C679 /* CUONA.framework in Frameworks */,
 				47BF2E9E160568245C55F051 /* Pods_publicApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,14 +539,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14E3A8E91FD8104700428950 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79CE6EBFB690ADCC2C86350F /* Pods_cuona_sample.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14F8766E202309C100BB24F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -637,7 +602,6 @@
 				14B824B41FBADE160097050B /* CoreSample */,
 				14B824C91FBADE160097050B /* CoreSampleTests */,
 				14B824D41FBADE160097050B /* CoreSampleUITests */,
-				14E3A8ED1FD8104700428950 /* cuona_sample */,
 				A6F4FD5F202301CA00523677 /* Favor */,
 				14F87672202309C100BB24F9 /* Favor_sample */,
 				14E20DBA223B912E00EFAE70 /* factory-check */,
@@ -664,7 +628,6 @@
 				14B824C61FBADE160097050B /* CoreSampleTests.xctest */,
 				14B824D11FBADE160097050B /* CoreSampleUITests.xctest */,
 				1454EA151FBDB01800DA77E0 /* CUONACore.framework */,
-				14E3A8EC1FD8104700428950 /* cuona_sample.app */,
 				A6F4FD5E202301CA00523677 /* Favor.framework */,
 				14F87671202309C100BB24F9 /* Favor_sample.app */,
 				14E20DB9223B912E00EFAE70 /* factory-check.app */,
@@ -846,20 +809,6 @@
 				14E20DDD223B913100EFAE70 /* Info.plist */,
 			);
 			path = "factory-checkUITests";
-			sourceTree = "<group>";
-		};
-		14E3A8ED1FD8104700428950 /* cuona_sample */ = {
-			isa = PBXGroup;
-			children = (
-				14E3A9091FD8110F00428950 /* cuona_sample.entitlements */,
-				14E3A8EE1FD8104700428950 /* AppDelegate.swift */,
-				14E3A8F01FD8104700428950 /* ViewController.swift */,
-				14E3A8F21FD8104700428950 /* Main.storyboard */,
-				14E3A8F51FD8104700428950 /* Assets.xcassets */,
-				14E3A8F71FD8104700428950 /* LaunchScreen.storyboard */,
-				14E3A8FA1FD8104700428950 /* Info.plist */,
-			);
-			path = cuona_sample;
 			sourceTree = "<group>";
 		};
 		14F0BEEE228C58120062C679 /* Model */ = {
@@ -1267,24 +1216,6 @@
 			productReference = 14E20DD7223B913100EFAE70 /* factory-checkUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		14E3A8EB1FD8104700428950 /* cuona_sample */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 14E3A8FB1FD8104700428950 /* Build configuration list for PBXNativeTarget "cuona_sample" */;
-			buildPhases = (
-				8C83E48000202899E967965B /* [CP] Check Pods Manifest.lock */,
-				14E3A8E81FD8104700428950 /* Sources */,
-				14E3A8E91FD8104700428950 /* Frameworks */,
-				14E3A8EA1FD8104700428950 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = cuona_sample;
-			productName = cuona_sample;
-			productReference = 14E3A8EC1FD8104700428950 /* cuona_sample.app */;
-			productType = "com.apple.product-type.application";
-		};
 		14F87670202309C100BB24F9 /* Favor_sample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14F87680202309C100BB24F9 /* Build configuration list for PBXNativeTarget "Favor_sample" */;
@@ -1424,15 +1355,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 14E20DB8223B912E00EFAE70;
 					};
-					14E3A8EB1FD8104700428950 = {
-						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.NearFieldCommunicationTagReading = {
-								enabled = 1;
-							};
-						};
-					};
 					14F87670202309C100BB24F9 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
@@ -1471,7 +1393,6 @@
 				14B824C51FBADE160097050B /* CoreSampleTests */,
 				14B824D01FBADE160097050B /* CoreSampleUITests */,
 				1454EA041FBDB01800DA77E0 /* CUONACore */,
-				14E3A8EB1FD8104700428950 /* cuona_sample */,
 				A6F4FD5D202301CA00523677 /* Favor */,
 				14F87670202309C100BB24F9 /* Favor_sample */,
 				14E20DB8223B912E00EFAE70 /* factory-check */,
@@ -1589,16 +1510,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		14E3A8EA1FD8104700428950 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14E3A8F91FD8104700428950 /* LaunchScreen.storyboard in Resources */,
-				14E3A8F61FD8104700428950 /* Assets.xcassets in Resources */,
-				14E3A8F41FD8104700428950 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1886,28 +1797,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8C83E48000202899E967965B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-cuona_sample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8D93F8C0C758860B31C6DD86 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2179,26 +2068,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14E3A8E81FD8104700428950 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14E3A8FE1FD8105600428950 /* CUONA.h in Sources */,
-				14E3A8FF1FD8105600428950 /* CUONABTManager.swift in Sources */,
-				14E3A9001FD8105600428950 /* CUONADecryptor.swift in Sources */,
-				14E3A9011FD8105600428950 /* CUONAKeys.swift in Sources */,
-				14E3A9021FD8105600428950 /* CUONAEncryptor.swift in Sources */,
-				14E3A9031FD8105600428950 /* CUONAManager.swift in Sources */,
-				14E3A9041FD8105600428950 /* NFCReader.swift in Sources */,
-				14E3A9051FD8105600428950 /* DeviceManager.swift in Sources */,
-				14E3A9061FD8105600428950 /* Extensions.swift in Sources */,
-				14E3A9071FD8105600428950 /* Info.plist in Sources */,
-				14E3A9081FD8105600428950 /* Cuona.swift in Sources */,
-				14E3A8F11FD8104700428950 /* ViewController.swift in Sources */,
-				14E3A8EF1FD8104700428950 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14F8766D202309C100BB24F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2338,22 +2207,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				14E20DC5223B913000EFAE70 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		14E3A8F21FD8104700428950 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14E3A8F31FD8104700428950 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		14E3A8F71FD8104700428950 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14E3A8F81FD8104700428950 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3091,44 +2944,6 @@
 			};
 			name = Release;
 		};
-		14E3A8FC1FD8104700428950 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 989D297A9E722701D5A2975C /* Pods-cuona_sample.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = cuona_sample/cuona_sample.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = cuona_sample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.cuona-sample";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)/CommonCryptoModuleMap/module.modulemap";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		14E3A8FD1FD8104700428950 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B91E51B7FC11073319A1CED /* Pods-cuona_sample.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = cuona_sample/cuona_sample.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 68WVY52GZ2;
-				INFOPLIST_FILE = cuona_sample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.conol.cuona-sample";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)/CommonCryptoModuleMap/module.modulemap";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		14F87681202309C100BB24F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E0309B5F1B68B0D8BBE0692 /* Pods-Favor_sample.debug.xcconfig */;
@@ -3360,15 +3175,6 @@
 			buildConfigurations = (
 				14E20DE2223B913100EFAE70 /* Debug */,
 				14E20DE3223B913100EFAE70 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		14E3A8FB1FD8104700428950 /* Build configuration list for PBXNativeTarget "cuona_sample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				14E3A8FC1FD8104700428950 /* Debug */,
-				14E3A8FD1FD8104700428950 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
