@@ -235,6 +235,7 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                         advertisementData: [String : Any],
                         rssi RSSI: NSNumber) {
         let pname = peripheral.name ?? ""
+        print("Start BT research...\(pname)")
         if pname == "CUONA1" || pname == "CNFC1" {
             CUONADebugPrint("didDiscover: peripheral: \(peripheral), RSSI=\(RSSI)")
             CUONADebugPrint("  advertisementData=\(advertisementData)")

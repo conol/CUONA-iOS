@@ -440,7 +440,8 @@ UITextFieldDelegate {
     }
     
     func cuonaConnectFailed(_ error:String) {
-        writeLog("Failed: connect failed\n")
+        // ここはタイムアウトでの接続失敗なので、CUONAの電源が入っていない可能性が高い
+        writeLog("Failed: BT connect timeout...\n")
     }
     
     func cuonaUpdatedSystemStatus(_ status: CUONASystemStatus) {
