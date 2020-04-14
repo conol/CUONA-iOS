@@ -17,7 +17,7 @@ public class Alert
 {
     public static var alert:UIAlertController!
     
-    public static func show(title:String, message:String, _ actions:[UIAlertAction]? = nil, _ textfields:[String]? = nil)
+    public static func show(title:String, message:String, vc:UIViewController?, _ actions:[UIAlertAction]? = nil, _ textfields:[String]? = nil)
     {
         alert = UIAlertController(title: title, message:message, preferredStyle: .alert)
         
@@ -37,10 +37,14 @@ public class Alert
             }
         }
         
-        if let controller = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
-            controller.present(alert, animated: true, completion: nil)
+        if vc != nil {
+            vc!.present(alert, animated: true, completion: nil)
         } else {
-            UIApplication.shared.delegate?.window!!.rootViewController?.present(alert, animated: true, completion: nil)
+            if let pvc = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController {
+                pvc.present(alert, animated: true, completion: nil)
+            } else {
+                UIApplication.shared.delegate?.window??.rootViewController?.present(alert, animated: true, completion: nil)
+            }
         }
         return
     }
@@ -188,4 +192,28 @@ extension UIDevice {
         
         return mapToDevice(identifier: identifier)
     }()
+}
+
+extension UIViewController
+{
+   func alert(alertText : String, alertMessage : String, _ actions:[UIAlertAction]? = nil, _ textfields:[String]? = nil)
+   {
+        let alert = UIAlertController(title: alertText, message: alertMessage, preferredStyle: .alert)
+        if actions != nil {
+            for action in actions! {
+                alert.addAction(action)
+            }
+        } else {
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        }
+        
+        if textfields != nil {
+            for textfield in textfields! {
+                alert.addTextField { (text) in
+                    text.text = textfield
+                }
+            }
+        }
+        self.present(alert, animated: true, completion: nil)
+   }
 }

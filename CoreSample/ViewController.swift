@@ -190,7 +190,7 @@ UITextFieldDelegate {
         let coreMenu = UIAlertController(title: "Admin Menu List", message: nil, preferredStyle: .actionSheet)
         let UpdateFirmware = UIAlertAction(title: "Update firmware", style: .default) { Void in
             if let manager = self.cuonaManager {
-                if !manager.requestOTAUpdate(force: true) {
+                if !manager.requestOTAUpdate(url: "http://ota.cuona.io/aaa.bin", version: "1.1.0-rc5") {
                     self.writeLog("This CUONA firmware does not support OTA\n")
                 }
             }

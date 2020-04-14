@@ -19,6 +19,30 @@
 		1422B31F23CEC3C10069F2FC /* CUONA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14322FB51FD62D63007A78A1 /* CUONACore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; };
 		14322FB61FD62D63007A78A1 /* CUONACore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1454EA151FBDB01800DA77E0 /* CUONACore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		143CEFD7242611FB00F5FC21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CEFD6242611FB00F5FC21 /* AppDelegate.swift */; };
+		143CEFD9242611FB00F5FC21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CEFD8242611FB00F5FC21 /* SceneDelegate.swift */; };
+		143CEFDB242611FB00F5FC21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CEFDA242611FB00F5FC21 /* ViewController.swift */; };
+		143CEFDE242611FB00F5FC21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143CEFDC242611FB00F5FC21 /* Main.storyboard */; };
+		143CEFE0242611FF00F5FC21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 143CEFDF242611FF00F5FC21 /* Assets.xcassets */; };
+		143CEFE3242611FF00F5FC21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143CEFE1242611FF00F5FC21 /* LaunchScreen.storyboard */; };
+		143CEFEE2426120000F5FC21 /* GoalAppSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CEFED2426120000F5FC21 /* GoalAppSampleTests.swift */; };
+		143CEFF92426120000F5FC21 /* GoalAppSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CEFF82426120000F5FC21 /* GoalAppSampleUITests.swift */; };
+		143CF0072426137400F5FC21 /* GoalSmartlockSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143CF0062426137400F5FC21 /* GoalSmartlockSDK.framework */; };
+		143CF009242613AE00F5FC21 /* GoalSmartlockSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 143CF0062426137400F5FC21 /* GoalSmartlockSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		143CF01024261F6400F5FC21 /* CUONA.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1446E6011FAF9E4100F06724 /* CUONA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		143CF0142426277100F5FC21 /* CUONA.h in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6041FAF9E4100F06724 /* CUONA.h */; };
+		143CF0152426277100F5FC21 /* CUONABTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61B1FAF9E9200F06724 /* CUONABTManager.swift */; };
+		143CF0162426277100F5FC21 /* CUONADecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61C1FAF9E9200F06724 /* CUONADecryptor.swift */; };
+		143CF0172426277100F5FC21 /* CUONAEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145750D41FB19947000C0C96 /* CUONAEncryptor.swift */; };
+		143CF0182426277100F5FC21 /* CUONAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61D1FAF9E9200F06724 /* CUONAKeys.swift */; };
+		143CF0192426277100F5FC21 /* CUONAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E6201FAF9E9200F06724 /* CUONAManager.swift */; };
+		143CF01A2426277100F5FC21 /* CUONAMasterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59566682202203D300B8213A /* CUONAMasterKey.swift */; };
+		143CF01B2426277100F5FC21 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B824A21FB9D09E0097050B /* DeviceManager.swift */; };
+		143CF01C2426277100F5FC21 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E64D1FAFA43800F06724 /* Extensions.swift */; };
+		143CF01D2426277100F5FC21 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446E61F1FAF9E9200F06724 /* NFCReader.swift */; };
+		143CF01E2426277100F5FC21 /* CUONASealWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C68B7F2364D021004FF8A6 /* CUONASealWriter.swift */; };
+		143CF01F2426277100F5FC21 /* NFCWifiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592789D8236A23E200148621 /* NFCWifiConfig.swift */; };
+		143CF021242741A400F5FC21 /* hotelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CF020242741A400F5FC21 /* hotelViewController.swift */; };
 		143E5BB3228C07BC0062725E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E5BB2228C07BC0062725E /* AppDelegate.swift */; };
 		143E5BB5228C07BC0062725E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E5BB4228C07BC0062725E /* ViewController.swift */; };
 		143E5BB8228C07BC0062725E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143E5BB6228C07BC0062725E /* Main.storyboard */; };
@@ -142,6 +166,27 @@
 			remoteGlobalIDString = 1454EA041FBDB01800DA77E0;
 			remoteInfo = CUONACore;
 		};
+		143CEFEA242611FF00F5FC21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 143CEFD3242611FB00F5FC21;
+			remoteInfo = GoalAppSample;
+		};
+		143CEFF52426120000F5FC21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 143CEFD3242611FB00F5FC21;
+			remoteInfo = GoalAppSample;
+		};
+		143CF01124261F6400F5FC21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1446E6001FAF9E4100F06724;
+			remoteInfo = CUONA;
+		};
 		143E5BC4228C07C00062725E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1446E5F81FAF9E4100F06724 /* Project object */;
@@ -226,6 +271,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		143CF0082426139D00F5FC21 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				143CF01024261F6400F5FC21 /* CUONA.framework in CopyFiles */,
+				143CF009242613AE00F5FC21 /* GoalSmartlockSDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14F0BEED228C555C0062C679 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -251,6 +307,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		143CEFD4242611FB00F5FC21 /* ゴール&CUONA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ゴール&CUONA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		143CEFD6242611FB00F5FC21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		143CEFD8242611FB00F5FC21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		143CEFDA242611FB00F5FC21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		143CEFDD242611FB00F5FC21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		143CEFDF242611FF00F5FC21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		143CEFE2242611FF00F5FC21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		143CEFE4242611FF00F5FC21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		143CEFE9242611FF00F5FC21 /* GoalAppSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoalAppSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		143CEFED2426120000F5FC21 /* GoalAppSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAppSampleTests.swift; sourceTree = "<group>"; };
+		143CEFEF2426120000F5FC21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		143CEFF42426120000F5FC21 /* GoalAppSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoalAppSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		143CEFF82426120000F5FC21 /* GoalAppSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAppSampleUITests.swift; sourceTree = "<group>"; };
+		143CEFFA2426120000F5FC21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		143CF0062426137400F5FC21 /* GoalSmartlockSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoalSmartlockSDK.framework; sourceTree = "<group>"; };
+		143CF01324261F8C00F5FC21 /* GoalAppSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoalAppSample.entitlements; sourceTree = "<group>"; };
+		143CF020242741A400F5FC21 /* hotelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hotelViewController.swift; sourceTree = "<group>"; };
 		143E5BB0228C07BC0062725E /* publicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = publicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		143E5BB2228C07BC0062725E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		143E5BB4228C07BC0062725E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +430,28 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		143CEFD1242611FB00F5FC21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				143CF0072426137400F5FC21 /* GoalSmartlockSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		143CEFE6242611FF00F5FC21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		143CEFF12426120000F5FC21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		143E5BAD228C07BC0062725E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -476,6 +571,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		143CEFD5242611FB00F5FC21 /* GoalAppSample */ = {
+			isa = PBXGroup;
+			children = (
+				143CF01324261F8C00F5FC21 /* GoalAppSample.entitlements */,
+				143CEFD6242611FB00F5FC21 /* AppDelegate.swift */,
+				143CEFD8242611FB00F5FC21 /* SceneDelegate.swift */,
+				143CEFDA242611FB00F5FC21 /* ViewController.swift */,
+				143CF020242741A400F5FC21 /* hotelViewController.swift */,
+				143CEFDC242611FB00F5FC21 /* Main.storyboard */,
+				143CEFDF242611FF00F5FC21 /* Assets.xcassets */,
+				143CEFE1242611FF00F5FC21 /* LaunchScreen.storyboard */,
+				143CF0062426137400F5FC21 /* GoalSmartlockSDK.framework */,
+				143CEFE4242611FF00F5FC21 /* Info.plist */,
+			);
+			path = GoalAppSample;
+			sourceTree = "<group>";
+		};
+		143CEFEC242611FF00F5FC21 /* GoalAppSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				143CEFED2426120000F5FC21 /* GoalAppSampleTests.swift */,
+				143CEFEF2426120000F5FC21 /* Info.plist */,
+			);
+			path = GoalAppSampleTests;
+			sourceTree = "<group>";
+		};
+		143CEFF72426120000F5FC21 /* GoalAppSampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				143CEFF82426120000F5FC21 /* GoalAppSampleUITests.swift */,
+				143CEFFA2426120000F5FC21 /* Info.plist */,
+			);
+			path = GoalAppSampleUITests;
+			sourceTree = "<group>";
+		};
+		143CF00A242613E500F5FC21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		143E5BB1228C07BC0062725E /* publicApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,9 +664,13 @@
 				143E5BB1228C07BC0062725E /* publicApp */,
 				143E5BC6228C07C00062725E /* publicAppTests */,
 				143E5BD1228C07C10062725E /* publicAppUITests */,
+				143CEFD5242611FB00F5FC21 /* GoalAppSample */,
+				143CEFEC242611FF00F5FC21 /* GoalAppSampleTests */,
+				143CEFF72426120000F5FC21 /* GoalAppSampleUITests */,
 				1446E6021FAF9E4100F06724 /* Products */,
 				1454EA161FBDB01800DA77E0 /* CUONACore.plist */,
 				A8E40AF8D54F4261B9E006ED /* Pods */,
+				143CF00A242613E500F5FC21 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -552,6 +693,9 @@
 				143E5BB0228C07BC0062725E /* publicApp.app */,
 				143E5BC3228C07C00062725E /* publicAppTests.xctest */,
 				143E5BCE228C07C00062725E /* publicAppUITests.xctest */,
+				143CEFD4242611FB00F5FC21 /* ゴール&CUONA.app */,
+				143CEFE9242611FF00F5FC21 /* GoalAppSampleTests.xctest */,
+				143CEFF42426120000F5FC21 /* GoalAppSampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -807,6 +951,61 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		143CEFD3242611FB00F5FC21 /* GoalAppSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 143CF0012426120000F5FC21 /* Build configuration list for PBXNativeTarget "GoalAppSample" */;
+			buildPhases = (
+				143CEFD0242611FB00F5FC21 /* Sources */,
+				143CEFD1242611FB00F5FC21 /* Frameworks */,
+				143CEFD2242611FB00F5FC21 /* Resources */,
+				143CF0082426139D00F5FC21 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				143CF01224261F6400F5FC21 /* PBXTargetDependency */,
+			);
+			name = GoalAppSample;
+			productName = GoalAppSample;
+			productReference = 143CEFD4242611FB00F5FC21 /* ゴール&CUONA.app */;
+			productType = "com.apple.product-type.application";
+		};
+		143CEFE8242611FF00F5FC21 /* GoalAppSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 143CF0022426120000F5FC21 /* Build configuration list for PBXNativeTarget "GoalAppSampleTests" */;
+			buildPhases = (
+				143CEFE5242611FF00F5FC21 /* Sources */,
+				143CEFE6242611FF00F5FC21 /* Frameworks */,
+				143CEFE7242611FF00F5FC21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				143CEFEB242611FF00F5FC21 /* PBXTargetDependency */,
+			);
+			name = GoalAppSampleTests;
+			productName = GoalAppSampleTests;
+			productReference = 143CEFE9242611FF00F5FC21 /* GoalAppSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		143CEFF32426120000F5FC21 /* GoalAppSampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 143CF0032426120000F5FC21 /* Build configuration list for PBXNativeTarget "GoalAppSampleUITests" */;
+			buildPhases = (
+				143CEFF02426120000F5FC21 /* Sources */,
+				143CEFF12426120000F5FC21 /* Frameworks */,
+				143CEFF22426120000F5FC21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				143CEFF62426120000F5FC21 /* PBXTargetDependency */,
+			);
+			name = GoalAppSampleUITests;
+			productName = GoalAppSampleUITests;
+			productReference = 143CEFF42426120000F5FC21 /* GoalAppSampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		143E5BAF228C07BC0062725E /* publicApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 143E5BDB228C07C10062725E /* Build configuration list for PBXNativeTarget "publicApp" */;
@@ -1103,10 +1302,24 @@
 		1446E5F81FAF9E4100F06724 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "conol, Inc";
 				TargetAttributes = {
+					143CEFD3242611FB00F5FC21 = {
+						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Automatic;
+					};
+					143CEFE8242611FF00F5FC21 = {
+						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 143CEFD3242611FB00F5FC21;
+					};
+					143CEFF32426120000F5FC21 = {
+						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 143CEFD3242611FB00F5FC21;
+					};
 					143E5BAF228C07BC0062725E = {
 						CreatedOnToolsVersion = 10.2.1;
 						ProvisioningStyle = Automatic;
@@ -1243,11 +1456,38 @@
 				143E5BAF228C07BC0062725E /* publicApp */,
 				143E5BC2228C07C00062725E /* publicAppTests */,
 				143E5BCD228C07C00062725E /* publicAppUITests */,
+				143CEFD3242611FB00F5FC21 /* GoalAppSample */,
+				143CEFE8242611FF00F5FC21 /* GoalAppSampleTests */,
+				143CEFF32426120000F5FC21 /* GoalAppSampleUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		143CEFD2242611FB00F5FC21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				143CEFE3242611FF00F5FC21 /* LaunchScreen.storyboard in Resources */,
+				143CEFE0242611FF00F5FC21 /* Assets.xcassets in Resources */,
+				143CEFDE242611FB00F5FC21 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		143CEFE7242611FF00F5FC21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		143CEFF22426120000F5FC21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		143E5BAE228C07BC0062725E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1375,6 +1615,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		143CEFD0242611FB00F5FC21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				143CF0142426277100F5FC21 /* CUONA.h in Sources */,
+				143CF0152426277100F5FC21 /* CUONABTManager.swift in Sources */,
+				143CF0162426277100F5FC21 /* CUONADecryptor.swift in Sources */,
+				143CF0172426277100F5FC21 /* CUONAEncryptor.swift in Sources */,
+				143CF0182426277100F5FC21 /* CUONAKeys.swift in Sources */,
+				143CF0192426277100F5FC21 /* CUONAManager.swift in Sources */,
+				143CF01A2426277100F5FC21 /* CUONAMasterKey.swift in Sources */,
+				143CF01B2426277100F5FC21 /* DeviceManager.swift in Sources */,
+				143CF01C2426277100F5FC21 /* Extensions.swift in Sources */,
+				143CF01D2426277100F5FC21 /* NFCReader.swift in Sources */,
+				143CF01E2426277100F5FC21 /* CUONASealWriter.swift in Sources */,
+				143CF01F2426277100F5FC21 /* NFCWifiConfig.swift in Sources */,
+				143CEFDB242611FB00F5FC21 /* ViewController.swift in Sources */,
+				143CEFD7242611FB00F5FC21 /* AppDelegate.swift in Sources */,
+				143CEFD9242611FB00F5FC21 /* SceneDelegate.swift in Sources */,
+				143CF021242741A400F5FC21 /* hotelViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		143CEFE5242611FF00F5FC21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				143CEFEE2426120000F5FC21 /* GoalAppSampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		143CEFF02426120000F5FC21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				143CEFF92426120000F5FC21 /* GoalAppSampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		143E5BAC228C07BC0062725E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1597,6 +1876,21 @@
 			target = 1454EA041FBDB01800DA77E0 /* CUONACore */;
 			targetProxy = 14322FB71FD62D63007A78A1 /* PBXContainerItemProxy */;
 		};
+		143CEFEB242611FF00F5FC21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 143CEFD3242611FB00F5FC21 /* GoalAppSample */;
+			targetProxy = 143CEFEA242611FF00F5FC21 /* PBXContainerItemProxy */;
+		};
+		143CEFF62426120000F5FC21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 143CEFD3242611FB00F5FC21 /* GoalAppSample */;
+			targetProxy = 143CEFF52426120000F5FC21 /* PBXContainerItemProxy */;
+		};
+		143CF01224261F6400F5FC21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1446E6001FAF9E4100F06724 /* CUONA */;
+			targetProxy = 143CF01124261F6400F5FC21 /* PBXContainerItemProxy */;
+		};
 		143E5BC5228C07C00062725E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 143E5BAF228C07BC0062725E /* publicApp */;
@@ -1650,6 +1944,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		143CEFDC242611FB00F5FC21 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				143CEFDD242611FB00F5FC21 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		143CEFE1242611FF00F5FC21 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				143CEFE2242611FF00F5FC21 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		143E5BB6228C07BC0062725E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1717,6 +2027,137 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		143CEFFB2426120000F5FC21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = GoalAppSample/GoalAppSample.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoalAppSample",
+				);
+				INFOPLIST_FILE = GoalAppSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
+				PRODUCT_BUNDLE_IDENTIFIER = cuona.io.GoalAppSample;
+				PRODUCT_NAME = "ゴール&CUONA";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		143CEFFC2426120000F5FC21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = GoalAppSample/GoalAppSample.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoalAppSample",
+				);
+				INFOPLIST_FILE = GoalAppSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-D ENABLE_MASTER_KEY";
+				PRODUCT_BUNDLE_IDENTIFIER = cuona.io.GoalAppSample;
+				PRODUCT_NAME = "ゴール&CUONA";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		143CEFFD2426120000F5FC21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = GoalAppSampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = cuona.io.GoalAppSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoalAppSample.app/GoalAppSample";
+			};
+			name = Debug;
+		};
+		143CEFFE2426120000F5FC21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = GoalAppSampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = cuona.io.GoalAppSampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoalAppSample.app/GoalAppSample";
+			};
+			name = Release;
+		};
+		143CEFFF2426120000F5FC21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = GoalAppSampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = cuona.io.GoalAppSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GoalAppSample;
+			};
+			name = Debug;
+		};
+		143CF0002426120000F5FC21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68WVY52GZ2;
+				INFOPLIST_FILE = GoalAppSampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = cuona.io.GoalAppSampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GoalAppSample;
+			};
+			name = Release;
+		};
 		143E5BD5228C07C10062725E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2499,6 +2940,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		143CF0012426120000F5FC21 /* Build configuration list for PBXNativeTarget "GoalAppSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				143CEFFB2426120000F5FC21 /* Debug */,
+				143CEFFC2426120000F5FC21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		143CF0022426120000F5FC21 /* Build configuration list for PBXNativeTarget "GoalAppSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				143CEFFD2426120000F5FC21 /* Debug */,
+				143CEFFE2426120000F5FC21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		143CF0032426120000F5FC21 /* Build configuration list for PBXNativeTarget "GoalAppSampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				143CEFFF2426120000F5FC21 /* Debug */,
+				143CF0002426120000F5FC21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		143E5BDB228C07C10062725E /* Build configuration list for PBXNativeTarget "publicApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

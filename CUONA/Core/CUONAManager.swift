@@ -198,7 +198,55 @@ public struct CUONAWiFiSSIDPw {
         data.replaceSubrange(32 ..< 32 + pwLen, with: pwData)
         return data
     }
+}
+
+public struct CUONAOTA {
+    public let url: String
+    public let version: String
     
+    init?(data: Data) {
+        if data.count != 128 + 32 {
+            return nil
+        }
+        
+        let endOfurl = endOfStringIndex(data: data, range: 0 ..< 128)
+        let urlData = data.subdata(in: 0 ..< endOfurl)
+        url = String(bytes: urlData, encoding: .utf8) ?? ""
+        
+        let endOfversion = endOfStringIndex(data: data, range: 128 ..< 128 + 32)
+        let versionData  = data.subdata(in: 128 ..< endOfversion)
+        version = String(bytes: versionData, encoding: .utf8) ?? ""
+    }
+    
+    public init(url: String, version: String) {
+        self.url = url
+        self.version = version
+    }
+    
+    func data() -> Data? {
+        guard let urlData = url.data(using: .utf8) else {
+            return nil
+        }
+        guard let versionData = version.data(using: .utf8) else {
+            return nil
+        }
+        
+        let urlLen = urlData.count
+        if urlLen > 128 {
+            return nil
+        }
+        
+        let versionLen = versionData.count
+        if versionLen > 32 {
+            return nil
+        }
+        
+        var data = Data(count: 128 + 32)
+        data.replaceSubrange(0 ..< urlLen, with: urlData)
+        data.replaceSubrange(128 ..< 128 + versionLen, with: versionData)
+        
+        return data
+    }
 }
 
 @objc public enum CUONAOTAStatus: Int {
@@ -319,8 +367,8 @@ class CUONAManager: NFCReaderDelegate {
         return false
     }
     
-    func requestOTAUpdate(force: Bool = false) -> Bool {
-        return CUONABTManager.shared.requestOTAUpdate(force: force)
+    func requestOTAUpdate(url: String, version: String) -> Bool {
+        return CUONABTManager.shared.requestOTAUpdate(url: url, version: version)
     }
     
     func writeJSON(_ json: String) -> Bool {
@@ -459,6 +507,10 @@ class CUONAManager: NFCReaderDelegate {
     }
     
     func nfcReaderError(_ error: Error) {
-        delegate?.cuonaIllegalNFCDetected()
+        if error.localizedDescription == "Session invalidated by user" {
+            delegate?.cuonaNFCCanceled()
+        } else {
+            delegate?.cuonaIllegalNFCDetected()
+        }
     }
 }

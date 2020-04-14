@@ -153,6 +153,10 @@ class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
         delegate?.nfcReaderError(error)
     }
     
+    func readerSessionDidBecomeActive(_ session: NFCNDEFReaderSession) {
+        //
+    }
+    
     func readerSession(_ session: NFCNDEFReaderSession,
                        didDetectNDEFs messages: [NFCNDEFMessage]) {
         CUONADebugPrint("NFC: didDetectNDEFs: " + String(describing: messages))

@@ -38,19 +38,19 @@ class login: UIViewController, DeviceManagerDelegate
     @IBAction func sendLogin()
     {
         if userEmail.isBlank {
-            Alert.show(title: "エラー", message: "メールアドレスを入力してください")
+            Alert.show(title: "エラー", message: "メールアドレスを入力してください", vc: self)
             return
         }
         if userEmail.isLessThan(10) {
-            Alert.show(title: "エラー", message: "メールアドレスが短すぎます")
+            Alert.show(title: "エラー", message: "メールアドレスが短すぎます", vc: self)
             return
         }
         if userPass.isBlank {
-            Alert.show(title: "エラー", message: "パスワードを入力してください")
+            Alert.show(title: "エラー", message: "パスワードを入力してください", vc: self)
             return
         }
         if userEmail.isLessThan(4) {
-            Alert.show(title: "エラー", message: "パスワードが短すぎます")
+            Alert.show(title: "エラー", message: "パスワードが短すぎます", vc: self)
             return
         }
         doLogin()
@@ -94,6 +94,6 @@ class login: UIViewController, DeviceManagerDelegate
     func failedSignIn(status: NSInteger, json: [String : Any]?)
     {
         print(json!)
-        Alert.show(title: "ログインエラー", message: "が原因")
+        Alert.show(title: "ログインエラー", message: "が原因", vc: self)
     }
 }

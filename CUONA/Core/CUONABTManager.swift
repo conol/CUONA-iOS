@@ -115,15 +115,14 @@ class CUONABTManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         return true
     }
     
-    func requestOTAUpdate(force: Bool) -> Bool {
-        guard let peripheral = currentPeripheral else {
-            return false
-        }
-        guard let char = CUONAOTACtrlChar else {
+    func requestOTAUpdate(url: String, version: String) -> Bool {
+        let ota = CUONAOTA(url: url, version: version)
+        guard let peripheral = currentPeripheral,
+            let char = CUONAOTACtrlChar,
+            let data = ota.data() else {
             CUONADebugPrint("OTA is not supported on this firmware")
             return false
         }
-        let data =  Data(force ? CUONA_OTA_REQ_FORCE : CUONA_OTA_REQ_NORMAL)
         peripheral.writeValue(data, for: char, type: .withResponse)
         return true
     }
