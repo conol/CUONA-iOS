@@ -113,13 +113,13 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     func cuonaNFCCanceled()
     {
-        Alert.show(title: "キャンセル", message: "NFCタッチがキャンセルされました")
+        Alert.show(title: "キャンセル", message: "NFCタッチがキャンセルされました", vc: self)
     }
     
     func cuonaIllegalNFCDetected()
     {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        Alert.show(title: "エラー", message: "正しいNFCデータとして認識されませんでした！")
+        Alert.show(title: "エラー", message: "正しいNFCデータとして認識されませんでした！", vc: self)
     }
     
     func cuonaConnected()
@@ -128,6 +128,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         if cuonaManager?.enterAdminMode("0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0") ?? false
         {
             _ = cuonaManager?.requestSystemStatus()
+            _ = cuonaManager?.isDevelopment(false)
         }
         let log = [
             "time": getNowDatetime(),
@@ -143,7 +144,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func cuonaConnectFailed(_ error: String)
     {
         setStepStatus(stepNum: 2, status: .error)
-        Alert.show(title: "エラー", message: error)
+        Alert.show(title: "エラー", message: error, vc: self)
         let log = [
             "time": getNowDatetime(),
             "data": "",
@@ -158,7 +159,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     
     func cuonaDisconnected() {
         if  checkNowStep() < results.count {
-            Alert.show(title: "", message: "BLEが切断されました")
+            Alert.show(title: "", message: "BLEが切断されました", vc: self)
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 //            let log = [
 //                "time": getNowDatetime(),
@@ -250,7 +251,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
                         ] as [String : Any]
                     self.logs?.append(log)
                     ud.set(self.logs, forKey: "logs")
-                    Alert.show(title: "エラー", message: "WiFiの接続に失敗しました")
+                    Alert.show(title: "エラー", message: "WiFiの接続に失敗しました", vc: self)
                 }
             }
         }
@@ -379,7 +380,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
             type = "success"
         } else {
             setStepStatus(stepNum: 6, status: .error)
-            Alert.show(title: "エラー", message: "DBへのCUONAの登録に失敗しました")
+            Alert.show(title: "エラー", message: "DBへのCUONAの登録に失敗しました", vc: self)
             disconnect()
             type = "error"
         }
@@ -427,7 +428,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func finish()
     {
         disconnect()
-        Alert.show(title: "検査終了", message: "このCUONAは想定する品質を満たしています")
+        Alert.show(title: "検査終了", message: "このCUONAは想定する品質を満たしています", vc: self)
         setStepStatus(stepNum: 7, status: .success)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
