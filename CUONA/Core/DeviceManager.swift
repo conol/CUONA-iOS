@@ -314,12 +314,12 @@ public class HttpRequest
     }
     
     //MARK: - 工場出荷用追加API
-    public func addDevice(_ device_id:String)
+    public func addDevice(_ device_id:String, device_type: Int)
     {
         let url = API_URL + "/devices"
         let params = [
             "nfc_uid": device_id,
-            "device_type": "cube"
+            "device_type": device_type == 1 ? "cube" : "tag"
             ] as [String : Any]
         
         sendRequestAsynchronous(url, method: .post, params: params) { (returnData, response) in

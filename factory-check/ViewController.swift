@@ -41,6 +41,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     var deviceManager: DeviceManager?
     var cuonaManager: CUONAManager?
     var cuona_uuid: String?
+    var cuona_type: Int!
     var steps:[UIImageView]?
     var loadings:[UIActivityIndicatorView]?
     var isConnectingWifi = false
@@ -97,6 +98,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     {
         reset()
         cuona_uuid = deviceId.removingWhitespaces().uppercased()
+        cuona_type = type
         setStepStatus(stepNum: 1, status: .success)
         
         let log = [
@@ -108,6 +110,13 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
             ] as [String : Any]
         logs?.append(log)
         ud.set(logs, forKey: "logs")
+
+        // tagの場合はbt接続をスキップ
+        if type == 2 {
+            deviceManager?.request?.addDevice(cuona_uuid!, device_type: type)
+            return false
+        }
+
         return true
     }
     
@@ -294,7 +303,7 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         if code == 200 && success && !timeout {
             setStepStatus(stepNum: 5, status: .success)
             if cuona_uuid != nil {
-                deviceManager?.request?.addDevice(cuona_uuid!)
+                deviceManager?.request?.addDevice(cuona_uuid!, device_type: 1)
             }
             type = "success"
         } else {
@@ -428,7 +437,11 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func finish()
     {
         disconnect()
-        Alert.show(title: "検査終了", message: "このCUONAは想定する品質を満たしています", vc: self)
+        var message = "このCUONAは想定する品質を満たしています。"
+        if cuona_type == 2 {
+            message = "TAGタイプのCUONAが検出されたため、STET.2 ~ 5はスキップされました。\n" + message
+        }
+        Alert.show(title: "検査終了", message: message, vc: self)
         setStepStatus(stepNum: 7, status: .success)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
