@@ -14,7 +14,7 @@ let CUONA_MAGIC_3 = 0x05 // New secure, with keyCode
 private let CUONA_Legacy_SCAN_SIGNATURE_LENGTH = 10
 private let CUONA_Legacy_SCAN_SIGNATURE_PREFIX_LENGTH = 3
 
-protocol NFCReaderDelegate: class {
+protocol NFCReaderDelegate: AnyObject {
     func nfcReaderGotRecord(_ record: String)
     func nfcReaderFoundCUONARecord(scanSignature: Data?, deviceId: Data,
                                    jsonData: Data)

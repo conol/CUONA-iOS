@@ -21,6 +21,9 @@ class LogViewController: UITableViewController {
         logs = logs_order?.reversed()
         tableView.reloadData()
     }
+    @IBAction func doClose(_ sender: Any) {
+        navigationController?.dismiss(animated: true)
+    }
     
     // MARK: - Table view data source
 

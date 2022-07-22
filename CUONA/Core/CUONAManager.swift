@@ -264,7 +264,7 @@ public struct CUONAOTA {
     }
 }
 
-@objc protocol CUONAManagerDelegate: class {
+@objc protocol CUONAManagerDelegate: AnyObject {
 
     // card detection
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
@@ -292,12 +292,12 @@ public struct CUONAOTA {
 }
 
 struct CUONALogData: Codable {
-    let phone_os_type: String = "iOS"
-    let phone_os_version: String = UIDevice.current.systemVersion
-    let model: String = UIDevice.modelName
+    var phone_os_type: String = "iOS"
+    var phone_os_version: String = UIDevice.current.systemVersion
+    var model: String = UIDevice.modelName
     var event_id: String = ""
     var customer_id: Int = 0
-    let app_id: String = Bundle.main.bundleIdentifier ?? "?"
+    var app_id: String = Bundle.main.bundleIdentifier ?? "?"
     var used_at: Date = Date()
     var note: String = ""
     var url: URL? = nil

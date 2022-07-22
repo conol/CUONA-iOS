@@ -73,6 +73,18 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         
         resetLoading()
     }
+    @IBAction func changeMode(_ sender: UIButton) {
+        let flg = deviceManager?.request?.dev_flg ?? false
+        let check = flg ? false : true
+        deviceManager?.request?.dev_flg = check
+        
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        if check {
+            sender.setTitle("v\(String(describing: version))(bleeding)", for: .normal)
+        } else {
+            sender.setTitle("v\(String(describing: version))(production)", for: .normal)
+        }
+    }
     
     @IBAction func startNFC()
     {
@@ -100,6 +112,17 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
         cuona_uuid = deviceId.removingWhitespaces().uppercased()
         cuona_type = type
         setStepStatus(stepNum: 1, status: .success)
+        
+        let flg = deviceManager?.request?.dev_flg ?? false
+        let dev = flg ? false : true
+        let log0 = [
+            "time": getNowDatetime(),
+            "data": "",
+            "step": 0,
+            "type": "success",
+            "message": "Env is " + (dev ? "Bleeding" : "Production")
+            ] as [String : Any]
+        logs?.append(log0)
         
         let log = [
             "time": getNowDatetime(),

@@ -24,10 +24,10 @@
 	<true/>
 	<key>NFCReaderUsageDescription</key>
 	<string>NFCが正しく動作しているか工場でチェックする用途で利用されます</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Bluetoothが正しく動作しているか工場でチェックする用途で利用されます</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

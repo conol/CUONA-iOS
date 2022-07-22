@@ -9,7 +9,7 @@
 import UIKit
 import SystemConfiguration
 
-//private let API_URL = "https://api.bleeding-edge.cuona.io"
+private let API_DEV_URL = "https://api.bleeding-edge.core.cuona.io"
 private let API_URL = "https://api.cuona.io"
 private let SAVE_LOGS = "saveLogs"
 private let DEVICE_PASS = "deviceMasterPassword"
@@ -24,7 +24,7 @@ public enum Method:String
     case delete = "DELETE"
 }
 
-@objc protocol DeviceManagerDelegate: class
+@objc protocol DeviceManagerDelegate: AnyObject
 {
     func successSendLog(json:[String : Any])
     func failedSendLog(status:NSInteger, json:[String : Any]?)
@@ -152,7 +152,7 @@ public class DeviceManager: NSObject, HttpRequestDelegate
     }
 }
 
-@objc protocol HttpRequestDelegate: class
+@objc protocol HttpRequestDelegate: AnyObject
 {
     func successSendLog(json:[String : Any])
     func failedSendLog(status:NSInteger, json:[String : Any]?)
@@ -180,7 +180,8 @@ public class HttpRequest
 {
     let condition = NSCondition()
     weak var delegate: HttpRequestDelegate?
-    public var app_token:String?
+    public var app_token: String?
+    public var dev_flg: Bool = true
     
     init(delegate: HttpRequestDelegate)
     {
@@ -196,7 +197,7 @@ public class HttpRequest
     @available(iOS 11.0, *)
     public func sendLog(_ device_id:String, event_id:String, customer_id:Int, note:String)
     {
-        let url = API_URL + "/log"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/log"
         
         let log = [
             "app_id": Bundle.main.bundleIdentifier ?? "",
@@ -245,7 +246,7 @@ public class HttpRequest
     //MARK: - サインイン送信
     public func signIn(email:String, password:String)
     {
-        let url = API_URL + "/sign_in"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/sign_in"
         let params = [
             "email": email,
             "password": password
@@ -269,7 +270,7 @@ public class HttpRequest
     //MARK: - MQTT GET_STATUS
     public func Ping(_ nfc_uid:String)
     {
-        let url = API_URL + "/devices/ping/" + nfc_uid
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/devices/ping/" + nfc_uid
         sendRequestAsynchronous(url, method: .post, params: nil) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
             
@@ -284,7 +285,7 @@ public class HttpRequest
     //MARK: - イベント一覧を取得
     public func getEventList()
     {
-        let url = API_URL + "/events/all.json"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/events/all.json"
         
         sendRequestAsynchronous(url, method: .get, params: nil) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
@@ -299,7 +300,7 @@ public class HttpRequest
     //MARK: - オーナーのデバイス一覧を取得
     public func getDeviceList(_ develop:Bool = false)
     {
-        var url = API_URL + "/api/owners/devices.json?unused=true&environment="
+        var url = (dev_flg ? API_DEV_URL : API_URL) + "/api/owners/devices.json?unused=true&environment="
         url += develop ? "development" : "production"
         
         sendRequestAsynchronous(url, method: .get, params: nil) { (returnData, response) in
@@ -316,7 +317,7 @@ public class HttpRequest
     //MARK: - 工場出荷用追加API
     public func addDevice(_ device_id:String, device_type: Int)
     {
-        let url = API_URL + "/devices"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/devices"
         let params = [
             "nfc_uid": device_id,
             "device_type": device_type == 1 ? "cube" : "tag"
@@ -336,7 +337,7 @@ public class HttpRequest
     //MARK: - オーナーにデバイスをペアリング
     public func pearingDevice(_ device_id:String, name:String, enabled:Bool)
     {
-        let url = API_URL + "/pairing"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/pairing"
         let params = [
             "device_id": device_id,
             "name": name
@@ -356,7 +357,7 @@ public class HttpRequest
     //MARK: - オーナーのデバイスペアリングを解除
     public func releaseDevice(_ device_id:String)
     {
-        let url = API_URL + "/api/owners/devices/" + device_id.encodeUrl()! + "/release.json"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/api/owners/devices/" + device_id.encodeUrl()! + "/release.json"
         
         sendRequestAsynchronous(url, method: .patch, params: nil) { (returnData, response) in
             let httpResponse = response as? HTTPURLResponse
@@ -372,7 +373,7 @@ public class HttpRequest
     //MARK: - オーナーデバイスの設定編集
     public func editDevice(_ device_id:String, name:String, service_ids:Array<Int>, enabled:Bool)
     {
-        let url = API_URL + "/api/owners/devices/" + device_id.encodeUrl()! + ".json"
+        let url = (dev_flg ? API_DEV_URL : API_URL) + "/api/owners/devices/" + device_id.encodeUrl()! + ".json"
         let params = [
             "name": name,
             "status": "normal", //将来廃止予定
