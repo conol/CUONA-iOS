@@ -100,10 +100,11 @@ class CUONASealWriterImpl: CUONASealWriter, NFCTagReaderSessionDelegate {
         if id.count == 7 {
             // Add check codes
             // cf. ISO/IEC 1444-3:2001 6.4.4. "UID contents and cascade levels"
-            let bcc0 = 0x88 ^ id[0] ^ id[1] ^ id[2]
-            let bcc1 = id[3] ^ id[4] ^ id[5] ^ id[6]
-            return [id[0], id[1], id[2], bcc0,
-                    id[3], id[4], id[5], id[6], bcc1]
+//            let bcc0 = 0x88 ^ id[0] ^ id[1] ^ id[2]
+//            let bcc1 = id[3] ^ id[4] ^ id[5] ^ id[6]
+//            return [id[0], id[1], id[2], bcc0,
+//                    id[3], id[4], id[5], id[6], bcc1]
+            return [id[0], id[1], id[2], id[3], id[4], id[5], id[6]]
         } else {
             return Array(id)
         }

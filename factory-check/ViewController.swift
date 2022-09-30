@@ -109,7 +109,9 @@ class ViewController: UIViewController, CUONAManagerDelegate, DeviceManagerDeleg
     func cuonaNFCDetected(deviceId: String, type: Int, json: String) -> Bool
     {
         reset()
-        cuona_uuid = deviceId.removingWhitespaces().uppercased()
+        let uuids = deviceId.components(separatedBy: " ")
+        let deviceId = "\(uuids[0])\(uuids[1])\(uuids[2])\(uuids[4])\(uuids[5])\(uuids[6])\(uuids[7])"
+        cuona_uuid = deviceId//.removingWhitespaces().uppercased()
         cuona_type = type
         setStepStatus(stepNum: 1, status: .success)
         
